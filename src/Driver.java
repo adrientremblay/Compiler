@@ -27,9 +27,9 @@ public class Driver {
         testTokens.add("id");
 
         NdfaGenerator ndfaGenerator = new NdfaGenerator(testMap, testTokens);
-        ndfaGenerator.generate();
+        State entry = ndfaGenerator.generate();
 
         AutomataVisualizer automataVisualizer = new AutomataVisualizer();
-        automataVisualizer.visualize(n);
+        automataVisualizer.visualize(entry);
     }
 }

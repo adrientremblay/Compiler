@@ -12,7 +12,7 @@ public class AutomataVisualizer {
     /**
      * converts an Ndfa to a graphiz-java graph, and draws it
      */
-    public void visualize(Ndfa ndfa) throws IOException {
+    public void visualize(State entry) throws IOException {
         MutableGraph graph = mutGraph("example1").setDirected(true);
 
         graph.add(node("main"));

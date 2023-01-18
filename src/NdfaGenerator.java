@@ -17,16 +17,21 @@ public class NdfaGenerator {
         root = new State();
     }
 
-    public void generate() {
-
+    public State generate() {
         // generate an Ndfa for every token
-        ArrayList<Ndfa> generatedTokenNdfas = new ArrayList<Ndfa>();
-        for  (String token : tokens)
-            generateNdfaFromElement(token);
+        ArrayList<State> generatedTokenEntryStates = new ArrayList<State>();
+        for  (String token : tokens) {
+            Ndfa newNdfa = generateNdfaFromElement(token);
+            generatedTokenEntryStates.add(newNdfa.getEntry());
+        }
 
-       State start = new State();
+        // connect them and return the Ndfa
+        State start = new State();
+        for (State entryState : generatedTokenEntryStates) {
+            start.addEdge("ε", entryState);
+        }
 
-       // connect them and return the Ndfa
+        return start;
     }
 
     private Ndfa generateNdfaFromElement(String element) {
