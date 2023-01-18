@@ -1,4 +1,5 @@
 import guru.nidi.graphviz.attribute.Color;
+import guru.nidi.graphviz.attribute.Label;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableGraph;
@@ -45,8 +46,7 @@ public class AutomataVisualizer {
                 StateNodePair childPair = new StateNodePair(childState, childNode);
 
                 // draw edge
-                // todo: use label
-                curPair.node.addLink(childPair.node);
+                curPair.node.addLink(to(childPair.node).with(Label.of(label)));
 
                 // add the child to the stack
                 if (!seen.containsKey(childState)) {
