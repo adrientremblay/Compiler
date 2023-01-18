@@ -11,4 +11,8 @@ public class State {
     public void addEdge(String label, State target) {
         edges.put(label, target);
     }
+
+    public State followEdge(String label) {
+        return edges.get(label);
+    }
 }

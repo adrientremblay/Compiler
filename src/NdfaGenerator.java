@@ -27,6 +27,7 @@ public class NdfaGenerator {
         String[] elementSplit = element.split(" ");
 
         if (elementSplit.length == 1) {
+            // There is only a single element
             if (element.charAt(element.length() - 1) == '*')  {
                 // recursive thingy
                 State start = new State();
@@ -40,7 +41,11 @@ public class NdfaGenerator {
                 repeatedPart.getExit().addEdge("ε", end);
 
                 return new Ndfa(start, end);
+            }  else if (atomicLexicalElementMap.containsKey(element)) {
+                // Can expand element from map
+                return generateNdfaFromElement(atomicLexicalElementMap.get(element));
             } else {
+                // element cannot be expanded
                 State start = new State();
                 State end = new State();
                 start.addEdge(element, end);
@@ -48,20 +53,33 @@ public class NdfaGenerator {
             }
         }
 
-        ArrayList<String> regularExpression = new ArrayList<String>(Arrays.asList(atomicLexicalElementMap.get(element).split(" ")));
+        // construct a combination of elements
+        State start = new State();
+        State cur = start;
+        ArrayList<State> tails = new ArrayList<State>();
+        for (int i = 0 ; i < elementSplit.length ; i++) {
+            Ndfa pathNdfa = generateNdfaFromElement(elementSplit[i]);
+            if (i < elementSplit.length - 1 && elementSplit[i+1].equals("|")) {
+                // create new branch from start
+                i++;
 
-        // step 1: processing to expand the regular expression into atomic elements
-        int i = 0;
-        while (i < regularExpression.size()) {
-            String item = regularExpression.get(i);
+                if (cur != start)
+                    tails.add(cur);
 
-            if (atomicLexicalElementMap.containsKey(item)) { // expand it
-                regularExpression.remove(i);
-                regularExpression.add(i, atomicLexicalElementMap.get(item));
+                start.addEdge("ε", pathNdfa.getEntry());
+                cur = pathNdfa.getExit();
+            } else {
+                // continue along whatever branch you're at (or the start)
+                cur.addEdge("ε", pathNdfa.getEntry());
+                cur = pathNdfa.getExit();
             }
-
-
-
         }
+
+        State end = new State();
+        for (State tail : tails) {
+            tail.addEdge("ε", end);
+        }
+
+        return new Ndfa(start, end);
     }
 }
