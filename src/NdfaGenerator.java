@@ -18,8 +18,15 @@ public class NdfaGenerator {
     }
 
     public void generate() {
-       for  (String token : tokens)
+
+        // generate an Ndfa for every token
+        ArrayList<Ndfa> generatedTokenNdfas = new ArrayList<Ndfa>();
+        for  (String token : tokens)
             generateNdfaFromElement(token);
+
+       State start = new State();
+
+       // connect them and return the Ndfa
     }
 
     private Ndfa generateNdfaFromElement(String element) {

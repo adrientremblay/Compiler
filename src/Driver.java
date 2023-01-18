@@ -30,6 +30,6 @@ public class Driver {
         ndfaGenerator.generate();
 
         AutomataVisualizer automataVisualizer = new AutomataVisualizer();
-        automataVisualizer.visualize();
+        automataVisualizer.visualize(n);
     }
 }

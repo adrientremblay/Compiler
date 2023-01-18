@@ -6,16 +6,17 @@ import guru.nidi.graphviz.model.MutableGraph;
 import java.io.File;
 import java.io.IOException;
 
-import static guru.nidi.graphviz.model.Factory.mutGraph;
-import static guru.nidi.graphviz.model.Factory.mutNode;
+import static guru.nidi.graphviz.model.Factory.*;
 
 public class AutomataVisualizer {
     /**
      * converts an Ndfa to a graphiz-java graph, and draws it
      */
-    public void visualize() throws IOException {
-        MutableGraph g = mutGraph("example1").setDirected(true).add(
-                mutNode("a").add(Color.RED).addLink(mutNode("b")));
-        Graphviz.fromGraph(g).width(200).render(Format.PNG).toFile(new File("example/ex1m.png"));
+    public void visualize(Ndfa ndfa) throws IOException {
+        MutableGraph graph = mutGraph("example1").setDirected(true);
+
+        graph.add(node("main"));
+
+        Graphviz.fromGraph(graph).width(200).render(Format.PNG).toFile(new File("example/ex1m.png"));
     }
 }
