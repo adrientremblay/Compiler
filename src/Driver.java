@@ -29,16 +29,7 @@ public class Driver {
         NdfaGenerator ndfaGenerator = new NdfaGenerator(testMap, testTokens);
         ndfaGenerator.generate();
 
-        Graph g = graph("example1").directed()
-                .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))
-                .nodeAttr().with(Font.name("arial"))
-                .linkAttr().with("class", "link-class")
-                .with(
-                        node("a").with(Color.RED).link(node("b")),
-                        node("b").link(
-                                to(node("c")).with(attr("weight", 5), Style.DASHED)
-                        )
-                );
-        Graphviz.fromGraph(g).height(100).render(Format.PNG).toFile(new File("example/ex1.png"));
+        AutomataVisualizer automataVisualizer = new AutomataVisualizer();
+        automataVisualizer.visualize();
     }
 }
