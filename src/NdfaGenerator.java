@@ -22,7 +22,7 @@ public class NdfaGenerator {
             generateNdfaFromElement(token);
     }
 
-    private Map.Entry<State, State> generateNdfaFromElement(String element) {
+    private Ndfa generateNdfaFromElement(String element) {
         // checking if we can split up the element
         String[] elementSplit = element.split(" ");
 
@@ -30,12 +30,21 @@ public class NdfaGenerator {
             if (element.charAt(element.length() - 1) == '*')  {
                 // recursive thingy
                 State start = new State();
+                State end = new State();
+                start.addEdge("ε", end);
 
+                Ndfa repeatedPart = generateNdfaFromElement(element.substring(0, element.length() - 1));
+                repeatedPart.getExit().addEdge("ε", repeatedPart.getEntry());
+
+                start.addEdge("ε", repeatedPart.getEntry());
+                repeatedPart.getExit().addEdge("ε", end);
+
+                return new Ndfa(start, end);
             } else {
                 State start = new State();
                 State end = new State();
                 start.addEdge(element, end);
-                return new Map.Entry<String, String>(start, end);
+                return new Ndfa(start, end);
             }
         }
 
