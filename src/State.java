@@ -1,21 +1,28 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class State {
-    private HashMap<String, State> edges;
+    private ArrayList<Edge> edges;
 
     public State() {
-        edges = new HashMap<String, State>();
+        edges = new ArrayList<Edge>();
     }
 
     public void addEdge(String label, State target) {
-        edges.put(label, target);
+        edges.add(new Edge(label, target));
     }
 
-    public State followEdge(String label) {
-        return edges.get(label);
-    }
-
-    public HashMap<String, State> getEdges() {
+    public ArrayList<Edge> getEdges() {
         return edges;
+    }
+
+    public class Edge {
+       public String label;
+       public State destination;
+
+        public Edge(String label, State destination) {
+            this.label = label;
+            this.destination = destination;
+        }
     }
 }

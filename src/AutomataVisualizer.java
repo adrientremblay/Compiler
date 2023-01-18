@@ -8,6 +8,7 @@ import guru.nidi.graphviz.model.Node;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Stack;
@@ -33,9 +34,9 @@ public class AutomataVisualizer {
             // add this state to the graph
             graph.add(curPair.node);
 
-            HashMap<String, State> stateEdges = curPair.state.getEdges();
-            for (String label: stateEdges.keySet()) {
-                State childState = stateEdges.get(label);
+            ArrayList<State.Edge> curStateEdges = curPair.state.getEdges();
+            for (State.Edge edge: curStateEdges) {
+                State childState = edge.destination;
 
                 MutableNode childNode;
                 if (seen.containsKey(childState))
@@ -46,7 +47,7 @@ public class AutomataVisualizer {
                 StateNodePair childPair = new StateNodePair(childState, childNode);
 
                 // draw edge
-                curPair.node.addLink(to(childPair.node).with(Label.of(label)));
+                curPair.node.addLink(to(childPair.node).with(Label.of(edge.label)));
 
                 // add the child to the stack
                 if (!seen.containsKey(childState)) {

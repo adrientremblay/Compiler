@@ -88,9 +88,9 @@ public class NdfaGenerator {
         }
 
         State end = new State();
-        for (State tail : tails) {
+        cur.addEdge("ε", end);
+        for (State tail : tails)
             tail.addEdge("ε", end);
-        }
 
         return new Ndfa(start, end);
     }
