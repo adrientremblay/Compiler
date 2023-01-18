@@ -48,7 +48,7 @@ public class AutomataVisualizer {
                 curPair.node.link(childPair.node);
 
                 // add the child to the stack
-                if (!seen.containsKey(curPair.state)) {
+                if (!seen.containsKey(childState)) {
                     graphStack.push(childPair);
                     seen.put(childState, childNode);
                 }
