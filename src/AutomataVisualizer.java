@@ -33,11 +33,11 @@ public class AutomataVisualizer {
 
             HashMap<String, State> stateEdges = curPair.state.getEdges();
             for (String label: stateEdges.keySet()) {
-                State childState = stateEdges.get("label");
+                State childState = stateEdges.get(label);
 
                 Node childNode;
-                if (seen.containsKey(curPair.state))
-                    childNode = seen.get(curPair.state);
+                if (seen.containsKey(childState))
+                    childNode = seen.get(childState);
                 else
                     childNode = node(String.valueOf(i++));
 
@@ -48,9 +48,10 @@ public class AutomataVisualizer {
                 curPair.node.link(childPair.node);
 
                 // add the child to the stack
-                if (!seen.containsKey(curPair.state))
+                if (!seen.containsKey(curPair.state)) {
                     graphStack.push(childPair);
-
+                    seen.put(childState, childNode);
+                }
             }
         }
 
