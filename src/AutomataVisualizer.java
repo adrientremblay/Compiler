@@ -2,6 +2,7 @@ import guru.nidi.graphviz.attribute.Color;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableGraph;
+import guru.nidi.graphviz.model.MutableNode;
 import guru.nidi.graphviz.model.Node;
 
 import java.io.File;
@@ -21,9 +22,9 @@ public class AutomataVisualizer {
 
         int i = 1;
         Stack<StateNodePair> graphStack = new Stack<StateNodePair>();
-        Node baseNode = node(String.valueOf(i++));
+        MutableNode baseNode = mutNode(String.valueOf(i++));
         graphStack.add(new StateNodePair(entry, baseNode));
-        HashMap<State, Node> seen = new HashMap<State, Node>();
+        HashMap<State, MutableNode> seen = new HashMap<State, MutableNode>();
         seen.put(entry, baseNode);
 
         while (!graphStack.empty()) {
@@ -35,17 +36,17 @@ public class AutomataVisualizer {
             for (String label: stateEdges.keySet()) {
                 State childState = stateEdges.get(label);
 
-                Node childNode;
+                MutableNode childNode;
                 if (seen.containsKey(childState))
                     childNode = seen.get(childState);
                 else
-                    childNode = node(String.valueOf(i++));
+                    childNode = mutNode(String.valueOf(i++));
 
                 StateNodePair childPair = new StateNodePair(childState, childNode);
 
                 // draw edge
                 // todo: use label
-                curPair.node.link(childPair.node);
+                curPair.node.addLink(childPair.node);
 
                 // add the child to the stack
                 if (!seen.containsKey(childState)) {
@@ -60,9 +61,9 @@ public class AutomataVisualizer {
 
     private class StateNodePair {
         public State state;
-        public Node node;
+        public MutableNode node;
 
-        public StateNodePair(State state, Node node) {
+        public StateNodePair(State state, MutableNode node) {
             this.state = state;
             this.node = node;
         }
