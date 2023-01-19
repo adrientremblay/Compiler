@@ -7,7 +7,7 @@ public class Driver {
         HashMap<String, String> testMap = new HashMap<String, String>();
         testMap.put("id", "letter alphanum*");
         testMap.put("alphanum", "letter | digit | _");
-        testMap.put("integer", "nonzero digit* | 0");
+        testMap.put("integer", "[nonzero digit*] | 0");
         testMap.put("float", "integer fraction [e [+ | -] integer]");
         testMap.put("fraction", ". [digit* nonzero] | 0");
 
