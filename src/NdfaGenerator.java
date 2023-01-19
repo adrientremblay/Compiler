@@ -68,6 +68,7 @@ public class NdfaGenerator {
 
         // construct a combination of elements
         State start = new State();
+        State branchingPoint = start;
         State cur = start;
         ArrayList<State> tails = new ArrayList<State>();
         for (int i = 0 ; i < elementSplit.length ; i++) {
@@ -80,9 +81,12 @@ public class NdfaGenerator {
                 if (cur != start)
                     tails.add(cur);
 
-                start.addEdge("ε", pathNdfa.getEntry());
+                branchingPoint.addEdge("ε", pathNdfa.getEntry());
                 cur = pathNdfa.getExit();
             } else {
+                if (cur == start)
+                    branchingPoint = pathNdfa.getExit();
+
                 // continue along whatever branch you're at (or the start)
                 cur.addEdge("ε", pathNdfa.getEntry());
                 cur = pathNdfa.getExit();
