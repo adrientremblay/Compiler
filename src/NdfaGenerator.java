@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Takes a regular expression and generates a NDFA
@@ -36,7 +34,7 @@ public class NdfaGenerator {
 
     private Ndfa generateNdfaFromElement(String element) {
         // checking if we can split up the element
-        String[] elementSplit = element.split(" ");
+        String[] elementSplit = splitIgnoreBrackets(element);
 
         if (elementSplit.length == 1) {
             // There is only a single element
@@ -55,7 +53,7 @@ public class NdfaGenerator {
                 return new Ndfa(start, end);
             } else if (element.charAt(0) == '[' && element.charAt(element.length() - 1) == ']') {
                 // element is in square brackets. The point of this is to isolate recursions.
-                return generateNdfaFromElement(element.substring(1, element.length() - 1));
+                return generateNdfaFromElement(element.substring(1, element.length() - 2));
             } else if (atomicLexicalElementMap.containsKey(element)) {
                 // Can expand element from map
                 return generateNdfaFromElement(atomicLexicalElementMap.get(element));
@@ -96,5 +94,25 @@ public class NdfaGenerator {
             tail.addEdge("ε", end);
 
         return new Ndfa(start, end);
+    }
+
+    private String[] splitIgnoreBrackets(String s) {
+        int left = 0;
+
+        ArrayList<String> ret = new ArrayList<String>();
+
+        for (int right = 1 ; right < s.length() ; right++) {
+            if (s.charAt(right) != ' ')
+                continue;
+
+            ret.add(s.substring(left, right));
+            left = right+1;
+        }
+
+        ret.add(s.substring(left, s.length()));
+
+        String[] retArr = new String[ret.size()];
+        ret.toArray(retArr);
+        return retArr;
     }
 }

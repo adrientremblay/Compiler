@@ -1,4 +1,5 @@
 import guru.nidi.graphviz.attribute.Label;
+import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableGraph;
@@ -17,7 +18,9 @@ public class AutomataVisualizer {
      * converts an Ndfa to a graphiz-java graph, and draws it
      */
     public void visualize(State entry) throws IOException {
-        MutableGraph graph = mutGraph("example1").setDirected(true);
+        MutableGraph graph = mutGraph("example1")
+                .setDirected(true)
+                .graphAttrs().add(Rank.dir(Rank.RankDir.LEFT_TO_RIGHT));
 
         int i = 1;
         Stack<StateNodePair> graphStack = new Stack<StateNodePair>();
@@ -39,7 +42,7 @@ public class AutomataVisualizer {
                 if (seen.containsKey(childState))
                     childNode = seen.get(childState);
                 else
-                    childNode = mutNode(String.valueOf(i++));
+                    childNode = mutNode("s" + String.valueOf(i++));
 
                 StateNodePair childPair = new StateNodePair(childState, childNode);
 
@@ -54,7 +57,7 @@ public class AutomataVisualizer {
             }
         }
 
-        Graphviz.fromGraph(graph).width(500).render(Format.PNG).toFile(new File("example/ex1m.png"));
+        Graphviz.fromGraph(graph).render(Format.PNG).toFile(new File("example/ex1m.png"));
     }
 
     private class StateNodePair {
