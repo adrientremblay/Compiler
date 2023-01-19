@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 // todo: state should really be an intercae cause for DfaState edges should be only other Dfa States
 public class State {
@@ -17,8 +18,8 @@ public class State {
         return edges;
     }
 
-    public List<State> epsilonClosure() {
-        List<State> ret = new ArrayList<State>();
+    public Set<State> epsilonClosure() {
+        Set<State> ret = new HashSet<State>();
         ret.add(this);
 
         for (Edge edge : edges) {

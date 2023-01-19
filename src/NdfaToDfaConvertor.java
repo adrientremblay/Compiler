@@ -2,7 +2,7 @@ import java.util.*;
 
 public class NdfaToDfaConvertor {
     public static DfaState convert(State dnfa) {
-        HashMap<List<State>, DfaState> dfa = new HashMap<List<State>, DfaState>();
+        HashMap<Set<State>, DfaState> dfa = new HashMap<Set<State>, DfaState>();
         Stack<DfaState> dnfaStateStack = new Stack<DfaState>();
 
         DfaState dfaRoot = new DfaState(dnfa.epsilonClosure());
@@ -12,17 +12,16 @@ public class NdfaToDfaConvertor {
 
         if (! dnfaStateStack.empty()) {
             DfaState curState = dnfaStateStack.pop();
-            for (State.Edge edge : curState.getEdges()) {
-                if (edge.label.equals("ε"))
-                    continue;
+            HashMap<String, Set<State>> curStateMoves = curState.getMoves();
+            for (String label : curStateMoves.keySet()) {
+                Set<State> statesReached = curStateMoves.get(label);
+                Set<State> statesReachedEpsilonClosure = epsilonClosureOfStateSet(statesReached);
 
-                List<State> potentialNewStateEpsilonClosure = edge.destination.epsilonClosure();
-
-                if (dfa.containsKey(potentialNewStateEpsilonClosure)) {
-                    curState.addEdge(edge.label, dfa.get(potentialNewStateEpsilonClosure));
+                if (dfa.containsKey(statesReachedEpsilonClosure)) {
+                    curState.addEdge(label, dfa.get(statesReached));
                 } else {
-                    DfaState newState = new DfaState(potentialNewStateEpsilonClosure);
-                    curState.addEdge(edge.label, newState);
+                    DfaState newState = new DfaState(statesReachedEpsilonClosure);
+                    curState.addEdge(label, newState);
 
                     dnfaStateStack.push(newState);
                     dfa.put(newState.getSlaves(), newState);
@@ -31,6 +30,15 @@ public class NdfaToDfaConvertor {
         }
 
         return dfaRoot;
+    }
+
+    private static Set<State> epsilonClosureOfStateSet(Set<State> states) {
+        HashSet<State> ret = new HashSet<State>();
+
+        for (State state : states)
+            ret.addAll(state.epsilonClosure());
+
+        return ret;
     }
 
 }
