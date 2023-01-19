@@ -17,7 +17,7 @@ public class AutomataVisualizer {
     /**
      * converts an Ndfa to a graphiz-java graph, and draws it
      */
-    public void visualize(State entry) throws IOException {
+    public static void visualize(State entry, String outputFileName) throws IOException {
         MutableGraph graph = mutGraph("example1")
                 .setDirected(true)
                 .graphAttrs().add(Rank.dir(Rank.RankDir.LEFT_TO_RIGHT));
@@ -57,10 +57,10 @@ public class AutomataVisualizer {
             }
         }
 
-        Graphviz.fromGraph(graph).render(Format.PNG).toFile(new File("images/ndfa.png"));
+        Graphviz.fromGraph(graph).render(Format.PNG).toFile(new File("images/" + outputFileName + ".png"));
     }
 
-    private class StateNodePair {
+    private static class StateNodePair {
         public State state;
         public MutableNode node;
 

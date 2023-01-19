@@ -18,10 +18,9 @@ public class Driver {
 
         NdfaGenerator ndfaGenerator = new NdfaGenerator(testMap, testTokens);
         State ndfa = ndfaGenerator.generate();
+        AutomataVisualizer.visualize(ndfa, "ndfa");
 
         DfaState dfa = NdfaToDfaConvertor.convert(ndfa);
-
-        AutomataVisualizer automataVisualizer = new AutomataVisualizer();
-        automataVisualizer.visualize(dfa);
+        AutomataVisualizer.visualize(dfa, "dfa");
     }
 }

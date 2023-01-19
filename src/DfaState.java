@@ -16,6 +16,9 @@ public class DfaState extends State {
 
         for (State slave : slaves) {
             for (Edge edge : slave.getEdges()) {
+                if (edge.label.equals("ε"))
+                    continue;
+
                 if (!ret.containsKey(edge.label))
                     ret.put(edge.label, new HashSet<State>());
 
