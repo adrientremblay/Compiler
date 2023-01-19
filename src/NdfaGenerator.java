@@ -53,7 +53,10 @@ public class NdfaGenerator {
                 repeatedPart.getExit().addEdge("ε", end);
 
                 return new Ndfa(start, end);
-            }  else if (atomicLexicalElementMap.containsKey(element)) {
+            } else if (element.charAt(0) == '[' && element.charAt(element.length() - 1) == ']') {
+                // element is in square brackets. The point of this is to isolate recursions.
+                return generateNdfaFromElement(element.substring(1, element.length() - 1));
+            } else if (atomicLexicalElementMap.containsKey(element)) {
                 // Can expand element from map
                 return generateNdfaFromElement(atomicLexicalElementMap.get(element));
             } else {

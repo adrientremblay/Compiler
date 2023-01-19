@@ -21,12 +21,13 @@ public class Driver {
         testMap.put("id", "letter alphanum*");
         testMap.put("alphanum", "letter | digit | _");
         testMap.put("integer", "nonzero digit* | 0");
-        //testMap.put("digit", "0.009");
-        // todo: need to figure out this I don't want to expand
+        testMap.put("float", "integer fraction [e [+ | -] integer]");
+        testMap.put("fraction", ". [digit* nonzero] | 0");
 
         ArrayList<String> testTokens = new ArrayList<String>();
         testTokens.add("id");
         testTokens.add("integer");
+        testTokens.add("float");
 
         NdfaGenerator ndfaGenerator = new NdfaGenerator(testMap, testTokens);
         State entry = ndfaGenerator.generate();
