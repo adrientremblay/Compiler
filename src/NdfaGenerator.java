@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// todo: make this class static
 /**
  * Takes a regular expression and generates a NDFA
  */

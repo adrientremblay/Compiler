@@ -17,9 +17,11 @@ public class Driver {
         testTokens.add("float");
 
         NdfaGenerator ndfaGenerator = new NdfaGenerator(testMap, testTokens);
-        State entry = ndfaGenerator.generate();
+        State ndfa = ndfaGenerator.generate();
+
+        DfaState dfa = NdfaToDfaConvertor.convert(ndfa);
 
         AutomataVisualizer automataVisualizer = new AutomataVisualizer();
-        automataVisualizer.visualize(entry);
+        automataVisualizer.visualize(dfa);
     }
 }
