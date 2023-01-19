@@ -57,7 +57,7 @@ public class AutomataVisualizer {
             }
         }
 
-        Graphviz.fromGraph(graph).render(Format.PNG).toFile(new File("example/ex1m.png"));
+        Graphviz.fromGraph(graph).render(Format.PNG).toFile(new File("images/ndfa.png"));
     }
 
     private class StateNodePair {

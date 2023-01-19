@@ -72,9 +72,10 @@ public class NdfaGenerator {
         ArrayList<State> tails = new ArrayList<State>();
         for (int i = 0 ; i < elementSplit.length ; i++) {
             Ndfa pathNdfa = generateNdfaFromElement(elementSplit[i]);
-            if (i < elementSplit.length - 1 && elementSplit[i+1].equals("|")) {
+            if ((i < elementSplit.length - 1 && elementSplit[i+1].equals("|")) || (i > 0 && elementSplit[i-1].equals("|"))) {
                 // create new branch from start
-                i++;
+                if (i < elementSplit.length - 1 && elementSplit[i+1].equals("|"))
+                    i++;
 
                 if (cur != start)
                     tails.add(cur);
