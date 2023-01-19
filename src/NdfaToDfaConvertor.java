@@ -10,7 +10,7 @@ public class NdfaToDfaConvertor {
         dnfaStateStack.push(dfaRoot);
         dfa.put(dfaRoot.getSlaves(), dfaRoot);
 
-        if (! dnfaStateStack.empty()) {
+        while (! dnfaStateStack.empty()) {
             DfaState curState = dnfaStateStack.pop();
             HashMap<String, Set<State>> curStateMoves = curState.getMoves();
             for (String label : curStateMoves.keySet()) {
@@ -18,7 +18,7 @@ public class NdfaToDfaConvertor {
                 Set<State> statesReachedEpsilonClosure = epsilonClosureOfStateSet(statesReached);
 
                 if (dfa.containsKey(statesReachedEpsilonClosure)) {
-                    curState.addEdge(label, dfa.get(statesReached));
+                    curState.addEdge(label, dfa.get(statesReachedEpsilonClosure));
                 } else {
                     DfaState newState = new DfaState(statesReachedEpsilonClosure);
                     curState.addEdge(label, newState);
