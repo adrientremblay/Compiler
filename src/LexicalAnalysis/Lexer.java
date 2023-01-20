@@ -11,6 +11,7 @@ public class Lexer {
     private NdfaGenerator ndfaGenerator;
     private DfaState dfa;
     private String sourceCode;
+    private int sourceIndex;
 
     public Lexer() throws IOException {
         ndfaGenerator = new NdfaGenerator();
@@ -32,10 +33,13 @@ public class Lexer {
 
     public void loadSource(String source) {
         this.sourceCode = source;
+        sourceIndex = 0;
     }
 
     public Token nextToken() {
+        DfaState cur = dfa;
 
+
+        return null;
     }
-
 }
