@@ -13,29 +13,26 @@ public enum Token {
     DIAMOND("diamond", "< >", true, true),
     LESS_THAN("lessthan", "<", true, true),
     GREATER_THAN("greaterthan", ">", true, true),
-    /*
-    LESS_THAN_OR_EQUAL("", "< =", true, false),
-    GREATER_THAN_OR_EQUAL("", "> =", true, false),
-    PLUS("", "+", true, false),
-    MINUS("", "-", true, false),
-    STAR("", "*", true, false),
-    FORWARD_SLASH("", "/", true, false),
-    EQUALS("", "=", true, false),
-    LEFT_BRACKET("", "(", true, false),
-    RIGHT_BRACKET("", ")", true, false),
-    LEFT_BRACE("", "{", true, false),
-    RIGHT_BRACE("", "}", true, false),
-    LEFT_SQUARE_BRACKET("", "[", true, false),
-    RIGHT_SQUARE_BRACKET("", "]", true, false),
-    SEMI_COLON("", ";", true, false),
-    COMMA("", ",", true, false),
-    PERIOD("", ".", true, false),
-    COLON("", ":", true, false),
-    ARROW("", "=>", true, false),
-    COLON_COLON("", "::", true, false),
-     */
-
-    ;
+    LESS_THAN_OR_EQUAL("lessthanorequal", "< =", true, true),
+    GREATER_THAN_OR_EQUAL("greaterthanorequal", "> =", true, true),
+    PLUS("plus", "+", true, true),
+    MINUS("minus", "-", true, true),
+    // todo: implement * and [ ]
+//    STAR("star", "*", true, true),
+    FORWARD_SLASH("forwardslash", "/", true, true),
+    EQUALS("equals", "=", true, true),
+    LEFT_BRACKET("leftbracket", "(", true, true),
+    RIGHT_BRACKET("rightbracket", ")", true, true),
+    LEFT_BRACE("leftbrace", "{", true, true),
+    RIGHT_BRACE("rightbrace", "}", true, true),
+//    LEFT_SQUARE_BRACKET("leftsquarebracket", "[", true, true),
+//    RIGHT_SQUARE_BRACKET("rightsquarebracket", "]", true, true),
+    SEMI_COLON("semicolon", ";", true, true),
+    COMMA("comma", ",", true, true),
+    PERIOD("period", ".", true, true),
+    COLON("colon", ":", true, true),
+    ARROW("arrow", "= >", true, true),
+    COLON_COLON("coloncolon", ": :", true, true);
 
     private final String name; // name as found in regular expression
     private final String regex; // the regular expression
