@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-// todo: make this class static
 /**
  * Takes a regular expression and generates a NDFA
  */
@@ -10,9 +10,9 @@ public class NdfaGenerator {
     private ArrayList<String> tokens;
     private State root;
 
-    public NdfaGenerator(HashMap<String, String> atomicLexicalElementMap, ArrayList<String> tokens) {
-        this.atomicLexicalElementMap = atomicLexicalElementMap;
-        this.tokens = tokens;
+    public NdfaGenerator() {
+        this.atomicLexicalElementMap = new HashMap<String, String>();
+        this.tokens = new ArrayList<String>();
         root = new State();
     }
 
@@ -31,6 +31,14 @@ public class NdfaGenerator {
         }
 
         return start;
+    }
+
+    public void addElementRegularExpression(String element, String regularExpression) {
+        atomicLexicalElementMap.put(element, regularExpression);
+    }
+
+    public void addTokens(String... tokens) {
+        this.tokens.addAll(List.of(tokens));
     }
 
     private Ndfa generateNdfaFromElement(String element) {

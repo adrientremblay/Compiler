@@ -3,15 +3,15 @@ import java.util.*;
 public class NdfaToDfaConvertor {
     public static DfaState convert(State dnfa) {
         HashMap<Set<State>, DfaState> dfa = new HashMap<Set<State>, DfaState>();
-        Stack<DfaState> dnfaStateStack = new Stack<DfaState>();
+        Stack<DfaState> dfaStateStack = new Stack<DfaState>();
 
         DfaState dfaRoot = new DfaState(dnfa.epsilonClosure());
 
-        dnfaStateStack.push(dfaRoot);
+        dfaStateStack.push(dfaRoot);
         dfa.put(dfaRoot.getSlaves(), dfaRoot);
 
-        while (! dnfaStateStack.empty()) {
-            DfaState curState = dnfaStateStack.pop();
+        while (! dfaStateStack.empty()) {
+            DfaState curState = dfaStateStack.pop();
             HashMap<String, Set<State>> curStateMoves = curState.getMoves();
             for (String label : curStateMoves.keySet()) {
                 Set<State> statesReached = curStateMoves.get(label);
@@ -23,7 +23,7 @@ public class NdfaToDfaConvertor {
                     DfaState newState = new DfaState(statesReachedEpsilonClosure);
                     curState.addEdge(label, newState);
 
-                    dnfaStateStack.push(newState);
+                    dfaStateStack.push(newState);
                     dfa.put(newState.getSlaves(), newState);
                 }
             }
