@@ -1,3 +1,5 @@
+package LexicalAnalysis;
+
 import DfaGeneration.*;
 
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.io.IOException;
 public class Lexer {
     private NdfaGenerator ndfaGenerator;
     private DfaState dfa;
+    private String sourceCode;
 
     public Lexer() throws IOException {
         ndfaGenerator = new NdfaGenerator();
@@ -26,4 +29,13 @@ public class Lexer {
         dfa = NdfaToDfaConvertor.convert(ndfa);
         AutomataVisualizer.visualize(dfa, "dfa");
     }
+
+    public void loadSource(String source) {
+        this.sourceCode = source;
+    }
+
+    public Token nextToken() {
+
+    }
+
 }
