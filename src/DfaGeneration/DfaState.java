@@ -1,5 +1,7 @@
 package DfaGeneration;
 
+import LexicalAnalysis.Token;
+
 import java.util.*;
 
 public class DfaState extends State {
@@ -39,6 +41,14 @@ public class DfaState extends State {
             ret.addAll(slave.epsilonClosure());
 
         return ret;
+    }
+
+    @Override
+    public Token getPathToken() {
+        if (slaves.isEmpty())
+            return null;
+
+        return slaves.stream().findAny().get().getPathToken();
     }
 
     @Override
