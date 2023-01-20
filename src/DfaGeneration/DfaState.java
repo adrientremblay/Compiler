@@ -40,4 +40,13 @@ public class DfaState extends State {
 
         return ret;
     }
+
+    @Override
+    public boolean isTerminal() {
+        for (State slave : slaves)
+            if (slave.isTerminal())
+                return true;
+
+        return false;
+    }
 }

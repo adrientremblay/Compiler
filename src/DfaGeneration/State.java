@@ -1,16 +1,24 @@
 package DfaGeneration;
 
+import LexicalAnalysis.Token;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
-// todo: state should really be an intercae cause for DfaGeneration.DfaState edges should be only other Dfa States
+// todo: state should really be an interface cause for DfaGeneration.DfaState edges should be only other Dfa States
 public class State {
     private ArrayList<Edge> edges;
+    private Token pathToken;
 
     public State() {
         edges = new ArrayList<Edge>();
+    }
+
+    public State(Token pathToken) {
+        edges = new ArrayList<Edge>();
+        this.pathToken = pathToken;
     }
 
     public void addEdge(String label, State target) {
@@ -43,6 +51,10 @@ public class State {
         }
 
         return ret;
+    }
+
+    public boolean isTerminal() {
+        return edges.isEmpty();
     }
 
     public class Edge {
