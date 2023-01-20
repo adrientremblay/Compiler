@@ -26,7 +26,7 @@ public class AutomataVisualizer {
 
         int i = 1;
         Stack<StateNodePair> graphStack = new Stack<StateNodePair>();
-        MutableNode baseNode = mutNode(String.valueOf(i++));
+        MutableNode baseNode = mutNode(String.valueOf("s" + i++));
         graphStack.add(new StateNodePair(entry, baseNode));
         HashMap<State, MutableNode> seen = new HashMap<State, MutableNode>();
         seen.put(entry, baseNode);
