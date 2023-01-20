@@ -1,3 +1,5 @@
+package DfaGeneration;
+
 import guru.nidi.graphviz.attribute.Label;
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.engine.Format;
@@ -15,7 +17,7 @@ import static guru.nidi.graphviz.model.Factory.*;
 
 public class AutomataVisualizer {
     /**
-     * converts an Ndfa to a graphiz-java graph, and draws it
+     * converts an DfaGeneration.Ndfa to a graphiz-java graph, and draws it
      */
     public static void visualize(State entry, String outputFileName) throws IOException {
         MutableGraph graph = mutGraph("example1")

@@ -1,9 +1,11 @@
+package DfaGeneration;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
-// todo: state should really be an intercae cause for DfaState edges should be only other Dfa States
+// todo: state should really be an intercae cause for DfaGeneration.DfaState edges should be only other Dfa States
 public class State {
     private ArrayList<Edge> edges;
 

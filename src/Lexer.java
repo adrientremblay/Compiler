@@ -1,3 +1,5 @@
+import DfaGeneration.*;
+
 import java.io.IOException;
 
 /**

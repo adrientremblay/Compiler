@@ -1,3 +1,5 @@
+package DfaGeneration;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,14 +19,14 @@ public class NdfaGenerator {
     }
 
     public State generate() {
-        // generate an Ndfa for every token
+        // generate an DfaGeneration.Ndfa for every token
         ArrayList<State> generatedTokenEntryStates = new ArrayList<State>();
         for  (String token : tokens) {
             Ndfa newNdfa = generateNdfaFromElement(token);
             generatedTokenEntryStates.add(newNdfa.getEntry());
         }
 
-        // connect them and return the Ndfa
+        // connect them and return the DfaGeneration.Ndfa
         State start = new State();
         for (State entryState : generatedTokenEntryStates) {
             start.addEdge("ε", entryState);

@@ -1,3 +1,5 @@
+package DfaGeneration;
+
 import java.util.*;
 
 public class NdfaToDfaConvertor {

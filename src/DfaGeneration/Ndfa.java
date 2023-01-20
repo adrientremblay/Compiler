@@ -1,3 +1,5 @@
+package DfaGeneration;
+
 public class Ndfa {
     private State entry;
     private State exit;
