@@ -9,10 +9,11 @@ public enum Token {
     LETTER("letter", "a..z | A..Z", false, false),
     DIGIT("digit", "0..9", false, false),
     NON_ZERO("nonzero", "1..9", false, false),
-    EQUALS_EQUALS("", "= =", true, false),
-    DIAMOND("", "< >", true, false),
-    LESS_THAN("", "<", true, false),
-    GREATER_THAN("", ">", true, false),
+    EQUALS_EQUALS("equalsequals", "= =", true, true),
+    DIAMOND("diamond", "< >", true, true),
+    LESS_THAN("lessthan", "<", true, true),
+    GREATER_THAN("greaterthan", ">", true, true),
+    /*
     LESS_THAN_OR_EQUAL("", "< =", true, false),
     GREATER_THAN_OR_EQUAL("", "> =", true, false),
     PLUS("", "+", true, false),
@@ -32,6 +33,7 @@ public enum Token {
     COLON("", ":", true, false),
     ARROW("", "=>", true, false),
     COLON_COLON("", "::", true, false),
+     */
 
     ;
 
@@ -40,11 +42,26 @@ public enum Token {
     private final boolean standalone; // todo: find better name
     private final boolean expand;
 
-
     Token(String name, String regex, boolean standalone, boolean expand) {
         this.name = name;
         this.regex = regex;
         this.standalone = standalone;
         this.expand = expand;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRegex() {
+        return regex;
+    }
+
+    public boolean isStandalone() {
+        return standalone;
+    }
+
+    public boolean isExpand() {
+        return expand;
     }
 }

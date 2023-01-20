@@ -1,5 +1,7 @@
 package DfaGeneration;
 
+import LexicalAnalysis.Token;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,19 +11,27 @@ import java.util.List;
  */
 public class NdfaGenerator {
     private HashMap<String, String> atomicLexicalElementMap;
-    private ArrayList<String> tokens;
+    private ArrayList<String> standalones;
     private State root;
 
     public NdfaGenerator() {
         this.atomicLexicalElementMap = new HashMap<String, String>();
-        this.tokens = new ArrayList<String>();
+        this.standalones = new ArrayList<String>();
+
+        for (Token token : Token.values()) {
+            if (token.isExpand())
+                atomicLexicalElementMap.put(token.getName(), token.getRegex());
+            if (token.isStandalone())
+                standalones.add(token.getName());
+        }
+
         root = new State();
     }
 
     public State generate() {
         // generate an DfaGeneration.Ndfa for every token
         ArrayList<State> generatedTokenEntryStates = new ArrayList<State>();
-        for  (String token : tokens) {
+        for  (String token : standalones) {
             Ndfa newNdfa = generateNdfaFromElement(token);
             generatedTokenEntryStates.add(newNdfa.getEntry());
         }
@@ -35,12 +45,12 @@ public class NdfaGenerator {
         return start;
     }
 
-    public void addElementRegularExpression(String element, String regularExpression) {
+    private void addElementRegularExpression(String element, String regularExpression) {
         atomicLexicalElementMap.put(element, regularExpression);
     }
 
-    public void addTokens(String... tokens) {
-        this.tokens.addAll(List.of(tokens));
+    private void addTokens(String... tokens) {
+        this.standalones.addAll(List.of(tokens));
     }
 
     private Ndfa generateNdfaFromElement(String element) {
