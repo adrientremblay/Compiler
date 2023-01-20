@@ -57,6 +57,10 @@ public class State {
         return edges.isEmpty();
     }
 
+    public Token getPathToken() {
+        return pathToken;
+    }
+
     public class Edge {
        public String label;
        public State destination;

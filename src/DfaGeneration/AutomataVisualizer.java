@@ -43,6 +43,8 @@ public class AutomataVisualizer {
                 MutableNode childNode;
                 if (seen.containsKey(childState))
                     childNode = seen.get(childState);
+                else if (childState.getPathToken() != null && childState.isTerminal())
+                     childNode = mutNode(childState.getPathToken().getName());
                 else
                     childNode = mutNode("s" + String.valueOf(i++));
 
