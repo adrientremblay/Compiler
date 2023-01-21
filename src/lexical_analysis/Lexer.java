@@ -12,6 +12,9 @@ public class Lexer {
     private DfaState dfa;
     private String sourceCode;
     private int sourceIndex;
+    // todo: actually implement current line and char logic
+    private int curLine = 1;
+    private int curChar = 1;
 
     public Lexer() throws IOException {
         ndfaGenerator = new NdfaGenerator();
@@ -27,7 +30,7 @@ public class Lexer {
         sourceIndex = 0;
     }
 
-    public Token nextToken() {
+    public FoundToken nextToken() {
         boolean searchForSkippableChars = true;
         while (searchForSkippableChars) {
             searchForSkippableChars = false;
@@ -72,7 +75,9 @@ public class Lexer {
         }
 
         if (sourceIndex >= sourceCode.length())
-            return Token.END_OF_FILE;
+            return new FoundToken(Token.END_OF_FILE, sourceCode.substring(sourceIndex - 1, sourceIndex - 1), curLine, curChar);
+
+        int foundTokenStartIndex = sourceIndex;
 
         DfaState cur = dfa;
         boolean foundNextState = true;
@@ -94,12 +99,14 @@ public class Lexer {
             }
         } while (foundNextState && sourceIndex < sourceCode.length());
 
+        int foundTokenEndIndex = sourceIndex;
+
         if (cur.isTerminal())
-            return cur.getPathToken();
+            return new FoundToken(cur.getPathToken(), sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex), curLine, curChar);
 
         // todo: do error handling
         sourceIndex++;
-        return Token.ERROR;
+        return new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex), curLine, curChar);
     }
 
     private static boolean isAlpha(char c) {

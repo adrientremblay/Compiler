@@ -5,4 +5,20 @@ public class FoundToken {
     private String lexeme;
     private int foundOnLine;
     private int foundOnChar;
+
+    public FoundToken(Token token, String lexeme, int foundOnLine, int foundOnChar) {
+        this.token = token;
+        this.lexeme = lexeme;
+        this.foundOnLine = foundOnLine;
+        this.foundOnChar = foundOnChar;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + token.getName() + ", " + lexeme + ", " + String.valueOf(foundOnLine) + ":" + String.valueOf(foundOnChar) + "]";
+    }
+
+    public Token getToken() {
+        return token;
+    }
 }
