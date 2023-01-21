@@ -33,6 +33,7 @@ public enum Token {
     COLON("colon", ":", true, true),
     ARROW("arrow", "= >", true, true),
     COLON_COLON("coloncolon", ": :", true, true);
+    // todo: add ERR token
 
     private final String name; // name as found in regular expression
     private final String regex; // the regular expression
