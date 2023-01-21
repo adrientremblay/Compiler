@@ -1,6 +1,6 @@
-package LexicalAnalysis;
+package lexical_analysis;
 
-import DfaGeneration.*;
+import dfa_generation.*;
 
 import java.io.IOException;
 
@@ -30,14 +30,15 @@ public class Lexer {
     public Token nextToken() {
         DfaState cur = dfa;
 
+        while (isWhiteSpace(peekChar()))
+            nextChar();
+
         boolean foundNextState = true;
         do {
             if (!hasNextChar())
                 break;
 
             char next = nextChar();
-            if (next == ' ')
-                continue;
 
             foundNextState = false;
 
@@ -63,6 +64,10 @@ public class Lexer {
 
     private char nextChar() {
         return sourceCode.charAt(sourceIndex++);
+    }
+
+    private char peekChar() {
+        return sourceCode.charAt(sourceIndex);
     }
 
     private boolean hasNextChar() {
@@ -99,5 +104,9 @@ public class Lexer {
             return true;
 
         return false;
+    }
+
+    private static boolean isWhiteSpace(char c) {
+        return (c == ' ' || c == '\n' || c == '\t');
     }
 }

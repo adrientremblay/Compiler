@@ -1,4 +1,4 @@
-package DfaGeneration;
+package dfa_generation;
 
 public class Ndfa {
     private State entry;

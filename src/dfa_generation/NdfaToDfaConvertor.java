@@ -1,4 +1,4 @@
-package DfaGeneration;
+package dfa_generation;
 
 import java.util.*;
 

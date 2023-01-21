@@ -1,4 +1,4 @@
-package LexicalAnalysis;
+package lexical_analysis;
 
 public class FoundToken {
     private Token token;

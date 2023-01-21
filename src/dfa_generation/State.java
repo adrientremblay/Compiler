@@ -1,6 +1,6 @@
-package DfaGeneration;
+package dfa_generation;
 
-import LexicalAnalysis.Token;
+import lexical_analysis.Token;
 
 import java.util.ArrayList;
 import java.util.HashSet;

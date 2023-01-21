@@ -1,4 +1,4 @@
-package LexicalAnalysis;
+package lexical_analysis;
 
 public enum Token {
     IDENTIFIER("id", "letter alphanum*", true, true),

@@ -1,4 +1,4 @@
-package DfaGeneration;
+package dfa_generation;
 
 import guru.nidi.graphviz.attribute.Label;
 import guru.nidi.graphviz.attribute.Rank;
