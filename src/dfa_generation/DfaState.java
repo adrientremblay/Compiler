@@ -43,12 +43,18 @@ public class DfaState extends State {
         return ret;
     }
 
+    /**
+     * will return
+     *
+     * @return
+     */
     @Override
     public Token getPathToken() {
-        if (slaves.isEmpty())
-            return null;
+        for (State slave : slaves)
+            if (slave.isTerminal())
+                return slave.getPathToken();
 
-        return slaves.stream().findAny().get().getPathToken();
+        return null;
     }
 
     @Override
