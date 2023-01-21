@@ -45,10 +45,13 @@ public class Lexer {
                 sourceIndex+=2;
                 while (sourceIndex < sourceCode.length()) {
                     if (sourceIndex < sourceCode.length() - 1) {
-                        if(sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '*')
+                        if(sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '*') {
                             openers++;
-                        else if (sourceCode.charAt(sourceIndex) == '*' && sourceCode.charAt(sourceIndex+1) == '/')
+                            sourceIndex++;
+                        } else if (sourceCode.charAt(sourceIndex) == '*' && sourceCode.charAt(sourceIndex+1) == '/') {
                             openers--;
+                            sourceIndex++;
+                        }
                     }
 
                     if (openers == 0) {
