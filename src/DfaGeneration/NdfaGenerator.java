@@ -48,7 +48,7 @@ public class NdfaGenerator {
 
         if (elementSplit.length == 1) {
             // There is only a single element
-            if (element.charAt(element.length() - 1) == '*')  {
+            if (element.length() != 1 && element.charAt(element.length() - 1) == '*')  {
                 // recursive thingy
                 State start = new State(branchToken);
                 State end = new State(branchToken);

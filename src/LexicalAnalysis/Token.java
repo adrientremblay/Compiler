@@ -18,7 +18,7 @@ public enum Token {
     PLUS("plus", "+", true, true),
     MINUS("minus", "-", true, true),
     // todo: implement * and [ ]
-//    STAR("star", "*", true, true),
+    STAR("star", "*", true, true),
     FORWARD_SLASH("forwardslash", "/", true, true),
     EQUALS("equals", "=", true, true),
     LEFT_BRACKET("leftbracket", "(", true, true),
