@@ -30,9 +30,16 @@ public class Lexer {
     public Token nextToken() {
         DfaState cur = dfa;
 
-        while (!cur.isTerminal()) {
+        boolean foundNextState = true;
+        do {
+            if (!hasNextChar())
+                break;
+
             char next = nextChar();
-            boolean foundNextState = false;
+            if (next == ' ')
+                continue;
+
+            foundNextState = false;
 
             for (State.Edge edge : cur.getEdges()) {
                 if ((edge.label.equals(Token.LETTER.getName()) && isAlpha(next)) ||
@@ -44,17 +51,26 @@ public class Lexer {
                     break;
                 }
             }
+        } while (foundNextState);
 
-            if (!foundNextState) {
-                return null;
-            }
+        backTrack();
+        if (cur.isTerminal())
+            return cur.getPathToken();
+        else {
+            return null; // todo: err token
         }
-
-        return cur.getPathToken();
     }
 
     private char nextChar() {
         return sourceCode.charAt(sourceIndex++);
+    }
+
+    private boolean hasNextChar() {
+        return sourceIndex < sourceCode.length() - 1;
+    }
+
+    private void backTrack() {
+        sourceIndex--;
     }
 
     private char peek() {
