@@ -28,14 +28,24 @@ public class Lexer {
     }
 
     public Token nextToken() {
-        DfaState cur = dfa;
-
-         if (sourceIndex >= sourceCode.length())
+        if (sourceIndex >= sourceCode.length())
             return Token.END_OF_FILE;
 
         while (isWhiteSpace(sourceCode.charAt(sourceIndex)))
             sourceIndex++;
 
+        // inline comment skip
+        while(sourceIndex < sourceCode.length() - 1 && sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '/') {
+            sourceIndex+=2;
+            while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
+                sourceIndex++;
+            sourceIndex++;
+        }
+
+        if (sourceIndex >= sourceCode.length())
+            return Token.END_OF_FILE;
+
+        DfaState cur = dfa;
         boolean foundNextState = true;
         do {
             char next = sourceCode.charAt(sourceIndex);
