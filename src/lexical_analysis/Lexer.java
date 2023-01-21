@@ -28,10 +28,7 @@ public class Lexer {
     }
 
     public Token nextToken() {
-        if (sourceIndex >= sourceCode.length())
-            return Token.END_OF_FILE;
-
-        while (isWhiteSpace(sourceCode.charAt(sourceIndex)))
+        while (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex)))
             sourceIndex++;
 
         // inline comment skip
@@ -40,6 +37,8 @@ public class Lexer {
             while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
                 sourceIndex++;
             sourceIndex++;
+            while (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex)))
+                sourceIndex++;
         }
 
         if (sourceIndex >= sourceCode.length())
