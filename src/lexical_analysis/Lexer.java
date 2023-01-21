@@ -30,15 +30,15 @@ public class Lexer {
     public Token nextToken() {
         DfaState cur = dfa;
 
-        while (isWhiteSpace(peekChar()))
-            nextChar();
+         if (sourceIndex >= sourceCode.length())
+            return Token.END_OF_FILE;
+
+        while (isWhiteSpace(sourceCode.charAt(sourceIndex)))
+            sourceIndex++;
 
         boolean foundNextState = true;
         do {
-            if (!hasNextChar())
-                break;
-
-            char next = nextChar();
+            char next = sourceCode.charAt(sourceIndex);
 
             foundNextState = false;
 
@@ -49,37 +49,18 @@ public class Lexer {
                     (edge.label.length() == 1 && edge.label.charAt(0) == next)) {
                     cur = (DfaState) edge.destination; // todo: cringe caused by my design of the states
                     foundNextState = true;
+                    sourceIndex++;
                     break;
                 }
             }
-        } while (foundNextState);
+        } while (foundNextState && sourceIndex < sourceCode.length());
 
-        backTrack();
         if (cur.isTerminal())
             return cur.getPathToken();
-        else {
-            return null; // todo: err token
-        }
-    }
 
-    private char nextChar() {
-        return sourceCode.charAt(sourceIndex++);
-    }
-
-    private char peekChar() {
-        return sourceCode.charAt(sourceIndex);
-    }
-
-    private boolean hasNextChar() {
-        return sourceIndex < sourceCode.length() - 1;
-    }
-
-    private void backTrack() {
-        sourceIndex--;
-    }
-
-    private char peek() {
-        return sourceCode.charAt(sourceIndex++);
+        // todo: do error handling
+        sourceIndex++;
+        return Token.ERROR;
     }
 
     private static boolean isAlpha(char c) {

@@ -1,10 +1,9 @@
 import lexical_analysis.Lexer;
+import lexical_analysis.Token;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Driver {
     public static void main(String args[]) throws IOException {
@@ -14,11 +13,11 @@ public class Driver {
 
         lexer.loadSource(source);
 
-        System.out.println(lexer.nextToken().getName());
-        System.out.println(lexer.nextToken().getName());
-        System.out.println(lexer.nextToken().getName());
-        System.out.println(lexer.nextToken().getName());
-        System.out.println(lexer.nextToken().getName());
+        Token t;
+        while ((t = lexer.nextToken()) != Token.END_OF_FILE) {
+            System.out.println(t.getName());
+        }
+
     }
 
     public static String readFileAsString(String fileName) throws IOException {

@@ -31,8 +31,9 @@ public enum Token {
     PERIOD("period", ".", true, true),
     COLON("colon", ":", true, true),
     ARROW("arrow", "= >", true, true),
-    COLON_COLON("coloncolon", ": :", true, true);
-    // todo: add ERR token
+    COLON_COLON("coloncolon", ": :", true, true),
+    ERROR("error", "", false, false),
+    END_OF_FILE("endoffile", "", false, false);
 
     private final String name; // name as found in regular expression
     private final String regex; // the regular expression

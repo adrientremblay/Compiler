@@ -15,6 +15,7 @@ import java.util.Stack;
 
 import static guru.nidi.graphviz.model.Factory.*;
 
+// todo: something is iffy with the generation
 public class AutomataVisualizer {
     /**
      * converts an DfaGeneration.Ndfa to a graphiz-java graph, and draws it
