@@ -28,7 +28,6 @@ public class Lexer {
     }
 
     public Token nextToken() {
-        // inline comment skip
         boolean searchForSkippableChars = true;
         while (searchForSkippableChars) {
             searchForSkippableChars = false;
@@ -38,6 +37,27 @@ public class Lexer {
                 sourceIndex+=2;
                 while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
                     sourceIndex++;
+            }
+            // block comment skip
+            if (sourceIndex < sourceCode.length() -1 && sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '*') {
+                searchForSkippableChars = true;
+                int openers = 1;
+                sourceIndex+=2;
+                while (sourceIndex < sourceCode.length()) {
+                    if (sourceIndex < sourceCode.length() - 1) {
+                        if(sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '*')
+                            openers++;
+                        else if (sourceCode.charAt(sourceIndex) == '*' && sourceCode.charAt(sourceIndex+1) == '/')
+                            openers--;
+                    }
+
+                    if (openers == 0) {
+                        sourceIndex+=2;
+                        break;
+                    }
+
+                    sourceIndex++;
+                }
             }
             // whitespace
             if (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex))) {
