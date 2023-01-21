@@ -28,17 +28,24 @@ public class Lexer {
     }
 
     public Token nextToken() {
-        while (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex)))
-            sourceIndex++;
-
         // inline comment skip
-        while(sourceIndex < sourceCode.length() - 1 && sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '/') {
-            sourceIndex+=2;
-            while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
-                sourceIndex++;
-            sourceIndex++;
-            while (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex)))
-                sourceIndex++;
+        boolean searchForSkippableChars = true;
+        while (searchForSkippableChars) {
+            searchForSkippableChars = false;
+            // inline comment skip
+            if (sourceIndex < sourceCode.length() - 1 && sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '/') {
+                searchForSkippableChars = true;
+                sourceIndex+=2;
+                while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
+                    sourceIndex++;
+            }
+            // whitespace
+            if (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex))) {
+                searchForSkippableChars = true;
+                while (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex))) {
+                    sourceIndex++;
+                }
+            }
         }
 
         if (sourceIndex >= sourceCode.length())
