@@ -13,8 +13,8 @@ public class Lexer {
     private String sourceCode;
     private int sourceIndex;
     // todo: actually implement current line and char logic
-    private int curLine = 1;
-    private int curChar = 1;
+    private int curLine;
+    private int curChar;
 
     public Lexer() throws IOException {
         ndfaGenerator = new NdfaGenerator();
@@ -28,6 +28,8 @@ public class Lexer {
     public void loadSource(String source) {
         this.sourceCode = source;
         sourceIndex = 0;
+        curLine = 1;
+        curChar = 0;
     }
 
     public FoundToken nextToken() {
@@ -35,54 +37,58 @@ public class Lexer {
         while (searchForSkippableChars) {
             searchForSkippableChars = false;
             // inline comment skip
-            if (sourceIndex < sourceCode.length() - 1 && sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '/') {
+            if (nextTwoCharsAre('/', '/')) {
                 searchForSkippableChars = true;
-                sourceIndex+=2;
+                nextChar();
+                nextChar();
                 while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
-                    sourceIndex++;
+                    nextChar();
             }
             // block comment skip
-            if (sourceIndex < sourceCode.length() -1 && sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '*') {
+            if (nextTwoCharsAre('/', '*')) {
                 searchForSkippableChars = true;
                 int openers = 1;
-                sourceIndex+=2;
+                nextChar();
+                nextChar();
                 while (sourceIndex < sourceCode.length()) {
                     if (sourceIndex < sourceCode.length() - 1) {
-                        if(sourceCode.charAt(sourceIndex) == '/' && sourceCode.charAt(sourceIndex+1) == '*') {
+                        if(nextTwoCharsAre('/', '*')) {
                             openers++;
-                            sourceIndex++;
-                        } else if (sourceCode.charAt(sourceIndex) == '*' && sourceCode.charAt(sourceIndex+1) == '/') {
+                            nextChar();
+                        } else if (nextTwoCharsAre('*', '/')) {
                             openers--;
-                            sourceIndex++;
+                            nextChar();
                         }
                     }
 
                     if (openers == 0) {
-                        sourceIndex+=2;
+                        nextChar();
+                        nextChar();
                         break;
                     }
 
-                    sourceIndex++;
+                    nextChar();
                 }
             }
             // whitespace
             if (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex))) {
                 searchForSkippableChars = true;
                 while (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex))) {
-                    sourceIndex++;
+                    nextChar();
                 }
             }
         }
 
-        if (sourceIndex >= sourceCode.length())
-            return new FoundToken(Token.END_OF_FILE, sourceCode.substring(sourceIndex - 1, sourceIndex - 1), curLine, curChar);
-
         int foundTokenStartIndex = sourceIndex;
+        int foundTokenStartChar = curChar;
+
+        if (sourceIndex >= sourceCode.length())
+            return new FoundToken(Token.END_OF_FILE, sourceCode.substring(sourceIndex - 1, sourceIndex - 1), curLine, foundTokenStartChar);
 
         DfaState cur = dfa;
         boolean foundNextState = true;
         do {
-            char next = sourceCode.charAt(sourceIndex);
+            char next = peekChar();
 
             foundNextState = false;
 
@@ -93,7 +99,7 @@ public class Lexer {
                     (edge.label.length() == 1 && edge.label.charAt(0) == next)) {
                     cur = (DfaState) edge.destination; // todo: cringe caused by my design of the states
                     foundNextState = true;
-                    sourceIndex++;
+                    nextChar();
                     break;
                 }
             }
@@ -102,11 +108,33 @@ public class Lexer {
         int foundTokenEndIndex = sourceIndex;
 
         if (cur.isTerminal())
-            return new FoundToken(cur.getPathToken(), sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex), curLine, curChar);
+            return new FoundToken(cur.getPathToken(), sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex), curLine, foundTokenStartChar);
 
         // todo: do error handling
+        nextChar();
+        return new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex), curLine, foundTokenStartChar);
+    }
+
+    private char nextChar() {
+        char next = peekChar();
+
+        if (next == '\n') {
+            curLine++;
+            curChar = 0;
+        } else {
+            curChar++;
+        }
+
         sourceIndex++;
-        return new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex), curLine, curChar);
+        return next;
+    }
+
+    private char peekChar() {
+        return sourceIndex < sourceCode.length() ? sourceCode.charAt(sourceIndex) : ' ';
+    }
+
+    private boolean nextTwoCharsAre(char c1, char c2) {
+        return (sourceIndex < sourceCode.length() - 1 && sourceCode.charAt(sourceIndex) == c1 && sourceCode.charAt(sourceIndex+1) == c2);
     }
 
     private static boolean isAlpha(char c) {
