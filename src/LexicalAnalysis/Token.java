@@ -17,7 +17,6 @@ public enum Token {
     GREATER_THAN_OR_EQUAL("greaterthanorequal", "> =", true, true),
     PLUS("plus", "+", true, true),
     MINUS("minus", "-", true, true),
-    // todo: implement * and [ ]
     STAR("star", "*", true, true),
     FORWARD_SLASH("forwardslash", "/", true, true),
     EQUALS("equals", "=", true, true),
@@ -25,8 +24,8 @@ public enum Token {
     RIGHT_BRACKET("rightbracket", ")", true, true),
     LEFT_BRACE("leftbrace", "{", true, true),
     RIGHT_BRACE("rightbrace", "}", true, true),
-//    LEFT_SQUARE_BRACKET("leftsquarebracket", "[", true, true),
-//    RIGHT_SQUARE_BRACKET("rightsquarebracket", "]", true, true),
+    LEFT_SQUARE_BRACKET("leftsquarebracket", "[", true, true),
+    RIGHT_SQUARE_BRACKET("rightsquarebracket", "]", true, true),
     SEMI_COLON("semicolon", ";", true, true),
     COMMA("comma", ",", true, true),
     PERIOD("period", ".", true, true),
