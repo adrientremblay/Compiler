@@ -161,6 +161,6 @@ public class Lexer {
     }
 
     private static boolean isWhiteSpace(char c) {
-        return (c == ' ' || c == '\n' || c == '\t');
+        return (c == ' ' || c == '\n' || c == '\r' || c == '\t');
     }
 }
