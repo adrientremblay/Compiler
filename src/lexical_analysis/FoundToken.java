@@ -21,4 +21,8 @@ public class FoundToken {
     public Token getToken() {
         return token;
     }
+
+    public int getFoundOnLine() {
+        return foundOnLine;
+    }
 }

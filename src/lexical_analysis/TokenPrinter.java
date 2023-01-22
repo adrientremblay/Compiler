@@ -24,17 +24,22 @@ public class TokenPrinter {
         Path outputDir = sourceFilePathAsPath.getParent();
         String inputFileName = outputDir.getFileName().toString();
         String outputFileName = inputFileName + ".outlextokens";
-
         File tokensOutputFile = new File(outputDir + "/" + outputFileName); // todo: make sure this works on windows
         BufferedWriter writer = new BufferedWriter(new FileWriter(tokensOutputFile));
-        writer.write("penis");
 
-        writer.close();
-
+        // reading tokens and writing to file
+        int currentLine = 1;
         FoundToken t;
         while ((t = lexer.nextToken()).getToken() != Token.END_OF_FILE) {
-            System.out.println(t);
+            if (t.getFoundOnLine() > currentLine) {
+                writer.write("\n");
+                currentLine = t.getFoundOnLine();
+            }
+            writer.write(t.toString());
+            writer.write(' ');
         }
+
+        writer.close();
     }
 
     private static String readFileAsString(String fileName) throws IOException {
