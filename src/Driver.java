@@ -1,26 +1,22 @@
-import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
-import lexical_analysis.Token;
+import lexical_analysis.TokenPrinter;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
+
+/**
+ * I would have used JUnit to separate my test cases but the assignment asks for a Driver class
+ */
 public class Driver {
     public static void main(String args[]) throws IOException {
         Lexer lexer = new Lexer();
+        TokenPrinter tokenPrinter = new TokenPrinter(lexer);
 
-        String source = readFileAsString("test_source_files/bubble_sort/bubble_sort.src");
+        String[] sourceFilePaths = {
+                "test_source_files/lex_positive_grading/lex_positive_grading.src"
+        };
 
-        lexer.loadSource(source);
-
-        FoundToken t;
-        while ((t = lexer.nextToken()).getToken() != Token.END_OF_FILE) {
-            System.out.println(t);
-        }
-    }
-
-    public static String readFileAsString(String fileName) throws IOException {
-        return new String(Files.readAllBytes(Path.of(fileName)));
+        for (String sourceFilePath : sourceFilePaths)
+            tokenPrinter.printTokens(sourceFilePath);
     }
 }

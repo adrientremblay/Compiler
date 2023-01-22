@@ -12,7 +12,6 @@ public class Lexer {
     private DfaState dfa;
     private String sourceCode;
     private int sourceIndex;
-    // todo: actually implement current line and char logic
     private int curLine;
     private int curChar;
 
