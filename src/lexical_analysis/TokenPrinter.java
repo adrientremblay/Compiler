@@ -20,12 +20,16 @@ public class TokenPrinter {
         lexer.loadSource(source);
 
         // creating file
-        Path.of(sourceFilePath).getRoot();
-        Path.of(sourceFilePath).getParent();
+        Path sourceFilePathAsPath = Path.of(sourceFilePath);
+        Path outputDir = sourceFilePathAsPath.getParent();
+        String inputFileName = outputDir.getFileName().toString();
+        String outputFileName = inputFileName + ".outlextokens";
 
-        File testFile = new File(Path.of(sourceFilePath).getParent() + "/penis.text"); // todo: make sure this works on windows
-        BufferedWriter writer = new BufferedWriter(new FileWriter(testFile));
+        File tokensOutputFile = new File(outputDir + "/" + outputFileName); // todo: make sure this works on windows
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tokensOutputFile));
         writer.write("penis");
+
+        writer.close();
 
         FoundToken t;
         while ((t = lexer.nextToken()).getToken() != Token.END_OF_FILE) {
