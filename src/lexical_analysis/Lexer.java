@@ -3,6 +3,7 @@ package lexical_analysis;
 import dfa_generation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Actually a stateful class
@@ -10,6 +11,7 @@ import java.io.IOException;
 public class Lexer {
     private NdfaGenerator ndfaGenerator;
     private DfaState dfa;
+    private HashMap<String, Token> reservedWordMap;
     private String sourceCode;
     private int sourceIndex;
     private int curLine;
@@ -22,6 +24,14 @@ public class Lexer {
 
         dfa = NdfaToDfaConvertor.convert(ndfa);
         AutomataVisualizer.visualize(dfa, "dfa");
+
+        reservedWordMap = new HashMap<String, Token>();
+        for (Token token : Token.values()) {
+            if (!token.isReservedWord())
+                continue;
+
+            reservedWordMap.put(token.getName(), token);
+        }
     }
 
     public void loadSource(String source) {
@@ -106,10 +116,15 @@ public class Lexer {
 
         int foundTokenEndIndex = sourceIndex;
 
-        if (cur.isTerminal())
-            return new FoundToken(cur.getPathToken(), sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex), curLine, foundTokenStartChar);
+        String lexeme = sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex);
 
-        // todo: do error handling
+        if (cur.isTerminal()) {
+            if (cur.getPathToken() == Token.IDENTIFIER && reservedWordMap.containsKey(lexeme))
+                return new FoundToken(reservedWordMap.get(lexeme), lexeme, curLine, foundTokenStartChar);
+
+            return new FoundToken(cur.getPathToken(), lexeme, curLine, foundTokenStartChar); // todo: extract all the calls to the FoundToken constructor to a method
+        }
+
         nextChar();
         return new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex), curLine, foundTokenStartChar);
     }
