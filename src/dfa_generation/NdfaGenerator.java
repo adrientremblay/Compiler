@@ -61,6 +61,11 @@ public class NdfaGenerator {
                 repeatedPart.getExit().addEdge("ε", end);
 
                 return new Ndfa(start, end);
+            } else if (element.length() != 1 && element.charAt(element.length() - 1) == '?') {
+                // the element is optional so do the recursion and then draw a ε edge from entry to exit
+                Ndfa optionalPart = generateNdfaFromElement(element.substring(1, element.length() - 1), branchToken);
+                optionalPart.getEntry().addEdge("ε", optionalPart.getExit());
+                return optionalPart;
             } else if (element.charAt(0) == '[' && element.charAt(element.length() - 1) == ']') {
                 // element is in square brackets. The point of this is to isolate recursions.
                 return generateNdfaFromElement(element.substring(1, element.length() - 1), branchToken);

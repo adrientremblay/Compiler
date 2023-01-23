@@ -5,7 +5,7 @@ public enum Token {
     IDENTIFIER("id", "letter alphanum*", true, true, false),
     ALPHA_NUMERIC("alphanum", "letter | digit | _", false, true, false),
     INT_NUM("intnum", "[nonzero digit*] | 0", true, true, false),
-    FLOAT_NUM("floatnum", "intnum fraction [e [+ | -] intnum]", true, true, false),
+    FLOAT_NUM("floatnum", "intnum fraction [e [+ | -]? intnum]?", true, true, false),
     FRACTION("fraction", ". [digit* nonzero] | 0", false, true, false),
     LETTER("letter", "a..z | A..Z", false, false, false),
     DIGIT("digit", "0..9", false, false, false),
