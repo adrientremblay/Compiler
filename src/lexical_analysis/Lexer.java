@@ -128,24 +128,22 @@ public class Lexer {
         if (lastSeenTerminalState != null) {
             // todo: will totally fuck with the line and character count
             // backtracking
-            sourceIndex = lastSeenTerminalStateSourceIndex + 1;
+            sourceIndex = lastSeenTerminalStateSourceIndex;
             String lexeme = sourceCode.substring(foundTokenStartIndex, lastSeenTerminalStateSourceIndex);
 
             if (lastSeenTerminalState.getPathToken() == Token.IDENTIFIER && reservedWordMap.containsKey(lexeme))
                 return new FoundToken(reservedWordMap.get(lexeme), lexeme, curLine, foundTokenStartChar);
 
             return new FoundToken(lastSeenTerminalState.getPathToken(), lexeme, curLine, foundTokenStartChar);
-        }
-
-        if (foundTokenStartIndex == sourceIndex) {
+        } else if (foundTokenStartIndex == sourceIndex) {
             ret =  new FoundToken(Token.INVALID_CHAR, sourceCode.substring(sourceIndex, sourceIndex + 1), curLine, foundTokenStartChar);
             nextChar();
             return ret;
+        } else {
+            ret = new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, sourceIndex), curLine, foundTokenStartChar);
+            nextChar();
+            return ret;
         }
-
-        ret = new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, sourceIndex), curLine, foundTokenStartChar);
-        nextChar();
-        return ret;
     }
 
     private char nextChar() {
