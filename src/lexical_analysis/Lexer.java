@@ -42,54 +42,52 @@ public class Lexer {
     }
 
     public FoundToken nextToken() {
-        boolean searchForSkippableChars = true;
-        while (searchForSkippableChars) {
-            searchForSkippableChars = false;
-            // inline comment skip
-            if (nextTwoCharsAre('/', '/')) {
-                searchForSkippableChars = true;
-                nextChar();
-                nextChar();
-                while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
-                    nextChar();
-            }
-            // block comment skip
-            if (nextTwoCharsAre('/', '*')) {
-                searchForSkippableChars = true;
-                int openers = 1;
-                nextChar();
-                nextChar();
-                while (sourceIndex < sourceCode.length()) {
-                    if (sourceIndex < sourceCode.length() - 1) {
-                        if(nextTwoCharsAre('/', '*')) {
-                            openers++;
-                            nextChar();
-                        } else if (nextTwoCharsAre('*', '/')) {
-                            openers--;
-                            nextChar();
-                        }
-                    }
-
-                    if (openers == 0) {
-                        nextChar();
-                        nextChar();
-                        break;
-                    }
-
-                    nextChar();
-                }
-            }
-            // whitespace
-            if (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex))) {
-                searchForSkippableChars = true;
-                while (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex))) {
-                    nextChar();
-                }
-            }
-        }
+        // whitespace skip
+        while (sourceIndex < sourceCode.length() && isWhiteSpace(sourceCode.charAt(sourceIndex)))
+            nextChar();
 
         int foundTokenStartIndex = sourceIndex;
         int foundTokenStartChar = curChar;
+
+        // inline comment detected
+        if (nextTwoCharsAre('/', '/')) {
+            nextChar();
+            nextChar();
+
+            while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
+                nextChar();
+
+            return new FoundToken(Token.IN_LINE_COMMENT, sourceCode.substring(foundTokenStartIndex, sourceIndex - 1), curLine - 1, foundTokenStartChar);
+        }
+
+        // block comment detected
+        if (nextTwoCharsAre('/', '*')) {
+            int foundLine = curLine;
+            int openers = 1;
+            nextChar();
+            nextChar();
+
+            while (sourceIndex < sourceCode.length() && openers > 0) {
+                if (sourceIndex < sourceCode.length() - 1) {
+                    if(nextTwoCharsAre('/', '*')) {
+                        openers++;
+                        nextChar();
+                        nextChar();
+                    } else if (nextTwoCharsAre('*', '/')) {
+                        openers--;
+                        nextChar();
+                        nextChar();
+                    } else {
+                        nextChar();
+                    }
+                } else {
+                    nextChar();
+                    return new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, sourceIndex - 1), foundLine, foundTokenStartChar);
+                }
+            }
+
+            return new FoundToken(Token.BLOCK_COMMENT, sourceCode.substring(foundTokenStartIndex, sourceIndex - 1), foundLine, foundTokenStartChar);
+        }
 
         if (sourceIndex >= sourceCode.length())
             return new FoundToken(Token.END_OF_FILE, sourceCode.substring(sourceIndex - 1, sourceIndex - 1), curLine, foundTokenStartChar);

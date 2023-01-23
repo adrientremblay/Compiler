@@ -59,7 +59,9 @@ public enum Token {
     PRIVATE("private", "", false, false, true),
     // HELPER TOKENS
     ERROR("error", "", false, false, false),
-    END_OF_FILE("endoffile", "", false, false, false);
+    END_OF_FILE("endoffile", "", false, false, false),
+    IN_LINE_COMMENT("inlinecmt", "", false, false, false),
+    BLOCK_COMMENT("blockcmt", "", false, false, false);
 
     private final String name; // name as found in regular expression
     private final String regex; // the regular expression

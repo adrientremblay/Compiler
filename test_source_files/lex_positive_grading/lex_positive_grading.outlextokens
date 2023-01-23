@@ -20,3 +20,13 @@
 [id, a1bc, 23:0] 
 [id, abc_1abc, 24:0] 
 [id, abc1_abc, 25:0] 
+[inlinecmt, // this is an inline comment, 26:0] 
+[blockcmt, /* this is a single line block comment *, 29:0] 
+[blockcmt, /* this is a 
+multiple line
+block comment 
+*, 31:0] 
+[blockcmt, /* this is an imbricated 
+/* block comment
+*/
+*, 36:0] 
