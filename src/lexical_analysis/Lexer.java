@@ -95,16 +95,19 @@ public class Lexer {
 
         ArrayList<DfaState> currentGeneration = new ArrayList<DfaState>();
         currentGeneration.add(dfa);
-        DfaState terminalStateBackup = null;
+
+        DfaState lastSeenTerminalState = null;
+        int lastSeenTerminalStateSourceIndex = 0;
 
         while (currentGeneration.size() > 0 && sourceIndex < sourceCode.length()) {
             char next = peekChar();
-            terminalStateBackup = null;
             ArrayList<DfaState> offspring = new ArrayList<DfaState>();
 
             for (DfaState survivor : currentGeneration) {
-                if (survivor.isTerminal())
-                    terminalStateBackup = survivor;
+                if (survivor.isTerminal()) {
+                    lastSeenTerminalState = survivor;
+                    lastSeenTerminalStateSourceIndex = sourceIndex;
+                }
 
                 for (State.Edge edge : survivor.getEdges()) {
                     if ((edge.label.equals(Token.LETTER.getName()) && isAlpha(next)) ||
@@ -121,18 +124,28 @@ public class Lexer {
                 nextChar();
         }
 
-        int foundTokenEndIndex = sourceIndex;
-        String lexeme = sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex);
+        FoundToken ret;
+        if (lastSeenTerminalState != null) {
+            // todo: will totally fuck with the line and character count
+            // backtracking
+            sourceIndex = lastSeenTerminalStateSourceIndex + 1;
+            String lexeme = sourceCode.substring(foundTokenStartIndex, lastSeenTerminalStateSourceIndex);
 
-        if (terminalStateBackup != null) {
-            if (terminalStateBackup.getPathToken() == Token.IDENTIFIER && reservedWordMap.containsKey(lexeme))
+            if (lastSeenTerminalState.getPathToken() == Token.IDENTIFIER && reservedWordMap.containsKey(lexeme))
                 return new FoundToken(reservedWordMap.get(lexeme), lexeme, curLine, foundTokenStartChar);
 
-            return new FoundToken(terminalStateBackup.getPathToken(), lexeme, curLine, foundTokenStartChar);
+            return new FoundToken(lastSeenTerminalState.getPathToken(), lexeme, curLine, foundTokenStartChar);
         }
 
+        if (foundTokenStartIndex == sourceIndex) {
+            ret =  new FoundToken(Token.INVALID_CHAR, sourceCode.substring(foundTokenStartIndex, lastSeenTerminalStateSourceIndex), curLine, foundTokenStartChar);
+            nextChar();
+            return ret;
+        }
+
+        ret = new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, sourceIndex), curLine, foundTokenStartChar);
         nextChar();
-        return new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex), curLine, foundTokenStartChar);
+        return ret;
     }
 
     private char nextChar() {
