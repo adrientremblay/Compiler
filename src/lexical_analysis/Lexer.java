@@ -57,7 +57,7 @@ public class Lexer {
             while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
                 nextChar();
 
-            return new FoundToken(Token.IN_LINE_COMMENT, sourceCode.substring(foundTokenStartIndex, sourceIndex - 1), curLine - 1, foundTokenStartChar);
+            return new FoundToken(Token.IN_LINE_COMMENT,  sourceCode.substring(foundTokenStartIndex, sourceIndex - 1), curLine - 1, foundTokenStartChar);
         }
 
         // block comment detected
@@ -82,11 +82,11 @@ public class Lexer {
                     }
                 } else {
                     nextChar();
-                    return new FoundToken(Token.ERROR, sourceCode.substring(foundTokenStartIndex, sourceIndex - 1), foundLine, foundTokenStartChar);
+                    return new FoundToken(Token.ERROR, cleanseStringOfNewlineChars(sourceCode.substring(foundTokenStartIndex, sourceIndex - 1)), foundLine, foundTokenStartChar);
                 }
             }
 
-            return new FoundToken(Token.BLOCK_COMMENT, sourceCode.substring(foundTokenStartIndex, sourceIndex - 1), foundLine, foundTokenStartChar);
+            return new FoundToken(Token.BLOCK_COMMENT, cleanseStringOfNewlineChars(sourceCode.substring(foundTokenStartIndex, sourceIndex - 1)), foundLine, foundTokenStartChar);
         }
 
         if (sourceIndex >= sourceCode.length())
@@ -175,5 +175,20 @@ public class Lexer {
 
     private static boolean isWhiteSpace(char c) {
         return (c == ' ' || c == '\n' || c == '\r' || c == '\t');
+    }
+
+    private static String cleanseStringOfNewlineChars(String s) {
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : s.toCharArray()) {
+            if (c == '\n')
+                sb.append('\\').append('n');
+            else if (c == '\r')
+                sb.append('\\').append('r');
+            else
+               sb.append(c);
+        }
+
+        return sb.toString();
     }
 }
