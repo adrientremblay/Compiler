@@ -138,7 +138,7 @@ public class Lexer {
         }
 
         if (foundTokenStartIndex == sourceIndex) {
-            ret =  new FoundToken(Token.INVALID_CHAR, sourceCode.substring(foundTokenStartIndex, lastSeenTerminalStateSourceIndex), curLine, foundTokenStartChar);
+            ret =  new FoundToken(Token.INVALID_CHAR, sourceCode.substring(sourceIndex, sourceIndex + 1), curLine, foundTokenStartChar);
             nextChar();
             return ret;
         }
