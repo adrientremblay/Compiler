@@ -3,6 +3,7 @@ package lexical_analysis;
 import dfa_generation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -92,35 +93,42 @@ public class Lexer {
         if (sourceIndex >= sourceCode.length())
             return new FoundToken(Token.END_OF_FILE, sourceCode.substring(sourceIndex - 1, sourceIndex - 1), curLine, foundTokenStartChar);
 
-        DfaState cur = dfa;
-        boolean foundNextState = true;
-        do {
+        ArrayList<DfaState> currentGeneration = new ArrayList<DfaState>();
+        currentGeneration.add(dfa);
+        DfaState terminalStateBackup = null;
+
+        while (currentGeneration.size() > 0 && sourceIndex < sourceCode.length()) {
             char next = peekChar();
+            terminalStateBackup = null;
+            ArrayList<DfaState> offspring = new ArrayList<DfaState>();
 
-            foundNextState = false;
+            for (DfaState survivor : currentGeneration) {
+                if (survivor.isTerminal())
+                    terminalStateBackup = survivor;
 
-            for (State.Edge edge : cur.getEdges()) {
-                if ((edge.label.equals(Token.LETTER.getName()) && isAlpha(next)) ||
-                    (edge.label.equals(Token.DIGIT.getName()) && isDigit(next)) ||
-                    (edge.label.equals(Token.NON_ZERO.getName()) && isNonZero(next)) ||
-                    (edge.label.length() == 1 && edge.label.charAt(0) == next)) {
-                    cur = (DfaState) edge.destination; // todo: cringe caused by my design of the states
-                    foundNextState = true;
-                    nextChar();
-                    break;
+                for (State.Edge edge : survivor.getEdges()) {
+                    if ((edge.label.equals(Token.LETTER.getName()) && isAlpha(next)) ||
+                            (edge.label.equals(Token.DIGIT.getName()) && isDigit(next)) ||
+                            (edge.label.equals(Token.NON_ZERO.getName()) && isNonZero(next)) ||
+                            (edge.label.length() == 1 && edge.label.charAt(0) == next)) {
+                        offspring.add((DfaState) edge.destination);
+                    }
                 }
             }
-        } while (foundNextState && sourceIndex < sourceCode.length());
+
+            currentGeneration = offspring;
+            if (offspring.size() != 0)
+                nextChar();
+        }
 
         int foundTokenEndIndex = sourceIndex;
-
         String lexeme = sourceCode.substring(foundTokenStartIndex, foundTokenEndIndex);
 
-        if (cur.isTerminal()) {
-            if (cur.getPathToken() == Token.IDENTIFIER && reservedWordMap.containsKey(lexeme))
+        if (terminalStateBackup != null) {
+            if (terminalStateBackup.getPathToken() == Token.IDENTIFIER && reservedWordMap.containsKey(lexeme))
                 return new FoundToken(reservedWordMap.get(lexeme), lexeme, curLine, foundTokenStartChar);
 
-            return new FoundToken(cur.getPathToken(), lexeme, curLine, foundTokenStartChar); // todo: extract all the calls to the FoundToken constructor to a method
+            return new FoundToken(terminalStateBackup.getPathToken(), lexeme, curLine, foundTokenStartChar);
         }
 
         nextChar();
