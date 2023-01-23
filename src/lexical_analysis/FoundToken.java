@@ -25,4 +25,12 @@ public class FoundToken {
     public int getFoundOnLine() {
         return foundOnLine;
     }
+
+    public String getLexeme() {
+        return lexeme;
+    }
+
+    public int getFoundOnChar() {
+        return foundOnChar;
+    }
 }
