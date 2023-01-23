@@ -9,15 +9,15 @@ import java.util.Stack;
 
 // todo: state should really be an interface cause for DfaGeneration.DfaState edges should be only other Dfa States
 public class State {
-    private ArrayList<Edge> edges;
+    private HashSet<Edge> edges;
     private Token pathToken;
 
     public State() {
-        edges = new ArrayList<Edge>();
+        edges = new HashSet<Edge>();
     }
 
     public State(Token pathToken) {
-        edges = new ArrayList<Edge>();
+        this();
         this.pathToken = pathToken;
     }
 
@@ -25,7 +25,7 @@ public class State {
         edges.add(new Edge(label, target));
     }
 
-    public ArrayList<Edge> getEdges() {
+    public Set<Edge> getEdges() {
         return edges;
     }
 

@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.Stack;
 
 import static guru.nidi.graphviz.model.Factory.*;
@@ -37,15 +38,15 @@ public class AutomataVisualizer {
             // add this state to the graph
             graph.add(curPair.node);
 
-            ArrayList<State.Edge> curStateEdges = curPair.state.getEdges();
+            Set<State.Edge> curStateEdges = curPair.state.getEdges();
             for (State.Edge edge: curStateEdges) {
                 State childState = edge.destination;
 
                 MutableNode childNode;
                 if (seen.containsKey(childState))
                     childNode = seen.get(childState);
-                else if (childState.isTerminal())
-                     childNode = mutNode(childState.getPathToken().getName());
+                else if (childState.isTerminal()) // todo: add an option to simplify the drawn DFA?
+                     childNode = mutNode(childState.getPathToken().getName() + String.valueOf(i++));
                 else
                     childNode = mutNode("s" + String.valueOf(i++));
 
