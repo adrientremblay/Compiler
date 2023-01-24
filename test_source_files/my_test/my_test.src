@@ -1,0 +1,49 @@
+// 9.1 inline comments
+// I am a comment :)
+// 9.2 block comment
+/* this
+is a
+block comment
+22222223.9
+*/
+// 9.3 nested block comment
+/* we
+/* are
+/* nested
+*/ comments
+*/ :)
+*/
+// 9.5 integer literals
+0 10 12131258
+// 9.6 integer - leading zeros not accepted
+0123
+// 9.7 float literals
+0.0 10.0 123.0 1.23 1.03 1.23e4 1.23e+4 1.23e-4
+// 9.8 floats leading zeros not accepted
+01.23
+// 9.9 floats - trailing zeros not accepted
+1.230
+// 9.10 floats - leading zeros in exponent not accepted
+1.23e04
+// 9.11 identifiers
+iAmAnIdentifier
+// 9.12 identifiers - with underscore after first letter
+i_am_an_identifier
+// 9.13 identifiers - with digits after first letter
+iAmAnIdentifier123
+// 9.14 invalid characters rejected as lexical errors
+# @ !
+// 9.15 space characters not always necessary between tokens
+*+-float:self}123
+// 9.16 specific tokens for each operator, punctuation and reserved word
+== + or ( ; integer while localvar
+<> - and ) , float if constructor
+< * not { . void then attribute
+> / } : class else function
+<= = { => self read public
+>= ] :: isa write private
+return
+// 9.4 unterminated block comment error
+/*
+
+asdasdasdsad never ends

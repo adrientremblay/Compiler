@@ -58,7 +58,7 @@ public class Lexer {
             while (sourceIndex < sourceCode.length() && sourceCode.charAt(sourceIndex) != '\n')
                 nextChar();
 
-            return new FoundToken(Token.IN_LINE_COMMENT,  sourceCode.substring(foundTokenStartIndex, sourceIndex - 1), curLine - 1, foundTokenStartChar);
+            return new FoundToken(Token.IN_LINE_COMMENT,  sourceCode.substring(foundTokenStartIndex, sourceIndex), curLine, foundTokenStartChar);
         }
 
         // block comment detected

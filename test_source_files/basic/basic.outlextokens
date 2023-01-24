@@ -1,6 +1,0 @@
-[id, cedric, 1:0] [intnum, 123, 1:7] [inlinecmt, //  1 3 3 3 3 33333 12912312u9u1 COMMEN, 1:0] 
-[inlinecmt, // ANOTHER inline comment gamer 22727*, 2:0] 
-[inlinecmt, // manother comment but whitespac, 4:0] 
-[div, /, 6:0] [colon, :, 6:1] [assign, =, 6:2] 
-[blockcmt, /*\nA3333////\n /*block comment */*, 8:0] 
-[intnum, 12, 12:0] [error, 3, 12:3] 

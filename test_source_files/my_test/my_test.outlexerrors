@@ -1,0 +1,4 @@
+Lexical error: Invalid character: "#": line 35, character 0.
+Lexical error: Invalid character: "@": line 35, character 2.
+Lexical error: Invalid character: "!": line 35, character 4.
+Lexical error: Error: "/*\n\nasdasdasdsad never end": line 47, character 0.
