@@ -39,7 +39,7 @@ public class Lexer {
         this.sourceCode = source;
         sourceIndex = 0;
         curLine = 1;
-        curChar = 0;
+        curChar = 1;
     }
 
     public FoundToken nextToken() {
@@ -151,7 +151,7 @@ public class Lexer {
 
         if (next == '\n') {
             curLine++;
-            curChar = 0;
+            curChar = 1;
         } else {
             curChar++;
         }
