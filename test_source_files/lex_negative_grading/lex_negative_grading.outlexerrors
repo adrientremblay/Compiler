@@ -1,8 +1,8 @@
-Lexical error: Invalid character: "@": line 1, character 0.
-Lexical error: Invalid character: "#": line 1, character 2.
-Lexical error: Invalid character: "$": line 1, character 4.
-Lexical error: Invalid character: "'": line 1, character 6.
-Lexical error: Invalid character: "\": line 1, character 8.
-Lexical error: Invalid character: "~": line 1, character 10.
-Lexical error: Invalid character: "_": line 18, character 0.
-Lexical error: Invalid character: "_": line 20, character 0.
+Lexical error: Invalid character: "@": line 1, character 1.
+Lexical error: Invalid character: "#": line 1, character 3.
+Lexical error: Invalid character: "$": line 1, character 5.
+Lexical error: Invalid character: "'": line 1, character 7.
+Lexical error: Invalid character: "\": line 1, character 9.
+Lexical error: Invalid character: "~": line 1, character 11.
+Lexical error: Invalid character: "_": line 18, character 1.
+Lexical error: Invalid character: "_": line 20, character 1.

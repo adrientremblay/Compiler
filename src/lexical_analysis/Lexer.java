@@ -126,7 +126,6 @@ public class Lexer {
 
         FoundToken ret;
         if (lastSeenTerminalState != null) {
-            // todo: will totally fuck with the line and character count
             // backtracking
             sourceIndex = lastSeenTerminalStateSourceIndex;
             String lexeme = sourceCode.substring(foundTokenStartIndex, lastSeenTerminalStateSourceIndex);

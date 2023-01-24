@@ -2,7 +2,6 @@ package dfa_generation;
 
 import lexical_analysis.Token;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;

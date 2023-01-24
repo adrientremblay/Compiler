@@ -3,7 +3,6 @@ import lexical_analysis.TokenPrinter;
 
 import java.io.IOException;
 
-
 /**
  * I would have used JUnit to separate my test cases but the assignment asks for a Driver class
  */
