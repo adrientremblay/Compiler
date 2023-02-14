@@ -47,12 +47,16 @@ factor -> '(' arithExpr ')'
 factor -> 'not' factor 
 factor -> sign factor 
 
+variable -> rept-variable0 'id' rept-variable2 
+
+rept-variable0 -> idnest rept-variable0 
+rept-variable0 -> EPSILON 
+
 functionCall -> rept-functionCall0 'id' '(' aParams ')' 
 
 rept-functionCall0 -> idnest rept-functionCall0 
 rept-functionCall0 -> EPSILON 
 
-idnest -> 'id' idnestPrime
 idnest -> 'id' idnestPrime
 
 idnestPrime -> rept-idnest1 '.' 
@@ -85,7 +89,6 @@ funcHeadPrimePrime -> 'constructor' '(' fParams ')'
 
 indice -> '[' arithExpr ']' 
 
-localVarDecl -> 'localVar' 'id' ':' type localVarDeclPrime
 localVarDecl -> 'localVar' 'id' ':' type localVarDeclPrime
 
 localVarDeclPrime -> rept-localVarDecl4 ';'
@@ -153,9 +156,6 @@ rept-opt-classDecl22 -> EPSILON
 rept-statBlock1 -> statement rept-statBlock1 
 rept-statBlock1 -> EPSILON 
 
-rept-variable0 -> idnest rept-variable0 
-rept-variable0 -> EPSILON 
-
 rept-variable2 -> indice rept-variable2 
 rept-variable2 -> EPSILON 
 
@@ -184,8 +184,6 @@ rightrec-term -> multOp factor rightrec-term
 type -> 'integer' 
 type -> 'float' 
 type -> 'id' 
-
-variable -> rept-variable0 'id' rept-variable2 
 
 visibility -> 'public' 
 visibility -> 'private' 
