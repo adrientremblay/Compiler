@@ -27,7 +27,7 @@ exprEnd -> rightrec-arithExpr
 
 arithExpr -> term arithExprEnd
 
-arithExprEnd - > rightrec-arithExpr
+arithExprEnd -> rightrec-arithExpr
 
 relExpr -> term relExprEnd
 
