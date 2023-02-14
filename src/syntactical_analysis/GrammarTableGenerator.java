@@ -71,6 +71,15 @@ public class GrammarTableGenerator {
             } else if (!rhs[0].equals("EPSILON")){
                 generateFirstSet(rhs[0]);
                 firstSets.get(rule).addAll(firstSets.get(rhs[0]));
+
+                // might need to do the next one
+                for (int i = 0 ; i < rhs.length - 1 ; i++) {
+                    if ((!isTerminal(rhs[i])) && rules.get(rhs[i]).contains("EPSILON")) {
+                        generateFirstSet(rhs[i+1]);
+                        firstSets.get(rule).addAll(firstSets.get(rhs[i+1]));
+                    }
+                }
+
             }
         }
     }

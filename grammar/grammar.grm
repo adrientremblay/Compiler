@@ -35,7 +35,7 @@ relExprEnd -> rightrec-arithExpr relOp arithExpr
 
 term -> factor rightrec-term
 
-factor -> rept-varOrFunc 'id'  variableOrFuncEnd
+factor -> rept-varOrFunc 'id' variableOrFuncEnd
 factor -> 'intLit'
 factor -> 'floatLit'
 factor -> '(' arithExpr ')'
@@ -166,13 +166,13 @@ assignStat -> variable assignOp expr
 variableOrFuncEnd -> variableEnd
 variableOrFuncEnd -> functionCallEnd
 
-variable -> rept-varOrFunc  'id'  variableEnd
+variable -> rept-varOrFunc 'id' variableEnd
 variableEnd -> rept-variable2
 
 rept-varOrFunc -> idnest rept-varOrFunc
 rept-variable0 -> EPSILON
 
-functionCall -> rept-varOrFunc  'id'  functionCallEnd
+functionCall -> rept-varOrFunc 'id' functionCallEnd
 functionCallEnd -> '(' aParams ')'
 
 rightrec-term -> EPSILON
