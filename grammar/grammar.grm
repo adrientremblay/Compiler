@@ -10,7 +10,7 @@ addOp -> '-'
 addOp -> 'or'
 
 arraySize -> '[' arraySizePrime
-arraySizePrime -> intLit ']'
+arraySizePrime -> 'intLit' ']'
 arraySizePrime -> ']'
 
 assignOp -> '='

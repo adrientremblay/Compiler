@@ -46,12 +46,34 @@ public class GrammarTableGenerator {
         }
 
         // Generating first sets
+        firstSets = new HashMap<String, ArrayList<String>>();
+
+        for (String rule : rules.keySet()) {
+
+            generateFirstSet(rule);
+        }
 
         // Parse the grammar file
 
 
         return null;
     };
+
+    private void generateFirstSet(String rule) {
+        if (firstSets.containsKey(rule))
+            return; // no need to redo work, first set for this rule already generated
+
+        firstSets.put(rule, new ArrayList<String>());
+
+        for (String[] rhs : rules.get(rule)) {
+            if (isTerminal(rhs[0])) {
+                firstSets.get(rule).add(rhs[0].substring(1, rhs[0].length() - 1));
+            } else if (!rhs[0].equals("EPSILON")){
+                generateFirstSet(rhs[0]);
+                firstSets.get(rule).addAll(firstSets.get(rhs[0]));
+            }
+        }
+    }
 
     private static boolean isTerminal(String s) {
         if (s.length() <= 2)
