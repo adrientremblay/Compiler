@@ -25,6 +25,8 @@ public class Driver {
             tokenPrinter.printTokens(sourceFilePath);
          */
 
-        GrammarTableGenerator.generateGrammarTable();
+        GrammarTableGenerator grammarTableGenerator = new GrammarTableGenerator();
+
+        grammarTableGenerator.generateGrammarTable();
     }
 }
