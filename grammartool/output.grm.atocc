@@ -40,7 +40,7 @@ term -> factor rightrec-term
 
 
 
-factor -> rept-varOrFunc variableOrFuncEnd
+factor -> rept-varOrFunc 'id'  variableOrFuncEnd
 factor -> 'intLit' 
 factor -> 'floatLit' 
 factor -> '(' arithExpr ')' 
@@ -50,14 +50,14 @@ factor -> sign factor
 variableOrFuncEnd -> variableEnd
 variableOrFuncEnd -> functionCallEnd
 
-variable -> rept-varOrFunc 'id' variableEnd
+variable -> rept-varOrFunc  'id'  variableEnd
 variableEnd -> rept-variable2 
 
 rept-varOrFunc -> idnest rept-varOrFunc
 rept-variable0 -> EPSILON 
 
-functionCall -> rept-varOrFunc functionCallEnd
-functionCallEnd -> 'id' '(' aParams ')'
+functionCall -> rept-varOrFunc  'id'  functionCallEnd
+functionCallEnd -> '(' aParams ')'
 
 
 
