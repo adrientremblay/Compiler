@@ -170,7 +170,7 @@ variable -> rept-varOrFunc 'id' variableEnd
 variableEnd -> rept-variable2
 
 rept-varOrFunc -> idnest rept-varOrFunc
-rept-variable0 -> EPSILON
+rept-varOrFunc -> EPSILON
 
 functionCall -> rept-varOrFunc 'id' functionCallEnd
 functionCallEnd -> '(' aParams ')'
