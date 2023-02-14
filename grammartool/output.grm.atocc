@@ -15,8 +15,6 @@ arraySizePrime -> ']'
 
 assignOp -> '=' 
 
-assignStat -> variable assignOp expr 
-
 classDecl -> 'class' 'id' opt-classDecl2 '{' rept-classDecl4 '}' ';' 
 
 classDeclOrFuncDef -> classDecl 
@@ -47,17 +45,6 @@ factor -> '(' arithExpr ')'
 factor -> 'not' factor 
 factor -> sign factor 
 
-variableOrFuncEnd -> variableEnd
-variableOrFuncEnd -> functionCallEnd
-
-variable -> rept-varOrFunc  'id'  variableEnd
-variableEnd -> rept-variable2 
-
-rept-varOrFunc -> idnest rept-varOrFunc
-rept-variable0 -> EPSILON 
-
-functionCall -> rept-varOrFunc  'id'  functionCallEnd
-functionCallEnd -> '(' aParams ')'
 
 
 
@@ -173,13 +160,35 @@ statBlock -> '{' rept-statBlock1 '}'
 statBlock -> statement 
 statBlock -> EPSILON 
 
-statement -> assignStat ';' 
+
+
+statement -> rept-varOrFunc assignOrFuncEnd
 statement -> 'if' '(' relExpr ')' 'then' statBlock 'else' statBlock ';' 
 statement -> 'while' '(' relExpr ')' statBlock ';' 
 statement -> 'read' '(' variable ')' ';' 
 statement -> 'write' '(' expr ')' ';' 
 statement -> 'return' '(' expr ')' ';' 
-statement -> functionCall ';' 
+
+assignOrFuncEnd -> variableEnd assignOp expr
+assignOrFuncEnd -> 'id' functionCallEnd
+
+assignStat -> variable assignOp expr 
+
+variableOrFuncEnd -> variableEnd
+variableOrFuncEnd -> functionCallEnd
+
+variable -> rept-varOrFunc  'id'  variableEnd
+variableEnd -> rept-variable2 
+
+rept-varOrFunc -> idnest rept-varOrFunc
+rept-variable0 -> EPSILON 
+
+functionCall -> rept-varOrFunc  'id'  functionCallEnd
+functionCallEnd -> '(' aParams ')'
+
+
+
+
 
 
 rightrec-term -> EPSILON 
