@@ -1,5 +1,6 @@
 import lexical_analysis.Lexer;
 import lexical_analysis.TokenPrinter;
+import syntactical_analysis.GrammarTableGenerator;
 
 import java.io.IOException;
 
@@ -24,6 +25,6 @@ public class Driver {
             tokenPrinter.printTokens(sourceFilePath);
          */
 
-
+        GrammarTableGenerator.generateGrammarTable();
     }
 }
