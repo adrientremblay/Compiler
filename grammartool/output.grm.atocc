@@ -85,8 +85,11 @@ funcHeadPrimePrime -> 'constructor' '(' fParams ')'
 
 indice -> '[' arithExpr ']' 
 
-localVarDecl -> 'localVar' 'id' ':' type rept-localVarDecl4 ';' 
-localVarDecl -> 'localVar' 'id' ':' type '(' aParams ')' ';' 
+localVarDecl -> 'localVar' 'id' ':' type localVarDeclPrime
+localVarDecl -> 'localVar' 'id' ':' type localVarDeclPrime
+
+localVarDeclPrime -> rept-localVarDecl4 ';'
+localVarDeclPrime -> '(' aParams ')' ';' 
 
 localVarDeclOrStmt -> localVarDecl 
 localVarDeclOrStmt -> statement 
