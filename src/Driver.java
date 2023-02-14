@@ -8,6 +8,7 @@ import java.io.IOException;
  */
 public class Driver {
     public static void main(String args[]) throws IOException {
+        /*
         Lexer lexer = new Lexer();
         TokenPrinter tokenPrinter = new TokenPrinter(lexer);
 
@@ -21,5 +22,8 @@ public class Driver {
 
         for (String sourceFilePath : sourceFilePaths)
             tokenPrinter.printTokens(sourceFilePath);
+         */
+
+
     }
 }
