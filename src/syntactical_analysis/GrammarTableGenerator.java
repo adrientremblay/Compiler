@@ -3,18 +3,15 @@ package syntactical_analysis;
 import lexical_analysis.Token;
 import util.Util;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 // todo: right know the grammar table is generated dynamically, implement saving and loading later
 public class GrammarTableGenerator {
     HashMap<String, HashMap<Token, String>> grammarTable;
-    HashMap<String, ArrayList<String[]>> rules;
+    HashMap<String, HashSet<String[]>> rules;
 
-    HashMap<String, ArrayList<String>> firstSets;
-    HashMap<String, ArrayList<String>> followSets;
+    HashMap<String, HashSet<String>> firstSets;
+    HashMap<String, HashSet<String>> followSets;
 
     public HashMap<String, HashMap<Token, String>> generateGrammarTable() {
         HashMap<String, HashMap<Token, String>> grammarTable = new HashMap<String, HashMap<Token, String>>();
@@ -23,7 +20,7 @@ public class GrammarTableGenerator {
         List<String> lines = Util.readFileForLines("grammar/grammar.grm");
 
         // Reading rules
-        rules = new HashMap<String, ArrayList<String[]>>();
+        rules = new HashMap<String, HashSet<String[]>>();
 
         for (String line : lines) {
             if (line.length() == 0)
@@ -40,21 +37,24 @@ public class GrammarTableGenerator {
             String[] rightHandSide = Arrays.<String>copyOfRange(stringSplit, 2, stringSplit.length);
 
             if (!rules.containsKey(leftHandSide))
-                rules.put(leftHandSide, new ArrayList<String[]>());
+                rules.put(leftHandSide, new HashSet<String[]>());
 
             rules.get(leftHandSide).add(rightHandSide);
         }
 
         // Generating first sets
-        firstSets = new HashMap<String, ArrayList<String>>();
+        firstSets = new HashMap<String, HashSet<String>>();
 
-        for (String rule : rules.keySet()) {
-
+        for (String rule : rules.keySet())
             generateFirstSet(rule);
-        }
 
-        // Parse the grammar file
+        // Generating follow sets (important to do this after the first sets are generated cause they are used)
 
+        followSets = new HashMap<String, HashSet<String>>();
+        for (String rule : rules.keySet())
+            generateFollowSet(rule);
+
+        // Create the table
 
         return null;
     };
@@ -63,23 +63,66 @@ public class GrammarTableGenerator {
         if (firstSets.containsKey(rule))
             return; // no need to redo work, first set for this rule already generated
 
-        firstSets.put(rule, new ArrayList<String>());
+        firstSets.put(rule, new HashSet<String>());
 
         for (String[] rhs : rules.get(rule)) {
             if (isTerminal(rhs[0])) {
                 firstSets.get(rule).add(rhs[0].substring(1, rhs[0].length() - 1));
-            } else if (!rhs[0].equals("EPSILON")){
+            } else if (!rhs[0].equals("EPSILON")) {
                 generateFirstSet(rhs[0]);
                 firstSets.get(rule).addAll(firstSets.get(rhs[0]));
 
                 // might need to do the next one
-                for (int i = 0 ; i < rhs.length - 1 ; i++) {
+                for (int i = 0; i < rhs.length - 1; i++) {
                     if ((!isTerminal(rhs[i])) && rules.get(rhs[i]).contains("EPSILON")) {
-                        generateFirstSet(rhs[i+1]);
-                        firstSets.get(rule).addAll(firstSets.get(rhs[i+1]));
+                        generateFirstSet(rhs[i + 1]);
+                        firstSets.get(rule).addAll(firstSets.get(rhs[i + 1]));
                     }
                 }
 
+            }
+        }
+    }
+
+    private void generateFollowSet(String rule) {
+        if (followSets.containsKey(rule))
+            return; // no need to redo work, first set for this rule already generated
+
+        followSets.put(rule, new HashSet<String>());
+
+        if (rule.equals("START")) {
+            followSets.get(rule).add("$");
+            return;
+        }
+
+        // scan all other rules to try and add to follow set
+        for (String foundRule : rules.keySet()) {
+            for (String[] rhs : rules.get(foundRule)) {
+                for (int i = 0 ; i < rhs.length ; i++) {
+                   if (rhs[i].equals(rule)) {
+                       if (i < rhs.length - 1) {
+                           if (isTerminal(rhs[i+1]) && (!rhs[i+1].equals("EPSILON"))) {
+                              followSets.get(rule).add(rhs[i+1]);
+                           } else {
+                               generateFollowSet(rhs[i+1]);
+                               followSets.get(rule).addAll(followSets.get(rhs[i+1]));
+
+                               if (firstSets.get(rhs[i+1]).contains("EPSILON")) {
+                                   if (i < rhs.length - 2) {
+                                       generateFollowSet(rhs[i+2]);
+                                       followSets.get(rule).addAll(followSets.get(rhs[i+2]));
+                                   } else {
+                                       generateFollowSet(foundRule);
+                                       followSets.get(rule).addAll(followSets.get(foundRule));
+                                   }
+                               }
+                           }
+                       } else {
+                           generateFollowSet(foundRule);
+                           followSets.get(rule).addAll(followSets.get(foundRule));
+                       }
+                   }
+                }
             }
         }
     }
