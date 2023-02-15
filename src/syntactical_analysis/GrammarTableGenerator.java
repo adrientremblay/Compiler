@@ -7,14 +7,13 @@ import java.util.*;
 
 // todo: right know the grammar table is generated dynamically, implement saving and loading later
 public class GrammarTableGenerator {
-    HashMap<String, HashMap<Token, String>> grammarTable;
+    HashMap<String, HashMap<String, String>> grammarTable;
     HashMap<String, HashSet<String[]>> rules;
-
     HashMap<String, HashSet<String>> firstSets;
     HashMap<String, HashSet<String>> followSets;
 
     public HashMap<String, HashMap<Token, String>> generateGrammarTable() {
-        HashMap<String, HashMap<Token, String>> grammarTable = new HashMap<String, HashMap<Token, String>>();
+        grammarTable = new HashMap<String, HashMap<String, String>>();
 
         // Read the grammar file
         List<String> lines = Util.readFileForLines("grammar/grammar.grm");
@@ -44,17 +43,44 @@ public class GrammarTableGenerator {
 
         // Generating first sets
         firstSets = new HashMap<String, HashSet<String>>();
-
         for (String rule : rules.keySet())
             generateFirstSet(rule);
 
         // Generating follow sets (important to do this after the first sets are generated cause they are used)
-
         followSets = new HashMap<String, HashSet<String>>();
         for (String rule : rules.keySet())
             generateFollowSet(rule);
 
-        // Create the table
+        // Generating the table
+        for (String line : lines) {
+            if (line.length() == 0)
+                continue;
+
+            String[] stringSplit = line.split(" ");
+
+            if (stringSplit.length < 3 || stringSplit[0].length() == 0 || (!stringSplit[1].equals("->"))) {
+                System.err.println("Invalid rule : " + line);
+                continue;
+            }
+
+            String leftHandSide = stringSplit[0];
+            String[] rightHandSide = Arrays.<String>copyOfRange(stringSplit, 2, stringSplit.length);
+
+            if (! grammarTable.containsKey(leftHandSide))
+                grammarTable.put(leftHandSide, new HashMap<String, String>());
+
+            if (rightHandSide.length == 1 && rightHandSide[0] == "EPSILON") {
+                Set<String> lineFollowSet = followSets.get(leftHandSide);
+
+                for (String terminal : lineFollowSet)
+                    grammarTable.get(leftHandSide).put(terminal, line);
+            } else {
+                Set<String> lineFirstSet = firstSets.get(leftHandSide);
+
+                for (String terminal : lineFirstSet)
+                    grammarTable.get(leftHandSide).put(terminal, line);
+            }
+        }
 
         return null;
     };
