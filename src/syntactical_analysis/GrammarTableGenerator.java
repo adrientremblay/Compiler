@@ -129,13 +129,17 @@ public class GrammarTableGenerator {
                    if (rhs[i].equals(rule)) {
                        if (i < rhs.length - 1) {
                            if (isTerminal(rhs[i+1])) {
-                              followSets.get(rule).add(rhs[i+1]);
+                              followSets.get(rule).add(rhs[i+1].substring(1, rhs[i+1].length() - 1));
                            } else {
                                followSets.get(rule).addAll(firstSets.get(rhs[i+1]));
 
                                if (canBeEpsilon.contains(rhs[i+1])) {
                                    if (i < rhs.length - 2) {
-                                       followSets.get(rule).addAll(firstSets.get(rhs[i+2]));
+                                       if (isTerminal(rhs[i+2])) {
+                                           followSets.get(rule).add(rhs[i+2].substring(1, rhs[i+2].length() - 1));
+                                       } else {
+                                           followSets.get(rule).addAll(firstSets.get(rhs[i+2]));
+                                       }
                                    } else {
                                        generateFollowSet(foundRule);
                                        followSets.get(rule).addAll(followSets.get(foundRule));
