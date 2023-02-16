@@ -32,7 +32,7 @@ public enum Token {
     COMMA("comma", ",", true, true, false),
     DOT("dot", ".", true, true, false),
     COLON("colon", ":", true, true, false),
-    RETURN_TYPE("returntype", "= >", true, true, false),
+    ARROW("arrow", "= >", true, true, false), // used to be called RETURN_TYPE with 'returntype' as the name
     SCOPE_OP("scopeop", ": :", true, true, false),
     // RESERVED WORDS
     OR("or", "", false, false, true),
