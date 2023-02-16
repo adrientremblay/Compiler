@@ -69,7 +69,7 @@ public class GrammarTableGenerator {
             if (! grammarTable.containsKey(leftHandSide))
                 grammarTable.put(leftHandSide, new HashMap<String, String>());
 
-            if (rightHandSide.length == 1 && rightHandSide[0] == "EPSILON") {
+            if (rightHandSide.length == 1 && rightHandSide[0].equals("EPSILON")) {
                 Set<String> lineFollowSet = followSets.get(leftHandSide);
 
                 for (String terminal : lineFollowSet)
