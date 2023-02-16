@@ -20,14 +20,9 @@ classDecl -> 'class' 'id' opt-classDecl2 '{' rept-classDecl4 '}' ';'
 classDeclOrFuncDef -> classDecl
 classDeclOrFuncDef -> funcDef
 
-expr -> term exprEnd
-
-exprEnd -> arithExprEnd
-exprEnd -> rightrec-arithExpr
+expr -> term rightrec-arithExpr
 
 arithExpr -> term arithExprEnd
-
-arithExprEnd -> rightrec-arithExpr
 
 relExpr -> term relExprEnd
 
