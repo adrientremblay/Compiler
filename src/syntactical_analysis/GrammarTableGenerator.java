@@ -79,11 +79,6 @@ public class GrammarTableGenerator {
 
                 for (String terminal : lineFollowSet)
                     grammarTable.get(leftHandSide).put(terminal, line);
-            } else {
-                Set<String> lineFirstSet = firstSets.get(leftHandSide);
-
-                for (String terminal : lineFirstSet)
-                    grammarTable.get(leftHandSide).put(terminal, line);
             }
         }
 
@@ -96,13 +91,22 @@ public class GrammarTableGenerator {
 
         firstSets.put(rule, new HashSet<String>());
 
+        if (! grammarTable.containsKey(rule))
+            grammarTable.put(rule, new HashMap<String, String>());
+
         for (String[] rhs : rules.get(rule)) {
             for (int i = 0 ; i < rhs.length ; i++) {
                 if (isTerminal(rhs[i])) {
-                    firstSets.get(rule).add(rhs[i].substring(1, rhs[i].length() - 1));
+                    String terminal = rhs[i].substring(1, rhs[i].length() - 1);
+                    firstSets.get(rule).add(terminal);
+                    grammarTable.get(rule).put(terminal, rule + " -> " + String.join(" ", rhs));
                 } else if (!rhs[i].equals("EPSILON")) {
                     generateFirstSet(rhs[i]);
                     firstSets.get(rule).addAll(firstSets.get(rhs[i]));
+
+                    for (String terminal : firstSets.get(rhs[i])) {
+                        grammarTable.get(rule).put(terminal, rule + " -> " + String.join(" ", rhs));
+                    }
                 }
 
                 if (!canBeEpsilon.contains(rhs[i]))

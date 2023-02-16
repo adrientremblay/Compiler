@@ -59,20 +59,17 @@ funcBody -> '{' rept-funcBody1 '}'
 
 funcDef -> funcHead funcBody
 
-funcHead -> 'function' funcHeadPrime
+funcHead -> 'function' 'id' funcHeadPrime
 
-opt-funcHead1 -> 'id' 'sr'
-opt-funcHead1 -> EPSILON
+funcHeadPrime -> '(' fParams ')' 'arrow' returnType
+funcHeadPrime -> 'sr' funcHeadPrimePrime
 
-funcHeadPrime -> 'id' 'sr' funcHeadPrimePrime
-funcHeadPrime -> EPSILON 'id' '(' fParams ')' 'arrow' returnType
-
-funcHeadPrimePrime -> 'id' '(' fParams ')' 'arrow' returnType
 funcHeadPrimePrime -> 'constructor' '(' fParams ')'
+funcHeadPrimePrime -> 'id' '(' fParams ')' 'arrow' returnType
 
 indice -> '[' arithExpr ']'
 
-localVarDecl -> 'localVar' 'id' ':' type localVarDeclPrime
+localVarDecl -> 'localvar' 'id' ':' type localVarDeclPrime
 
 localVarDeclPrime -> rept-localVarDecl4 ';'
 localVarDeclPrime -> '(' aParams ')' ';'

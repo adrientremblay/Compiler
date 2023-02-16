@@ -33,7 +33,7 @@ public enum Token {
     DOT("dot", ".", true, true, false),
     COLON("colon", ":", true, true, false),
     ARROW("arrow", "= >", true, true, false), // used to be called RETURN_TYPE with 'returntype' as the name
-    SCOPE_OP("scopeop", ": :", true, true, false),
+    SCOPE_REDUCTION("sr", ": :", true, true, false),
     // RESERVED WORDS
     OR("or", "", false, false, true),
     AND("and", "", false, false, true),
