@@ -12,7 +12,7 @@ public class GrammarTableGenerator {
     HashMap<String, HashSet<String>> firstSets;
     HashMap<String, HashSet<String>> followSets;
 
-    public HashMap<String, HashMap<Token, String>> generateGrammarTable() {
+    public HashMap<String, HashMap<String, String>> generateGrammarTable() {
         grammarTable = new HashMap<String, HashMap<String, String>>();
 
         // Read the grammar file
@@ -82,7 +82,7 @@ public class GrammarTableGenerator {
             }
         }
 
-        return null;
+        return grammarTable;
     };
 
     private void generateFirstSet(String rule) {
@@ -153,7 +153,7 @@ public class GrammarTableGenerator {
         }
     }
 
-    private static boolean isTerminal(String s) {
+    public static boolean isTerminal(String s) {
         if (s.length() <= 2)
             return false;
 

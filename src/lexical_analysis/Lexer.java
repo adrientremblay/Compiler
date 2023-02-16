@@ -18,13 +18,11 @@ public class Lexer {
     private int curLine;
     private int curChar;
 
-    public Lexer() throws IOException {
+    public Lexer() {
         ndfaGenerator = new NdfaGenerator();
         State ndfa = ndfaGenerator.generate();
-        AutomataVisualizer.visualize(ndfa, "ndfa");
 
         dfa = NdfaToDfaConvertor.convert(ndfa);
-        AutomataVisualizer.visualize(dfa, "dfa");
 
         reservedWordMap = new HashMap<String, Token>();
         for (Token token : Token.values()) {
@@ -32,6 +30,14 @@ public class Lexer {
                 continue;
 
             reservedWordMap.put(token.getName(), token);
+        }
+
+        try {
+            AutomataVisualizer.visualize(ndfa, "ndfa");
+            AutomataVisualizer.visualize(dfa, "dfa");
+        } catch (IOException e){
+            System.err.println("Error with a NDFA or DFA visualization! No biggie though.");
+            e.printStackTrace();
         }
     }
 
