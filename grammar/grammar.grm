@@ -177,7 +177,7 @@ functionPrimePrime -> EPSILON
 
 variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
 
-variableOrFunctionCallPrime -> rept-idnest1 variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> indice variableOrFunctionCallPrime
 variableOrFunctionCallPrime -> '(' aParams ')' variableOrFunctionCallPrime
 
 variableOrFunctionCallPrimePrime -> '.' variableOrFunctionCallPrime
