@@ -28,7 +28,7 @@ public class Parser {
 
         FoundToken foundToken = lexer.nextToken();
         String top;
-        while ((top = parseStack.peek()) != "$") { // todo: can you do this in Java?
+        while ((top = parseStack.peek()) != "$") {
             // skips
             if (foundToken.getToken() == Token.IN_LINE_COMMENT || foundToken.getToken() == Token.BLOCK_COMMENT) {
                 foundToken = lexer.nextToken();
@@ -48,6 +48,7 @@ public class Parser {
                 } else {
                     // did not find the terminal I wanted to... :'(
                     System.err.println("ERROR!");
+                    break;
                 }
             } else {
                 if (grammarTable.containsKey(top)) {
@@ -67,10 +68,12 @@ public class Parser {
                     } else {
                        // The cell is empty...
                        System.err.println("ERROR!");
+                       break;
                     }
                 } else {
                     // The rule isnt' even in the parse table???
                     System.err.println("ERROR!");
+                    break;
                 }
             }
         }
