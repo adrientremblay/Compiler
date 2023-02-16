@@ -162,11 +162,24 @@ variableOrFuncEnd -> functionCallEnd
 
 variable -> 'id' variablePrime
 
-variablePrime -> rept-idnest variablePrimePrime
+variablePrime -> rept-idnest1 variablePrimePrime
 variablePrime -> '(' aParams ')' '.' variable
 
 variablePrimePrime -> '.' variable
 variablePrimePrime -> EPSILON
+
+
+functionCall -> 'id' functionCallPrime
+
+functionCallPrime -> '(' aParams ')' functionPrimePrime
+functionCallPrime -> rept-idnest1 '.' variable
+
+functionPrimePrime -> '.' function
+functionPrimePrime -> EPSILON
+
+
+
+
 
 
 idnest -> 'id' idnestPrime
@@ -174,8 +187,7 @@ idnest -> 'id' idnestPrime
 idnestPrime -> rept-idnest1 '.'
 idnestPrime -> '(' aParams ')' '.'
 
-functionCall -> rept-varOrFunc 'id' functionCallEnd
-functionCallEnd -> '(' aParams ')'
+
 
 rightrec-term -> EPSILON
 rightrec-term -> multOp factor rightrec-term
