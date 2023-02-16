@@ -148,7 +148,7 @@ statBlock -> '{' rept-statBlock1 '}'
 statBlock -> statement
 statBlock -> EPSILON
 
-statement -> rept-varOrFunc assignOrFuncEnd
+statement -> rept-varOrFunc assignOrFuncEnd ';'
 statement -> 'if' '(' relExpr ')' 'then' statBlock 'else' statBlock ';'
 statement -> 'while' '(' relExpr ')' statBlock ';'
 statement -> 'read' '(' variable ')' ';'
