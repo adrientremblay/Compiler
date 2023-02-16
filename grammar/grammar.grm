@@ -140,22 +140,20 @@ statBlock -> '{' rept-statBlock1 '}'
 statBlock -> statement
 statBlock -> EPSILON
 
-statement -> rept-idnestc assignOrFuncEnd ';'
+
+
+
+statement -> assignStatOrFunctionCall ';'
 statement -> 'if' '(' relExpr ')' 'then' statBlock 'else' statBlock ';'
 statement -> 'while' '(' relExpr ')' statBlock ';'
 statement -> 'read' '(' variable ')' ';'
 statement -> 'write' '(' expr ')' ';'
 statement -> 'return' '(' expr ')' ';'
 
-assignOrFuncEnd -> variableEnd assignOp expr
-assignOrFuncEnd -> 'id' functionCallEnd
+
+
 
 assignStat -> variable assignOp expr
-
-variableOrFuncEnd -> variableEnd
-variableOrFuncEnd -> functionCallEnd
-
-
 
 
 
@@ -179,6 +177,9 @@ functionCallPrime -> rept-idnest1 '.' variable
 functionPrimePrime -> '.' function
 functionPrimePrime -> EPSILON
 
+
+
+
 variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
 
 variableOrFunctionCallPrime -> rept-idnest1 variableOrFunctionCallPrime
@@ -187,6 +188,18 @@ variableOrFunctionCallPrime -> '(' aParams ')' variableOrFunctionCallPrime
 variableOrFunctionCallPrimePrime -> '.' variableOrFunctionCallPrime
 variableOrFunctionCallPrimePrime -> EPSILON
 
+
+
+assignStatOrFunctionCall -> 'id' assignStatOrFunctionCallPrime
+
+assignStatOrFunctionCallPrime -> '(' aParams ')' assignStatOrFunctionCallPrime
+assignStatOrFunctionCallPrime -> rept-idnest1 assignStatOrFunctionCallPrimePrime
+
+assignStatOrFunctionCallPrimePrime -> '.' assignStatOrFunctionCallPrime
+assignStatOrFunctionCallPrimePrime -> EPSILON
+
+assignStatOrFunctionCallPrimePrimePrime -> '.' assignStatOrFunctionCallPrime
+assignStatOrFunctionCallPrimePrimePrime -> assignOp expr
 
 
 
