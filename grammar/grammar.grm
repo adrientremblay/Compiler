@@ -42,11 +42,6 @@ factor -> '(' arithExpr ')'
 factor -> 'not' factor
 factor -> sign factor
 
-idnest -> 'id' idnestPrime
-
-idnestPrime -> rept-idnest1 '.'
-idnestPrime -> '(' aParams ')' '.'
-
 rightrec-arithExpr -> EPSILON
 rightrec-arithExpr -> addOp term rightrec-arithExpr
 
@@ -135,9 +130,6 @@ rept-opt-classDecl22 -> EPSILON
 rept-statBlock1 -> statement rept-statBlock1
 rept-statBlock1 -> EPSILON
 
-rept-variable2 -> indice rept-variable2
-rept-variable2 -> EPSILON
-
 returnType -> type
 returnType -> 'void'
 
@@ -163,11 +155,24 @@ assignStat -> variable assignOp expr
 variableOrFuncEnd -> variableEnd
 variableOrFuncEnd -> functionCallEnd
 
-variable -> rept-varOrFunc 'id' variableEnd
-variableEnd -> rept-variable2
 
-rept-varOrFunc -> idnest rept-varOrFunc
-rept-varOrFunc -> EPSILON
+
+
+
+
+variable -> 'id' variablePrime
+
+variablePrime -> rept-idnest variablePrimePrime
+variablePrime -> '(' aParams ')' '.' variable
+
+variablePrimePrime -> '.' variable
+variablePrimePrime -> EPSILON
+
+
+idnest -> 'id' idnestPrime
+
+idnestPrime -> rept-idnest1 '.'
+idnestPrime -> '(' aParams ')' '.'
 
 functionCall -> rept-varOrFunc 'id' functionCallEnd
 functionCallEnd -> '(' aParams ')'
