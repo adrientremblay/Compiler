@@ -35,7 +35,7 @@ relExprEnd -> rightrec-arithExpr relOp arithExpr
 
 term -> factor rightrec-term
 
-factor -> rept-varOrFunc 'id' variableOrFuncEnd
+factor -> variableOrFunctionCall
 factor -> 'intLit'
 factor -> 'floatLit'
 factor -> '(' arithExpr ')'
@@ -140,7 +140,7 @@ statBlock -> '{' rept-statBlock1 '}'
 statBlock -> statement
 statBlock -> EPSILON
 
-statement -> rept-varOrFunc assignOrFuncEnd ';'
+statement -> rept-idnestc assignOrFuncEnd ';'
 statement -> 'if' '(' relExpr ')' 'then' statBlock 'else' statBlock ';'
 statement -> 'while' '(' relExpr ')' statBlock ';'
 statement -> 'read' '(' variable ')' ';'
@@ -169,6 +169,8 @@ variablePrimePrime -> '.' variable
 variablePrimePrime -> EPSILON
 
 
+
+
 functionCall -> 'id' functionCallPrime
 
 functionCallPrime -> '(' aParams ')' functionPrimePrime
@@ -177,7 +179,13 @@ functionCallPrime -> rept-idnest1 '.' variable
 functionPrimePrime -> '.' function
 functionPrimePrime -> EPSILON
 
+variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
 
+variableOrFunctionCallPrime -> rept-idnest1 variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> '(' aParams ')' variableOrFunctionCallPrime
+
+variableOrFunctionCallPrimePrime -> '.' variableOrFunctionCallPrime
+variableOrFunctionCallPrimePrime -> EPSILON
 
 
 
@@ -187,7 +195,8 @@ idnest -> 'id' idnestPrime
 idnestPrime -> rept-idnest1 '.'
 idnestPrime -> '(' aParams ')' '.'
 
-
+rept-idnest -> udbest rept-idnest
+rept-idnest -> EPSILON
 
 rightrec-term -> EPSILON
 rightrec-term -> multOp factor rightrec-term
