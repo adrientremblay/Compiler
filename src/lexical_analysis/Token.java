@@ -97,4 +97,12 @@ public enum Token {
     public boolean isReservedWord() {
         return reservedWord;
     }
+
+    // todo: this is kind of dumb, in fact this entire class is kind of dumb
+    public boolean isType() {
+        if (this == Token.INTEGER || this == Token.FLOAT)
+            return true;
+
+        return false;
+    }
 }

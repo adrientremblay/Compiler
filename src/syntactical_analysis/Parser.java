@@ -42,7 +42,11 @@ public class Parser {
 
             if (GrammarTableGenerator.isTerminal(top)) {
                 String topTerminal = top.substring(1, top.length() - 1);
-                if (topTerminal.equals(foundToken.getToken().getName()) || topTerminal.equals(foundToken.getToken().getRegex())) {
+                if (
+                    topTerminal.equals(foundToken.getToken().getName()) // for reserved words
+                    || topTerminal.equals(foundToken.getToken().getRegex()) // for everything else
+                    || (topTerminal.equals("id") && foundToken.getToken().isType()) // type tokens should count as identifiers too
+                ) {
                     // found a terminal
                     parseStack.pop();
                     foundToken = lexer.nextToken();
@@ -53,23 +57,26 @@ public class Parser {
                 }
             } else {
                 if (grammarTable.containsKey(top)) {
+                    String rule;
                     if (grammarTable.get(top).containsKey(foundToken.getToken().getName())) {
-                        String rule = grammarTable.get(top).get(foundToken.getToken().getName());
-
-                        parseStack.pop();
-
-                        System.out.println(rule);
-
-                        String[] ruleSplit = rule.split(" ");
-
-                        String[] rightHandSide = Arrays.<String>copyOfRange(ruleSplit, 2, ruleSplit.length);
-                        for (int i = rightHandSide.length - 1 ; i >= 0 ; i--) {
-                            parseStack.push(rightHandSide[i]);
-                        }
+                        rule = grammarTable.get(top).get(foundToken.getToken().getName());
+                    } else if (grammarTable.get(top).containsKey(foundToken.getToken().getRegex())) { // todo: CRINGE!!
+                        rule = grammarTable.get(top).get(foundToken.getToken().getRegex());
                     } else {
                        // The cell is empty...
                        System.err.println("ERROR!");
                        break;
+                    }
+
+                    parseStack.pop();
+
+                    System.out.println(rule);
+
+                    String[] ruleSplit = rule.split(" ");
+
+                    String[] rightHandSide = Arrays.<String>copyOfRange(ruleSplit, 2, ruleSplit.length);
+                    for (int i = rightHandSide.length - 1 ; i >= 0 ; i--) {
+                        parseStack.push(rightHandSide[i]);
                     }
                 } else {
                     // The rule isnt' even in the parse table???

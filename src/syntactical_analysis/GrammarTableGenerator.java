@@ -11,6 +11,7 @@ public class GrammarTableGenerator {
     HashMap<String, HashSet<String[]>> rules;
     HashMap<String, HashSet<String>> firstSets;
     HashMap<String, HashSet<String>> followSets;
+    HashSet<String> canBeEpsilon;
 
     public HashMap<String, HashMap<String, String>> generateGrammarTable() {
         grammarTable = new HashMap<String, HashMap<String, String>>();
@@ -20,6 +21,7 @@ public class GrammarTableGenerator {
 
         // Reading rules
         rules = new HashMap<String, HashSet<String[]>>();
+        canBeEpsilon = new HashSet<String>();
 
         for (String line : lines) {
             if (line.length() == 0)
@@ -37,6 +39,9 @@ public class GrammarTableGenerator {
 
             if (!rules.containsKey(leftHandSide))
                 rules.put(leftHandSide, new HashSet<String[]>());
+
+            if (rightHandSide.length == 1 && rightHandSide[0].equals("EPSILON"))
+                canBeEpsilon.add(leftHandSide);
 
             rules.get(leftHandSide).add(rightHandSide);
         }
@@ -92,20 +97,16 @@ public class GrammarTableGenerator {
         firstSets.put(rule, new HashSet<String>());
 
         for (String[] rhs : rules.get(rule)) {
-            if (isTerminal(rhs[0])) {
-                firstSets.get(rule).add(rhs[0].substring(1, rhs[0].length() - 1));
-            } else if (!rhs[0].equals("EPSILON")) {
-                generateFirstSet(rhs[0]);
-                firstSets.get(rule).addAll(firstSets.get(rhs[0]));
-
-                // might need to do the next one
-                for (int i = 0; i < rhs.length - 1; i++) {
-                    if ((!isTerminal(rhs[i])) && rules.get(rhs[i]).contains("EPSILON")) {
-                        generateFirstSet(rhs[i + 1]);
-                        firstSets.get(rule).addAll(firstSets.get(rhs[i + 1]));
-                    }
+            for (int i = 0 ; i < rhs.length ; i++) {
+                if (isTerminal(rhs[i])) {
+                    firstSets.get(rule).add(rhs[i].substring(1, rhs[i].length() - 1));
+                } else if (!rhs[i].equals("EPSILON")) {
+                    generateFirstSet(rhs[i]);
+                    firstSets.get(rule).addAll(firstSets.get(rhs[i]));
                 }
 
+                if (!canBeEpsilon.contains(rhs[i]))
+                    break;
             }
         }
     }
@@ -127,16 +128,14 @@ public class GrammarTableGenerator {
                 for (int i = 0 ; i < rhs.length ; i++) {
                    if (rhs[i].equals(rule)) {
                        if (i < rhs.length - 1) {
-                           if (isTerminal(rhs[i+1]) && (!rhs[i+1].equals("EPSILON"))) {
+                           if (isTerminal(rhs[i+1])) {
                               followSets.get(rule).add(rhs[i+1]);
                            } else {
-                               generateFollowSet(rhs[i+1]);
-                               followSets.get(rule).addAll(followSets.get(rhs[i+1]));
+                               followSets.get(rule).addAll(firstSets.get(rhs[i+1]));
 
-                               if (firstSets.get(rhs[i+1]).contains("EPSILON")) {
+                               if (canBeEpsilon.contains(rhs[i+1])) {
                                    if (i < rhs.length - 2) {
-                                       generateFollowSet(rhs[i+2]);
-                                       followSets.get(rule).addAll(followSets.get(rhs[i+2]));
+                                       followSets.get(rule).addAll(firstSets.get(rhs[i+2]));
                                    } else {
                                        generateFollowSet(foundRule);
                                        followSets.get(rule).addAll(followSets.get(foundRule));
