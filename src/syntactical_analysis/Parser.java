@@ -41,7 +41,8 @@ public class Parser {
             }
 
             if (GrammarTableGenerator.isTerminal(top)) {
-                if (top.substring(1, top.length() - 1).equals(foundToken.getToken().getName())) {
+                String topTerminal = top.substring(1, top.length() - 1);
+                if (topTerminal.equals(foundToken.getToken().getName()) || topTerminal.equals(foundToken.getToken().getRegex())) {
                     // found a terminal
                     parseStack.pop();
                     foundToken = lexer.nextToken();
