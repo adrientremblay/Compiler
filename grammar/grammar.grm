@@ -22,7 +22,7 @@ classDeclOrFuncDef -> funcDef
 
 expr -> term rightrec-arithExpr
 
-arithExpr -> term arithExprEnd
+arithExpr -> term rightrec-arithExpr
 
 relExpr -> term relExprEnd
 
@@ -203,7 +203,7 @@ idnest -> 'id' idnestPrime
 idnestPrime -> rept-idnest1 '.'
 idnestPrime -> '(' aParams ')' '.'
 
-rept-idnest -> udbest rept-idnest
+rept-idnest -> idnest rept-idnest
 rept-idnest -> EPSILON
 
 rightrec-term -> EPSILON
