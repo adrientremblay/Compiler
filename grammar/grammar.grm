@@ -10,7 +10,7 @@ addOp -> '-'
 addOp -> 'or'
 
 arraySize -> '[' arraySizePrime
-arraySizePrime -> 'intLit' ']'
+arraySizePrime -> 'intnum' ']'
 arraySizePrime -> ']'
 
 assignOp -> '='
@@ -31,8 +31,8 @@ relExprEnd -> rightrec-arithExpr relOp arithExpr
 term -> factor rightrec-term
 
 factor -> variableOrFunctionCall
-factor -> 'intLit'
-factor -> 'floatLit'
+factor -> 'intnum'
+factor -> 'floatnum'
 factor -> '(' arithExpr ')'
 factor -> 'not' factor
 factor -> sign factor
@@ -179,6 +179,7 @@ variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
 
 variableOrFunctionCallPrime -> indice variableOrFunctionCallPrimePrime
 variableOrFunctionCallPrime -> '(' aParams ')' variableOrFunctionCallPrimePrime
+variableOrFunctionCallPrime -> EPSILON
 
 variableOrFunctionCallPrimePrime -> '.' variableOrFunctionCallPrime
 variableOrFunctionCallPrimePrime -> EPSILON
