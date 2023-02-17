@@ -177,8 +177,8 @@ functionPrimePrime -> EPSILON
 
 variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
 
-variableOrFunctionCallPrime -> indice variableOrFunctionCallPrime
-variableOrFunctionCallPrime -> '(' aParams ')' variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> indice variableOrFunctionCallPrimePrime
+variableOrFunctionCallPrime -> '(' aParams ')' variableOrFunctionCallPrimePrime
 
 variableOrFunctionCallPrimePrime -> '.' variableOrFunctionCallPrime
 variableOrFunctionCallPrimePrime -> EPSILON
@@ -187,13 +187,13 @@ variableOrFunctionCallPrimePrime -> EPSILON
 
 assignStatOrFunctionCall -> 'id' assignStatOrFunctionCallPrime
 
-assignStatOrFunctionCallPrime -> '(' aParams ')' assignStatOrFunctionCallPrime
-assignStatOrFunctionCallPrime -> rept-idnest1 assignStatOrFunctionCallPrimePrime
+assignStatOrFunctionCallPrime -> '(' aParams ')' assignStatOrFunctionCallPrimePrime
+assignStatOrFunctionCallPrime -> rept-idnest1 assignStatOrFunctionCallPrimePrimePrime
 
-assignStatOrFunctionCallPrimePrime -> '.' assignStatOrFunctionCallPrime
+assignStatOrFunctionCallPrimePrime -> '.' assignStatOrFunctionCall
 assignStatOrFunctionCallPrimePrime -> EPSILON
 
-assignStatOrFunctionCallPrimePrimePrime -> '.' assignStatOrFunctionCallPrime
+assignStatOrFunctionCallPrimePrimePrime -> '.' assignStatOrFunctionCall
 assignStatOrFunctionCallPrimePrimePrime -> assignOp expr
 
 
