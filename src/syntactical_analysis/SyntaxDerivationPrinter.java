@@ -17,7 +17,7 @@ public class SyntaxDerivationPrinter {
         try {
             String derivationFileName = sourceFileName + ".derivation";
             File derivationOutputFile = new File(outputDir + "/" + derivationFileName);
-            derivationWriter = new BufferedWriter(new FileWriter(derivationFileName));
+            derivationWriter = new BufferedWriter(new FileWriter(derivationOutputFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
