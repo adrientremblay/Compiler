@@ -179,9 +179,10 @@ variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
 
 variableOrFunctionCallPrime -> indice variableOrFunctionCallPrimePrime
 variableOrFunctionCallPrime -> '(' aParams ')' variableOrFunctionCallPrimePrime
+variableOrFunctionCallPrime -> variableOrFunctionCallPrimePrime
 variableOrFunctionCallPrime -> EPSILON
 
-variableOrFunctionCallPrimePrime -> '.' variableOrFunctionCallPrime
+variableOrFunctionCallPrimePrime -> '.' variableOrFunctionCall
 variableOrFunctionCallPrimePrime -> EPSILON
 
 
