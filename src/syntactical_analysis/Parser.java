@@ -53,7 +53,7 @@ public class Parser {
                     || (topTerminal.equals("id") && foundToken.getToken().isType()) // type tokens should count as identifiers too
                 ) {
                     // found a terminal
-                    //System.out.println("DEBUG: FOUND " + foundToken.getLexeme());
+                    System.out.println("DEBUG: FOUND " + foundToken.getLexeme());
                     parseStack.pop();
                     foundToken = lexer.nextToken();
                 } else {
@@ -79,6 +79,7 @@ public class Parser {
                     parseStack.pop();
 
                     syntaxDerivationPrinter.writeLine(rule);
+                    System.out.println(rule);
 
                     String[] ruleSplit = rule.split(" ");
 

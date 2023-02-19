@@ -1,0 +1,222 @@
+START -> rept-START0
+rept-START0 -> classDeclOrFuncDef rept-START0
+classDeclOrFuncDef -> classDecl
+classDecl -> 'class' 'id' opt-classDecl2 '{' rept-classDecl4 '}' ';'
+opt-classDecl2 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'public'
+memberDecl -> memberFuncDecl
+memberFuncDecl -> 'function' 'id' ':' '(' fParams ')' 'arrow' returnType ';'
+fParams -> 'id' ':' type rept-fParams3 rept-fParams4
+type -> 'float'
+rept-fParams3 -> EPSILON
+rept-fParams4 -> EPSILON
+returnType -> type
+type -> 'float'
+rept-classDecl4 -> EPSILON
+rept-START0 -> classDeclOrFuncDef rept-START0
+classDeclOrFuncDef -> classDecl
+classDecl -> 'class' 'id' opt-classDecl2 '{' rept-classDecl4 '}' ';'
+opt-classDecl2 -> 'isa' 'id' rept-opt-classDecl22
+rept-opt-classDecl22 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'private'
+memberDecl -> memberVarDecl
+memberVarDecl -> 'attribute' 'id' ':' type rept-memberVarDecl4 ';'
+type -> 'float'
+rept-memberVarDecl4 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'private'
+memberDecl -> memberVarDecl
+memberVarDecl -> 'attribute' 'id' ':' type rept-memberVarDecl4 ';'
+type -> 'float'
+rept-memberVarDecl4 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'public'
+memberDecl -> memberFuncDecl
+memberFuncDecl -> 'constructor' ':' '(' fParams ')' ';'
+fParams -> 'id' ':' type rept-fParams3 rept-fParams4
+type -> 'float'
+rept-fParams3 -> EPSILON
+rept-fParams4 -> fParamsTail rept-fParams4
+fParamsTail -> ',' 'id' ':' type rept-fParamsTail4
+type -> 'float'
+rept-fParamsTail4 -> EPSILON
+rept-fParams4 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'public'
+memberDecl -> memberFuncDecl
+memberFuncDecl -> 'function' 'id' ':' '(' fParams ')' 'arrow' returnType ';'
+fParams -> 'id' ':' type rept-fParams3 rept-fParams4
+type -> 'float'
+rept-fParams3 -> EPSILON
+rept-fParams4 -> EPSILON
+returnType -> type
+type -> 'float'
+rept-classDecl4 -> EPSILON
+rept-START0 -> classDeclOrFuncDef rept-START0
+classDeclOrFuncDef -> classDecl
+classDecl -> 'class' 'id' opt-classDecl2 '{' rept-classDecl4 '}' ';'
+opt-classDecl2 -> 'isa' 'id' rept-opt-classDecl22
+rept-opt-classDecl22 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'private'
+memberDecl -> memberVarDecl
+memberVarDecl -> 'attribute' 'id' ':' type rept-memberVarDecl4 ';'
+type -> 'float'
+rept-memberVarDecl4 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'private'
+memberDecl -> memberVarDecl
+memberVarDecl -> 'attribute' 'id' ':' type rept-memberVarDecl4 ';'
+type -> 'float'
+rept-memberVarDecl4 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'private'
+memberDecl -> memberVarDecl
+memberVarDecl -> 'attribute' 'id' ':' type rept-memberVarDecl4 ';'
+type -> 'float'
+rept-memberVarDecl4 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'public'
+memberDecl -> memberFuncDecl
+memberFuncDecl -> 'constructor' ':' '(' fParams ')' ';'
+fParams -> 'id' ':' type rept-fParams3 rept-fParams4
+type -> 'float'
+rept-fParams3 -> EPSILON
+rept-fParams4 -> fParamsTail rept-fParams4
+fParamsTail -> ',' 'id' ':' type rept-fParamsTail4
+type -> 'float'
+rept-fParamsTail4 -> EPSILON
+rept-fParams4 -> fParamsTail rept-fParams4
+fParamsTail -> ',' 'id' ':' type rept-fParamsTail4
+type -> 'float'
+rept-fParamsTail4 -> EPSILON
+rept-fParams4 -> EPSILON
+rept-classDecl4 -> visibility memberDecl rept-classDecl4
+visibility -> 'public'
+memberDecl -> memberFuncDecl
+memberFuncDecl -> 'function' 'id' ':' '(' fParams ')' 'arrow' returnType ';'
+fParams -> 'id' ':' type rept-fParams3 rept-fParams4
+type -> 'float'
+rept-fParams3 -> EPSILON
+rept-fParams4 -> EPSILON
+returnType -> type
+type -> 'float'
+rept-classDecl4 -> EPSILON
+rept-START0 -> classDeclOrFuncDef rept-START0
+classDeclOrFuncDef -> funcDef
+funcDef -> funcHead funcBody
+funcHead -> 'function' 'id' funcHeadPrime
+funcHeadPrime -> 'sr' funcHeadPrimePrime
+funcHeadPrimePrime -> 'id' '(' fParams ')' 'arrow' returnType
+fParams -> 'id' ':' type rept-fParams3 rept-fParams4
+type -> 'float'
+rept-fParams3 -> EPSILON
+rept-fParams4 -> EPSILON
+returnType -> type
+type -> 'float'
+funcBody -> '{' rept-funcBody1 '}'
+rept-funcBody1 -> localVarDeclOrStmt rept-funcBody1
+localVarDeclOrStmt -> statement
+statement -> 'return' '(' expr ')' ';'
+expr -> term rightrec-arithExpr
+term -> factor rightrec-term
+factor -> 'intnum'
+rightrec-term -> EPSILON
+rightrec-arithExpr -> EPSILON
+rept-funcBody1 -> EPSILON
+rept-START0 -> classDeclOrFuncDef rept-START0
+classDeclOrFuncDef -> funcDef
+funcDef -> funcHead funcBody
+funcHead -> 'function' 'id' funcHeadPrime
+funcHeadPrime -> 'sr' funcHeadPrimePrime
+funcHeadPrimePrime -> 'id' '(' fParams ')' 'arrow' returnType
+fParams -> 'id' ':' type rept-fParams3 rept-fParams4
+type -> 'float'
+rept-fParams3 -> EPSILON
+rept-fParams4 -> EPSILON
+returnType -> type
+type -> 'float'
+funcBody -> '{' rept-funcBody1 '}'
+rept-funcBody1 -> localVarDeclOrStmt rept-funcBody1
+localVarDeclOrStmt -> localVarDecl
+localVarDecl -> 'localvar' 'id' ':' type localVarDeclPrime
+type -> 'float'
+localVarDeclPrime -> rept-localVarDecl4 ';'
+rept-localVarDecl4 -> EPSILON
+rept-funcBody1 -> localVarDeclOrStmt rept-funcBody1
+localVarDeclOrStmt -> statement
+statement -> assignStatOrFunctionCall ';'
+assignStatOrFunctionCall -> 'id' assignStatOrFunctionCallPrime
+assignStatOrFunctionCallPrime -> rept-idnest1 assignStatOrFunctionCallPrimePrimePrime
+rept-idnest1 -> EPSILON
+assignStatOrFunctionCallPrimePrimePrime -> assignOp expr
+assignOp -> '='
+expr -> term rightrec-arithExpr
+term -> factor rightrec-term
+factor -> variableOrFunctionCall
+variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> EPSILON
+rightrec-term -> EPSILON
+rightrec-arithExpr -> EPSILON
+rept-funcBody1 -> localVarDeclOrStmt rept-funcBody1
+localVarDeclOrStmt -> statement
+statement -> assignStatOrFunctionCall ';'
+assignStatOrFunctionCall -> 'id' assignStatOrFunctionCallPrime
+assignStatOrFunctionCallPrime -> rept-idnest1 assignStatOrFunctionCallPrimePrimePrime
+rept-idnest1 -> EPSILON
+assignStatOrFunctionCallPrimePrimePrime -> assignOp expr
+assignOp -> '='
+expr -> term rightrec-arithExpr
+term -> factor rightrec-term
+factor -> variableOrFunctionCall
+variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> EPSILON
+rightrec-term -> multOp factor rightrec-term
+multOp -> '*'
+factor -> variableOrFunctionCall
+variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> EPSILON
+rightrec-term -> EPSILON
+rightrec-arithExpr -> addOp term rightrec-arithExpr
+addOp -> '+'
+term -> factor rightrec-term
+factor -> variableOrFunctionCall
+variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> EPSILON
+rightrec-term -> EPSILON
+rightrec-arithExpr -> EPSILON
+rept-funcBody1 -> localVarDeclOrStmt rept-funcBody1
+localVarDeclOrStmt -> statement
+statement -> assignStatOrFunctionCall ';'
+assignStatOrFunctionCall -> 'id' assignStatOrFunctionCallPrime
+assignStatOrFunctionCallPrime -> rept-idnest1 assignStatOrFunctionCallPrimePrimePrime
+rept-idnest1 -> EPSILON
+assignStatOrFunctionCallPrimePrimePrime -> assignOp expr
+assignOp -> '='
+expr -> term rightrec-arithExpr
+term -> factor rightrec-term
+factor -> variableOrFunctionCall
+variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> EPSILON
+rightrec-term -> multOp factor rightrec-term
+multOp -> '*'
+factor -> variableOrFunctionCall
+variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> EPSILON
+rightrec-term -> EPSILON
+rightrec-arithExpr -> addOp term rightrec-arithExpr
+addOp -> '+'
+term -> factor rightrec-term
+factor -> variableOrFunctionCall
+variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
+variableOrFunctionCallPrime -> EPSILON
+rightrec-term -> EPSILON
+rightrec-arithExpr -> EPSILON
+rept-funcBody1 -> localVarDeclOrStmt rept-funcBody1
+localVarDeclOrStmt -> statement
+statement -> 'return' '(' expr ')' ';'
+expr -> term rightrec-arithExpr
+term -> factor rightrec-term
+factor -> variableOr

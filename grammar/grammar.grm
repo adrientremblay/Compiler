@@ -187,6 +187,7 @@ variableOrFunctionCallPrimePrime -> EPSILON
 
 
 assignStatOrFunctionCall -> 'id' assignStatOrFunctionCallPrime
+assignStatOrFunctionCall -> 'self' assignStatOrFunctionCallPrime
 
 assignStatOrFunctionCallPrime -> '(' aParams ')' assignStatOrFunctionCallPrimePrime
 assignStatOrFunctionCallPrime -> rept-idnest1 assignStatOrFunctionCallPrimePrimePrime
