@@ -11,6 +11,7 @@ public class GrammarTableGenerator {
     HashMap<String, HashSet<String[]>> rules;
     HashMap<String, HashSet<String>> firstSets;
     HashMap<String, HashSet<String>> followSets;
+    HashSet<String> followSetKeys;
     HashSet<String> canBeEpsilon;
 
     public HashMap<String, HashMap<String, String>> generateGrammarTable() {
@@ -53,6 +54,13 @@ public class GrammarTableGenerator {
 
         // Generating follow sets (important to do this after the first sets are generated cause they are used)
         followSets = new HashMap<String, HashSet<String>>();
+        followSetKeys = new HashSet<String>();
+        for (String rule : rules.keySet())
+            generateFollowSet(rule);
+
+        // Generate the follow sets for a second time... Lord have mercy on my soul...
+        // This is a dumb solution
+        followSetKeys = new HashSet<String>();
         for (String rule : rules.keySet())
             generateFollowSet(rule);
 
@@ -116,10 +124,12 @@ public class GrammarTableGenerator {
     }
 
     private void generateFollowSet(String rule) {
-        if (followSets.containsKey(rule))
+        if (followSetKeys.contains(rule))
             return; // no need to redo work, first set for this rule already generated
 
-        followSets.put(rule, new HashSet<String>());
+        if (!followSets.containsKey(rule))
+            followSets.put(rule, new HashSet<String>());
+        followSetKeys.add(rule);
 
         if (rule.equals("START")) {
             followSets.get(rule).add("$");
@@ -128,6 +138,12 @@ public class GrammarTableGenerator {
 
         // scan all other rules to try and add to follow set
         for (String foundRule : rules.keySet()) {
+            /*
+            if (foundRule.equals(rule) && rules.get(foundRule).size() == 1 && rules.get(foundRule).contains("EPSILON"))  {
+                // found an EPSILON rule for this rule
+            }
+             */
+
             for (String[] rhs : rules.get(foundRule)) {
                 for (int i = 0 ; i < rhs.length ; i++) {
                    if (rhs[i].equals(rule)) {
