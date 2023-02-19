@@ -63,6 +63,8 @@ public class Parser {
                         rule = grammarTable.get(top).get(foundToken.getToken().getName());
                     } else if (grammarTable.get(top).containsKey(foundToken.getToken().getRegex())) { // todo: CRINGE!!
                         rule = grammarTable.get(top).get(foundToken.getToken().getRegex());
+                    } else if (foundToken.getToken().equals(Token.END_OF_FILE) && grammarTable.get(top).containsKey("$")) {
+                        rule = grammarTable.get(top).get("$");
                     } else {
                        // The cell is empty...
                        System.err.println("ERROR!");
