@@ -3,15 +3,18 @@ package syntactical_analysis;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
 import lexical_analysis.Token;
+import util.Util;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
 
 public class Parser {
-    Lexer lexer;
+    private Lexer lexer;
 
-    HashMap<String, HashMap<String, String>> grammarTable;
+    private HashMap<String, HashMap<String, String>> grammarTable;
+    private SyntaxDerivationPrinter syntaxDerivationPrinter;
+
 
     public Parser() {
         lexer = new Lexer();
@@ -21,6 +24,8 @@ public class Parser {
     }
 
     public boolean parse() {
+        System.out.println("Starting Parse.");
+
         Stack<String> parseStack = new Stack<String>();
 
         parseStack.push("$");
@@ -48,7 +53,7 @@ public class Parser {
                     || (topTerminal.equals("id") && foundToken.getToken().isType()) // type tokens should count as identifiers too
                 ) {
                     // found a terminal
-                    System.out.println("DEBUG: FOUND " + foundToken.getLexeme());
+                    //System.out.println("DEBUG: FOUND " + foundToken.getLexeme());
                     parseStack.pop();
                     foundToken = lexer.nextToken();
                 } else {
@@ -73,7 +78,7 @@ public class Parser {
 
                     parseStack.pop();
 
-                    System.out.println(rule);
+                    syntaxDerivationPrinter.writeLine(rule);
 
                     String[] ruleSplit = rule.split(" ");
 
@@ -92,10 +97,13 @@ public class Parser {
         if (foundToken.getToken() != Token.END_OF_FILE)
             return false;
 
+        System.out.println("Finished Parse.");
+
         return true;
     }
 
-    public void loadSource(String source) {
-        lexer.loadSource(source);
+    public void loadSource(String sourceFilePath) {
+        lexer.loadSource(Util.readFileAsString(sourceFilePath));
+        syntaxDerivationPrinter = new SyntaxDerivationPrinter(sourceFilePath);
     }
 }

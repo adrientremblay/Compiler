@@ -21,10 +21,7 @@ public class Driver {
         Parser parser = new Parser();
 
         for (String sourceFilePath : SOURCE_FILES) {
-            String source = readFileAsString(sourceFilePath);
-
-            parser.loadSource(source);
-
+            parser.loadSource(sourceFilePath);
             parser.parse();
         }
     }
