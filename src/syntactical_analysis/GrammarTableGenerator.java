@@ -90,6 +90,8 @@ public class GrammarTableGenerator {
             }
         }
 
+        printFirstAndFollowSets();
+
         return grammarTable;
     };
 
@@ -181,5 +183,27 @@ public class GrammarTableGenerator {
             return false;
 
         return (s.charAt(0) == '\'' && s.charAt(s.length() - 1) == '\'');
+    }
+
+    private void printFirstAndFollowSets() {
+        System.out.println("FIRST SETS:");
+        System.out.println();
+        for (String key : firstSets.keySet()) {
+            System.out.print(key + ": ");
+            for (String terminal : firstSets.get(key)) {
+                System.out.print(terminal + ", ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("FOLLOW SETS:");
+        System.out.println();
+        for (String key : followSets.keySet()) {
+            System.out.print(key + ": ");
+            for (String terminal : followSets.get(key)) {
+                System.out.print("'" + terminal + "'" +  " ");
+            }
+            System.out.println();
+        }
     }
 }
