@@ -110,6 +110,8 @@ public class Parser {
             }
         }
 
+        syntaxDerivationPrinter.cleanup();
+
         if (foundToken.getToken() != Token.END_OF_FILE)
             return false;
 
@@ -131,7 +133,9 @@ public class Parser {
                     .append(lexer.getCurLine()).append(":").append(lexer.getCurChar()).append(" while parsing rule ")
                     .append(parseStack.peek()).append(", the token ").append(foundToken).append(" was found.")
                     .toString();
+
             System.err.println(errorMessage);
+            syntaxDerivationPrinter.writeError(errorMessage);
 
             if (foundToken.getToken() == Token.END_OF_FILE
                     || (followSets.containsKey(parseStack.peek())) &&

@@ -8,6 +8,7 @@ import java.nio.file.Path;
 
 public class SyntaxDerivationPrinter {
     BufferedWriter derivationWriter;
+    BufferedWriter syntaxErrorWriter;
 
     public SyntaxDerivationPrinter(String sourceFilePath) {
         Path sourceFilePathAsPath = Path.of(sourceFilePath);
@@ -18,6 +19,10 @@ public class SyntaxDerivationPrinter {
             String derivationFileName = sourceFileName + ".derivation";
             File derivationOutputFile = new File(outputDir + "/" + derivationFileName);
             derivationWriter = new BufferedWriter(new FileWriter(derivationOutputFile));
+
+            String syntaxErrorsFileName = sourceFileName + ".outsyntaxerrors";
+            File syntaxErrorsOutputFile = new File(outputDir + "/" + syntaxErrorsFileName);
+            syntaxErrorWriter = new BufferedWriter(new FileWriter(syntaxErrorsOutputFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,9 +36,18 @@ public class SyntaxDerivationPrinter {
         }
     }
 
+    public void writeError(String line) {
+        try {
+            syntaxErrorWriter.write(line + '\n');
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void cleanup() {
         try {
             derivationWriter.close();
+            syntaxErrorWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
