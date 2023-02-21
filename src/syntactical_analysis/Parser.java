@@ -18,6 +18,7 @@ public class Parser {
     private HashMap<String, HashSet<String>> followSets;
     private SyntaxDerivationPrinter syntaxDerivationPrinter;
     private String filepath;
+    private boolean skippingErrors;
 
     private Stack<String> parseStack;
     private FoundToken foundToken;
@@ -30,6 +31,7 @@ public class Parser {
         firstSets = grammarTableGenerator.getFirstSets();
         followSets = grammarTableGenerator.getFollowSets();
         filepath = "";
+        skippingErrors = false;
     }
 
     public boolean parse() {
@@ -63,13 +65,14 @@ public class Parser {
                     || (topTerminal.equals("id") && foundToken.getToken().isType()) // type tokens should count as identifiers too
                 ) {
                     // found a terminal
+                    skippingErrors = false;
                     System.out.println("DEBUG: FOUND " + foundToken.getLexeme());
                     parseStack.pop();
                     foundToken = lexer.nextToken();
                 } else {
                     // did not find the terminal I wanted to... :'(
                     skipErrors();
-                    break;
+                    continue;
                 }
             } else {
                 if (grammarTable.containsKey(top)) {
@@ -83,8 +86,10 @@ public class Parser {
                     } else {
                        // The cell is empty...
                        skipErrors();
-                       break;
+                       continue;
                     }
+
+                    skippingErrors = false;
 
                     parseStack.pop();
 
@@ -100,7 +105,7 @@ public class Parser {
                 } else {
                     // The rule isnt' even in the parse table???
                     skipErrors();
-                    break;
+                    continue;
                 }
             }
         }
@@ -121,25 +126,23 @@ public class Parser {
 
     private void skipErrors() {
         // Printing error message.
-        String errorMessage = new StringBuilder().append("Syntax Error in ").append(filepath).append(" ")
-                .append(lexer.getCurLine()).append(":").append(lexer.getCurChar()).append(" while parsing rule ")
-                .append(parseStack.peek()).append(", the token ").append(foundToken).append(" was found.")
-                .toString();
-        System.err.println(errorMessage);
+        if (!skippingErrors) {
+            String errorMessage = new StringBuilder().append("Syntax Error in ").append(filepath).append(" ")
+                    .append(lexer.getCurLine()).append(":").append(lexer.getCurChar()).append(" while parsing rule ")
+                    .append(parseStack.peek()).append(", the token ").append(foundToken).append(" was found.")
+                    .toString();
+            System.err.println(errorMessage);
 
-        // Doing skip.
-        if (foundToken.getToken() == Token.END_OF_FILE
-                || followSets.get(parseStack.peek()).contains(foundToken.getToken().getName())
-                || followSets.get(parseStack.peek()).contains(foundToken.getToken().getRegex())) {
-            parseStack.pop();
-        } else {
-            while (!(grammarTable.containsKey(parseStack.peek())
-                    && (grammarTable.get(parseStack.peek()).containsKey(foundToken.getToken().getName())
-                    || grammarTable.get(parseStack.peek()).containsKey(foundToken.getToken().getRegex())
-                    || foundToken.getToken().equals(Token.END_OF_FILE)))
-            ) {
-                foundToken = lexer.nextToken();
+            if (foundToken.getToken() == Token.END_OF_FILE
+                    || (followSets.containsKey(parseStack.peek())) &&
+                    (followSets.get(parseStack.peek()).contains(foundToken.getToken().getName())
+                            || followSets.get(parseStack.peek()).contains(foundToken.getToken().getRegex()))) {
+                parseStack.pop();
+                return;
             }
         }
+
+        foundToken = lexer.nextToken();
+        skippingErrors = true;
     }
 }
