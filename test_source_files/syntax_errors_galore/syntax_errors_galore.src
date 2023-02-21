@@ -1,24 +1,24 @@
 /* sort the array */
 function bubbleSort(arr: integer[], size: integer) => void
 {
-  localvar n balls    : integer;
-  localvar i    : integer;
+  localvar n balls as    : integer;
+  localvar i    :: integer;
   localvar j    : integer;
   localvar temp : integer;
   n = size;
   i = 0;
-  j = 0;
+  j = 0,1212 ;
   temp = 0;
   while (i < n-1) {
     while (j < n-i-1) {
       if (arr[j] > arr[j+1])
-        then {
+        then { assjasjajsa sajjasjas
           // swap temp and arr[i]
           temp = arr[j];
           arr[j] = arr[j+1];
           arr[j+1] = temp;
         } else ;
-        j = j+1;
+        j = j+1+1+1+1 + balls2;
       };
     i = i+1;
   };
