@@ -7,31 +7,41 @@ import util.Util;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Stack;
 
 public class Parser {
     private Lexer lexer;
 
     private HashMap<String, HashMap<String, String>> grammarTable;
+    private HashMap<String, HashSet<String>> firstSets;
+    private HashMap<String, HashSet<String>> followSets;
     private SyntaxDerivationPrinter syntaxDerivationPrinter;
+    private String filepath;
 
+    private Stack<String> parseStack;
+    private FoundToken foundToken;
 
     public Parser() {
         lexer = new Lexer();
 
         GrammarTableGenerator grammarTableGenerator = new GrammarTableGenerator();
         grammarTable = grammarTableGenerator.generateGrammarTable();
+        firstSets = grammarTableGenerator.getFirstSets();
+        followSets = grammarTableGenerator.getFollowSets();
+        filepath = "";
     }
 
     public boolean parse() {
         System.out.println("Starting Parse.");
 
-        Stack<String> parseStack = new Stack<String>();
+        parseStack = new Stack<String>();
 
         parseStack.push("$");
         parseStack.push("START");
 
-        FoundToken foundToken = lexer.nextToken();
+        foundToken = lexer.nextToken();
+
         String top;
         while ((top = parseStack.peek()) != "$") {
             // skips
@@ -58,7 +68,7 @@ public class Parser {
                     foundToken = lexer.nextToken();
                 } else {
                     // did not find the terminal I wanted to... :'(
-                    System.err.println("ERROR!");
+                    skipErrors();
                     break;
                 }
             } else {
@@ -72,7 +82,7 @@ public class Parser {
                         rule = grammarTable.get(top).get("$");
                     } else {
                        // The cell is empty...
-                       System.err.println("ERROR!");
+                       skipErrors();
                        break;
                     }
 
@@ -89,7 +99,7 @@ public class Parser {
                     }
                 } else {
                     // The rule isnt' even in the parse table???
-                    System.err.println("ERROR!");
+                    skipErrors();
                     break;
                 }
             }
@@ -106,5 +116,30 @@ public class Parser {
     public void loadSource(String sourceFilePath) {
         lexer.loadSource(Util.readFileAsString(sourceFilePath));
         syntaxDerivationPrinter = new SyntaxDerivationPrinter(sourceFilePath);
+        filepath = sourceFilePath;
+    }
+
+    private void skipErrors() {
+        // Printing error message.
+        String errorMessage = new StringBuilder().append("Syntax Error in ").append(filepath).append(" ")
+                .append(lexer.getCurLine()).append(":").append(lexer.getCurChar()).append(" while parsing rule ")
+                .append(parseStack.peek()).append(", the token ").append(foundToken).append(" was found.")
+                .toString();
+        System.err.println(errorMessage);
+
+        // Doing skip.
+        if (foundToken.getToken() == Token.END_OF_FILE
+                || followSets.get(parseStack.peek()).contains(foundToken.getToken().getName())
+                || followSets.get(parseStack.peek()).contains(foundToken.getToken().getRegex())) {
+            parseStack.pop();
+        } else {
+            while (!(grammarTable.containsKey(parseStack.peek())
+                    && (grammarTable.get(parseStack.peek()).containsKey(foundToken.getToken().getName())
+                    || grammarTable.get(parseStack.peek()).containsKey(foundToken.getToken().getRegex())
+                    || foundToken.getToken().equals(Token.END_OF_FILE)))
+            ) {
+                foundToken = lexer.nextToken();
+            }
+        }
     }
 }

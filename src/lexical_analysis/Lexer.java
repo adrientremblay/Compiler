@@ -215,4 +215,12 @@ public class Lexer {
 
         return sb.toString();
     }
+
+    public int getCurLine() {
+        return curLine;
+    }
+
+    public int getCurChar() {
+        return curChar;
+    }
 }
