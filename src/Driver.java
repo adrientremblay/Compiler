@@ -11,7 +11,8 @@ public class Driver {
 
     private static final String[] SOURCE_FILES = {
             //        "test_source_files/my_test/my_test.src",
-                      "test_source_files/bubble_sort/bubble_sort.src",
+            //          "test_source_files/bubble_sort/bubble_sort.src",
+                      "test_source_files/bubble_sort_extended/bubble_sort_extended.src",
             //        "test_source_files/lex_negative_grading/lex_negative_grading.src",
             //        "test_source_files/lex_positive_grading/lex_positive_grading.src",
             //        "test_source_files/polynomial/polynomial.src"

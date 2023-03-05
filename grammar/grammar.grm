@@ -1,4 +1,4 @@
-<START> -> <PROG> 'eof'
+<START> -> <PROG> 'endoffile'
 
 <ADDOP> -> 'plus'
 <ADDOP> -> 'minus'
