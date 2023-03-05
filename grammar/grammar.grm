@@ -11,10 +11,10 @@
 
 <ARITHEXPR> -> <TERM> <RIGHTRECARITHEXPR>
 
-<ARRAYSIZE> -> 'lsqbr' <ARRAYSIZE2>
+<ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 
-<ARRAYSIZE2> -> 'intlit' 'rsqbr'
-<ARRAYSIZE2> -> 'rsqbr'
+<ARRAYSIZE2> -> 'intlit' 'closesqbr'
+<ARRAYSIZE2> -> 'closesqbr'
 
 <ASSIGNOP> -> 'equal'
 
@@ -38,7 +38,7 @@
 
 <FPARAMSTAIL> -> 'comma' 'id' 'colon' <TYPE> <REPTFPARAMSTAIL4>
 
-<FUNCBODY> -> 'lcurbr' <REPTLOCALVARORSTAT> 'rcurbr'
+<FUNCBODY> -> 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 
 <MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
 
@@ -82,7 +82,7 @@
 <IDNEST2> -> 'openpar' <APARAMS> 'closepar'
 <IDNEST2> -> <REPTIDNEST1>
 
-<INDICE> -> 'lsqbr' <ARITHEXPR> 'rsqbr'
+<INDICE> -> 'opensqbr' <ARITHEXPR> 'closesqbr'
 
 <MEMBERDECL> -> <MEMBERFUNCDECL>
 <MEMBERDECL> -> <MEMBERVARDECL>
@@ -149,11 +149,11 @@
 <SIGN> -> 'plus'
 <SIGN> -> 'minus'
 
-<STATBLOCK> -> 'lcurbr' <REPTSTATBLOCK1> 'rcurbr'
+<STATBLOCK> -> 'opencurbr' <REPTSTATBLOCK1> 'closecurbr'
 <STATBLOCK> -> <STATEMENT>
 <STATBLOCK> -> EPSILON
 
-<CLASSDECL> -> 'class' 'id' <OPTINHERITS> 'lcurbr' <REPTMEMBERDECL> 'rcurbr' 'semi'
+<CLASSDECL> -> 'class' 'id' <OPTINHERITS> 'opencurbr' <REPTMEMBERDECL> 'closecurbr' 'semi'
 
 <TERM> -> <FACTOR> <RIGHTRECTERM>
 
