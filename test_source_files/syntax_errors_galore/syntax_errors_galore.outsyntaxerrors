@@ -1,4 +1,0 @@
-Syntax Error in test_source_files/syntax_errors_galore/syntax_errors_galore.src 4:19 while parsing rule ':', the token [id, balls, 4:14] was found.
-Syntax Error in test_source_files/syntax_errors_galore/syntax_errors_galore.src 5:19 while parsing rule ':', the token [sr, ::, 5:17] was found.
-Syntax Error in test_source_files/syntax_errors_galore/syntax_errors_galore.src 10:9 while parsing rule ';', the token [comma, ,, 10:8] was found.
-Syntax Error in test_source_files/syntax_errors_galore/syntax_errors_galore.src 15:37 while parsing rule assignStatOrFunctionCallPrime, the token [id, sajjasjas, 15:28] was found.

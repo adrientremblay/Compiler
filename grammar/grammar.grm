@@ -1,221 +1,187 @@
-START -> rept-START0
+<START> -> <PROG> 'eof'
 
-aParams -> expr rept-aParams1
-aParams -> EPSILON
+<ADDOP> -> 'plus'
+<ADDOP> -> 'minus'
+<ADDOP> -> 'or'
 
-aParamsTail -> ',' expr
+<APARAMS> -> <EXPR> <REPTAPARAMS1>
+<APARAMS> -> EPSILON
 
-addOp -> '+'
-addOp -> '-'
-addOp -> 'or'
+<APARAMSTAIL> -> 'comma' <EXPR>
 
-arraySize -> '[' arraySizePrime
-arraySizePrime -> 'intnum' ']'
-arraySizePrime -> ']'
+<ARITHEXPR> -> <TERM> <RIGHTRECARITHEXPR>
 
-assignOp -> '='
+<ARRAYSIZE> -> 'lsqbr' <ARRAYSIZE2>
 
-classDecl -> 'class' 'id' opt-classDecl2 '{' rept-classDecl4 '}' ';'
+<ARRAYSIZE2> -> 'intlit' 'rsqbr'
+<ARRAYSIZE2> -> 'rsqbr'
 
-classDeclOrFuncDef -> classDecl
-classDeclOrFuncDef -> funcDef
+<ASSIGNOP> -> 'equal'
 
-expr -> term rightrec-arithExpr
+<EXPR> -> <ARITHEXPR> <EXPR2>
 
-arithExpr -> term rightrec-arithExpr
+<EXPR2> -> <RELOP> <ARITHEXPR>
+<EXPR2> -> EPSILON
 
-relExpr -> term relExprEnd
+<FACTOR> -> 'id' <FACTOR2> <REPTVARIABLEORFUNCTIONCALL>
+<FACTOR> -> 'intlit'
+<FACTOR> -> 'floatlit'
+<FACTOR> -> 'openpar' <ARITHEXPR> 'closepar'
+<FACTOR> -> 'not' <FACTOR>
+<FACTOR> -> <SIGN> <FACTOR>
 
-relExprEnd -> rightrec-arithExpr relOp arithExpr
+<FACTOR2> -> 'openpar' <APARAMS> 'closepar'
+<FACTOR2> -> <REPTIDNEST1>
 
-term -> factor rightrec-term
+<FPARAMS> -> 'id' 'colon' <TYPE> <REPTFPARAMS3> <REPTFPARAMS4>
+<FPARAMS> -> EPSILON
 
-factor -> variableOrFunctionCall
-factor -> 'intnum'
-factor -> 'floatnum'
-factor -> '(' arithExpr ')'
-factor -> 'not' factor
-factor -> sign factor
+<FPARAMSTAIL> -> 'comma' 'id' 'colon' <TYPE> <REPTFPARAMSTAIL4>
 
-rightrec-arithExpr -> EPSILON
-rightrec-arithExpr -> addOp term rightrec-arithExpr
+<FUNCBODY> -> 'lcurbr' <REPTLOCALVARORSTAT> 'rcurbr'
 
-fParams -> 'id' ':' type rept-fParams3 rept-fParams4
-fParams -> EPSILON
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
 
-fParamsTail -> ',' 'id' ':' type rept-fParamsTail4
+<MEMBERFUNCHEAD> -> 'function' 'id' 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
+<MEMBERFUNCHEAD> -> 'constructorkeyword' 'colon' 'openpar' <FPARAMS> 'closepar'
 
-funcBody -> '{' rept-funcBody1 '}'
+<FUNCDEF> -> <FUNCHEAD> <FUNCBODY>
 
-funcDef -> funcHead funcBody
+<FUNCHEAD> -> 'function' 'id' <FUNCHEADTAIL>
+<FUNCHEADTAIL> -> 'sr' <FUNCHEADMEMBERTAIL>
+<FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
+<FUNCHEADMEMBERTAIL> -> 'id' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
+<FUNCHEADMEMBERTAIL> -> 'constructorkeyword' 'openpar' <FPARAMS> 'closepar'
 
-funcHead -> 'function' 'id' funcHeadPrime
 
-funcHeadPrime -> '(' fParams ')' 'arrow' returnType
-funcHeadPrime -> 'sr' funcHeadPrimePrime
+<STATEMENT> -> 'id' <STATEMENTIDNEST> 'semi'
+<STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' <STATBLOCK> 'else' <STATBLOCK> 'semi'
+<STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' <STATBLOCK> 'semi'
+<STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' 'semi'
+<STATEMENT> -> 'write' 'openpar' <EXPR> 'closepar' 'semi'
+<STATEMENT> -> 'return' 'openpar' <EXPR> 'closepar' 'semi'
 
-funcHeadPrimePrime -> 'constructor' '(' fParams ')'
-funcHeadPrimePrime -> 'id' '(' fParams ')' 'arrow' returnType
+<STATEMENTIDNEST> -> 'dot' 'id' <STATEMENTIDNEST>
+<STATEMENTIDNEST> -> 'openpar' <APARAMS> 'closepar' <STATEMENTIDNEST2>
+<STATEMENTIDNEST> -> <INDICE> <REPTIDNEST1> <STATEMENTIDNEST3>
+<STATEMENTIDNEST> -> <ASSIGNOP> <EXPR>
 
-indice -> '[' arithExpr ']'
+<STATEMENTIDNEST2> -> EPSILON
+<STATEMENTIDNEST2> -> 'dot' 'id' <STATEMENTIDNEST>
 
-localVarDecl -> 'localvar' 'id' ':' type localVarDeclPrime
+<STATEMENTIDNEST3> -> <ASSIGNOP> <EXPR>
+<STATEMENTIDNEST3> -> 'dot' 'id' <STATEMENTIDNEST>
 
-localVarDeclPrime -> rept-localVarDecl4 ';'
-localVarDeclPrime -> '(' aParams ')' ';'
+<REPTIDNEST1> -> <INDICE> <REPTIDNEST1>
+<REPTIDNEST1> -> EPSILON
 
-localVarDeclOrStmt -> localVarDecl
-localVarDeclOrStmt -> statement
+<REPTVARIABLEORFUNCTIONCALL> -> <IDNEST> <REPTVARIABLEORFUNCTIONCALL>
+<REPTVARIABLEORFUNCTIONCALL> -> EPSILON
 
-memberDecl -> memberFuncDecl
-memberDecl -> memberVarDecl
+<IDNEST> -> 'dot' 'id' <IDNEST2>
+<IDNEST2> -> 'openpar' <APARAMS> 'closepar'
+<IDNEST2> -> <REPTIDNEST1>
 
-memberFuncDecl -> 'function' 'id' ':' '(' fParams ')' 'arrow' returnType ';'
-memberFuncDecl -> 'constructor' ':' '(' fParams ')' ';'
+<INDICE> -> 'lsqbr' <ARITHEXPR> 'rsqbr'
 
-memberVarDecl -> 'attribute' 'id' ':' type rept-memberVarDecl4 ';'
+<MEMBERDECL> -> <MEMBERFUNCDECL>
+<MEMBERDECL> -> <MEMBERVARDECL>
 
-multOp -> '*'
-multOp -> '/'
-multOp -> 'and'
+<MEMBERVARDECL> -> 'attribute' 'id' 'colon' <TYPE> <REPTARRAYSIZE> 'semi'
 
-opt-classDecl2 -> 'isa' 'id' rept-opt-classDecl22
-opt-classDecl2 -> EPSILON
+<MULTOP> -> 'mult'
+<MULTOP> -> 'div'
+<MULTOP> -> 'and'
 
-relOp -> 'eq'
-relOp -> 'neq'
-relOp -> 'lt'
-relOp -> 'gt'
-relOp -> 'leq'
-relOp -> 'geq'
+<OPTINHERITS> -> 'isa' 'id' <REPTINHERITSLIST>
+<OPTINHERITS> -> EPSILON
 
-rept-START0 -> classDeclOrFuncDef rept-START0
-rept-START0 -> EPSILON
+<REPTINHERITSLIST> -> 'comma' 'id' <REPTINHERITSLIST>
+<REPTINHERITSLIST> -> EPSILON
 
-rept-aParams1 -> aParamsTail rept-aParams1
-rept-aParams1 -> EPSILON
+<PROG> -> <REPTPROG0>
 
-rept-classDecl4 -> visibility memberDecl rept-classDecl4
-rept-classDecl4 -> EPSILON
+<RELEXPR> -> <ARITHEXPR> <RELOP> <ARITHEXPR>
 
-rept-fParams3 -> arraySize rept-fParams3
-rept-fParams3 -> EPSILON
+<RELOP> -> 'eq'
+<RELOP> -> 'neq'
+<RELOP> -> 'lt'
+<RELOP> -> 'gt'
+<RELOP> -> 'leq'
+<RELOP> -> 'geq'
 
-rept-fParams4 -> fParamsTail rept-fParams4
-rept-fParams4 -> EPSILON
+<REPTAPARAMS1> -> <APARAMSTAIL> <REPTAPARAMS1>
+<REPTAPARAMS1> -> EPSILON
 
-rept-fParamsTail4 -> arraySize rept-fParamsTail4
-rept-fParamsTail4 -> EPSILON
+<REPTFPARAMS3> -> <ARRAYSIZE> <REPTFPARAMS3>
+<REPTFPARAMS3> -> EPSILON
 
-rept-funcBody1 -> localVarDeclOrStmt rept-funcBody1
-rept-funcBody1 -> EPSILON
+<REPTFPARAMS4> -> <FPARAMSTAIL> <REPTFPARAMS4>
+<REPTFPARAMS4> -> EPSILON
 
-rept-idnest1 -> indice rept-idnest1
-rept-idnest1 -> EPSILON
+<REPTFPARAMSTAIL4> -> <ARRAYSIZE> <REPTFPARAMSTAIL4>
+<REPTFPARAMSTAIL4> -> EPSILON
 
-rept-localVarDecl4 -> arraySize rept-localVarDecl4
-rept-localVarDecl4 -> EPSILON
+<REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
+<REPTPROG0> -> EPSILON
 
-rept-memberVarDecl4 -> arraySize rept-memberVarDecl4
-rept-memberVarDecl4 -> EPSILON
+<CLASSDECLORFUNCDEF> -> <CLASSDECL>
+<CLASSDECLORFUNCDEF> -> <FUNCDEF>
 
-rept-opt-classDecl22 -> ',' 'id' rept-opt-classDecl22
-rept-opt-classDecl22 -> EPSILON
+<REPTSTATBLOCK1> -> <STATEMENT> <REPTSTATBLOCK1>
+<REPTSTATBLOCK1> -> EPSILON
 
-rept-statBlock1 -> statement rept-statBlock1
-rept-statBlock1 -> EPSILON
+<REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
+<REPTMEMBERDECL> -> EPSILON
 
-returnType -> type
-returnType -> 'void'
+<REPTARRAYSIZE> -> <ARRAYSIZE> <REPTARRAYSIZE>
+<REPTARRAYSIZE> -> EPSILON
 
-sign -> '+'
-sign -> '-'
+<RETURNTYPE> -> <TYPE>
+<RETURNTYPE> -> 'void'
 
-statBlock -> '{' rept-statBlock1 '}'
-statBlock -> statement
-statBlock -> EPSILON
+<RIGHTRECARITHEXPR> -> <ADDOP> <TERM> <RIGHTRECARITHEXPR>
+<RIGHTRECARITHEXPR> -> EPSILON
 
+<RIGHTRECTERM> -> <MULTOP> <FACTOR> <RIGHTRECTERM>
+<RIGHTRECTERM> -> EPSILON
 
+<SIGN> -> 'plus'
+<SIGN> -> 'minus'
 
+<STATBLOCK> -> 'lcurbr' <REPTSTATBLOCK1> 'rcurbr'
+<STATBLOCK> -> <STATEMENT>
+<STATBLOCK> -> EPSILON
 
-statement -> assignStatOrFunctionCall ';'
-statement -> 'if' '(' relExpr ')' 'then' statBlock 'else' statBlock ';'
-statement -> 'while' '(' relExpr ')' statBlock ';'
-statement -> 'read' '(' variable ')' ';'
-statement -> 'write' '(' expr ')' ';'
-statement -> 'return' '(' expr ')' ';'
+<CLASSDECL> -> 'class' 'id' <OPTINHERITS> 'lcurbr' <REPTMEMBERDECL> 'rcurbr' 'semi'
 
+<TERM> -> <FACTOR> <RIGHTRECTERM>
 
+<TYPE> -> 'integer'
+<TYPE> -> 'float'
+<TYPE> -> 'id'
 
+<LOCALVARDECL> -> 'localvar' 'id' 'colon' <TYPE> <ARRAYOROBJECT> 'semi'
+<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<ARRAYOROBJECT> -> 'openpar' <APARAMS> 'closepar'
 
-assignStat -> variable assignOp expr
+<REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
+<REPTLOCALVARORSTAT> -> EPSILON
 
+<LOCALVARORSTAT> -> <LOCALVARDECL>
+<LOCALVARORSTAT> -> <STATEMENT>
 
+<VARIABLE> -> 'id' <VARIABLE2>
 
+<VARIABLE2> -> <REPTIDNEST1> <REPTVARIABLE>
+<VARIABLE2> -> 'openpar' <APARAMS> 'closepar' <VARIDNEST>
 
-variable -> 'id' variablePrime
+<REPTVARIABLE> -> <VARIDNEST> <REPTVARIABLE>
+<REPTVARIABLE> -> EPSILON
 
-variablePrime -> rept-idnest1 variablePrimePrime
-variablePrime -> '(' aParams ')' '.' variable
+<VARIDNEST> -> 'dot' 'id' <VARIDNEST2>
+<VARIDNEST2> -> 'openpar' <APARAMS> 'closepar' <VARIDNEST>
+<VARIDNEST2> -> <REPTIDNEST1>
 
-variablePrimePrime -> '.' variable
-variablePrimePrime -> EPSILON
-
-
-
-
-functionCall -> 'id' functionCallPrime
-
-functionCallPrime -> '(' aParams ')' functionPrimePrime
-functionCallPrime -> rept-idnest1 '.' variable
-
-functionPrimePrime -> '.' function
-functionPrimePrime -> EPSILON
-
-
-
-
-variableOrFunctionCall -> 'id' variableOrFunctionCallPrime
-
-variableOrFunctionCallPrime -> indice variableOrFunctionCallPrimePrime
-variableOrFunctionCallPrime -> '(' aParams ')' variableOrFunctionCallPrimePrime
-variableOrFunctionCallPrime -> variableOrFunctionCallPrimePrime
-variableOrFunctionCallPrime -> EPSILON
-
-variableOrFunctionCallPrimePrime -> '.' variableOrFunctionCall
-variableOrFunctionCallPrimePrime -> EPSILON
-
-
-
-assignStatOrFunctionCall -> 'id' assignStatOrFunctionCallPrime
-assignStatOrFunctionCall -> 'self' assignStatOrFunctionCallPrime
-
-assignStatOrFunctionCallPrime -> '(' aParams ')' assignStatOrFunctionCallPrimePrime
-assignStatOrFunctionCallPrime -> rept-idnest1 assignStatOrFunctionCallPrimePrimePrime
-
-assignStatOrFunctionCallPrimePrime -> '.' assignStatOrFunctionCall
-assignStatOrFunctionCallPrimePrime -> EPSILON
-
-assignStatOrFunctionCallPrimePrimePrime -> '.' assignStatOrFunctionCall
-assignStatOrFunctionCallPrimePrimePrime -> assignOp expr
-
-
-
-idnest -> 'id' idnestPrime
-
-idnestPrime -> rept-idnest1 '.'
-idnestPrime -> '(' aParams ')' '.'
-
-rept-idnest -> idnest rept-idnest
-rept-idnest -> EPSILON
-
-rightrec-term -> EPSILON
-rightrec-term -> multOp factor rightrec-term
-
-type -> 'integer'
-type -> 'float'
-type -> 'id'
-
-visibility -> 'public'
-visibility -> 'private'
-visibility -> EPSILON
+<VISIBILITY> -> 'public'
+<VISIBILITY> -> 'private'

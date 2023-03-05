@@ -40,7 +40,7 @@ public class Parser {
         parseStack = new Stack<String>();
 
         parseStack.push("$");
-        parseStack.push("START");
+        parseStack.push("<START>");
 
         foundToken = lexer.nextToken();
 
