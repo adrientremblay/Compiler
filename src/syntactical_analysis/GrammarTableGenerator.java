@@ -82,7 +82,8 @@ public class GrammarTableGenerator {
             if (! grammarTable.containsKey(leftHandSide))
                 grammarTable.put(leftHandSide, new HashMap<String, String>());
 
-            if (rightHandSide.length == 1 && rightHandSide[0].equals("EPSILON")) {
+            if (rightHandSide.length == 1 && rightHandSide[0].equals("EPSILON") // the current rule can be EPSILON directly
+            || canBeEpsilon.contains(rightHandSide[rightHandSide.length-1])) { // the last symbol of the rhs of the rule can be epsilon, so we take it's follow set
                 Set<String> lineFollowSet = followSets.get(leftHandSide);
 
                 for (String terminal : lineFollowSet)
