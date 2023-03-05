@@ -13,7 +13,7 @@
 
 <ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 
-<ARRAYSIZE2> -> 'intlit' 'closesqbr'
+<ARRAYSIZE2> -> 'intnum' 'closesqbr'
 <ARRAYSIZE2> -> 'closesqbr'
 
 <EXPR> -> <ARITHEXPR> <EXPR2>
@@ -22,8 +22,8 @@
 <EXPR2> -> EPSILON
 
 <FACTOR> -> 'id' <FACTOR2> <REPTVARIABLEORFUNCTIONCALL>
-<FACTOR> -> 'intlit'
-<FACTOR> -> 'floatlit'
+<FACTOR> -> 'intnum'
+<FACTOR> -> 'floatnum'
 <FACTOR> -> 'openpar' <ARITHEXPR> 'closepar'
 <FACTOR> -> 'not' <FACTOR>
 <FACTOR> -> <SIGN> <FACTOR>
