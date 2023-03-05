@@ -1,0 +1,2 @@
+Syntax Error in test_source_files/bubble_sort/bubble_sort.src 12:14 while parsing rule variableOrFunctionCallPrimePrime, the token [opensqbr, [, 12:13] was found.
+Syntax Error in test_source_files/bubble_sort/bubble_sort.src 12:17 while parsing rule ';', the token [closesqbr, ], 12:16] was found.
