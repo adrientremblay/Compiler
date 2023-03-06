@@ -35,44 +35,21 @@ public class astPrinter {
         cleanup();
     }
 
-    private void writeNode(SemanticConcept node) {
+    private int writeNode(SemanticConcept node) {
         int myId = nextNodeId;
         try {
-
-            // todo: make this code prettier
-            if (node.getMember() == null) {
+            if (node.getMember() == null)
                 dotFileWriter.write((nextNodeId++) + "[label=\"" + node.getName() +"\"];\n");
-            } else {
+            else
                 dotFileWriter.write((nextNodeId++) + "[label=\"" + node.getName() + " | " + node.getMember().getLexeme() +"\"];\n");
-            }
 
-            for (SemanticConcept child : node.getChildren()) {
-                writeNode(child);
-                dotFileWriter.write(myId + "->" + (nextNodeId-1) + "\n");
-            }
+            for (SemanticConcept child : node.getChildren())
+                dotFileWriter.write(myId + "->" + writeNode(child) + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return myId;
     }
-
-    /*
-    public void writeNode(String name) {
-        try {
-            dotFileWriter.write((nextNodeId++) + "[label=\"" + name +"\"];\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void writeNode(String name, String memberName) {
-        try {
-            dotFileWriter.write((nextNodeId++) + "[label=\"" + name + " | " + memberName +"\"];\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-     */
 
    private void cleanup() {
         try {

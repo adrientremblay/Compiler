@@ -87,7 +87,7 @@
 
 <MEMBERVARDECL> -> 'attribute' 'id' 'colon' <TYPE> <REPTARRAYSIZE> 'semi'
 
-<MULTOP> -> 'mult'
+<MULTOP> -> 'mult' !makeMultiplyOperation
 <MULTOP> -> 'div'
 <MULTOP> -> 'and'
 
@@ -141,7 +141,7 @@
 <RIGHTRECARITHEXPR> -> <ADDOP> <TERM> <RIGHTRECARITHEXPR>
 <RIGHTRECARITHEXPR> -> EPSILON
 
-<RIGHTRECTERM> -> <MULTOP> <FACTOR> <RIGHTRECTERM>
+<RIGHTRECTERM> -> <MULTOP> <FACTOR> !addFactorToOp <RIGHTRECTERM>
 <RIGHTRECTERM> -> EPSILON
 
 <SIGN> -> 'plus'

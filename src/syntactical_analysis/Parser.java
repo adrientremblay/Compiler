@@ -87,6 +87,13 @@ public class Parser {
                         Num number = new Num(lastToken);
                         semanticStack.push(number);
                         break;
+                    case "makeMultiplyOperation":
+                        semanticStack.push(new MultiplyOperation(semanticStack.pop()));
+                        break;
+                    case "addFactorToOp":
+                        SemanticConcept factor = semanticStack.pop();
+                        semanticStack.peek().addChild(factor);
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;

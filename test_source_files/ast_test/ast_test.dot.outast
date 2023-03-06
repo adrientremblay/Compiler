@@ -2,10 +2,18 @@ digraph AST {
 node [shape=record];
 node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
-2[label="AssigStat"];
-3[label="Num | 1"];
-2->3
-4[label="Id | n"];
-2->4
-1->4
+2[label="Id | x"];
+1->2
+3[label="AssigStat"];
+4[label="Num | 1"];
+3->4
+5[label="Id | n"];
+3->5
+1->3
+6[label="AssigStat"];
+7[label="Num | 1"];
+6->7
+8[label="Num | 1"];
+6->8
+1->6
 }
