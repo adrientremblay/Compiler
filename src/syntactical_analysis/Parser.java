@@ -2,6 +2,7 @@ package syntactical_analysis;
 
 import ast_generation.astPrinter;
 import ast_generation.tree.*;
+import ast_generation.tree.classes.*;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
 import lexical_analysis.Token;
@@ -125,14 +126,27 @@ public class Parser {
                     case "makeFunctionDefinition":
                         functionDefinitionList.addChild(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
+                    case "makeFunctionDeclaration":
+                        semanticStack.peek().addChild(new FunctionDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
+                        break;
                     case "makeParameterList":
                         semanticStack.push(new ParameterList());
                         break;
+                    case "pop":
                     case "closeDims":
                         semanticStack.pop();
                         break;
                     case "makeStatementBlock":
                         semanticStack.push(new StatementBlock());
+                        break;
+                    case "makeMemberList":
+                        semanticStack.push(new MemberList());
+                        break;
+                    case "makeInheritanceList":
+                        semanticStack.push(new InheritanceList());
+                        break;
+                    case "makeClassDeclaration":
+                        classDeclarationList.addChild(new ClassDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");

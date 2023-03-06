@@ -38,9 +38,9 @@
 
 <FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 
-<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> !makeFunctionDeclaration 'semi'
 
-<MEMBERFUNCHEAD> -> 'function' 'id' 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
+<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
 <MEMBERFUNCHEAD> -> 'constructorkeyword' 'colon' 'openpar' <FPARAMS> 'closepar'
 
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
@@ -151,7 +151,7 @@
 <STATBLOCK> -> <STATEMENT>
 <STATBLOCK> -> EPSILON
 
-<CLASSDECL> -> 'class' 'id' <OPTINHERITS> 'opencurbr' <REPTMEMBERDECL> 'closecurbr' 'semi'
+<CLASSDECL> -> 'class' 'id' !makeIdentifier !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
 
 <TERM> -> <FACTOR> <RIGHTRECTERM>
 

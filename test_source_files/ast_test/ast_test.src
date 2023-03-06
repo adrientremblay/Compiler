@@ -1,13 +1,13 @@
+/*
+
 function test() => void
 {
   localvar a    : integer;
 }
 
-/*
 function bubbleSort(size: integer) => void
 {
 }
-*/
 
 function func1(swag : int[5][3][2], balls : float[100]) => void {
   localvar a    : integer;
@@ -15,3 +15,8 @@ function func1(swag : int[5][3][2], balls : float[100]) => void {
   a = 1;
   g = 10 + 11 * 12;
 }
+*/
+
+class class1{
+    public attribute m1 : float;
+};

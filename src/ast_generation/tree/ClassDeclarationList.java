@@ -1,8 +1,0 @@
-package ast_generation.tree;
-
-public class ClassDeclarationList extends SemanticConcept{
-    @Override
-    public String getName() {
-        return "ClassDefList";
-    }
-}
