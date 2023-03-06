@@ -28,7 +28,7 @@ public class Parser {
     private FoundToken lastToken;
     private Program program;
     private FunctionDefinitionList functionDefinitionList;
-    private ClassDefinitionList classDefinitionList;
+    private ClassDeclarationList classDeclarationList;
     private Stack<SemanticConcept> semanticStack;
 
     public Parser() {
@@ -47,9 +47,9 @@ public class Parser {
 
         program = new Program();
         functionDefinitionList = new FunctionDefinitionList();
-        classDefinitionList = new ClassDefinitionList();
+        classDeclarationList = new ClassDeclarationList();
         program.addChild(functionDefinitionList);
-        program.addChild(classDefinitionList);
+        program.addChild(classDeclarationList);
 
         parseStack = new Stack<String>();
 
