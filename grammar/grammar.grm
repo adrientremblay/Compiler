@@ -159,7 +159,7 @@
 <TYPE> -> 'float'
 <TYPE> -> 'id'
 
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
 <ARRAYOROBJECT> -> <REPTARRAYSIZE>
 <ARRAYOROBJECT> -> 'openpar' <APARAMS> 'closepar'
 
