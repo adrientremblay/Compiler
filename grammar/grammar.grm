@@ -45,7 +45,7 @@
 
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY>
 
-<FUNCHEAD> -> 'function' 'id' <FUNCHEADTAIL>
+<FUNCHEAD> -> 'function' 'id' !makeIdentifier <FUNCHEADTAIL> !makeFunctionDefinition
 <FUNCHEADTAIL> -> 'sr' <FUNCHEADMEMBERTAIL>
 <FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
 <FUNCHEADMEMBERTAIL> -> 'id' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
@@ -135,8 +135,8 @@
 <REPTARRAYSIZE> -> <ARRAYSIZE> <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
 
-<RETURNTYPE> -> <TYPE>
-<RETURNTYPE> -> 'void'
+<RETURNTYPE> -> <TYPE> !makeType
+<RETURNTYPE> -> 'void' !makeType
 
 <RIGHTRECARITHEXPR> -> <ADDOP> <TERM> !addFactorToOp <RIGHTRECARITHEXPR>
 <RIGHTRECARITHEXPR> -> EPSILON

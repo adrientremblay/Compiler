@@ -116,6 +116,9 @@ public class Parser {
                     case "addIntToTop":
                         semanticStack.peek().addChild(new Num(lastToken));
                         break;
+                    case "makeFunctionDefinition":
+                        semanticStack.push(new FunctionDefinition(semanticStack.pop(), semanticStack.pop()));
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;
