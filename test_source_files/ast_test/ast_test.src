@@ -2,6 +2,6 @@ function test() => void
 {
   localvar n    : integer;
   n = 1;
-  x = 1+1;
+  x = 1*1;
 }
 
