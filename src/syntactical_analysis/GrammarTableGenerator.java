@@ -145,52 +145,36 @@ public class GrammarTableGenerator {
         for (String foundRule : rules.keySet()) {
             for (String[] rhs : rules.get(foundRule)) {
                 for (int i = 0 ; i < rhs.length ; i++) {
-                   if (rhs[i].equals(rule)) {
-                       if (i < rhs.length - 1) {
-                           int nextNonSemanticIndex;
+                   if (!rhs[i].equals(rule))
+                       continue;
 
-                           if (isSemanticAction(rhs[i+1])) {
-                               if (i < rhs.length - 2) {
-                                   nextNonSemanticIndex = i+2; // todo: assumes no consecutive semantic actions
-                               } else {
-                                   // todo: copied code!!!
-                                   generateFollowSet(foundRule);
-                                   followSets.get(rule).addAll(followSets.get(foundRule));
-                                   break;
-                               }
-                           } else {
-                               nextNonSemanticIndex = i+1;
-                           }
+                   int nextNonSemanticIndex = findNextNonSemanticIndex(i, rhs);
 
-                           if (isTerminal(rhs[nextNonSemanticIndex])) {
-                              followSets.get(rule).add(rhs[nextNonSemanticIndex].substring(1, rhs[nextNonSemanticIndex].length() - 1));
-                           } else {
-                               followSets.get(rule).addAll(firstSets.get(rhs[nextNonSemanticIndex]));
+                   if (nextNonSemanticIndex == -1) {
+                       generateFollowSet(foundRule);
+                       followSets.get(rule).addAll(followSets.get(foundRule));
+                       break;
+                   }
 
-                               if (canBeEpsilon.contains(rhs[nextNonSemanticIndex])) {
-                                   if (nextNonSemanticIndex < rhs.length - 1) {
-                                       if (!isSemanticAction(rhs[nextNonSemanticIndex+1])) {
-                                           if (isTerminal(rhs[nextNonSemanticIndex+1])) {
-                                               followSets.get(rule).add(rhs[nextNonSemanticIndex+1].substring(1, rhs[nextNonSemanticIndex+1].length() - 1));
-                                           } else {
-                                               followSets.get(rule).addAll(firstSets.get(rhs[nextNonSemanticIndex+1]));
-                                           }
-                                       } else if (nextNonSemanticIndex < rhs.length - 2){
-                                           if (isTerminal(rhs[nextNonSemanticIndex+2])) {
-                                               followSets.get(rule).add(rhs[nextNonSemanticIndex+2].substring(1, rhs[nextNonSemanticIndex+2].length() - 1));
-                                           } else {
-                                               followSets.get(rule).addAll(firstSets.get(rhs[nextNonSemanticIndex+2]));
-                                           }
-                                       }
-                                   } else {
-                                       generateFollowSet(foundRule);
-                                       followSets.get(rule).addAll(followSets.get(foundRule));
-                                   }
-                               }
-                           }
-                       } else {
+                   if (isTerminal(rhs[nextNonSemanticIndex])) {
+                      followSets.get(rule).add(rhs[nextNonSemanticIndex].substring(1, rhs[nextNonSemanticIndex].length() - 1));
+                      continue;
+                   }
+
+                   followSets.get(rule).addAll(firstSets.get(rhs[nextNonSemanticIndex]));
+
+                   if (canBeEpsilon.contains(rhs[nextNonSemanticIndex])) {
+                       int nextNextNonSemanticIndex = findNextNonSemanticIndex(nextNonSemanticIndex, rhs) ;
+
+                       if (nextNextNonSemanticIndex == -1) {
                            generateFollowSet(foundRule);
                            followSets.get(rule).addAll(followSets.get(foundRule));
+                       } else {
+                           if (isTerminal(rhs[nextNextNonSemanticIndex])) {
+                               followSets.get(rule).add(rhs[nextNextNonSemanticIndex].substring(1, rhs[nextNextNonSemanticIndex].length() - 1));
+                           } else {
+                               followSets.get(rule).addAll(firstSets.get(rhs[nextNextNonSemanticIndex]));
+                           }
                        }
                    }
                 }
@@ -220,6 +204,20 @@ public class GrammarTableGenerator {
 
         // This is not supposed to be reached
         return null;
+    }
+
+    /**
+     * Finds the index of the next non-semantic item AFTER the given index or -1 if it can't if one
+     * @param index
+     * @param items
+     * @return
+     */
+    private static int findNextNonSemanticIndex(int index, String[] items) {
+        for (int i = index+1 ; i < items.length ; i++)
+            if (!isSemanticAction(items[i]))
+                return i;
+
+        return -1;
     }
 
     public HashMap<String, HashSet<String>> getFirstSets() {
