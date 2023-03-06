@@ -3,37 +3,43 @@ node [shape=record];
 node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="FuncDef"];
-3[label="ParamList"];
-4[label="VarDecl"];
-5[label="Id | balls"];
+3[label="StatBlock"];
+4[label="AssigStat"];
+5[label="Num | 1"];
 4->5
-6[label="Dims"];
-7[label="Num | 100"];
-6->7
+6[label="Id | a"];
 4->6
-8[label="Type | float"];
-4->8
 3->4
-9[label="VarDecl"];
-10[label="Dims"];
-11[label="Num | 5"];
-10->11
-12[label="Num | 3"];
-10->12
-13[label="Num | 2"];
-10->13
-9->10
-14[label="Id | swag"];
-9->14
-15[label="Type | int"];
-9->15
-3->9
 2->3
-16[label="StatBlock"];
-2->16
-17[label="Type | void"];
-2->17
-18[label="Id | func1"];
-2->18
+7[label="Type | void"];
+2->7
+8[label="ParamList"];
+9[label="VarDecl"];
+10[label="Id | balls"];
+9->10
+11[label="Dims"];
+12[label="Num | 100"];
+11->12
+9->11
+13[label="Type | float"];
+9->13
+8->9
+14[label="VarDecl"];
+15[label="Dims"];
+16[label="Num | 5"];
+15->16
+17[label="Num | 3"];
+15->17
+18[label="Num | 2"];
+15->18
+14->15
+19[label="Id | swag"];
+14->19
+20[label="Type | int"];
+14->20
+8->14
+2->8
+21[label="Id | func1"];
+2->21
 1->2
 }

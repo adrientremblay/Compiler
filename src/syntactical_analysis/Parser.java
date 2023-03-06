@@ -81,7 +81,7 @@ public class Parser {
                         break;
                     case "makeAssExpr":
                         AssignmentStatement assignmentStatement = new AssignmentStatement(semanticStack.pop(), semanticStack.pop());
-                        semanticStack.push(assignmentStatement);
+                        semanticStack.peek().addChild(assignmentStatement);
                         break;
                     case "makeInt":
                         Num number = new Num(lastToken);
