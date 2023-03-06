@@ -122,6 +122,9 @@ public class Parser {
                     case "makeParameterList":
                         semanticStack.push(new ParameterList());
                         break;
+                    case "closeDims":
+                        semanticStack.pop();
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;

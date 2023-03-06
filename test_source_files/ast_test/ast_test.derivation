@@ -5,7 +5,26 @@
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY>
 <FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL> !makeFunctionDefinition
 <FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<FPARAMS> -> EPSILON
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
+<TYPE> -> 'id'
+<REPTFPARAMS3> -> <ARRAYSIZE> <REPTFPARAMS3>
+<ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
+<ARRAYSIZE2> -> 'intnum' !addIntToTop 'closesqbr'
+<REPTFPARAMS3> -> <ARRAYSIZE> <REPTFPARAMS3>
+<ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
+<ARRAYSIZE2> -> 'intnum' !addIntToTop 'closesqbr'
+<REPTFPARAMS3> -> <ARRAYSIZE> <REPTFPARAMS3>
+<ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
+<ARRAYSIZE2> -> 'intnum' !addIntToTop 'closesqbr'
+<REPTFPARAMS3> -> EPSILON
+<REPTFPARAMS4> -> <FPARAMSTAIL> <REPTFPARAMS4>
+<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration !closeDims <REPTFPARAMSTAIL4>
+<TYPE> -> 'id'
+<REPTFPARAMSTAIL4> -> <ARRAYSIZE> <REPTFPARAMSTAIL4>
+<ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
+<ARRAYSIZE2> -> 'intnum' !addIntToTop 'closesqbr'
+<REPTFPARAMSTAIL4> -> EPSILON
+<REPTFPARAMS4> -> EPSILON
 <RETURNTYPE> -> 'void'
 <FUNCBODY> -> 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> EPSILON

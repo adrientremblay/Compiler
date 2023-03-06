@@ -31,10 +31,10 @@
 <FACTOR2> -> 'openpar' <APARAMS> 'closepar'
 <FACTOR2> -> <REPTIDNEST1>
 
-<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> <REPTFPARAMS4>
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
 <FPARAMS> -> EPSILON
 
-<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMSTAIL4>
+<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration !closeDims <REPTFPARAMSTAIL4>
 
 <FUNCBODY> -> 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 
