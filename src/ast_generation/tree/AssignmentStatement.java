@@ -8,6 +8,6 @@ public class AssignmentStatement extends SemanticConcept {
 
     @Override
     public String getName() {
-        return null;
+        return "AssigStat";
     }
 }

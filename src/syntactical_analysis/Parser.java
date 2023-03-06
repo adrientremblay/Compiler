@@ -89,8 +89,10 @@ public class Parser {
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
-                        continue;
+                        break;
                }
+               parseStack.pop();
+                continue;
             }
 
             if (GrammarTableGenerator.isTerminal(top)) {
