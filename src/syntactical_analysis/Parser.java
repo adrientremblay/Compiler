@@ -1,9 +1,7 @@
 package syntactical_analysis;
 
 import ast_generation.astPrinter;
-import ast_generation.tree.Identifier;
-import ast_generation.tree.Program;
-import ast_generation.tree.SemanticConcept;
+import ast_generation.tree.*;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
 import lexical_analysis.Token;
@@ -27,7 +25,9 @@ public class Parser {
 
     private Stack<String> parseStack;
     private FoundToken foundToken;
+    private FoundToken lastToken;
     private SemanticConcept astRoot;
+    private Stack<SemanticConcept> semanticStack;
 
     public Parser() {
         lexer = new Lexer();
@@ -65,6 +65,32 @@ public class Parser {
                 continue;
             }
 
+            // checking for semantic actions
+            if (top.length() >= 1 && top.charAt(0) == '!') {
+                String semanticAction = top.substring(1, top.length());
+                switch (semanticAction) {
+                    case "makeProgram": // todo: temp implementation
+                       while (!semanticStack.isEmpty())
+                            astRoot.addChild(semanticStack.pop());
+                       break;
+                    case "makeIdentifier":
+                        SemanticConcept identifier = new Identifier(lastToken);
+                        semanticStack.add(identifier);
+                        break;
+                    case "makeAssExpr":
+                        AssignmentStatement assignmentStatement = new AssignmentStatement(semanticStack.pop(), semanticStack.pop());
+                        semanticStack.push(assignmentStatement);
+                        break;
+                    case "makeInt":
+                        Num number = new Num(lastToken);
+                        semanticStack.push(number);
+                        break;
+                    default:
+                        System.err.println("Unknown semantic action!!!!");
+                        continue;
+               }
+            }
+
             if (GrammarTableGenerator.isTerminal(top)) {
                 String topTerminal = top.substring(1, top.length() - 1);
                 if (
@@ -75,11 +101,8 @@ public class Parser {
                     // found a terminal
                     skippingErrors = false;
                     System.out.println("DEBUG: FOUND " + foundToken.getToken().getRegex());
-                    if (foundToken.getToken().equals(Token.IDENTIFIER)) {
-                        SemanticConcept identifier = new Identifier(foundToken);
-                        astRoot.addChild(identifier);
-                    }
                     parseStack.pop();
+                    lastToken = foundToken;
                     foundToken = lexer.nextToken();
                 } else {
                     // did not find the terminal I wanted to... :'(

@@ -19,6 +19,7 @@ public class GrammarTableGenerator {
 
         // Read the grammar file
         List<String> lines = Util.readFileForLines("grammar/grammar.grm");
+        List<String> linesSemanticActions = Util.readFileForLines("grammar/grammar_with_semantic_actions.grm");
 
         // Reading rules
         rules = new HashMap<String, HashSet<String[]>>();
@@ -65,7 +66,9 @@ public class GrammarTableGenerator {
             generateFollowSet(rule);
 
         // Generating the table
-        for (String line : lines) {
+        for (int i = 0 ; i < lines.size() ; i++) {
+            String line = lines.get(i) ;
+
             if (line.length() == 0)
                 continue;
 
@@ -87,7 +90,7 @@ public class GrammarTableGenerator {
                 Set<String> lineFollowSet = followSets.get(leftHandSide);
 
                 for (String terminal : lineFollowSet)
-                    grammarTable.get(leftHandSide).put(terminal, line);
+                    grammarTable.get(leftHandSide).put(terminal, linesSemanticActions.get(i));
             }
         }
 
@@ -184,6 +187,13 @@ public class GrammarTableGenerator {
             return false;
 
         return (s.charAt(0) == '\'' && s.charAt(s.length() - 1) == '\'');
+    }
+
+    public static boolean isSemanticAction(String s) {
+        if (s.length() < 1)
+            return false;
+
+        return (s.charAt(0) == '!');
     }
 
     public HashMap<String, HashSet<String>> getFirstSets() {
