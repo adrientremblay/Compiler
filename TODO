@@ -1,1 +1,2 @@
-- DivOp or add token to multop
+- Make sure the same id doesn't appear multiple times in the tree
+- Make sure children are ordered ? (important for arithmetic)

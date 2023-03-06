@@ -97,6 +97,12 @@ public class Parser {
                     case "makeAdditionOperation":
                         semanticStack.push(new AdditionOperation(semanticStack.pop()));
                         break;
+                    case "makeSubtractionOperation":
+                        semanticStack.push(new SubtractionOperation(semanticStack.pop()));
+                        break;
+                    case "makeDivisionOperation":
+                        semanticStack.push(new DivisionOperation(semanticStack.pop()));
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;

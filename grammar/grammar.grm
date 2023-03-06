@@ -1,7 +1,7 @@
 <START> -> <PROG> 'endoffile'
 
 <ADDOP> -> 'plus' !makeAdditionOperation
-<ADDOP> -> 'minus'
+<ADDOP> -> 'minus' !makeSubtractionOperation
 <ADDOP> -> 'or'
 
 <APARAMS> -> <EXPR> <REPTAPARAMS1>
@@ -88,7 +88,7 @@
 <MEMBERVARDECL> -> 'attribute' 'id' 'colon' <TYPE> <REPTARRAYSIZE> 'semi'
 
 <MULTOP> -> 'mult' !makeMultiplyOperation
-<MULTOP> -> 'div'
+<MULTOP> -> 'div' !makeDivisionOperation
 <MULTOP> -> 'and'
 
 <OPTINHERITS> -> 'isa' 'id' <REPTINHERITSLIST>

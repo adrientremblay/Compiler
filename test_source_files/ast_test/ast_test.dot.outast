@@ -3,23 +3,23 @@ node [shape=record];
 node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="AssigStat"];
-3[label="Id | c"];
+3[label="Id | f"];
 2->3
-4[label="AddOp"];
-5[label="Num | 2"];
+4[label="DivOp"];
+5[label="Num | 9"];
 4->5
-6[label="Num | 3"];
+6[label="Num | 8"];
 4->6
 2->4
 1->2
 7[label="AssigStat"];
-8[label="MultOp"];
-9[label="Num | 1"];
+8[label="SubOp"];
+9[label="Num | 6"];
 8->9
-10[label="Num | 1"];
+10[label="Num | 7"];
 8->10
 7->8
-11[label="Id | b"];
+11[label="Id | e"];
 7->11
 1->7
 12[label="AssigStat"];
@@ -28,4 +28,38 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 14[label="Id | a"];
 12->14
 1->12
+15[label="AssigStat"];
+16[label="Id | g"];
+15->16
+17[label="AddOp"];
+18[label="Num | 10"];
+17->18
+19[label="MultOp"];
+20[label="Num | 11"];
+19->20
+21[label="Num | 12"];
+19->21
+17->19
+15->17
+1->15
+22[label="AssigStat"];
+23[label="Id | c"];
+22->23
+24[label="AddOp"];
+25[label="Num | 4"];
+24->25
+26[label="Num | 5"];
+24->26
+22->24
+1->22
+27[label="AssigStat"];
+28[label="MultOp"];
+29[label="Num | 3"];
+28->29
+30[label="Num | 2"];
+28->30
+27->28
+31[label="Id | b"];
+27->31
+1->27
 }
