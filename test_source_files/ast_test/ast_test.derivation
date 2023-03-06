@@ -7,7 +7,7 @@
 <REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
 <VISIBILITY> -> 'public'
 <MEMBERDECL> -> <MEMBERVARDECL>
-<MEMBERVARDECL> -> 'attribute' 'id' 'colon' <TYPE> <REPTARRAYSIZE> 'semi'
+<MEMBERVARDECL> -> 'attribute' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTARRAYSIZE> !closeDims 'semi'
 <TYPE> -> 'float'
 <REPTARRAYSIZE> -> EPSILON
 <REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>

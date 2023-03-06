@@ -85,7 +85,7 @@
 <MEMBERDECL> -> <MEMBERFUNCDECL>
 <MEMBERDECL> -> <MEMBERVARDECL>
 
-<MEMBERVARDECL> -> 'attribute' 'id' 'colon' <TYPE> <REPTARRAYSIZE> 'semi'
+<MEMBERVARDECL> -> 'attribute' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTARRAYSIZE> !closeDims 'semi'
 
 <MULTOP> -> 'mult' !makeMultiplyOperation
 <MULTOP> -> 'div' !makeDivisionOperation

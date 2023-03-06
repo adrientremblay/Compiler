@@ -6,20 +6,28 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1->2
 3[label="ClassDeclList"];
 4[label="ClassDecl"];
-5[label="MembList"];
-6[label="FuncDecl"];
-7[label="Id | test"];
-6->7
-8[label="ParamList"];
-6->8
-9[label="Type | void"];
-6->9
-5->6
+5[label="InherList"];
 4->5
-10[label="InherList"];
-4->10
-11[label="Id | class1"];
-4->11
+6[label="MembList"];
+7[label="VarDecl"];
+8[label="Type | float"];
+7->8
+9[label="Id | m1"];
+7->9
+10[label="Dims"];
+7->10
+6->7
+11[label="FuncDecl"];
+12[label="Id | test"];
+11->12
+13[label="Type | void"];
+11->13
+14[label="ParamList"];
+11->14
+6->11
+4->6
+15[label="Id | class1"];
+4->15
 3->4
 1->3
 }
