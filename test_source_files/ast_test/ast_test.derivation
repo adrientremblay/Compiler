@@ -3,10 +3,10 @@
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <FUNCDEF>
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY>
-<FUNCHEAD> -> 'function' 'id' !makeIdentifier <FUNCHEADTAIL> !makeFunctionDefinition
-<FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
+<FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL> !makeFunctionDefinition
+<FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
 <FPARAMS> -> EPSILON
-<RETURNTYPE> -> 'void' !makeType
+<RETURNTYPE> -> 'void'
 <FUNCBODY> -> 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> EPSILON
 <REPTPROG0> -> EPSILON

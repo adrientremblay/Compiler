@@ -31,10 +31,10 @@
 <FACTOR2> -> 'openpar' <APARAMS> 'closepar'
 <FACTOR2> -> <REPTIDNEST1>
 
-<FPARAMS> -> 'id' 'colon' <TYPE> <REPTFPARAMS3> <REPTFPARAMS4>
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> <REPTFPARAMS4>
 <FPARAMS> -> EPSILON
 
-<FPARAMSTAIL> -> 'comma' 'id' 'colon' <TYPE> <REPTFPARAMSTAIL4>
+<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMSTAIL4>
 
 <FUNCBODY> -> 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 
@@ -45,10 +45,10 @@
 
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY>
 
-<FUNCHEAD> -> 'function' 'id' !makeIdentifier <FUNCHEADTAIL> !makeFunctionDefinition
+<FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL> !makeFunctionDefinition
 <FUNCHEADTAIL> -> 'sr' <FUNCHEADMEMBERTAIL>
-<FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
-<FUNCHEADMEMBERTAIL> -> 'id' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
+<FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<FUNCHEADMEMBERTAIL> -> 'id' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
 <FUNCHEADMEMBERTAIL> -> 'constructorkeyword' 'openpar' <FPARAMS> 'closepar'
 
 
@@ -135,8 +135,8 @@
 <REPTARRAYSIZE> -> <ARRAYSIZE> <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
 
-<RETURNTYPE> -> <TYPE> !makeType
-<RETURNTYPE> -> 'void' !makeType
+<RETURNTYPE> -> <TYPE>
+<RETURNTYPE> -> 'void'
 
 <RIGHTRECARITHEXPR> -> <ADDOP> <TERM> !addFactorToOp <RIGHTRECARITHEXPR>
 <RIGHTRECARITHEXPR> -> EPSILON
