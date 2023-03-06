@@ -36,26 +36,23 @@ public class astPrinter {
     }
 
     private void writeNode(SemanticConcept node) {
-        // todo: make this code prettier
-        if (node.getMember() == null) {
-            try {
+        int myId = nextNodeId;
+        try {
+
+            // todo: make this code prettier
+            if (node.getMember() == null) {
                 dotFileWriter.write((nextNodeId++) + "[label=\"" + node.getName() +"\"];\n");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            try {
+            } else {
                 dotFileWriter.write((nextNodeId++) + "[label=\"" + node.getName() + " | " + node.getMember().getLexeme() +"\"];\n");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
-        }
 
-        for (SemanticConcept child : node.getChildren()) {
-            writeNode(child);
-            // todo: draw connection
+            for (SemanticConcept child : node.getChildren()) {
+                writeNode(child);
+                dotFileWriter.write(myId + "->" + (nextNodeId-1) + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 
     /*
