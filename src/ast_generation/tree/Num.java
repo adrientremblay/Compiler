@@ -4,7 +4,6 @@ import lexical_analysis.FoundToken;
 
 public class Num extends SemanticConcept {
     public Num(FoundToken member) {
-        super();
         this.member = member;
     }
 

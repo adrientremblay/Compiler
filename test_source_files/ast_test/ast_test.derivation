@@ -10,7 +10,7 @@
 <FUNCBODY> -> 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' 'colon' <TYPE> <ARRAYOROBJECT> 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> 'semi'
 <TYPE> -> 'integer'
 <ARRAYOROBJECT> -> <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON

@@ -103,6 +103,12 @@ public class Parser {
                     case "makeDivisionOperation":
                         semanticStack.push(new DivisionOperation(semanticStack.pop()));
                         break;
+                    case "makeType":
+                        semanticStack.push(new Type(lastToken));
+                        break;
+                    case "makeVariableDeclaration":
+                        semanticStack.push(new VariableDeclaration(semanticStack.pop(), semanticStack.pop()));
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;
