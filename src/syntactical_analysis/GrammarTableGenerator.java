@@ -19,9 +19,8 @@ public class GrammarTableGenerator {
 
         // Read the grammar file
         List<String> lines = Util.readFileForLines("grammar/grammar.grm");
-        List<String> linesSemanticActions = Util.readFileForLines("grammar/grammar_with_semantic_actions.grm");
 
-        // Reading rules
+        // Reading rules to populate rules map and canBeEpsilon set
         rules = new HashMap<String, HashSet<String[]>>();
         canBeEpsilon = new HashSet<String>();
 
@@ -66,9 +65,7 @@ public class GrammarTableGenerator {
             generateFollowSet(rule);
 
         // Generating the table
-        for (int i = 0 ; i < lines.size() ; i++) {
-            String line = lines.get(i) ;
-
+        for (String line : lines) {
             if (line.length() == 0)
                 continue;
 
@@ -86,11 +83,11 @@ public class GrammarTableGenerator {
                 grammarTable.put(leftHandSide, new HashMap<String, String>());
 
             if (rightHandSide.length == 1 && rightHandSide[0].equals("EPSILON") // the current rule can be EPSILON directly
-            || canBeEpsilon.contains(rightHandSide[rightHandSide.length-1])) { // the last symbol of the rhs of the rule can be epsilon, so we take it's follow set
+            || canBeEpsilon.contains(lastNonSemanticItem(rightHandSide))) { // the last symbol of the rhs of the rule can be epsilon, so we take it's follow set
                 Set<String> lineFollowSet = followSets.get(leftHandSide);
 
                 for (String terminal : lineFollowSet)
-                    grammarTable.get(leftHandSide).put(terminal, linesSemanticActions.get(i));
+                    grammarTable.get(leftHandSide).put(terminal, line);
             }
         }
 
@@ -110,7 +107,9 @@ public class GrammarTableGenerator {
 
         for (String[] rhs : rules.get(rule)) {
             for (int i = 0 ; i < rhs.length ; i++) {
-                if (isTerminal(rhs[i])) {
+                if (isSemanticAction(rhs[i])) {
+                    continue;
+                } if (isTerminal(rhs[i])) {
                     String terminal = rhs[i].substring(1, rhs[i].length() - 1);
                     firstSets.get(rule).add(terminal);
                     grammarTable.get(rule).put(terminal, rule + " -> " + String.join(" ", rhs));
@@ -144,27 +143,44 @@ public class GrammarTableGenerator {
 
         // scan all other rules to try and add to follow set
         for (String foundRule : rules.keySet()) {
-            /*
-            if (foundRule.equals(rule) && rules.get(foundRule).size() == 1 && rules.get(foundRule).contains("EPSILON"))  {
-                // found an EPSILON rule for this rule
-            }
-             */
-
             for (String[] rhs : rules.get(foundRule)) {
                 for (int i = 0 ; i < rhs.length ; i++) {
                    if (rhs[i].equals(rule)) {
                        if (i < rhs.length - 1) {
-                           if (isTerminal(rhs[i+1])) {
-                              followSets.get(rule).add(rhs[i+1].substring(1, rhs[i+1].length() - 1));
-                           } else {
-                               followSets.get(rule).addAll(firstSets.get(rhs[i+1]));
+                           int nextNonSemanticIndex;
 
-                               if (canBeEpsilon.contains(rhs[i+1])) {
-                                   if (i < rhs.length - 2) {
-                                       if (isTerminal(rhs[i+2])) {
-                                           followSets.get(rule).add(rhs[i+2].substring(1, rhs[i+2].length() - 1));
-                                       } else {
-                                           followSets.get(rule).addAll(firstSets.get(rhs[i+2]));
+                           if (isSemanticAction(rhs[i+1])) {
+                               if (i < rhs.length - 2) {
+                                   nextNonSemanticIndex = i+2; // todo: assumes no consecutive semantic actions
+                               } else {
+                                   // todo: copied code!!!
+                                   generateFollowSet(foundRule);
+                                   followSets.get(rule).addAll(followSets.get(foundRule));
+                                   break;
+                               }
+                           } else {
+                               nextNonSemanticIndex = i+1;
+                           }
+
+                           if (isTerminal(rhs[nextNonSemanticIndex])) {
+                              followSets.get(rule).add(rhs[nextNonSemanticIndex].substring(1, rhs[nextNonSemanticIndex].length() - 1));
+                           } else {
+                               followSets.get(rule).addAll(firstSets.get(rhs[nextNonSemanticIndex]));
+
+                               if (canBeEpsilon.contains(rhs[nextNonSemanticIndex])) {
+                                   if (nextNonSemanticIndex < rhs.length - 1) {
+                                       if (!isSemanticAction(rhs[nextNonSemanticIndex+1])) {
+                                           if (isTerminal(rhs[nextNonSemanticIndex+1])) {
+                                               followSets.get(rule).add(rhs[nextNonSemanticIndex+1].substring(1, rhs[nextNonSemanticIndex+1].length() - 1));
+                                           } else {
+                                               followSets.get(rule).addAll(firstSets.get(rhs[nextNonSemanticIndex+1]));
+                                           }
+                                       } else if (nextNonSemanticIndex < rhs.length - 2){
+                                           if (isTerminal(rhs[nextNonSemanticIndex+2])) {
+                                               followSets.get(rule).add(rhs[nextNonSemanticIndex+2].substring(1, rhs[nextNonSemanticIndex+2].length() - 1));
+                                           } else {
+                                               followSets.get(rule).addAll(firstSets.get(rhs[nextNonSemanticIndex+2]));
+                                           }
                                        }
                                    } else {
                                        generateFollowSet(foundRule);
@@ -194,6 +210,16 @@ public class GrammarTableGenerator {
             return false;
 
         return (s.charAt(0) == '!');
+    }
+
+    private static String lastNonSemanticItem(String[] rhs) {
+        for (int i = rhs.length -1 ; i >= 0 ; i--) {
+            if (!isSemanticAction(rhs[i]))
+                return rhs[i];
+        }
+
+        // This is not supposed to be reached
+        return null;
     }
 
     public HashMap<String, HashSet<String>> getFirstSets() {

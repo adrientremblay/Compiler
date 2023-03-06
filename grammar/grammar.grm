@@ -22,7 +22,7 @@
 <EXPR2> -> EPSILON
 
 <FACTOR> -> 'id' <FACTOR2> <REPTVARIABLEORFUNCTIONCALL>
-<FACTOR> -> 'intnum'
+<FACTOR> -> 'intnum' !makeInt
 <FACTOR> -> 'floatnum'
 <FACTOR> -> 'openpar' <ARITHEXPR> 'closepar'
 <FACTOR> -> 'not' <FACTOR>
@@ -52,7 +52,7 @@
 <FUNCHEADMEMBERTAIL> -> 'constructorkeyword' 'openpar' <FPARAMS> 'closepar'
 
 
-<STATEMENT> -> 'id' <STATEMENTIDNEST> 'semi'
+<STATEMENT> -> 'id' !makeIdentifier <STATEMENTIDNEST> 'semi'
 <STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' <STATBLOCK> 'else' <STATBLOCK> 'semi'
 <STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' <STATBLOCK> 'semi'
 <STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' 'semi'
@@ -62,7 +62,7 @@
 <STATEMENTIDNEST> -> 'dot' 'id' <STATEMENTIDNEST>
 <STATEMENTIDNEST> -> 'openpar' <APARAMS> 'closepar' <STATEMENTIDNEST2>
 <STATEMENTIDNEST> -> <INDICE> <REPTIDNEST1> <STATEMENTIDNEST3>
-<STATEMENTIDNEST> -> 'assign' <EXPR>
+<STATEMENTIDNEST> -> 'assign' <EXPR> !makeAssExpr
 
 <STATEMENTIDNEST2> -> EPSILON
 <STATEMENTIDNEST2> -> 'dot' 'id' <STATEMENTIDNEST>
@@ -97,7 +97,7 @@
 <REPTINHERITSLIST> -> 'comma' 'id' <REPTINHERITSLIST>
 <REPTINHERITSLIST> -> EPSILON
 
-<PROG> -> <REPTPROG0>
+<PROG> -> <REPTPROG0> !makeProgram
 
 <RELEXPR> -> <ARITHEXPR> <RELOP> <ARITHEXPR>
 

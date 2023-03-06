@@ -52,6 +52,8 @@ public class Parser {
 
         foundToken = lexer.nextToken();
 
+        semanticStack = new Stack<SemanticConcept>();
+
         String top;
         while ((top = parseStack.peek()) != "$") {
             // skips
