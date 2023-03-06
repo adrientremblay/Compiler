@@ -5,6 +5,21 @@
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
 <FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL>
 <FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<FPARAMS> -> EPSILON
+<RETURNTYPE> -> 'void'
+<FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
+<REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
+<LOCALVARORSTAT> -> <LOCALVARDECL>
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
+<TYPE> -> 'integer'
+<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<REPTARRAYSIZE> -> EPSILON
+<REPTLOCALVARORSTAT> -> EPSILON
+<REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
+<CLASSDECLORFUNCDEF> -> <FUNCDEF>
+<FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
+<FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL>
+<FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
 <FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
 <TYPE> -> 'id'
 <REPTFPARAMS3> -> <ARRAYSIZE> <REPTFPARAMS3>

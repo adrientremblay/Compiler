@@ -26,7 +26,8 @@ public class Parser {
     private Stack<String> parseStack;
     private FoundToken foundToken;
     private FoundToken lastToken;
-    private SemanticConcept astRoot;
+    private Program program;
+    private FunctionDefinitionList functionDefinitionList;
     private Stack<SemanticConcept> semanticStack;
 
     public Parser() {
@@ -43,7 +44,9 @@ public class Parser {
     public boolean parse() {
         System.out.println("Starting Parse.");
 
-        astRoot = new Program();
+        program = new Program();
+        functionDefinitionList = new FunctionDefinitionList();
+        program.addChild(functionDefinitionList);
 
         parseStack = new Stack<String>();
 
@@ -73,7 +76,7 @@ public class Parser {
                 switch (semanticAction) {
                     case "makeProgram": // todo: temp implementation
                        while (!semanticStack.isEmpty())
-                            astRoot.addChild(semanticStack.pop());
+                            program.addChild(semanticStack.pop());
                        break;
                     case "makeIdentifier":
                         SemanticConcept identifier = new Identifier(lastToken);
@@ -117,7 +120,7 @@ public class Parser {
                         semanticStack.peek().addChild(new Num(lastToken));
                         break;
                     case "makeFunctionDefinition":
-                        semanticStack.push(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
+                        functionDefinitionList.addChild(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
                     case "makeParameterList":
                         semanticStack.push(new ParameterList());
@@ -198,7 +201,7 @@ public class Parser {
         System.out.println("Finished Parse.");
 
         // Print AST
-        astPrinter.writeTree(astRoot);
+        astPrinter.writeTree(program);
 
         return true;
     }
