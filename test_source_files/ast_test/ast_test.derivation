@@ -2,8 +2,8 @@
 <PROG> -> <REPTPROG0> !makeProgram
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <FUNCDEF>
-<FUNCDEF> -> <FUNCHEAD> <FUNCBODY>
-<FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL> !makeFunctionDefinition
+<FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
+<FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL>
 <FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
 <FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
 <TYPE> -> 'id'
@@ -26,6 +26,6 @@
 <REPTFPARAMSTAIL4> -> EPSILON
 <REPTFPARAMS4> -> EPSILON
 <RETURNTYPE> -> 'void'
-<FUNCBODY> -> 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
+<FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> EPSILON
 <REPTPROG0> -> EPSILON

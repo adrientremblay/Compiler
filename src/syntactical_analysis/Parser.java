@@ -117,13 +117,16 @@ public class Parser {
                         semanticStack.peek().addChild(new Num(lastToken));
                         break;
                     case "makeFunctionDefinition":
-                        semanticStack.push(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
+                        semanticStack.push(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
                     case "makeParameterList":
                         semanticStack.push(new ParameterList());
                         break;
                     case "closeDims":
                         semanticStack.pop();
+                        break;
+                    case "makeStatementBlock":
+                        semanticStack.push(new StatementBlock());
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");

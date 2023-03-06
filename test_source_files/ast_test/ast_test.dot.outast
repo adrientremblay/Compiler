@@ -29,9 +29,11 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 9->15
 3->9
 2->3
-16[label="Type | void"];
+16[label="StatBlock"];
 2->16
-17[label="Id | func1"];
+17[label="Type | void"];
 2->17
+18[label="Id | func1"];
+2->18
 1->2
 }

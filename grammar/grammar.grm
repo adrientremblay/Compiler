@@ -36,16 +36,16 @@
 
 <FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMSTAIL4> !closeDims
 
-<FUNCBODY> -> 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
+<FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 
 <MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
 
 <MEMBERFUNCHEAD> -> 'function' 'id' 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE>
 <MEMBERFUNCHEAD> -> 'constructorkeyword' 'colon' 'openpar' <FPARAMS> 'closepar'
 
-<FUNCDEF> -> <FUNCHEAD> <FUNCBODY>
+<FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
 
-<FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL> !makeFunctionDefinition
+<FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL>
 <FUNCHEADTAIL> -> 'sr' <FUNCHEADMEMBERTAIL>
 <FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
 <FUNCHEADMEMBERTAIL> -> 'id' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
