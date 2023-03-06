@@ -18,8 +18,8 @@
 <ARRAYSIZE2> -> 'intnum' !addIntToTop 'closesqbr'
 <REPTFPARAMS3> -> EPSILON
 <REPTFPARAMS4> -> <FPARAMSTAIL> <REPTFPARAMS4>
-<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration !closeDims <REPTFPARAMSTAIL4>
-<TYPE> -> 'id'
+<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMSTAIL4> !closeDims
+<TYPE> -> 'float'
 <REPTFPARAMSTAIL4> -> <ARRAYSIZE> <REPTFPARAMSTAIL4>
 <ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 <ARRAYSIZE2> -> 'intnum' !addIntToTop 'closesqbr'

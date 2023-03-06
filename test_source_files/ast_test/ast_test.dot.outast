@@ -3,18 +3,17 @@ node [shape=record];
 node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="FuncDef"];
-3[label="VarDecl"];
-4[label="Num | 100"];
+3[label="ParamList"];
+4[label="VarDecl"];
+5[label="Id | balls"];
+4->5
+6[label="Dims"];
+7[label="Num | 100"];
+6->7
+4->6
+8[label="Type | float"];
+4->8
 3->4
-5[label="Dims"];
-3->5
-6[label="Type | float100"];
-3->6
-7[label="Id | balls"];
-3->7
-2->3
-8[label="Type | void"];
-2->8
 9[label="VarDecl"];
 10[label="Dims"];
 11[label="Num | 5"];
@@ -26,12 +25,13 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 9->10
 14[label="Id | swag"];
 9->14
-15[label="Type | int532"];
+15[label="Type | int"];
 9->15
-2->9
+3->9
+2->3
+16[label="Type | void"];
+2->16
+17[label="Id | func1"];
+2->17
 1->2
-16[label="Id | func1"];
-1->16
-17[label="ParamList"];
-1->17
 }

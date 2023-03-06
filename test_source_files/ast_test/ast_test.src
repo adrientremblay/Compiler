@@ -18,5 +18,5 @@ function bubbleSort(size: integer) => void
 }
 */
 
-function func1(swag : int532[5][3][2], balls : float100[100]) => void {
+function func1(swag : int[5][3][2], balls : float[100]) => void {
 }
