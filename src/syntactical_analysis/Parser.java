@@ -1,5 +1,6 @@
 package syntactical_analysis;
 
+import ast_generation.DotFilePrinter;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
 import lexical_analysis.Token;
@@ -17,6 +18,7 @@ public class Parser {
     private HashMap<String, HashSet<String>> firstSets;
     private HashMap<String, HashSet<String>> followSets;
     private SyntaxDerivationPrinter syntaxDerivationPrinter;
+    private DotFilePrinter dotFilePrinter;
     private String filepath;
     private boolean skippingErrors;
 
@@ -66,7 +68,8 @@ public class Parser {
                 ) {
                     // found a terminal
                     skippingErrors = false;
-                    System.out.println("DEBUG: FOUND " + foundToken.getLexeme());
+                    System.out.println("DEBUG: FOUND " + foundToken.getToken().getRegex());
+                    dotFilePrinter.writeNode(foundToken.getLexeme());
                     parseStack.pop();
                     foundToken = lexer.nextToken();
                 } else {
@@ -111,6 +114,7 @@ public class Parser {
         }
 
         syntaxDerivationPrinter.cleanup();
+        dotFilePrinter.cleanup();
 
         if (foundToken.getToken() != Token.END_OF_FILE)
             return false;
@@ -123,6 +127,7 @@ public class Parser {
     public void loadSource(String sourceFilePath) {
         lexer.loadSource(Util.readFileAsString(sourceFilePath));
         syntaxDerivationPrinter = new SyntaxDerivationPrinter(sourceFilePath);
+        dotFilePrinter = new DotFilePrinter(sourceFilePath);
         filepath = sourceFilePath;
     }
 
