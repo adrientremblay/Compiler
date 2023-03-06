@@ -19,4 +19,5 @@ function func1(swag : int[5][3][2], balls : float[100]) => void {
 
 class class1{
     public attribute m1 : float;
+    public function test : () => void;
 };

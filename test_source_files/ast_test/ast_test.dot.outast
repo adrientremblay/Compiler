@@ -7,11 +7,19 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 3[label="ClassDeclList"];
 4[label="ClassDecl"];
 5[label="MembList"];
+6[label="FuncDecl"];
+7[label="Id | test"];
+6->7
+8[label="ParamList"];
+6->8
+9[label="Type | void"];
+6->9
+5->6
 4->5
-6[label="InherList"];
-4->6
-7[label="Id | class1"];
-4->7
+10[label="InherList"];
+4->10
+11[label="Id | class1"];
+4->11
 3->4
 1->3
 }

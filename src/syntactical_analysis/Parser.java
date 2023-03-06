@@ -127,7 +127,8 @@ public class Parser {
                         functionDefinitionList.addChild(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
                     case "makeFunctionDeclaration":
-                        semanticStack.peek().addChild(new FunctionDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
+                        FunctionDeclaration functionDeclaration = new FunctionDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
+                        semanticStack.peek().addChild(functionDeclaration);
                         break;
                     case "makeParameterList":
                         semanticStack.push(new ParameterList());

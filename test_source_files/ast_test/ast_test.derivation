@@ -10,5 +10,12 @@
 <MEMBERVARDECL> -> 'attribute' 'id' 'colon' <TYPE> <REPTARRAYSIZE> 'semi'
 <TYPE> -> 'float'
 <REPTARRAYSIZE> -> EPSILON
+<REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
+<VISIBILITY> -> 'public'
+<MEMBERDECL> -> <MEMBERFUNCDECL>
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> !makeFunctionDeclaration 'semi'
+<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<FPARAMS> -> EPSILON
+<RETURNTYPE> -> 'void'
 <REPTMEMBERDECL> -> EPSILON
 <REPTPROG0> -> EPSILON
