@@ -107,7 +107,14 @@ public class Parser {
                         semanticStack.push(new Type(lastToken));
                         break;
                     case "makeVariableDeclaration":
-                        semanticStack.push(new VariableDeclaration(semanticStack.pop(), semanticStack.pop()));
+                        VariableDeclaration variableDeclaration = new VariableDeclaration(semanticStack.pop(), semanticStack.pop());
+                        Dimensions dimensions = new Dimensions();
+                        variableDeclaration.addChild(dimensions);
+                        semanticStack.push(variableDeclaration);
+                        semanticStack.push(dimensions);
+                        break;
+                    case "addIntToTop":
+                        semanticStack.peek().addChild(new Num(lastToken));
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");

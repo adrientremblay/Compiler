@@ -13,7 +13,7 @@
 
 <ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 
-<ARRAYSIZE2> -> 'intnum' 'closesqbr'
+<ARRAYSIZE2> -> 'intnum' !addIntToTop 'closesqbr'
 <ARRAYSIZE2> -> 'closesqbr'
 
 <EXPR> -> <ARITHEXPR> <EXPR2>
