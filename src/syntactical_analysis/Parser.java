@@ -1,6 +1,9 @@
 package syntactical_analysis;
 
-import ast_generation.DotFilePrinter;
+import ast_generation.astPrinter;
+import ast_generation.tree.Identifier;
+import ast_generation.tree.Program;
+import ast_generation.tree.SemanticConcept;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
 import lexical_analysis.Token;
@@ -18,12 +21,13 @@ public class Parser {
     private HashMap<String, HashSet<String>> firstSets;
     private HashMap<String, HashSet<String>> followSets;
     private SyntaxDerivationPrinter syntaxDerivationPrinter;
-    private DotFilePrinter dotFilePrinter;
+    private astPrinter astPrinter;
     private String filepath;
     private boolean skippingErrors;
 
     private Stack<String> parseStack;
     private FoundToken foundToken;
+    private SemanticConcept astRoot;
 
     public Parser() {
         lexer = new Lexer();
@@ -38,6 +42,8 @@ public class Parser {
 
     public boolean parse() {
         System.out.println("Starting Parse.");
+
+        astRoot = new Program();
 
         parseStack = new Stack<String>();
 
@@ -69,7 +75,10 @@ public class Parser {
                     // found a terminal
                     skippingErrors = false;
                     System.out.println("DEBUG: FOUND " + foundToken.getToken().getRegex());
-                    dotFilePrinter.writeNode(foundToken.getLexeme());
+                    if (foundToken.getToken().equals(Token.IDENTIFIER)) {
+                        SemanticConcept identifier = new Identifier(foundToken);
+                        astRoot.addChild(identifier);
+                    }
                     parseStack.pop();
                     foundToken = lexer.nextToken();
                 } else {
@@ -114,12 +123,14 @@ public class Parser {
         }
 
         syntaxDerivationPrinter.cleanup();
-        dotFilePrinter.cleanup();
 
         if (foundToken.getToken() != Token.END_OF_FILE)
             return false;
 
         System.out.println("Finished Parse.");
+
+        // Print AST
+        astPrinter.writeTree(astRoot);
 
         return true;
     }
@@ -127,7 +138,7 @@ public class Parser {
     public void loadSource(String sourceFilePath) {
         lexer.loadSource(Util.readFileAsString(sourceFilePath));
         syntaxDerivationPrinter = new SyntaxDerivationPrinter(sourceFilePath);
-        dotFilePrinter = new DotFilePrinter(sourceFilePath);
+        astPrinter = new astPrinter(sourceFilePath);
         filepath = sourceFilePath;
     }
 
