@@ -94,6 +94,9 @@ public class Parser {
                         SemanticConcept factor = semanticStack.pop();
                         semanticStack.peek().addChild(factor);
                         break;
+                    case "makeAdditionOperation":
+                        semanticStack.push(new AdditionOperation(semanticStack.pop()));
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;

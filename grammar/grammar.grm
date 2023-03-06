@@ -1,6 +1,6 @@
 <START> -> <PROG> 'endoffile'
 
-<ADDOP> -> 'plus'
+<ADDOP> -> 'plus' !makeAdditionOperation
 <ADDOP> -> 'minus'
 <ADDOP> -> 'or'
 
@@ -138,7 +138,7 @@
 <RETURNTYPE> -> <TYPE>
 <RETURNTYPE> -> 'void'
 
-<RIGHTRECARITHEXPR> -> <ADDOP> <TERM> <RIGHTRECARITHEXPR>
+<RIGHTRECARITHEXPR> -> <ADDOP> <TERM> !addFactorToOp <RIGHTRECARITHEXPR>
 <RIGHTRECARITHEXPR> -> EPSILON
 
 <RIGHTRECTERM> -> <MULTOP> <FACTOR> !addFactorToOp <RIGHTRECTERM>

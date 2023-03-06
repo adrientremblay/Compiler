@@ -3,19 +3,29 @@ node [shape=record];
 node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="AssigStat"];
-3[label="MultOp"];
-4[label="Num | 1"];
-3->4
-5[label="Num | 1"];
-3->5
+3[label="Id | c"];
 2->3
-6[label="Id | x"];
-2->6
+4[label="AddOp"];
+5[label="Num | 2"];
+4->5
+6[label="Num | 3"];
+4->6
+2->4
 1->2
 7[label="AssigStat"];
-8[label="Num | 1"];
+8[label="MultOp"];
+9[label="Num | 1"];
+8->9
+10[label="Num | 1"];
+8->10
 7->8
-9[label="Id | n"];
-7->9
+11[label="Id | b"];
+7->11
 1->7
+12[label="AssigStat"];
+13[label="Num | 1"];
+12->13
+14[label="Id | a"];
+12->14
+1->12
 }

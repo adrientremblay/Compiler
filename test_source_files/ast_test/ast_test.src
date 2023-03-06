@@ -1,7 +1,8 @@
 function test() => void
 {
-  localvar n    : integer;
-  n = 1;
-  x = 1*1;
+  localvar a    : integer;
+  a = 1;
+  b = 1*1;
+  c = 2+3;
 }
 
