@@ -91,10 +91,10 @@
 <MULTOP> -> 'div' !makeDivisionOperation
 <MULTOP> -> 'and'
 
-<OPTINHERITS> -> 'isa' 'id' <REPTINHERITSLIST>
+<OPTINHERITS> -> 'isa' 'id' !makeIdentifier !consume <REPTINHERITSLIST>
 <OPTINHERITS> -> EPSILON
 
-<REPTINHERITSLIST> -> 'comma' 'id' <REPTINHERITSLIST>
+<REPTINHERITSLIST> -> 'comma' 'id' !makeIdentifier !consume <REPTINHERITSLIST>
 <REPTINHERITSLIST> -> EPSILON
 
 <PROG> -> <REPTPROG0> !makeProgram

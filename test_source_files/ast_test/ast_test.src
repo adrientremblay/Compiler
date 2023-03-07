@@ -17,7 +17,7 @@ function func1(swag : int[5][3][2], balls : float[100]) => void {
 }
 */
 
-class class1{
+class class1 isa big, chungus {
     public attribute m1 : float;
     public function test : () => void;
 };

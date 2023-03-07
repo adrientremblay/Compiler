@@ -149,6 +149,10 @@ public class Parser {
                     case "makeClassDeclaration":
                         classDeclarationList.addChild(new ClassDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
+                    case "consume":
+                        SemanticConcept item = semanticStack.pop();
+                        semanticStack.peek().addChild(item);
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;

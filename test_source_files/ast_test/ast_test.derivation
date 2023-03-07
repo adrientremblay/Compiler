@@ -3,7 +3,9 @@
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <CLASSDECL>
 <CLASSDECL> -> 'class' 'id' !makeIdentifier !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
-<OPTINHERITS> -> EPSILON
+<OPTINHERITS> -> 'isa' 'id' !makeIdentifier !consume <REPTINHERITSLIST>
+<REPTINHERITSLIST> -> 'comma' 'id' !makeIdentifier !consume <REPTINHERITSLIST>
+<REPTINHERITSLIST> -> EPSILON
 <REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
 <VISIBILITY> -> 'public'
 <MEMBERDECL> -> <MEMBERVARDECL>
