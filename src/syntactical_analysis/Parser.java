@@ -1,6 +1,6 @@
 package syntactical_analysis;
 
-import ast_generation.astPrinter;
+import ast_generation.AstPrinter;
 import ast_generation.tree.*;
 import ast_generation.tree.classes.*;
 import lexical_analysis.FoundToken;
@@ -20,7 +20,7 @@ public class Parser {
     private HashMap<String, HashSet<String>> firstSets;
     private HashMap<String, HashSet<String>> followSets;
     private SyntaxDerivationPrinter syntaxDerivationPrinter;
-    private astPrinter astPrinter;
+    private AstPrinter astPrinter;
     private String filepath;
     private boolean skippingErrors;
 
@@ -248,7 +248,7 @@ public class Parser {
     public void loadSource(String sourceFilePath) {
         lexer.loadSource(Util.readFileAsString(sourceFilePath));
         syntaxDerivationPrinter = new SyntaxDerivationPrinter(sourceFilePath);
-        astPrinter = new astPrinter(sourceFilePath);
+        astPrinter = new AstPrinter(sourceFilePath);
         filepath = sourceFilePath;
     }
 

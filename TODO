@@ -2,3 +2,4 @@
 - Make sure children are ordered ? (important for arithmetic)
 - DimList point to a dot?
 - Get the order of the identifiers right for the scope specification
+- SemanticConcept neighbors?

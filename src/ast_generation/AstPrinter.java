@@ -9,11 +9,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 
-public class astPrinter {
+public class AstPrinter {
     private BufferedWriter dotFileWriter;
     private static int nextNodeId = 1;
 
-    public astPrinter(String sourceFilePath) {
+    public AstPrinter(String sourceFilePath) {
         Path sourceFilePathAsPath = Path.of(sourceFilePath);
         Path outputDir = sourceFilePathAsPath.getParent();
         String sourceFileName = outputDir.getFileName().toString();

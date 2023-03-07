@@ -8,7 +8,6 @@ import static util.Util.readFileAsString;
  * I would have used JUnit to separate my test cases but the assignment asks for a Driver class
  */
 public class Driver {
-
     private static final String[] SOURCE_FILES = {
             //        "test_source_files/my_test/my_test.src",
             //          "test_source_files/bubble_sort/bubble_sort.src",
