@@ -1,5 +1,6 @@
 package ast_generation;
 
+import ast_generation.tree.RelativeOperator;
 import ast_generation.tree.SemanticConcept;
 
 import java.io.BufferedWriter;
@@ -41,7 +42,7 @@ public class astPrinter {
             if (node.getMember() == null)
                 dotFileWriter.write((nextNodeId++) + "[label=\"" + node.getName() +"\"];\n");
             else
-                dotFileWriter.write((nextNodeId++) + "[label=\"" + node.getName() + " | " + node.getMember().getLexeme() +"\"];\n");
+                dotFileWriter.write((nextNodeId++) + "[label=\"" + node.getName() + " | " + ((!(node instanceof RelativeOperator)) ? node.getMember().getLexeme() : node.getMember().getToken().getName()) +"\"];\n");
 
             for (SemanticConcept child : node.getChildren())
                 dotFileWriter.write(myId + "->" + writeNode(child) + "\n");

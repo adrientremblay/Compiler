@@ -21,7 +21,7 @@
 <EXPR2> -> <RELOP> <ARITHEXPR>
 <EXPR2> -> EPSILON
 
-<FACTOR> -> 'id' <FACTOR2> <REPTVARIABLEORFUNCTIONCALL>
+<FACTOR> -> 'id' !makeIdentifier <FACTOR2> <REPTVARIABLEORFUNCTIONCALL>
 <FACTOR> -> 'intnum' !makeInt
 <FACTOR> -> 'floatnum'
 <FACTOR> -> 'openpar' <ARITHEXPR> 'closepar'
@@ -52,7 +52,7 @@
 <FUNCHEADMEMBERTAIL> -> 'constructorkeyword' !makeScopeSpecification 'openpar' !makeParameterList <FPARAMS> 'closepar'
 
 <STATEMENT> -> 'id' !makeIdentifier <STATEMENTIDNEST> 'semi'
-<STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' <STATBLOCK> 'else' <STATBLOCK> 'semi'
+<STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' <STATBLOCK> 'else' <STATBLOCK> !makeIfStatement 'semi'
 <STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' <STATBLOCK> 'semi'
 <STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' 'semi'
 <STATEMENT> -> 'write' 'openpar' <EXPR> 'closepar' 'semi'
@@ -98,7 +98,7 @@
 
 <PROG> -> <REPTPROG0> !makeProgram
 
-<RELEXPR> -> <ARITHEXPR> <RELOP> <ARITHEXPR>
+<RELEXPR> -> <ARITHEXPR> <RELOP> !makeRelativeOperator <ARITHEXPR> !makeRelativeExpression
 
 <RELOP> -> 'eq'
 <RELOP> -> 'neq'
@@ -146,7 +146,7 @@
 <SIGN> -> 'plus'
 <SIGN> -> 'minus'
 
-<STATBLOCK> -> 'opencurbr' <REPTSTATBLOCK1> 'closecurbr'
+<STATBLOCK> -> 'opencurbr' !makeStatementBlock <REPTSTATBLOCK1> 'closecurbr'
 <STATBLOCK> -> <STATEMENT>
 <STATBLOCK> -> EPSILON
 

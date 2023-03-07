@@ -159,6 +159,17 @@ public class Parser {
                     case "makeEmptyScopeSpecification":
                         semanticStack.push(new ScopeSpecification());
                         break;
+                    case "makeRelativeOperator":
+                        semanticStack.push(new RelativeOperator(lastToken));
+                        break;
+                    case "makeRelativeExpression":
+                        RelativeExpression relativeExpression = new RelativeExpression(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
+                        semanticStack.push(relativeExpression);
+                        break;
+                    case "makeIfStatement":
+                        IfStatement ifStatement = new IfStatement(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
+                        semanticStack.push(ifStatement);
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;
