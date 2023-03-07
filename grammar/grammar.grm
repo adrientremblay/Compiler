@@ -45,12 +45,11 @@
 
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
 
-<FUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList <FUNCHEADTAIL>
+<FUNCHEAD> -> 'function' 'id' !makeIdentifier <FUNCHEADTAIL>
 <FUNCHEADTAIL> -> 'sr' <FUNCHEADMEMBERTAIL>
-<FUNCHEADTAIL> -> 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<FUNCHEADMEMBERTAIL> -> 'id' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<FUNCHEADMEMBERTAIL> -> 'constructorkeyword' 'openpar' <FPARAMS> 'closepar'
-
+<FUNCHEADTAIL> -> 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<FUNCHEADMEMBERTAIL> -> 'id' !makeScopeSpecification 'openpar' !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<FUNCHEADMEMBERTAIL> -> 'constructorkeyword' !makeScopeSpecification 'openpar' !makeParameterList <FPARAMS> 'closepar'
 
 <STATEMENT> -> 'id' !makeIdentifier <STATEMENTIDNEST> 'semi'
 <STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' <STATBLOCK> 'else' <STATBLOCK> 'semi'

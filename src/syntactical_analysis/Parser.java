@@ -124,7 +124,7 @@ public class Parser {
                         semanticStack.peek().addChild(new Num(lastToken));
                         break;
                     case "makeFunctionDefinition":
-                        functionDefinitionList.addChild(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
+                        functionDefinitionList.addChild(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
                     case "makeFunctionDeclaration":
                         FunctionDeclaration functionDeclaration = new FunctionDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
@@ -152,6 +152,12 @@ public class Parser {
                     case "consume":
                         SemanticConcept item = semanticStack.pop();
                         semanticStack.peek().addChild(item);
+                        break;
+                    case "makeScopeSpecification":
+                        semanticStack.push(new ScopeSpecification(lastToken));
+                        break;
+                    case "makeEmptyScopeSpecification":
+                        semanticStack.push(new ScopeSpecification());
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");

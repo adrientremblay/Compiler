@@ -1,6 +1,21 @@
 <START> -> <PROG> 'endoffile'
 <PROG> -> <REPTPROG0> !makeProgram
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
+<CLASSDECLORFUNCDEF> -> <FUNCDEF>
+<FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
+<FUNCHEAD> -> 'function' 'id' !makeIdentifier <FUNCHEADTAIL>
+<FUNCHEADTAIL> -> 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<FPARAMS> -> EPSILON
+<RETURNTYPE> -> 'void'
+<FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
+<REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
+<LOCALVARORSTAT> -> <LOCALVARDECL>
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
+<TYPE> -> 'integer'
+<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<REPTARRAYSIZE> -> EPSILON
+<REPTLOCALVARORSTAT> -> EPSILON
+<REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <CLASSDECL>
 <CLASSDECL> -> 'class' 'id' !makeIdentifier !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
 <OPTINHERITS> -> 'isa' 'id' !makeIdentifier !consume <REPTINHERITSLIST>

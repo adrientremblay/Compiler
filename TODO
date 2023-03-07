@@ -1,4 +1,4 @@
 - Make sure the same id doesn't appear multiple times in the tree
 - Make sure children are ordered ? (important for arithmetic)
-- Can only have one param with dimensions for functions??? check FPARAMS3 grammar rule
 - DimList point to a dot?
+- Get the order of the identifiers right for the scope specification
