@@ -172,7 +172,7 @@ public class Parser {
                         break;
                     case "makeWhileLoop":
                         WhileLoop whileLoop = new WhileLoop(semanticStack.pop(), semanticStack.pop());
-                        semanticStack.push(whileLoop);
+                        semanticStack.peek().addChild(whileLoop);
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
