@@ -1,4 +1,6 @@
-package ast_generation.tree;
+package ast_generation.tree.statements;
+
+import ast_generation.tree.SemanticConcept;
 
 public class IfStatement extends SemanticConcept {
     public IfStatement(SemanticConcept block2, SemanticConcept block1, SemanticConcept relativeExpr)  {

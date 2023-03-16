@@ -1,4 +1,6 @@
-package ast_generation.tree;
+package ast_generation.tree.statements;
+
+import ast_generation.tree.SemanticConcept;
 
 public class WhileLoop extends SemanticConcept {
     public WhileLoop(SemanticConcept statBlock, SemanticConcept relExpr) {
