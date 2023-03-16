@@ -3,10 +3,7 @@ package syntactical_analysis;
 import ast_generation.AstPrinter;
 import ast_generation.tree.*;
 import ast_generation.tree.classes.*;
-import ast_generation.tree.statements.AssignmentStatement;
-import ast_generation.tree.statements.IfStatement;
-import ast_generation.tree.statements.ReturnStatement;
-import ast_generation.tree.statements.WhileLoop;
+import ast_generation.tree.statements.*;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
 import lexical_analysis.Token;
@@ -181,6 +178,10 @@ public class Parser {
                     case "makeReturnStatement":
                         ReturnStatement returnStatement = new ReturnStatement(semanticStack.pop());
                         semanticStack.peek().addChild(returnStatement);
+                        break;
+                    case "makeWriteStatement":
+                        WriteStatement writeStatement = new WriteStatement(semanticStack.pop());
+                        semanticStack.peek().addChild(writeStatement);
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
