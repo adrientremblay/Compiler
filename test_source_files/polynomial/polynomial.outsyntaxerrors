@@ -1,10 +1,2 @@
 Syntax Error in test_source_files/polynomial/polynomial.src 9:22 while parsing rule <MEMBERDECL>, the token [constructor, constructor, 9:11] was found.
 Syntax Error in test_source_files/polynomial/polynomial.src 17:22 while parsing rule <MEMBERDECL>, the token [constructor, constructor, 17:11] was found.
-Syntax Error in test_source_files/polynomial/polynomial.src 37:32 while parsing rule <FUNCHEADMEMBERTAIL>, the token [constructor, constructor, 37:21] was found.
-Syntax Error in test_source_files/polynomial/polynomial.src 37:35 while parsing rule 'openpar', the token [colon, :, 37:34] was found.
-Syntax Error in test_source_files/polynomial/polynomial.src 45:2 while parsing rule 'arrow', the token [opencurbr, {, 45:1] was found.
-Syntax Error in test_source_files/polynomial/polynomial.src 62:27 while parsing rule 'id', the token [minus, -, 62:26] was found.
-Syntax Error in test_source_files/polynomial/polynomial.src 63:20 while parsing rule <FACTOR2>, the token [colon, :, 63:19] was found.
-Syntax Error in test_source_files/polynomial/polynomial.src 63:29 while parsing rule <REPTAPARAMS1>, the token [semi, ;, 63:28] was found.
-Syntax Error in test_source_files/polynomial/polynomial.src 68:4 while parsing rule 'semi', the token [opencurbr, {, 68:3] was found.
-Syntax Error in test_source_files/polynomial/polynomial.src 72:5 while parsing rule <REPTPROG0>, the token [semi, ;, 72:4] was found.

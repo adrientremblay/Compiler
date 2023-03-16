@@ -170,6 +170,10 @@ public class Parser {
                         IfStatement ifStatement = new IfStatement(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
                         semanticStack.push(ifStatement);
                         break;
+                    case "makeWhileLoop":
+                        WhileLoop whileLoop = new WhileLoop(semanticStack.pop(), semanticStack.pop());
+                        semanticStack.push(whileLoop);
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;

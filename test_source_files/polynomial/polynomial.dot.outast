@@ -1,0 +1,145 @@
+digraph AST {
+node [shape=record];
+node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
+1[label="Prog"];
+2[label="FuncDefList"];
+3[label="FuncDef"];
+4[label="Id | POLYNOMIAL"];
+3->4
+5[label="ScopeSpec | evaluate"];
+3->5
+6[label="StatBlock"];
+3->6
+7[label="Type | float"];
+3->7
+8[label="ParamList"];
+9[label="VarDecl"];
+10[label="Id | x"];
+9->10
+11[label="Dims"];
+9->11
+12[label="Type | float"];
+9->12
+8->9
+3->8
+2->3
+1->2
+13[label="ClassDeclList"];
+14[label="ClassDecl"];
+15[label="InherList"];
+14->15
+16[label="MembList"];
+17[label="FuncDecl"];
+18[label="Id | evaluate"];
+17->18
+19[label="Type | float"];
+17->19
+20[label="ParamList"];
+21[label="VarDecl"];
+22[label="Type | float"];
+21->22
+23[label="Id | x"];
+21->23
+24[label="Dims"];
+21->24
+20->21
+17->20
+16->17
+14->16
+25[label="Id | POLYNOMIAL"];
+14->25
+13->14
+26[label="ClassDecl"];
+27[label="MembList"];
+28[label="VarDecl"];
+29[label="Dims"];
+28->29
+30[label="Id | b"];
+28->30
+31[label="Type | float"];
+28->31
+27->28
+32[label="FuncDecl"];
+33[label="Type | float"];
+32->33
+34[label="Id | evaluate"];
+32->34
+35[label="ParamList"];
+36[label="VarDecl"];
+37[label="Id | x"];
+36->37
+38[label="Dims"];
+36->38
+39[label="Type | float"];
+36->39
+35->36
+32->35
+27->32
+40[label="VarDecl"];
+41[label="Type | float"];
+40->41
+42[label="Id | a"];
+40->42
+43[label="Dims"];
+40->43
+27->40
+26->27
+44[label="InherList"];
+45[label="Id | POLYNOMIAL"];
+44->45
+26->44
+46[label="Id | LINEAR"];
+26->46
+13->26
+47[label="ClassDecl"];
+48[label="MembList"];
+49[label="VarDecl"];
+50[label="Id | b"];
+49->50
+51[label="Dims"];
+49->51
+52[label="Type | float"];
+49->52
+48->49
+53[label="FuncDecl"];
+54[label="Id | evaluate"];
+53->54
+55[label="ParamList"];
+56[label="VarDecl"];
+57[label="Id | x"];
+56->57
+58[label="Dims"];
+56->58
+59[label="Type | float"];
+56->59
+55->56
+53->55
+60[label="Type | float"];
+53->60
+48->53
+61[label="VarDecl"];
+62[label="Id | c"];
+61->62
+63[label="Dims"];
+61->63
+64[label="Type | float"];
+61->64
+48->61
+65[label="VarDecl"];
+66[label="Dims"];
+65->66
+67[label="Id | a"];
+65->67
+68[label="Type | float"];
+65->68
+48->65
+47->48
+69[label="InherList"];
+70[label="Id | POLYNOMIAL"];
+69->70
+47->69
+71[label="Id | QUADRATIC"];
+47->71
+13->47
+1->13
+}

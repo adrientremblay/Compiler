@@ -53,7 +53,7 @@
 
 <STATEMENT> -> 'id' !makeIdentifier <STATEMENTIDNEST> 'semi'
 <STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' <STATBLOCK> 'else' <STATBLOCK> !makeIfStatement 'semi'
-<STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' <STATBLOCK> 'semi'
+<STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' <STATBLOCK> !makeWhileLoop 'semi'
 <STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' 'semi'
 <STATEMENT> -> 'write' 'openpar' <EXPR> 'closepar' 'semi'
 <STATEMENT> -> 'return' 'openpar' <EXPR> 'closepar' 'semi'
