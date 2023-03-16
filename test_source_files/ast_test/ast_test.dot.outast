@@ -4,42 +4,34 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="FuncDefList"];
 3[label="FuncDef"];
-4[label="Type | void"];
+4[label="ScopeSpec"];
 3->4
-5[label="Id | test2"];
+5[label="Type | void"];
 3->5
-6[label="StatBlock"];
-7[label="WhileLoop"];
-8[label="RelExpr"];
-9[label="Id | n"];
-8->9
-10[label="RelOp | lt"];
-8->10
-11[label="Id | i"];
-8->11
-7->8
-12[label="StatBlock"];
-13[label="WriteStat"];
-14[label="Id | i"];
-13->14
-12->13
-15[label="ReturnStat"];
-16[label="Dot"];
-17[label="Id | x"];
-16->17
-18[label="Id | i"];
-16->18
-15->16
-12->15
-7->12
-6->7
+6[label="Id | test2"];
 3->6
-19[label="ScopeSpec"];
-3->19
-20[label="ParamList"];
-3->20
+7[label="StatBlock"];
+8[label="WhileLoop"];
+9[label="StatBlock"];
+10[label="ReadStat"];
+11[label="Id | a"];
+10->11
+9->10
+8->9
+12[label="RelExpr"];
+13[label="Id | n"];
+12->13
+14[label="RelOp | lt"];
+12->14
+15[label="Id | i"];
+12->15
+8->12
+7->8
+3->7
+16[label="ParamList"];
+3->16
 2->3
 1->2
-21[label="ClassDeclList"];
-1->21
+17[label="ClassDeclList"];
+1->17
 }

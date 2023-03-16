@@ -4,10 +4,10 @@
 <ADDOP> -> 'minus' !makeSubtractionOperation
 <ADDOP> -> 'or'
 
-<APARAMS> -> <EXPR> <REPTAPARAMS1>
+<APARAMS> -> !makeParameterList <EXPR> !consume <REPTAPARAMS1>
 <APARAMS> -> EPSILON
 
-<APARAMSTAIL> -> 'comma' <EXPR>
+<APARAMSTAIL> -> 'comma' <EXPR> !consume
 
 <ARITHEXPR> -> <TERM> <RIGHTRECARITHEXPR>
 
@@ -54,7 +54,7 @@
 <STATEMENT> -> 'id' !makeIdentifier <STATEMENTIDNEST> 'semi'
 <STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' <STATBLOCK> 'else' <STATBLOCK> !makeIfStatement 'semi'
 <STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' <STATBLOCK> !makeWhileLoop 'semi'
-<STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' 'semi'
+<STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' !makeReadStatement 'semi'
 <STATEMENT> -> 'write' 'openpar' <EXPR> 'closepar' !makeWriteStatement 'semi'
 <STATEMENT> -> 'return' 'openpar' <EXPR> !makeReturnStatement 'closepar' 'semi'
 

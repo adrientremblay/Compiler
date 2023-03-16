@@ -187,6 +187,10 @@ public class Parser {
                         Dot dot = new Dot(semanticStack.pop(), semanticStack.pop());
                         semanticStack.push(dot);
                         break;
+                    case "makeReadStatement":
+                        ReadStatement readStatement = new ReadStatement(semanticStack.pop());
+                        semanticStack.peek().addChild(readStatement);
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;
