@@ -58,16 +58,16 @@
 <STATEMENT> -> 'write' 'openpar' <EXPR> 'closepar' !makeWriteStatement 'semi'
 <STATEMENT> -> 'return' 'openpar' <EXPR> !makeReturnStatement 'closepar' 'semi'
 
-<STATEMENTIDNEST> -> 'dot' 'id' <STATEMENTIDNEST>
+<STATEMENTIDNEST> -> 'dot' 'id' !makeIdentifier !makeDot <STATEMENTIDNEST>
 <STATEMENTIDNEST> -> 'openpar' <APARAMS> 'closepar' <STATEMENTIDNEST2>
 <STATEMENTIDNEST> -> <INDICE> <REPTIDNEST1> <STATEMENTIDNEST3>
 <STATEMENTIDNEST> -> 'assign' <EXPR> !makeAssExpr
 
 <STATEMENTIDNEST2> -> EPSILON
-<STATEMENTIDNEST2> -> 'dot' 'id' <STATEMENTIDNEST>
+<STATEMENTIDNEST2> -> 'dot' 'id' !makeIdentifier !makeDot <STATEMENTIDNEST>
 
 <STATEMENTIDNEST3> -> 'assign' <EXPR>
-<STATEMENTIDNEST3> -> 'dot' 'id' <STATEMENTIDNEST>
+<STATEMENTIDNEST3> -> 'dot' 'id' !makeIdentifier !makeDot <STATEMENTIDNEST>
 
 <REPTIDNEST1> -> <INDICE> <REPTIDNEST1>
 <REPTIDNEST1> -> EPSILON
@@ -75,7 +75,7 @@
 <REPTVARIABLEORFUNCTIONCALL> -> <IDNEST> <REPTVARIABLEORFUNCTIONCALL>
 <REPTVARIABLEORFUNCTIONCALL> -> EPSILON
 
-<IDNEST> -> 'dot' 'id' <IDNEST2>
+<IDNEST> -> 'dot' 'id' !makeIdentifier !makeDot <IDNEST2>
 <IDNEST2> -> 'openpar' <APARAMS> 'closepar'
 <IDNEST2> -> <REPTIDNEST1>
 
@@ -168,7 +168,7 @@
 <LOCALVARORSTAT> -> <LOCALVARDECL>
 <LOCALVARORSTAT> -> <STATEMENT>
 
-<VARIABLE> -> 'id' <VARIABLE2>
+<VARIABLE> -> 'id' !makeIdentifier <VARIABLE2>
 
 <VARIABLE2> -> <REPTIDNEST1> <REPTVARIABLE>
 <VARIABLE2> -> 'openpar' <APARAMS> 'closepar' <VARIDNEST>
@@ -176,7 +176,7 @@
 <REPTVARIABLE> -> <VARIDNEST> <REPTVARIABLE>
 <REPTVARIABLE> -> EPSILON
 
-<VARIDNEST> -> 'dot' 'id' <VARIDNEST2>
+<VARIDNEST> -> 'dot' 'id' !makeIdentifier !makeDot <VARIDNEST2>
 <VARIDNEST2> -> 'openpar' <APARAMS> 'closepar' <VARIDNEST>
 <VARIDNEST2> -> <REPTIDNEST1>
 

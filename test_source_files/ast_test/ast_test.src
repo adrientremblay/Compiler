@@ -1,7 +1,7 @@
 function test2() => void
 {
   while (i<n) {
-    return (i);
+    return (i.x);
     write (i);
   };
 }
