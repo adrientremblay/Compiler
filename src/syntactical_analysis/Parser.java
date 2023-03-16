@@ -5,6 +5,7 @@ import ast_generation.tree.*;
 import ast_generation.tree.classes.*;
 import ast_generation.tree.statements.AssignmentStatement;
 import ast_generation.tree.statements.IfStatement;
+import ast_generation.tree.statements.ReturnStatement;
 import ast_generation.tree.statements.WhileLoop;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
@@ -176,6 +177,10 @@ public class Parser {
                     case "makeWhileLoop":
                         WhileLoop whileLoop = new WhileLoop(semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(whileLoop);
+                        break;
+                    case "makeReturnStatement":
+                        ReturnStatement returnStatement = new ReturnStatement(semanticStack.pop());
+                        semanticStack.peek().addChild(returnStatement);
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");

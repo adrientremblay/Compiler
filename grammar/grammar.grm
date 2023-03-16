@@ -56,7 +56,7 @@
 <STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' <STATBLOCK> !makeWhileLoop 'semi'
 <STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' 'semi'
 <STATEMENT> -> 'write' 'openpar' <EXPR> 'closepar' 'semi'
-<STATEMENT> -> 'return' 'openpar' <EXPR> 'closepar' 'semi'
+<STATEMENT> -> 'return' 'openpar' <EXPR> !makeReturnStatement 'closepar' 'semi'
 
 <STATEMENTIDNEST> -> 'dot' 'id' <STATEMENTIDNEST>
 <STATEMENTIDNEST> -> 'openpar' <APARAMS> 'closepar' <STATEMENTIDNEST2>
