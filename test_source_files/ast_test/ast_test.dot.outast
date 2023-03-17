@@ -4,40 +4,26 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="FuncDefList"];
 3[label="FuncDef"];
-4[label="Id | swag"];
-5[label="ReadStat"];
-6[label="Var"];
-7[label="Dot"];
-8[label="Id | fugg"];
-7->8
-9[label="ParamList"];
-10[label="Id | a"];
-9->10
-7->9
-6->7
-11[label="Dot"];
-12[label="Id | balls"];
-11->12
-13[label="Indices"];
-14[label="Id | x"];
-13->14
-11->13
-6->11
-5->6
-4->5
+4[label="Id | test2"];
 3->4
-15[label="Type | void"];
-3->15
-16[label="ParamList"];
-3->16
-17[label="ScopeSpec"];
-3->17
-18[label="StatBlock"];
-3->18
+5[label="Type | void"];
+3->5
+6[label="ParamList"];
+3->6
+7[label="StatBlock"];
+8[label="ReadStat"];
+9[label="Var"];
+10[label="Indices"];
+9->10
+11[label="Id | swag"];
+9->11
+8->9
+7->8
+3->7
+12[label="ScopeSpec"];
+3->12
 2->3
 1->2
-19[label="Id | test2"];
-1->19
-20[label="ClassDeclList"];
-1->20
+13[label="ClassDeclList"];
+1->13
 }
