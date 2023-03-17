@@ -2,28 +2,38 @@ digraph AST {
 node [shape=record];
 node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
-2[label="FuncDefList"];
-3[label="FuncDef"];
-4[label="Id | test2"];
-3->4
-5[label="Type | void"];
-3->5
-6[label="ParamList"];
-3->6
-7[label="StatBlock"];
-8[label="ReadStat"];
-9[label="Var"];
-10[label="Indices"];
-9->10
-11[label="Id | swag"];
-9->11
-8->9
-7->8
-3->7
-12[label="ScopeSpec"];
-3->12
-2->3
+2[label="ClassDeclList"];
 1->2
-13[label="ClassDeclList"];
-1->13
+3[label="FuncDefList"];
+4[label="FuncDef"];
+5[label="StatBlock"];
+6[label="ReadStat"];
+7[label="Var"];
+8[label="Dot"];
+9[label="Id | eater"];
+8->9
+10[label="Id | swag"];
+11[label="Indices"];
+12[label="Id | x"];
+11->12
+13[label="Id | y"];
+11->13
+14[label="Id | z"];
+11->14
+10->11
+8->10
+7->8
+6->7
+5->6
+4->5
+15[label="ParamList"];
+4->15
+16[label="ScopeSpec"];
+4->16
+17[label="Id | test2"];
+4->17
+18[label="Type | void"];
+4->18
+3->4
+1->3
 }

@@ -4,7 +4,7 @@ function test2() => void
  // Variable tests
 
   //read (swag[x].balls(a).fugg);
-  read (swag);
+  read (swag[x][y][z].eater);
 
   /*
   while (i<n) {

@@ -195,7 +195,7 @@ public class Parser {
                         semanticStack.push(new Indices());
                         break;
                     case "makeVariable":
-                        Variable var = new Variable(semanticStack.pop(), semanticStack.pop());
+                        Variable var = new Variable(semanticStack.pop());
                         semanticStack.push(var);
                         break;
                     default:

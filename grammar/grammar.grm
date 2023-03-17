@@ -170,7 +170,7 @@
 
 <VARIABLE> -> 'id' !makeIdentifier <VARIABLE2> !makeVariable
 
-<VARIABLE2> -> !makeIndices <REPTIDNEST1> <REPTVARIABLE>
+<VARIABLE2> -> !makeIndices <REPTIDNEST1> !consume <REPTVARIABLE>
 <VARIABLE2> -> 'openpar' <APARAMS> 'closepar' <VARIDNEST>
 
 <REPTVARIABLE> -> <VARIDNEST> <REPTVARIABLE>
@@ -179,6 +179,7 @@
 <VARIDNEST> -> 'dot' 'id' !makeIdentifier !makeDot <VARIDNEST2>
 <VARIDNEST2> -> 'openpar' <APARAMS> 'closepar' <VARIDNEST>
 <VARIDNEST2> -> <REPTIDNEST1>
+<VARIDNEST2> -> EPSILON
 
 <VISIBILITY> -> 'public'
 <VISIBILITY> -> 'private'
