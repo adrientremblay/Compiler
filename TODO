@@ -3,3 +3,6 @@
 - DimList point to a dot?
 - Get the order of the identifiers right for the scope specification
 - SemanticConcept neighbors?
+- Variable
+- No indication if a parameter has param[]
+- Float type

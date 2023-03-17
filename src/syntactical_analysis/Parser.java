@@ -191,6 +191,13 @@ public class Parser {
                         ReadStatement readStatement = new ReadStatement(semanticStack.pop());
                         semanticStack.peek().addChild(readStatement);
                         break;
+                    case "makeIndices":
+                        semanticStack.push(new Indices());
+                        break;
+                    case "makeVariable":
+                        Variable var = new Variable(semanticStack.pop(), semanticStack.pop());
+                        semanticStack.push(var);
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;

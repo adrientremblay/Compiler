@@ -1,8 +1,15 @@
 function test2() => void
 {
+
+ // Variable tests
+
+  read (swag[x].balls(a).fugg);
+
+  /*
   while (i<n) {
     read(a);
   };
+  */
 }
 
 /*
