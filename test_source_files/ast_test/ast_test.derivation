@@ -11,8 +11,8 @@
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <STATEMENT>
 <STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' !makeReadStatement 'semi'
-<VARIABLE> -> 'id' !makeIdentifier <VARIABLE2> !makeVariable
-<VARIABLE2> -> !makeIndices <REPTIDNEST1> !consume <REPTVARIABLE>
+<VARIABLE> -> 'id' !makeIdentifier <VARIABLE2>
+<VARIABLE2> -> !makeIndices <REPTIDNEST1> !makeVariable <REPTVARIABLE>
 <REPTIDNEST1> -> <INDICE> <REPTIDNEST1>
 <INDICE> -> 'opensqbr' <ARITHEXPR> !consume 'closesqbr'
 <ARITHEXPR> -> <TERM> <RIGHTRECARITHEXPR>

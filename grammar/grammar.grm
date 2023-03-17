@@ -168,9 +168,9 @@
 <LOCALVARORSTAT> -> <LOCALVARDECL>
 <LOCALVARORSTAT> -> <STATEMENT>
 
-<VARIABLE> -> 'id' !makeIdentifier <VARIABLE2> !makeVariable
+<VARIABLE> -> 'id' !makeIdentifier <VARIABLE2>
 
-<VARIABLE2> -> !makeIndices <REPTIDNEST1> !consume <REPTVARIABLE>
+<VARIABLE2> -> !makeIndices <REPTIDNEST1> !makeVariable <REPTVARIABLE>
 <VARIABLE2> -> 'openpar' <APARAMS> 'closepar' <VARIDNEST>
 
 <REPTVARIABLE> -> <VARIDNEST> <REPTVARIABLE>

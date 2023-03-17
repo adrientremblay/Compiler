@@ -3,7 +3,6 @@ function test2() => void
 
  // Variable tests
 
-  //read (swag[x].balls(a).fugg);
   read (swag[x][y][z].eater);
 
   /*
