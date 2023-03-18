@@ -2,7 +2,10 @@ package syntactical_analysis;
 
 import ast_generation.AstPrinter;
 import ast_generation.tree.*;
+import ast_generation.tree.factor.Float;
+import ast_generation.tree.factor.Integer;
 import ast_generation.tree.classes.*;
+import ast_generation.tree.factor.Not;
 import ast_generation.tree.statements.*;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
@@ -92,8 +95,12 @@ public class Parser {
                         semanticStack.peek().addChild(assignmentStatement);
                         break;
                     case "makeInt":
-                        Num number = new Num(lastToken);
-                        semanticStack.push(number);
+                        Integer inty = new Integer(lastToken);
+                        semanticStack.push(inty);
+                        break;
+                    case "makeFloat":
+                        Float floaty = new Float(lastToken);
+                        semanticStack.push(floaty);
                         break;
                     case "makeMultiplyOperation":
                         semanticStack.push(new MultiplyOperation(semanticStack.pop()));
@@ -122,7 +129,7 @@ public class Parser {
                         semanticStack.push(dimensions);
                         break;
                     case "addIntToTop":
-                        semanticStack.peek().addChild(new Num(lastToken));
+                        semanticStack.peek().addChild(new Integer(lastToken));
                         break;
                     case "makeFunctionDefinition":
                         functionDefinitionList.addChild(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));

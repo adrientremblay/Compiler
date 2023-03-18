@@ -1,4 +1,6 @@
-package ast_generation.tree;
+package ast_generation.tree.factor;
+
+import ast_generation.tree.SemanticConcept;
 
 public class Not extends SemanticConcept {
     public Not(SemanticConcept factor) {

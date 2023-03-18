@@ -23,7 +23,7 @@
 
 <FACTOR> -> 'id' !makeIdentifier <FACTOR2> <REPTVARIABLEORFUNCTIONCALL>
 <FACTOR> -> 'intnum' !makeInt
-<FACTOR> -> 'floatnum' !makeInt
+<FACTOR> -> 'floatnum' !makeFloat
 <FACTOR> -> 'openpar' <ARITHEXPR> 'closepar'
 <FACTOR> -> 'not' <FACTOR> !makeNot
 <FACTOR> -> <SIGN> <FACTOR>
