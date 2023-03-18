@@ -1,11 +1,15 @@
 function test2() => void
 {
 
+
+  // Factor test
+  if (not a > b) then {
+  } else {
+  };
+
  // Variable tests
-
-  read (swag[x][y][z].eater);
-
   /*
+  read (swag[x][y][z].eater);
   while (i<n) {
     read(a);
   };

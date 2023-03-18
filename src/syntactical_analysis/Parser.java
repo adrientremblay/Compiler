@@ -198,6 +198,10 @@ public class Parser {
                         Variable var = new Variable(semanticStack.pop(), semanticStack.pop());
                         semanticStack.push(var);
                         break;
+                    case "makeNot":
+                        Not not = new Not(semanticStack.pop());
+                        semanticStack.add(not);
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;
