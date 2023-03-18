@@ -21,7 +21,7 @@
 <RELOP> -> 'gt'
 <ARITHEXPR> -> <TERM> <RIGHTRECARITHEXPR>
 <TERM> -> <FACTOR> <RIGHTRECTERM>
-<FACTOR> -> <SIGN> !makeSign <FACTOR>
+<FACTOR> -> <SIGN> !makeSign <FACTOR> !consume
 <SIGN> -> 'plus'
 <FACTOR> -> 'intnum' !makeInt
 <RIGHTRECTERM> -> EPSILON

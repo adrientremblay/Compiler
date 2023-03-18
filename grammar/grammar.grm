@@ -26,7 +26,7 @@
 <FACTOR> -> 'floatnum' !makeFloat
 <FACTOR> -> 'openpar' <ARITHEXPR> 'closepar'
 <FACTOR> -> 'not' <FACTOR> !makeNot
-<FACTOR> -> <SIGN> !makeSign <FACTOR>
+<FACTOR> -> <SIGN> !makeSign <FACTOR> !consume
 
 <FACTOR2> -> 'openpar' <APARAMS> 'closepar'
 <FACTOR2> -> <REPTIDNEST1>

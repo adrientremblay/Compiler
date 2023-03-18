@@ -10,6 +10,6 @@ public class Sign extends SemanticConcept {
 
     @Override
     public String getName() {
-        return "Float";
+        return "Sign";
     }
 }

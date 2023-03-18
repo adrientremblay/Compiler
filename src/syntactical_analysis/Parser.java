@@ -174,7 +174,7 @@ public class Parser {
                         break;
                     case "makeIfStatement":
                         IfStatement ifStatement = new IfStatement(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
-                        semanticStack.push(ifStatement);
+                        semanticStack.peek().addChild(ifStatement);
                         break;
                     case "makeWhileLoop":
                         WhileLoop whileLoop = new WhileLoop(semanticStack.pop(), semanticStack.pop());
