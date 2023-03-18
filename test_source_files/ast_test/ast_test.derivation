@@ -21,7 +21,9 @@
 <RELOP> -> 'gt'
 <ARITHEXPR> -> <TERM> <RIGHTRECARITHEXPR>
 <TERM> -> <FACTOR> <RIGHTRECTERM>
-<FACTOR> -> 'floatnum' !makeFloat
+<FACTOR> -> <SIGN> !makeSign <FACTOR>
+<SIGN> -> 'plus'
+<FACTOR> -> 'intnum' !makeInt
 <RIGHTRECTERM> -> EPSILON
 <RIGHTRECARITHEXPR> -> EPSILON
 <STATBLOCK> -> 'opencurbr' !makeStatementBlock <REPTSTATBLOCK1> 'closecurbr'

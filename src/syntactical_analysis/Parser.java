@@ -6,6 +6,7 @@ import ast_generation.tree.factor.Float;
 import ast_generation.tree.factor.Integer;
 import ast_generation.tree.classes.*;
 import ast_generation.tree.factor.Not;
+import ast_generation.tree.factor.Sign;
 import ast_generation.tree.statements.*;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
@@ -101,9 +102,6 @@ public class Parser {
                     case "makeFloat":
                         Float floaty = new Float(lastToken);
                         semanticStack.push(floaty);
-                        break;
-                    case "makeMultiplyOperation":
-                        semanticStack.push(new MultiplyOperation(semanticStack.pop()));
                         break;
                     case "addFactorToOp":
                         SemanticConcept factor = semanticStack.pop();
@@ -208,6 +206,10 @@ public class Parser {
                     case "makeNot":
                         Not not = new Not(semanticStack.pop());
                         semanticStack.add(not);
+                        break;
+                    case "makeSign":
+                        Sign sign = new Sign(lastToken);
+                        semanticStack.add(sign);
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");

@@ -87,7 +87,8 @@ public class GrammarTableGenerator {
                 Set<String> lineFollowSet = followSets.get(leftHandSide);
 
                 for (String terminal : lineFollowSet)
-                    grammarTable.get(leftHandSide).put(terminal, line);
+                    if (!terminal.equals("plus") && !terminal.equals("minus")) // todo: THIS CODE IS ASS!!!!
+                        grammarTable.get(leftHandSide).put(terminal, line);
             }
         }
 
