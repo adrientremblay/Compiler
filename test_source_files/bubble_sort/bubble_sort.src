@@ -1,5 +1,3 @@
-/*
-
 /* sort the array */
 function bubbleSort(arr: integer[], size: integer) => void
 {
@@ -39,8 +37,6 @@ function printArray(arr: integer[], size: integer) => void
       i = i+1;
   };
 }
-
-*/
 
 // main funtion to test above
 function main() => void
