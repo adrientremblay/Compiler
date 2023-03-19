@@ -53,8 +53,8 @@
 <FUNCHEADMEMBERTAIL> -> 'constructorkeyword' !makeScopeSpecification 'openpar' !makeParameterList <FPARAMS> 'closepar'
 
 <STATEMENT> -> 'id' !makeIdentifier <STATEMENTIDNEST> 'semi'
-<STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' <STATBLOCK> 'else' <STATBLOCK> !makeIfStatement 'semi'
-<STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' <STATBLOCK> !makeWhileLoop 'semi'
+<STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' !makeStatementBlock <STATBLOCK> 'else' !makeStatementBlock <STATBLOCK> !makeIfStatement 'semi'
+<STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' !makeStatementBlock <STATBLOCK> !makeWhileLoop 'semi'
 <STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' !makeReadStatement 'semi'
 <STATEMENT> -> 'write' 'openpar' <EXPR> 'closepar' !makeWriteStatement 'semi'
 <STATEMENT> -> 'return' 'openpar' <EXPR> !makeReturnStatement 'closepar' 'semi'
@@ -147,7 +147,7 @@
 <SIGN> -> 'plus'
 <SIGN> -> 'minus'
 
-<STATBLOCK> -> 'opencurbr' !makeStatementBlock <REPTSTATBLOCK1> 'closecurbr'
+<STATBLOCK> -> 'opencurbr' <REPTSTATBLOCK1> 'closecurbr'
 <STATBLOCK> -> <STATEMENT>
 <STATBLOCK> -> EPSILON
 
