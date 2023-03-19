@@ -7,8 +7,8 @@
 <REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
 <VISIBILITY> -> 'public'
 <MEMBERDECL> -> <MEMBERFUNCDECL>
-<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> !makeFunctionDeclaration 'semi'
-<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
+<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType !makeFunctionDeclaration
 <FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
 <TYPE> -> 'float'
 <REPTFPARAMS3> -> EPSILON
@@ -36,43 +36,21 @@
 <REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
 <VISIBILITY> -> 'public'
 <MEMBERDECL> -> <MEMBERFUNCDECL>
-<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> !makeFunctionDeclaration 'semi'
-<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
+<MEMBERFUNCHEAD> -> 'constructor' 'colon' 'openpar' !makeParameterList <FPARAMS> 'closepar' !makeConstructor
 <FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
 <TYPE> -> 'float'
 <REPTFPARAMS3> -> EPSILON
+<REPTFPARAMS4> -> <FPARAMSTAIL> <REPTFPARAMS4>
+<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMSTAIL4> !closeDims
+<TYPE> -> 'float'
+<REPTFPARAMSTAIL4> -> EPSILON
 <REPTFPARAMS4> -> EPSILON
-<RETURNTYPE> -> <TYPE>
-<TYPE> -> 'float'
-<REPTMEMBERDECL> -> EPSILON
-<REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
-<CLASSDECLORFUNCDEF> -> <CLASSDECL>
-<CLASSDECL> -> 'class' 'id' !makeIdentifier !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
-<OPTINHERITS> -> 'isa' 'id' !makeIdentifier !consume <REPTINHERITSLIST>
-<REPTINHERITSLIST> -> EPSILON
-<REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
-<VISIBILITY> -> 'private'
-<MEMBERDECL> -> <MEMBERVARDECL>
-<MEMBERVARDECL> -> 'attribute' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTARRAYSIZE> !closeDims 'semi'
-<TYPE> -> 'float'
-<REPTARRAYSIZE> -> EPSILON
-<REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
-<VISIBILITY> -> 'private'
-<MEMBERDECL> -> <MEMBERVARDECL>
-<MEMBERVARDECL> -> 'attribute' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTARRAYSIZE> !closeDims 'semi'
-<TYPE> -> 'float'
-<REPTARRAYSIZE> -> EPSILON
-<REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
-<VISIBILITY> -> 'private'
-<MEMBERDECL> -> <MEMBERVARDECL>
-<MEMBERVARDECL> -> 'attribute' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTARRAYSIZE> !closeDims 'semi'
-<TYPE> -> 'float'
-<REPTARRAYSIZE> -> EPSILON
 <REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
 <VISIBILITY> -> 'public'
 <MEMBERDECL> -> <MEMBERFUNCDECL>
-<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> !makeFunctionDeclaration 'semi'
-<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
+<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType !makeFunctionDeclaration
 <FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
 <TYPE> -> 'float'
 <REPTFPARAMS3> -> EPSILON
@@ -80,18 +58,4 @@
 <RETURNTYPE> -> <TYPE>
 <TYPE> -> 'float'
 <REPTMEMBERDECL> -> EPSILON
-<REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
-<CLASSDECLORFUNCDEF> -> <FUNCDEF>
-<FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
-<FUNCHEAD> -> 'function' 'id' !makeIdentifier <FUNCHEADTAIL>
-<FUNCHEADTAIL> -> 'sr' <FUNCHEADMEMBERTAIL>
-<FUNCHEADMEMBERTAIL> -> 'id' !makeScopeSpecification 'openpar' !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
-<TYPE> -> 'float'
-<REPTFPARAMS3> -> EPSILON
-<REPTFPARAMS4> -> EPSILON
-<RETURNTYPE> -> <TYPE>
-<TYPE> -> 'float'
-<FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
-<REPTLOCALVARORSTAT> -> EPSILON
 <REPTPROG0> -> EPSILON

@@ -1,2 +1,0 @@
-Syntax Error in test_source_files/polynomial/polynomial.src 9:22 while parsing rule <MEMBERDECL>, the token [constructor, constructor, 9:11] was found.
-Syntax Error in test_source_files/polynomial/polynomial.src 17:22 while parsing rule <MEMBERDECL>, the token [constructor, constructor, 17:11] was found.

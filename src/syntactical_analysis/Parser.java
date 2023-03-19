@@ -218,6 +218,10 @@ public class Parser {
                     case "addNothing":
                         semanticStack.peek().addChild(new Nothing());
                         break;
+                    case "makeConstructor":
+                        Constructor constructor = new Constructor(semanticStack.pop());
+                        semanticStack.peek().addChild(constructor);
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;

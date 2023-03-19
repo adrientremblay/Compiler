@@ -39,10 +39,10 @@
 
 <FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 
-<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> !makeFunctionDeclaration 'semi'
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
 
-<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<MEMBERFUNCHEAD> -> 'constructorkeyword' 'colon' 'openpar' <FPARAMS> 'closepar'
+<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType !makeFunctionDeclaration
+<MEMBERFUNCHEAD> -> 'constructor' 'colon' 'openpar' !makeParameterList <FPARAMS> 'closepar' !makeConstructor
 
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
 
