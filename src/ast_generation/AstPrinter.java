@@ -1,7 +1,9 @@
 package ast_generation;
 
+import ast_generation.tree.Nothing;
 import ast_generation.tree.RelativeOperator;
 import ast_generation.tree.SemanticConcept;
+import ast_generation.tree.factor.Not;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -36,9 +38,14 @@ public class AstPrinter {
         cleanup();
     }
 
-    private int writeNode(SemanticConcept node) {
+    private String writeNode(SemanticConcept node) {
         int myId = nextNodeId;
         try {
+            if (node instanceof Nothing)  {
+                dotFileWriter.write("none" + (nextNodeId++) + "[shape=point]");
+                return "none"+String.valueOf(myId);
+            }
+
             if (node.getMember() == null)
                 dotFileWriter.write((nextNodeId++) + "[label=\"" + node.getName() +"\"];\n");
             else
@@ -49,7 +56,7 @@ public class AstPrinter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return myId;
+        return String.valueOf(myId);
     }
 
    private void cleanup() {

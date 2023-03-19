@@ -103,8 +103,7 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 48->49
 53[label="VarDecl"];
 54[label="Dims"];
-55[label="Nothing (not supposed to appear)"];
-54->55
+none55[shape=point]54->none55
 53->54
 56[label="Type | integer"];
 53->56
