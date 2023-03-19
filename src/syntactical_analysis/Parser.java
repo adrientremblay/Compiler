@@ -95,6 +95,10 @@ public class Parser {
                         AssignmentStatement assignmentStatement = new AssignmentStatement(semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(assignmentStatement);
                         break;
+                    case "makeFunctionCall":
+                        FunctionCall functionCall = new FunctionCall(semanticStack.pop(), semanticStack.pop());
+                        semanticStack.peek().addChild(functionCall);
+                        break;
                     case "makeInt":
                         Integer inty = new Integer(lastToken);
                         semanticStack.push(inty);

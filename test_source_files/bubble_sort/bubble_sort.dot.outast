@@ -4,215 +4,128 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="FuncDefList"];
 3[label="FuncDef"];
-4[label="ScopeSpec"];
+4[label="ParamList"];
 3->4
 5[label="StatBlock"];
 6[label="AssigStat"];
-7[label="Int | 0"];
+7[label="Int | 12"];
 6->7
-8[label="Id | i"];
+8[label="Id | arr"];
+9[label="Indices"];
+10[label="Int | 3"];
+9->10
+8->9
 6->8
 5->6
-9[label="VarDecl"];
-10[label="Id | j"];
-9->10
-11[label="Type | integer"];
-9->11
-12[label="Dims"];
-9->12
-5->9
-13[label="AssigStat"];
-14[label="Int | 0"];
-13->14
-15[label="Id | j"];
-13->15
-5->13
-16[label="AssigStat"];
-17[label="Id | temp"];
+11[label="FunctionCall"];
+12[label="ParamList"];
+13[label="Int | 7"];
+12->13
+14[label="Id | arr"];
+12->14
+11->12
+15[label="Id | printarray"];
+11->15
+5->11
+16[label="VarDecl"];
+17[label="Dims"];
+18[label="Int | 7"];
+17->18
 16->17
-18[label="Int | 0"];
-16->18
+19[label="Type | integer"];
+16->19
+20[label="Id | arr"];
+16->20
 5->16
-19[label="VarDecl"];
-20[label="Dims"];
-19->20
-21[label="Id | n"];
-19->21
-22[label="Type | integer"];
-19->22
-5->19
-23[label="VarDecl"];
-24[label="Dims"];
+21[label="AssigStat"];
+22[label="Id | arr"];
+23[label="Indices"];
+24[label="Int | 0"];
 23->24
-25[label="Id | temp"];
-23->25
-26[label="Type | integer"];
-23->26
-5->23
-27[label="AssigStat"];
-28[label="Id | size"];
-27->28
-29[label="Id | n"];
-27->29
-5->27
-30[label="WhileLoop"];
-31[label="RelExpr"];
-32[label="RelOp | lt"];
-31->32
-33[label="SubOp"];
-34[label="Id | n"];
+22->23
+21->22
+25[label="Int | 64"];
+21->25
+5->21
+26[label="AssigStat"];
+27[label="Int | 34"];
+26->27
+28[label="Id | arr"];
+29[label="Indices"];
+30[label="Int | 1"];
+29->30
+28->29
+26->28
+5->26
+31[label="AssigStat"];
+32[label="Id | arr"];
+33[label="Indices"];
+34[label="Int | 5"];
 33->34
-35[label="Int | 1"];
-33->35
-31->33
-36[label="Id | i"];
-31->36
-30->31
-37[label="StatBlock"];
-38[label="AssigStat"];
-39[label="AddOp"];
-40[label="Id | i"];
-39->40
-41[label="Int | 1"];
-39->41
-38->39
-42[label="Id | i"];
-38->42
+32->33
+31->32
+35[label="Int | 11"];
+31->35
+5->31
+36[label="FunctionCall"];
+37[label="ParamList"];
+38[label="Id | arr"];
 37->38
-43[label="WhileLoop"];
-44[label="StatBlock"];
-45[label="AssigStat"];
-46[label="Id | j"];
-45->46
-47[label="AddOp"];
-48[label="Int | 1"];
-47->48
-49[label="Id | j"];
-47->49
-45->47
+39[label="Int | 7"];
+37->39
+36->37
+40[label="Id | printarray"];
+36->40
+5->36
+41[label="AssigStat"];
+42[label="Int | 90"];
+41->42
+43[label="Id | arr"];
+44[label="Indices"];
+45[label="Int | 6"];
 44->45
-50[label="IfStat"];
-51[label="StatBlock"];
-52[label="AssigStat"];
-53[label="Id | arr"];
-54[label="Indices"];
-55[label="Id | j"];
-54->55
+43->44
+41->43
+5->41
+46[label="AssigStat"];
+47[label="Int | 25"];
+46->47
+48[label="Id | arr"];
+49[label="Indices"];
+50[label="Int | 2"];
+49->50
+48->49
+46->48
+5->46
+51[label="AssigStat"];
+52[label="Id | arr"];
+53[label="Indices"];
+54[label="Int | 4"];
 53->54
 52->53
-56[label="Id | arr"];
-57[label="Indices"];
-58[label="AddOp"];
-59[label="Int | 1"];
-58->59
-60[label="Id | j"];
-58->60
-57->58
-56->57
-52->56
 51->52
-61[label="AssigStat"];
-62[label="Id | temp"];
-61->62
-63[label="Id | arr"];
-64[label="Indices"];
-65[label="AddOp"];
-66[label="Id | j"];
-65->66
-67[label="Int | 1"];
-65->67
-64->65
-63->64
-61->63
-51->61
-68[label="AssigStat"];
-69[label="Id | temp"];
-68->69
-70[label="Id | arr"];
-71[label="Indices"];
-72[label="Id | j"];
-71->72
-70->71
-68->70
-51->68
-50->51
-73[label="StatBlock"];
-50->73
-74[label="RelExpr"];
-75[label="Id | arr"];
-76[label="Indices"];
-77[label="Id | j"];
-76->77
-75->76
-74->75
-78[label="RelOp | gt"];
-74->78
-79[label="Id | arr"];
-80[label="Indices"];
-81[label="AddOp"];
-82[label="Int | 1"];
-81->82
-83[label="Id | j"];
-81->83
-80->81
-79->80
-74->79
-50->74
-44->50
-43->44
-84[label="RelExpr"];
-85[label="SubOp"];
-86[label="SubOp"];
-87[label="Id | n"];
-86->87
-88[label="Id | i"];
-86->88
-85->86
-89[label="Int | 1"];
-85->89
-84->85
-90[label="Id | j"];
-84->90
-91[label="RelOp | lt"];
-84->91
-43->84
-37->43
-30->37
-5->30
-92[label="VarDecl"];
-93[label="Dims"];
-92->93
-94[label="Type | integer"];
-92->94
-95[label="Id | i"];
-92->95
-5->92
+55[label="Int | 22"];
+51->55
+5->51
+56[label="FunctionCall"];
+57[label="ParamList"];
+58[label="Int | 7"];
+57->58
+59[label="Id | arr"];
+57->59
+56->57
+60[label="Id | bubbleSort"];
+56->60
+5->56
 3->5
-96[label="Id | bubbleSort"];
-3->96
-97[label="Type | void"];
-3->97
-98[label="ParamList"];
-99[label="VarDecl"];
-100[label="Dims"];
-99->100
-101[label="Type | integer"];
-99->101
-102[label="Id | size"];
-99->102
-98->99
-103[label="VarDecl"];
-104[label="Dims"];
-none105[shape=point]104->none105
-103->104
-106[label="Type | integer"];
-103->106
-107[label="Id | arr"];
-103->107
-98->103
-3->98
+61[label="Type | void"];
+3->61
+62[label="Id | main"];
+3->62
+63[label="ScopeSpec"];
+3->63
 2->3
 1->2
-108[label="ClassDeclList"];
-1->108
+64[label="ClassDeclList"];
+1->64
 }
