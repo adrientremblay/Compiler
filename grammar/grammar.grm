@@ -52,7 +52,7 @@
 <FUNCHEADMEMBERTAIL> -> 'id' !makeScopeSpecification 'openpar' !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
 <FUNCHEADMEMBERTAIL> -> 'constructorkeyword' !makeScopeSpecification 'openpar' !makeParameterList <FPARAMS> 'closepar'
 
-<STATEMENT> -> 'id' !makeIdentifier <STATEMENTIDNEST> 'semi'
+<STATEMENT> -> 'id' !makeIdentifier <STATEMENTIDNEST> !makeAssExpr 'semi'
 <STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' !makeStatementBlock <STATBLOCK> 'else' !makeStatementBlock <STATBLOCK> !makeIfStatement 'semi'
 <STATEMENT> -> 'while' 'openpar' <RELEXPR> 'closepar' !makeStatementBlock <STATBLOCK> !makeWhileLoop 'semi'
 <STATEMENT> -> 'read' 'openpar' <VARIABLE> 'closepar' !makeReadStatement 'semi'
@@ -61,8 +61,8 @@
 
 <STATEMENTIDNEST> -> 'dot' 'id' !makeIdentifier !makeDot <STATEMENTIDNEST>
 <STATEMENTIDNEST> -> 'openpar' <APARAMS> 'closepar' <STATEMENTIDNEST2>
-<STATEMENTIDNEST> -> <INDICE> <REPTIDNEST1> <STATEMENTIDNEST3>
-<STATEMENTIDNEST> -> 'assign' <EXPR> !makeAssExpr
+<STATEMENTIDNEST> -> !makeIndices <INDICE> <REPTIDNEST1> !consume <STATEMENTIDNEST3>
+<STATEMENTIDNEST> -> 'assign' <EXPR>
 
 <STATEMENTIDNEST2> -> EPSILON
 <STATEMENTIDNEST2> -> 'dot' 'id' !makeIdentifier !makeDot <STATEMENTIDNEST>

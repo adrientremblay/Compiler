@@ -4,95 +4,53 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="FuncDefList"];
 3[label="FuncDef"];
-4[label="Type | void"];
+4[label="Id | bubbleSort"];
 3->4
-5[label="StatBlock"];
-6[label="AssigStat"];
-7[label="Int | 0"];
+5[label="ParamList"];
+6[label="VarDecl"];
+7[label="Dims"];
 6->7
-8[label="Id | i"];
+8[label="Type | integer"];
 6->8
+9[label="Id | size"];
+6->9
 5->6
-9[label="VarDecl"];
-10[label="Id | j"];
-9->10
-11[label="Type | integer"];
-9->11
-12[label="Dims"];
-9->12
-5->9
-13[label="AssigStat"];
-14[label="Int | 0"];
-13->14
-15[label="Id | j"];
-13->15
-5->13
-16[label="VarDecl"];
-17[label="Dims"];
-16->17
-18[label="Id | n"];
-16->18
-19[label="Type | integer"];
-16->19
-5->16
-20[label="AssigStat"];
-21[label="Id | arr"];
-22[label="Indices"];
-23[label="Id | j"];
-22->23
-21->22
-20->21
-24[label="Id | temp"];
-20->24
-5->20
-25[label="VarDecl"];
-26[label="Dims"];
-25->26
-27[label="Id | temp"];
-25->27
-28[label="Type | integer"];
-25->28
-5->25
-29[label="AssigStat"];
-30[label="Id | size"];
-29->30
-31[label="Id | n"];
-29->31
-5->29
-32[label="VarDecl"];
-33[label="Dims"];
-32->33
-34[label="Type | integer"];
-32->34
-35[label="Id | i"];
-32->35
-5->32
+10[label="VarDecl"];
+11[label="Dims"];
+none12[shape=point]11->none12
+10->11
+13[label="Type | integer"];
+10->13
+14[label="Id | arr"];
+10->14
+5->10
 3->5
-36[label="ScopeSpec"];
-3->36
-37[label="ParamList"];
-38[label="VarDecl"];
-39[label="Dims"];
-38->39
-40[label="Type | integer"];
-38->40
-41[label="Id | size"];
-38->41
-37->38
-42[label="VarDecl"];
-43[label="Dims"];
-none44[shape=point]43->none44
-42->43
-45[label="Type | integer"];
-42->45
-46[label="Id | arr"];
-42->46
-37->42
-3->37
-47[label="Id | bubbleSort"];
-3->47
+15[label="Type | void"];
+3->15
+16[label="StatBlock"];
+17[label="AssigStat"];
+18[label="Id | arr"];
+19[label="Indices"];
+20[label="AddOp"];
+21[label="Id | j"];
+20->21
+22[label="Int | 1"];
+20->22
+19->20
+18->19
+17->18
+23[label="Id | arr"];
+24[label="Indices"];
+25[label="Id | j"];
+24->25
+23->24
+17->23
+16->17
+3->16
+26[label="ScopeSpec"];
+3->26
 2->3
 1->2
-48[label="ClassDeclList"];
-1->48
+27[label="ClassDeclList"];
+1->27
 }
