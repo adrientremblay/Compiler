@@ -14,7 +14,7 @@
 <ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 
 <ARRAYSIZE2> -> 'intnum' !addIntToTop 'closesqbr'
-<ARRAYSIZE2> -> 'closesqbr'
+<ARRAYSIZE2> -> 'closesqbr' !addNothing
 
 <EXPR> -> <ARITHEXPR> <EXPR2>
 
@@ -30,6 +30,7 @@
 
 <FACTOR2> -> 'openpar' <APARAMS> 'closepar'
 <FACTOR2> -> <REPTIDNEST1>
+<FACTOR2> -> EPSILON
 
 <FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
 <FPARAMS> -> EPSILON

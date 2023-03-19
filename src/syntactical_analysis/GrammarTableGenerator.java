@@ -59,7 +59,7 @@ public class GrammarTableGenerator {
             generateFollowSet(rule);
 
         // Generate the follow sets for a second time... Lord have mercy on my soul...
-        // This is a dumb solution
+        // todo: This is a dumb solution
         followSetKeys = new HashSet<String>();
         for (String rule : rules.keySet())
             generateFollowSet(rule);
@@ -87,7 +87,7 @@ public class GrammarTableGenerator {
                 Set<String> lineFollowSet = followSets.get(leftHandSide);
 
                 for (String terminal : lineFollowSet)
-                    if (!terminal.equals("plus") && !terminal.equals("minus")) // todo: THIS CODE IS ASS!!!!
+                    //if (!terminal.equals("plus") && !terminal.equals("minus")) // todo: THIS CODE IS ASS!!!!
                         grammarTable.get(leftHandSide).put(terminal, line);
             }
         }

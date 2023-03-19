@@ -211,6 +211,9 @@ public class Parser {
                         Sign sign = new Sign(lastToken);
                         semanticStack.add(sign);
                         break;
+                    case "addNothing":
+                        semanticStack.peek().addChild(new Nothing());
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;
