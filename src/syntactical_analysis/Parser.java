@@ -108,6 +108,7 @@ public class Parser {
                         semanticStack.push(floaty);
                         break;
                     case "addFactorToOp":
+                    case "consume":
                         SemanticConcept factor = semanticStack.pop();
                         semanticStack.peek().addChild(factor);
                         break;
@@ -130,11 +131,11 @@ public class Parser {
                         semanticStack.push(new Type(null));
                         break;
                     case "makeVariableDeclaration":
-                        VariableDeclaration variableDeclaration = new VariableDeclaration(semanticStack.pop(), semanticStack.pop());
+                        VariableDeclaration variableDeclaration = new VariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(variableDeclaration);
-                        Dimensions dimensions = new Dimensions();
-                        variableDeclaration.addChild(dimensions);
-                        semanticStack.push(dimensions);
+                        //Dimensions dimensions = new Dimensions();
+                        //variableDeclaration.addChild(dimensions);
+                        //semanticStack.push(dimensions);
                         break;
                     case "addIntToTop":
                         semanticStack.peek().addChild(new Integer(lastToken));
@@ -164,10 +165,6 @@ public class Parser {
                         break;
                     case "makeClassDeclaration":
                         classDeclarationList.addChild(new ClassDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
-                        break;
-                    case "consume":
-                        SemanticConcept item = semanticStack.pop();
-                        semanticStack.peek().addChild(item);
                         break;
                     case "makeScopeSpecification":
                         semanticStack.push(new ScopeSpecification(lastToken));

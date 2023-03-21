@@ -4,28 +4,34 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="FuncDefList"];
 3[label="FuncDef"];
-4[label="ScopeSpec"];
+4[label="Id | main"];
 3->4
-5[label="Dims"];
-3->5
-6[label="Type | void"];
-3->6
-7[label="ParamList"];
-3->7
-8[label="StatBlock"];
-9[label="VarDecl"];
-10[label="Dims"];
-9->10
-11[label="Type | QUADRATIC"];
-9->11
-12[label="Id | f2"];
-9->12
+5[label="StatBlock"];
+6[label="VarDecl"];
+7[label="Id | f2"];
+6->7
+8[label="ParamList"];
+9[label="Float | 1.0"];
 8->9
-3->8
+10[label="Sign | -"];
+11[label="Float | 2.0"];
+10->11
+8->10
+12[label="Float | 0.0"];
+8->12
+6->8
+13[label="Type | QUADRATIC"];
+6->13
+5->6
+3->5
+14[label="ParamList"];
+3->14
+15[label="Type | void"];
+3->15
+16[label="ScopeSpec"];
+3->16
 2->3
 1->2
-13[label="ClassDeclList"];
-1->13
-14[label="Id | main"];
-1->14
+17[label="ClassDeclList"];
+1->17
 }
