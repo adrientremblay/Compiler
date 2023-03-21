@@ -86,9 +86,12 @@ public class GrammarTableGenerator {
             || canBeEpsilon.contains(lastNonSemanticItem(rightHandSide))) { // the last symbol of the rhs of the rule can be epsilon, so we take it's follow set
                 Set<String> lineFollowSet = followSets.get(leftHandSide);
 
-                for (String terminal : lineFollowSet)
-                    //if (!terminal.equals("plus") && !terminal.equals("minus")) // todo: THIS CODE IS ASS!!!!
-                        grammarTable.get(leftHandSide).put(terminal, line);
+                for (String terminal : lineFollowSet) {
+                    if (leftHandSide.equals("<FACTOR>") && (terminal.equals("plus") || terminal.equals("minus"))) // todo: THIS CODE IS ASS!!!!
+                        continue;
+
+                    grammarTable.get(leftHandSide).put(terminal, line);
+                }
             }
         }
 
