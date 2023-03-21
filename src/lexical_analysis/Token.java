@@ -42,7 +42,7 @@ public enum Token {
     FLOAT("float", "", false, false, true),
     VOID("void", "", false, false, true),
     CLASS("class", "", false, false, true),
-    SELF("self", "", false, false, true),
+    //SELF("self", "", false, false, true),
     ISA("isa", "", false, false, true),
     WHILE("while", "", false, false, true),
     IF("if", "", false, false, true),

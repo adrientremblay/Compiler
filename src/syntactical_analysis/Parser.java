@@ -126,6 +126,9 @@ public class Parser {
                     case "makeType":
                         semanticStack.push(new Type(lastToken));
                         break;
+                    case "makeEmptyType":
+                        semanticStack.push(new Type(null));
+                        break;
                     case "makeVariableDeclaration":
                         VariableDeclaration variableDeclaration = new VariableDeclaration(semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(variableDeclaration);

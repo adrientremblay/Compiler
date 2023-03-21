@@ -50,7 +50,7 @@
 <FUNCHEADTAIL> -> !makeScopeSpecification 'sr' <FUNCHEADMEMBERTAIL>
 <FUNCHEADTAIL> -> !makeIdentifier 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
 <FUNCHEADMEMBERTAIL> -> 'id' !makeIdentifier 'openpar' !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<FUNCHEADMEMBERTAIL> -> 'constructor' !makeScopeSpecification 'openpar' !makeParameterList <FPARAMS> 'closepar'
+<FUNCHEADMEMBERTAIL> -> 'constructor' !makeIdentifier 'openpar' !makeParameterList <FPARAMS> 'closepar' !makeEmptyType
 
 <STATEMENT> -> 'id' !makeIdentifier <STATEMENTIDNEST> 'semi'
 <STATEMENT> -> 'if' 'openpar' <RELEXPR> 'closepar' 'then' !makeStatementBlock <STATBLOCK> 'else' !makeStatementBlock <STATBLOCK> !makeIfStatement 'semi'
