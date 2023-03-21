@@ -120,6 +120,9 @@ public class Parser {
                     case "makeDivisionOperation":
                         semanticStack.push(new DivisionOperation(semanticStack.pop()));
                         break;
+                    case "makeMultiplyOperation":
+                        semanticStack.push(new MultiplyOperation(semanticStack.pop()));
+                        break;
                     case "makeType":
                         semanticStack.push(new Type(lastToken));
                         break;
