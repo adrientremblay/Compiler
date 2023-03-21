@@ -99,6 +99,10 @@ public class Parser {
                         FunctionCall functionCall = new FunctionCall(semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(functionCall);
                         break;
+                    case "makeFunctionCallAndAddToStack":
+                        FunctionCall functionCall2 = new FunctionCall(semanticStack.pop(), semanticStack.pop());
+                        semanticStack.add(functionCall2);
+                        break;
                     case "makeInt":
                         Integer inty = new Integer(lastToken);
                         semanticStack.push(inty);

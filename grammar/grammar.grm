@@ -76,8 +76,8 @@
 <REPTVARIABLEORFUNCTIONCALL> -> <IDNEST> <REPTVARIABLEORFUNCTIONCALL>
 <REPTVARIABLEORFUNCTIONCALL> -> EPSILON
 
-<IDNEST> -> 'dot' 'id' !makeIdentifier !makeDot <IDNEST2>
-<IDNEST2> -> 'openpar' <APARAMS> 'closepar'
+<IDNEST> -> 'dot' 'id' !makeIdentifier <IDNEST2>
+<IDNEST2> -> 'openpar' <APARAMS> 'closepar' !makeFunctionCallAndAddToStack !makeDot
 <IDNEST2> -> <REPTIDNEST1>
 
 <INDICE> -> 'opensqbr' <ARITHEXPR> !consume 'closesqbr'
