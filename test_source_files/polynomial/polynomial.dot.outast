@@ -1,0 +1,33 @@
+digraph AST {
+node [shape=record];
+node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
+1[label="Prog"];
+2[label="FuncDefList"];
+1->2
+3[label="ClassDeclList"];
+4[label="ClassDecl"];
+5[label="Id | POLYNOMIAL"];
+4->5
+6[label="InherList"];
+4->6
+7[label="MembList"];
+8[label="FuncDecl"];
+9[label="Type | float"];
+8->9
+10[label="Id | evaluate"];
+11[label="VarDecl"];
+12[label="ParamList"];
+11->12
+13[label="Type | float"];
+11->13
+14[label="Id | x"];
+11->14
+10->11
+8->10
+15[label="Dims"];
+8->15
+7->8
+4->7
+3->4
+1->3
+}

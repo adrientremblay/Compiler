@@ -1,0 +1,19 @@
+<START> -> <PROG> 'endoffile'
+<PROG> -> <REPTPROG0> !makeProgram
+<REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
+<CLASSDECLORFUNCDEF> -> <CLASSDECL>
+<CLASSDECL> -> 'class' 'id' !makeIdentifier !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
+<OPTINHERITS> -> EPSILON
+<REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
+<VISIBILITY> -> 'public'
+<MEMBERDECL> -> <MEMBERFUNCDECL>
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
+<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType !makeFunctionDeclaration
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration !makeDimensions <REPTFPARAMS3> <REPTFPARAMS4>
+<TYPE> -> 'float'
+<REPTFPARAMS3> -> EPSILON
+<REPTFPARAMS4> -> EPSILON
+<RETURNTYPE> -> <TYPE>
+<TYPE> -> 'float'
+<REPTMEMBERDECL> -> EPSILON
+<REPTPROG0> -> EPSILON

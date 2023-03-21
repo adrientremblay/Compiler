@@ -137,9 +137,6 @@ public class Parser {
                     case "makeVariableDeclaration":
                         VariableDeclaration variableDeclaration = new VariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(variableDeclaration);
-                        //Dimensions dimensions = new Dimensions();
-                        //variableDeclaration.addChild(dimensions);
-                        //semanticStack.push(dimensions);
                         break;
                     case "addIntToTop":
                         semanticStack.peek().addChild(new Integer(lastToken));

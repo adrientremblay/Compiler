@@ -3,6 +3,8 @@ class POLYNOMIAL {
   public function evaluate: (x: float) => float;
 };
 
+/*
+
 class LINEAR isa POLYNOMIAL {
   private attribute a: float;
   private attribute b: float;
@@ -73,6 +75,7 @@ function main() => void
   };
 }
 
+*/
 
 /*
     classes
