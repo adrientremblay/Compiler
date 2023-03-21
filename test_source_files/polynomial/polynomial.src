@@ -1,5 +1,3 @@
-/*
-
 // ====== struct declarations ====== //
 class POLYNOMIAL {
   public function evaluate: (x: float) => float;
@@ -36,7 +34,6 @@ function QUADRATIC::evaluate(x: float) => float
   return (result);
 }
 
-*/
 
 function QUADRATIC::constructor(A: float, B: float, C: float)
 {
@@ -44,8 +41,6 @@ function QUADRATIC::constructor(A: float, B: float, C: float)
   self.b = B;
   self.c = C;
 }
-
-/*
 
 function LINEAR::constructor(A: float, B: float)
 {
@@ -60,6 +55,7 @@ function LINEAR::evaluate(x: float) => float
   result = a * x + b;
   return (result);
 }
+/*
 
 // ====== main ====== //
 function main() => void
