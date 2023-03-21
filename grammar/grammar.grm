@@ -160,7 +160,7 @@
 <TYPE> -> 'id'
 
 <LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
-<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <ARRAYOROBJECT> -> 'openpar' <APARAMS> 'closepar'
 
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>

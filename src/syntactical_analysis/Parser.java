@@ -225,6 +225,10 @@ public class Parser {
                         Constructor constructor = new Constructor(semanticStack.pop());
                         semanticStack.peek().addChild(constructor);
                         break;
+                    case "makeDimensions":
+                        Dimensions dims = new Dimensions();
+                        semanticStack.push(dims);
+                        break;
                     default:
                         System.err.println("Unknown semantic action!!!!");
                         break;
