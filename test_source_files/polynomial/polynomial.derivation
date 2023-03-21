@@ -9,7 +9,7 @@
 <MEMBERDECL> -> <MEMBERFUNCDECL>
 <MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
 <MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType !makeFunctionDeclaration
-<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration !makeDimensions <REPTFPARAMS3> <REPTFPARAMS4>
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeVariableDeclaration <REPTFPARAMS4>
 <TYPE> -> 'float'
 <REPTFPARAMS3> -> EPSILON
 <REPTFPARAMS4> -> EPSILON

@@ -15,17 +15,17 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 9[label="Type | float"];
 8->9
 10[label="Id | evaluate"];
-11[label="VarDecl"];
-12[label="ParamList"];
-11->12
-13[label="Type | float"];
-11->13
-14[label="Id | x"];
-11->14
-10->11
 8->10
+11[label="ParamList"];
+12[label="VarDecl"];
+13[label="Id | x"];
+12->13
+14[label="Type | float"];
+12->14
 15[label="Dims"];
-8->15
+12->15
+11->12
+8->11
 7->8
 4->7
 3->4
