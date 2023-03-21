@@ -3,93 +3,27 @@ node [shape=record];
 node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="FuncDefList"];
-1->2
-3[label="ClassDeclList"];
-4[label="ClassDecl"];
-5[label="Id | POLYNOMIAL"];
-4->5
-6[label="InherList"];
-4->6
-7[label="MembList"];
-8[label="FuncDecl"];
-9[label="Type | float"];
-8->9
-10[label="Id | evaluate"];
-8->10
-11[label="ParamList"];
-12[label="VarDecl"];
-13[label="Dims"];
-12->13
-14[label="Type | float"];
-12->14
-15[label="Id | x"];
-12->15
-11->12
-8->11
-7->8
-4->7
+3[label="FuncDef"];
+4[label="StatBlock"];
 3->4
-16[label="ClassDecl"];
-17[label="MembList"];
-18[label="Constructor"];
-19[label="ParamList"];
-20[label="VarDecl"];
-21[label="Type | float"];
-20->21
-22[label="Dims"];
-20->22
-23[label="Id | A"];
-20->23
-19->20
-24[label="VarDecl"];
-25[label="Type | float"];
-24->25
-26[label="Id | B"];
-24->26
-27[label="Dims"];
-24->27
-19->24
-18->19
-17->18
-28[label="FuncDecl"];
-29[label="Type | float"];
-28->29
-30[label="Id | evaluate"];
-28->30
-31[label="ParamList"];
-32[label="VarDecl"];
-33[label="Type | float"];
-32->33
-34[label="Dims"];
-32->34
-35[label="Id | x"];
-32->35
-31->32
-28->31
-17->28
-36[label="VarDecl"];
-37[label="Type | float"];
-36->37
-38[label="Id | b"];
-36->38
-39[label="Dims"];
-36->39
-17->36
-40[label="VarDecl"];
-41[label="Dims"];
-40->41
-42[label="Type | float"];
-40->42
-43[label="Id | a"];
-40->43
-17->40
-16->17
-44[label="Id | LINEAR"];
-16->44
-45[label="InherList"];
-46[label="Id | POLYNOMIAL"];
-45->46
-16->45
-3->16
-1->3
+5[label="Type | float"];
+3->5
+6[label="ScopeSpec | POLYNOMIAL"];
+3->6
+7[label="Id | evaluate"];
+3->7
+8[label="ParamList"];
+9[label="VarDecl"];
+10[label="Dims"];
+9->10
+11[label="Type | float"];
+9->11
+12[label="Id | x"];
+9->12
+8->9
+3->8
+2->3
+1->2
+13[label="ClassDeclList"];
+1->13
 }
