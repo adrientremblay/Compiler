@@ -71,7 +71,7 @@ function QUADRATIC::evaluate(x: float) => float
 	result = a.self;                                                       // 15.2
     return (result);
   }
-  
+
 function QUADRATIC::constructor(B: float, C: float)
   {
     localvar new_function: QUADRATIC ;
@@ -126,7 +126,7 @@ function main() => void
     write(f1.evaluate(counter));
     write(f2.evaluate(counter));
   };
-}
+
 
 /*
 1.   |X| Global symbol table 

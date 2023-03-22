@@ -121,7 +121,8 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
                     }
                 }
                 if (functionRow == null) {
-                    System.err.println("ERROR! Failed to find the matching class func decl row for a func def!");
+                    System.err.println("ERROR 6.1: definition provided for undeclared member function");
+                    symbolTablePrinter.writeError("ERROR 6.1: definition provided for undeclared member function");
                     return;
                 }
 

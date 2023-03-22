@@ -66,7 +66,7 @@ public class SymbolTablePrinter {
         }
     }
 
-    private void writeError(String line) {
+    public void writeError(String line) {
         try {
             semanticErrorWriter.write(line + '\n');
         } catch (IOException e) {

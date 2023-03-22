@@ -15,10 +15,10 @@ public class Driver {
             //        "test_source_files/bubble_sort_extended/bubble_sort_extended.src",
             //        "test_source_files/lex_negative_grading/lex_negative_grading.src",
             //        "test_source_files/lex_positive_grading/lex_positive_grading.src",
-            //        "test_source_files/polynomial/polynomial.src"
+                    "test_source_files/polynomial/polynomial.src"
             // "test_source_files/syntax_errors_galore/syntax_errors_galore.src",
             // "test_source_files/ast_test/ast_test.src",
-                    "test_source_files/polynomial_semantic_errors/polynomial_semantic_errors.src"
+            //        "test_source_files/polynomial_semantic_errors/polynomial_semantic_errors.src"
     };
 
     public static void main(String args[]) throws IOException {
