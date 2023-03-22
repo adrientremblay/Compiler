@@ -49,4 +49,8 @@ public class SymbolTableRow {
     public VisibilityKind getVisibilityKind() {
         return visibilityKind;
     }
+
+    public void setSymbolTableLink(SymbolTable symbolTableLink) {
+        this.symbolTableLink = symbolTableLink;
+    }
 }

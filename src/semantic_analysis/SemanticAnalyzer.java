@@ -84,18 +84,6 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
 
         SymbolTable classSymbolTable = classMap.get(functionDeclaration.getScopeSpecification().getMember().getLexeme());
         classSymbolTable.addRow(functionRow);
-
-        /*
-        SymbolTable functionBodySymbolTable = new SymbolTable(functionTableName);
-        if (functionDefinition.getScopeSpecification().getMember() == null) {
-        scopeStack.peek().addRow(functionRow);
-        } else if (classMap.containsKey(functionDefinition.getScopeSpecification().getMember().getLexeme())) {
-        SymbolTable classSymbolTable = classMap.get(functionDefinition.getScopeSpecification().getMember().getLexeme());
-        classSymbolTable.addRow(functionRow);
-        } else {
-        System.err.println("ERROR! Can't find the class that this function should go in!");
-        }
-        */
     }
 
     /**
@@ -137,7 +125,7 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
                     return;
                 }
 
-                classSymbolTable.addRow(functionRow);
+                functionRow.setSymbolTableLink(functionBodySymbolTable);
             } else {
                 System.err.println("ERROR! Can't find the class that this function should go in!");
                 return;
