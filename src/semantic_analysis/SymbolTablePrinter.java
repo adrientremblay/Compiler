@@ -37,13 +37,16 @@ public class SymbolTablePrinter {
         }
         String spacing = sb.toString();
 
+        //writeLine(spacing + "-----------------------------------------------------------");
         writeLine(spacing + "- TABLE: " + symbolTable.getName());
+        //writeLine(spacing + "-----------------------------------------------------------");
         for (SymbolTableRow row : symbolTable.getRows()) {
             writeLine(spacing + "- " + row.getKind() + " | " + row.getName() + " | " + row.getType());
             if (row.getSymbolTableLink() != null) {
                 writeSymbolTable(row.getSymbolTableLink(), indent+1);
             }
         }
+        //writeLine(spacing + "-----------------------------------------------------------");
     }
 
     private void writeLine(String line) {

@@ -1,7 +1,7 @@
 - TABLE: global
 - function | bubbleSort | (integer,integer[]):void
 	- TABLE: bubbleSort
-	- function | main | ():void
+- function | main | ():void
 	- TABLE: main
-	- function | printArray | (integer[],integer):void
+- function | printArray | (integer,integer[]):void
 	- TABLE: printArray
