@@ -8,6 +8,7 @@ import java.nio.file.Path;
 
 public class SymbolTablePrinter {
     private BufferedWriter symbolTableWriter;
+    private BufferedWriter semanticErrorWriter;
 
     // todo: the order of the rows is kinda messed up because of my use of Sets for children... fix this?
     public SymbolTablePrinter(String sourceFilePath) {
@@ -19,6 +20,10 @@ public class SymbolTablePrinter {
             String symbolTableFileName = sourceFileName + ".outsymboltables";
             File symbolTableOutputFile = new File(outputDir + "/" + symbolTableFileName);
             symbolTableWriter = new BufferedWriter(new FileWriter(symbolTableOutputFile));
+
+            String semanticErrorsFileName = sourceFileName + ".outsemanticerrors";
+            File semanticErrorsOutputFile = new File(outputDir + "/" + semanticErrorsFileName);
+            semanticErrorWriter = new BufferedWriter(new FileWriter(semanticErrorsOutputFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,9 +66,18 @@ public class SymbolTablePrinter {
         }
     }
 
+    private void writeError(String line) {
+        try {
+            semanticErrorWriter.write(line + '\n');
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void cleanup() {
         try {
             symbolTableWriter.close();
+            semanticErrorWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
