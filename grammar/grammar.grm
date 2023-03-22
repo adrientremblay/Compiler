@@ -151,7 +151,7 @@
 <STATBLOCK> -> <STATEMENT>
 <STATBLOCK> -> EPSILON
 
-<CLASSDECL> -> 'class' 'id' !makeIdentifier !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
+<CLASSDECL> -> 'class' 'id' !makeIdentifier !markScope !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
 
 <TERM> -> <FACTOR> <RIGHTRECTERM>
 

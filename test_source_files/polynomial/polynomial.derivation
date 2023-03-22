@@ -2,7 +2,7 @@
 <PROG> -> <REPTPROG0> !makeProgram
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <CLASSDECL>
-<CLASSDECL> -> 'class' 'id' !makeIdentifier !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
+<CLASSDECL> -> 'class' 'id' !makeIdentifier !markScope !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
 <OPTINHERITS> -> EPSILON
 <REPTMEMBERDECL> -> <VISIBILITY> !makeVisibility <MEMBERDECL> <REPTMEMBERDECL>
 <VISIBILITY> -> 'public'
@@ -18,7 +18,7 @@
 <REPTMEMBERDECL> -> EPSILON
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <CLASSDECL>
-<CLASSDECL> -> 'class' 'id' !makeIdentifier !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
+<CLASSDECL> -> 'class' 'id' !makeIdentifier !markScope !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
 <OPTINHERITS> -> 'isa' 'id' !makeIdentifier !consume <REPTINHERITSLIST>
 <REPTINHERITSLIST> -> EPSILON
 <REPTMEMBERDECL> -> <VISIBILITY> !makeVisibility <MEMBERDECL> <REPTMEMBERDECL>
@@ -60,7 +60,7 @@
 <REPTMEMBERDECL> -> EPSILON
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <CLASSDECL>
-<CLASSDECL> -> 'class' 'id' !makeIdentifier !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
+<CLASSDECL> -> 'class' 'id' !makeIdentifier !markScope !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
 <OPTINHERITS> -> 'isa' 'id' !makeIdentifier !consume <REPTINHERITSLIST>
 <REPTINHERITSLIST> -> EPSILON
 <REPTMEMBERDECL> -> <VISIBILITY> !makeVisibility <MEMBERDECL> <REPTMEMBERDECL>

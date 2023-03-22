@@ -4,6 +4,7 @@ import syntactical_analysis.ast_generation.tree.*;
 import syntactical_analysis.Parser;
 import syntactical_analysis.ast_generation.tree.classes.ClassDeclaration;
 import syntactical_analysis.ast_generation.tree.classes.ClassDeclarationList;
+import syntactical_analysis.ast_generation.tree.classes.Constructor;
 import syntactical_analysis.ast_generation.tree.classes.FunctionDeclaration;
 import syntactical_analysis.ast_generation.tree.statements.LocalVariableDeclaration;
 
@@ -60,17 +61,29 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
     }
 
     @Override
+    public void visitConstructor(Constructor constructor) {
+        String functionName = "constructor";
+
+        String functionType = constructor.getParameterList().toString() + ":";
+        functionType += constructor.getScopeSpecification().getMember().getLexeme();
+
+        SymbolTableRow functionRow = new SymbolTableRow(functionName, SymbolTableRowKind.FUNCTION, functionType, VisibilityKind.kindOf(constructor.getVisibility()));
+
+        SymbolTable classSymbolTable = classMap.get(constructor.getScopeSpecification().getMember().getLexeme());
+        classSymbolTable.addRow(functionRow);
+    }
+
+    @Override
     public void visitFunctionDeclaration(FunctionDeclaration functionDeclaration) {
         String functionName = functionDeclaration.getIdentifier().getMember().getLexeme();
 
         String functionType = functionDeclaration.getParameterList().toString() + ":";
-        functionType += (functionDeclaration.getType().getMember() != null) ? functionDeclaration.getType().getMember().getLexeme() :
-                functionDeclaration.getScopeSpecification().getMember().getLexeme(); // constructor
-
-        String functionTableName = functionDeclaration.getScopeSpecification().getMember().getLexeme() + "::" + functionName;
+        functionType += functionDeclaration.getType().getMember().getLexeme();
 
         SymbolTableRow functionRow = new SymbolTableRow(functionName, SymbolTableRowKind.FUNCTION, functionType, VisibilityKind.kindOf(functionDeclaration.getVisibility()));
-        scopeStack.peek().addRow(functionRow);
+
+        SymbolTable classSymbolTable = classMap.get(functionDeclaration.getScopeSpecification().getMember().getLexeme());
+        classSymbolTable.addRow(functionRow);
 
         /*
         SymbolTable functionBodySymbolTable = new SymbolTable(functionTableName);

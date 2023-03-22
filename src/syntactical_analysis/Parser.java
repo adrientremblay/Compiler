@@ -179,8 +179,10 @@ public class Parser {
                     case "makeClassDeclaration":
                         classDeclarationList.addChild(new ClassDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
-                    case "makeScopeSpecification":
+                    case "markScope":
                         lastSeenScopeSpec = lastToken;
+                        break;
+                    case "makeScopeSpecification":
                         ScopeSpecification scopeSpecification = new ScopeSpecification(lastToken);
                         semanticStack.push(scopeSpecification);
                         break;
@@ -237,7 +239,7 @@ public class Parser {
                         semanticStack.peek().addChild(new Nothing());
                         break;
                     case "makeConstructor":
-                        Constructor constructor = new Constructor(semanticStack.pop(), semanticStack.pop());
+                        Constructor constructor = new Constructor(semanticStack.pop(), semanticStack.pop(), new ScopeSpecification(lastSeenScopeSpec));
                         semanticStack.peek().addChild(constructor);
                         break;
                     case "makeDimensions":

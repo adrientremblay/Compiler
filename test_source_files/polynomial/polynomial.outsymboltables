@@ -1,0 +1,20 @@
+- TABLE: global
+- class | LINEAR | 
+	- TABLE: LINEAR
+	- function | constructor | (float[],float[]):LINEAR | public
+	- inherit | POLYNOMIAL | 
+	- function | evaluate | (float[]):float | public
+- class | QUADRATIC | 
+	- TABLE: QUADRATIC
+	- function | evaluate | (float[]):float | public
+	- function | constructor | (float[],float[],float[]):QUADRATIC | public
+	- inherit | POLYNOMIAL | 
+- class | POLYNOMIAL | 
+	- TABLE: POLYNOMIAL
+	- inherit | none | 
+	- function | evaluate | (float[]):float | public
+- function | main | ():void
+	- TABLE: main
+	- variable | counter | integer
+	- variable | f1 | LINEAR
+	- variable | f2 | QUADRATIC
