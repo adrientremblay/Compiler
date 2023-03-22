@@ -8,9 +8,9 @@
 - class | QUADRATIC | 
 	- TABLE: QUADRATIC
 	- inherit | POLYNOMIAL | 
-- function | constructor | LINEAR
+- function | constructor | (float[],float[]):LINEAR
 	- TABLE: constructor
-- function | constructor | QUADRATIC
+- function | constructor | (float[],float[],float[]):QUADRATIC
 	- TABLE: constructor
 - function | main | ():void
 	- TABLE: main
