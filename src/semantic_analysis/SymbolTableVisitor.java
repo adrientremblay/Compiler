@@ -8,8 +8,6 @@ import syntactical_analysis.ast_generation.tree.classes.FunctionDeclaration;
 import syntactical_analysis.ast_generation.tree.function.ParameterVariableDeclaration;
 import syntactical_analysis.ast_generation.tree.statements.LocalVariableDeclaration;
 
-import java.lang.reflect.Member;
-
 public interface SymbolTableVisitor {
     void visitConstructor(Constructor constructor);
     void visitFunctionDeclaration(FunctionDeclaration functionDeclaration);
