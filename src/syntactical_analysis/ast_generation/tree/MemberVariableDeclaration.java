@@ -2,15 +2,16 @@ package syntactical_analysis.ast_generation.tree;
 
 import semantic_analysis.SymbolTableVisitor;
 
-public class VariableDeclaration extends SemanticConcept {
+public class MemberVariableDeclaration extends SemanticConcept {
     private Identifier identifier;
     private Type type;
     private Dimensions dimensions;
 
-    public VariableDeclaration(SemanticConcept arrayOrObject, SemanticConcept type, SemanticConcept id) {
+    public MemberVariableDeclaration(SemanticConcept arrayOrObject, SemanticConcept type, SemanticConcept id, SemanticConcept visibility) {
         addChild(id);
         addChild(type);
         addChild(arrayOrObject);
+        addChild(visibility);
 
         this.identifier = (Identifier) id;
         this.type = (Type)  type;

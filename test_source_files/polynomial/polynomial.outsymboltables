@@ -1,4 +1,12 @@
 - TABLE: global
+- class | LINEAR | 
+	- TABLE: LINEAR
+	- inherit | POLYNOMIAL | 
+	- function | constructor | (float[],float[]):LINEAR
+		- TABLE: LINEAR::constructor
+	- function | evaluate | (float[]):float
+		- TABLE: LINEAR::evaluate
+		- variable | result | float
 - class | POLYNOMIAL | 
 	- TABLE: POLYNOMIAL
 	- function | evaluate | (float[]):float
@@ -6,17 +14,9 @@
 	- inherit | none | 
 - function | main | ():void
 	- TABLE: main
-	- variable | f1 | LINEAR
-	- variable | f2 | QUADRATIC
 	- variable | counter | integer
-- class | LINEAR | 
-	- TABLE: LINEAR
-	- function | evaluate | (float[]):float
-		- TABLE: LINEAR::evaluate
-		- variable | result | float
-	- function | constructor | (float[],float[]):LINEAR
-		- TABLE: LINEAR::constructor
-	- inherit | POLYNOMIAL | 
+	- variable | f2 | QUADRATIC
+	- variable | f1 | LINEAR
 - class | QUADRATIC | 
 	- TABLE: QUADRATIC
 	- inherit | POLYNOMIAL | 

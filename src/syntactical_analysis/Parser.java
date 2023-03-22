@@ -139,6 +139,10 @@ public class Parser {
                         VariableDeclaration variableDeclaration = new VariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(variableDeclaration);
                         break;
+                    case "makeMemberVariableDeclaration":
+                        MemberVariableDeclaration memberVariableDeclaration = new MemberVariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
+                        semanticStack.peek().addChild(memberVariableDeclaration);
+                        break;
                     case "makeLocalVariableDeclaration":
                         LocalVariableDeclaration localVariableDeclaration = new LocalVariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(localVariableDeclaration);
@@ -150,7 +154,7 @@ public class Parser {
                         functionDefinitionList.addChild(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
                     case "makeFunctionDeclaration":
-                        FunctionDeclaration functionDeclaration = new FunctionDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
+                        FunctionDeclaration functionDeclaration = new FunctionDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(functionDeclaration);
                         break;
                     case "makeParameterList":
@@ -228,12 +232,16 @@ public class Parser {
                         semanticStack.peek().addChild(new Nothing());
                         break;
                     case "makeConstructor":
-                        Constructor constructor = new Constructor(semanticStack.pop());
+                        Constructor constructor = new Constructor(semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(constructor);
                         break;
                     case "makeDimensions":
                         Dimensions dims = new Dimensions();
                         semanticStack.push(dims);
+                        break;
+                    case "makeVisibility":
+                        Visibility visibility = new Visibility(lastToken);
+                        semanticStack.push(visibility);
                         break;
                     default:
                         System.err.println("Unknown semantic action!!!!");

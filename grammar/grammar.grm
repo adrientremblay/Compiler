@@ -85,7 +85,7 @@
 <MEMBERDECL> -> <MEMBERFUNCDECL>
 <MEMBERDECL> -> <MEMBERVARDECL>
 
-<MEMBERVARDECL> -> 'attribute' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTARRAYSIZE> !makeVariableDeclaration 'semi'
+<MEMBERVARDECL> -> 'attribute' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTARRAYSIZE> !makeMemberVariableDeclaration 'semi'
 
 <MULTOP> -> 'mult' !makeMultiplyOperation
 <MULTOP> -> 'div' !makeDivisionOperation
@@ -129,7 +129,7 @@
 <REPTSTATBLOCK1> -> <STATEMENT> <REPTSTATBLOCK1>
 <REPTSTATBLOCK1> -> EPSILON
 
-<REPTMEMBERDECL> -> <VISIBILITY> <MEMBERDECL> <REPTMEMBERDECL>
+<REPTMEMBERDECL> -> <VISIBILITY> !makeVisibility <MEMBERDECL> <REPTMEMBERDECL>
 <REPTMEMBERDECL> -> EPSILON
 
 <REPTARRAYSIZE> -> <ARRAYSIZE> <REPTARRAYSIZE>
