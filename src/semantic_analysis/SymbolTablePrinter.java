@@ -9,6 +9,7 @@ import java.nio.file.Path;
 public class SymbolTablePrinter {
     private BufferedWriter symbolTableWriter;
 
+    // todo: the order of the rows is kinda messed up because of my use of Sets for children... fix this?
     public SymbolTablePrinter(String sourceFilePath) {
         Path sourceFilePathAsPath = Path.of(sourceFilePath);
         Path outputDir = sourceFilePathAsPath.getParent();
@@ -31,9 +32,10 @@ public class SymbolTablePrinter {
 
     private void writeSymbolTable(SymbolTable symbolTable, int indent) {
         StringBuilder sb = new StringBuilder();
-        while (indent > 0) {
-            sb.append('\t');
-            indent--;
+        int toIndent = indent;
+        while (toIndent > 0) {
+            sb.append("\t");
+            toIndent--;
         }
         String spacing = sb.toString();
 
