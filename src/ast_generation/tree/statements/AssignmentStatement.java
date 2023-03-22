@@ -1,6 +1,7 @@
 package ast_generation.tree.statements;
 
 import ast_generation.tree.SemanticConcept;
+import semantic_analysis.SymbolTableVisitor;
 
 public class AssignmentStatement extends SemanticConcept {
     public AssignmentStatement(SemanticConcept left, SemanticConcept right) {
@@ -11,5 +12,10 @@ public class AssignmentStatement extends SemanticConcept {
     @Override
     public String getName() {
         return "AssigStat";
+    }
+
+    @Override
+    public void accept(SymbolTableVisitor visitor) {
+        // Do Nothing
     }
 }

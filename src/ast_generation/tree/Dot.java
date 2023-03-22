@@ -1,5 +1,7 @@
 package ast_generation.tree;
 
+import semantic_analysis.SymbolTableVisitor;
+
 public class Dot extends SemanticConcept{
     public Dot(SemanticConcept dotParam1, SemanticConcept dotParam2) {
         addChild(dotParam1);
@@ -9,5 +11,10 @@ public class Dot extends SemanticConcept{
     @Override
     public String getName() {
         return "Dot";
+    }
+
+    @Override
+    public void accept(SymbolTableVisitor visitor) {
+        // Do Nothing
     }
 }

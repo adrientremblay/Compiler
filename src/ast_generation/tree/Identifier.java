@@ -1,6 +1,7 @@
 package ast_generation.tree;
 
 import lexical_analysis.FoundToken;
+import semantic_analysis.SymbolTableVisitor;
 
 public class Identifier extends SemanticConcept {
     @Override
@@ -11,5 +12,10 @@ public class Identifier extends SemanticConcept {
     public Identifier(FoundToken member) {
         super();
         this.member = member;
+    }
+
+    @Override
+    public void accept(SymbolTableVisitor visitor) {
+        // Do Nothing
     }
 }

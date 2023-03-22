@@ -1,6 +1,7 @@
 package ast_generation.tree.statements;
 
 import ast_generation.tree.SemanticConcept;
+import semantic_analysis.SymbolTableVisitor;
 
 public class ReadStatement extends SemanticConcept {
     public ReadStatement(SemanticConcept variable) {
@@ -10,5 +11,11 @@ public class ReadStatement extends SemanticConcept {
     @Override
     public String getName() {
         return "ReadStat";
+    }
+
+
+    @Override
+    public void accept(SymbolTableVisitor visitor) {
+        // Do Nothing
     }
 }

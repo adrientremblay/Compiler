@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 public class SyntaxDerivationPrinter {
-    BufferedWriter derivationWriter;
-    BufferedWriter syntaxErrorWriter;
+    private BufferedWriter derivationWriter;
+    private BufferedWriter syntaxErrorWriter;
 
     public SyntaxDerivationPrinter(String sourceFilePath) {
         Path sourceFilePathAsPath = Path.of(sourceFilePath);

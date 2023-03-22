@@ -48,7 +48,7 @@ public class Parser {
         skippingErrors = false;
     }
 
-    public boolean parse() {
+    public Program parse() {
         System.out.println("Starting Parse.");
 
         program = new Program();
@@ -295,14 +295,15 @@ public class Parser {
         syntaxDerivationPrinter.cleanup();
 
         if (foundToken.getToken() != Token.END_OF_FILE)
-            return false;
+            return null;
 
         System.out.println("Finished Parse.");
 
         // Print AST
         astPrinter.writeTree(program);
 
-        return true;
+        // Return the AST
+        return program;
     }
 
     public void loadSource(String sourceFilePath) {

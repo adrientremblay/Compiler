@@ -1,5 +1,7 @@
 package ast_generation.tree;
 
+import semantic_analysis.SymbolTableVisitor;
+
 public class FunctionDefinition extends SemanticConcept {
     public FunctionDefinition(SemanticConcept id, SemanticConcept scopeSpecification, SemanticConcept parameterList, SemanticConcept type, SemanticConcept statementBlock) {
         addChild(type);
@@ -12,5 +14,10 @@ public class FunctionDefinition extends SemanticConcept {
     @Override
     public String getName() {
         return "FuncDef";
+    }
+
+    @Override
+    public void accept(SymbolTableVisitor visitor) {
+        // Do Nothing
     }
 }

@@ -3,16 +3,16 @@
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <FUNCDEF>
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
-<FUNCHEAD> -> 'function' 'id' !makeIdentifier <FUNCHEADTAIL>
-<FUNCHEADTAIL> -> 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
+<FUNCHEAD> -> 'function' 'id' <FUNCHEADTAIL>
+<FUNCHEADTAIL> -> !makeIdentifier 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeVariableDeclaration <REPTFPARAMS4>
 <TYPE> -> 'integer'
 <REPTFPARAMS3> -> <ARRAYSIZE> <REPTFPARAMS3>
 <ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 <ARRAYSIZE2> -> 'closesqbr' !addNothing
 <REPTFPARAMS3> -> EPSILON
 <REPTFPARAMS4> -> <FPARAMSTAIL> <REPTFPARAMS4>
-<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMSTAIL4> !closeDims
+<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMSTAIL4> !makeVariableDeclaration
 <TYPE> -> 'integer'
 <REPTFPARAMSTAIL4> -> EPSILON
 <REPTFPARAMS4> -> EPSILON
@@ -20,27 +20,27 @@
 <FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
 <TYPE> -> 'integer'
-<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
 <TYPE> -> 'integer'
-<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
 <TYPE> -> 'integer'
-<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
 <TYPE> -> 'integer'
-<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <STATEMENT>
@@ -316,16 +316,16 @@
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <FUNCDEF>
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
-<FUNCHEAD> -> 'function' 'id' !makeIdentifier <FUNCHEADTAIL>
-<FUNCHEADTAIL> -> 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMS3> !closeDims <REPTFPARAMS4>
+<FUNCHEAD> -> 'function' 'id' <FUNCHEADTAIL>
+<FUNCHEADTAIL> -> !makeIdentifier 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeVariableDeclaration <REPTFPARAMS4>
 <TYPE> -> 'integer'
 <REPTFPARAMS3> -> <ARRAYSIZE> <REPTFPARAMS3>
 <ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 <ARRAYSIZE2> -> 'closesqbr' !addNothing
 <REPTFPARAMS3> -> EPSILON
 <REPTFPARAMS4> -> <FPARAMSTAIL> <REPTFPARAMS4>
-<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <REPTFPARAMSTAIL4> !closeDims
+<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMSTAIL4> !makeVariableDeclaration
 <TYPE> -> 'integer'
 <REPTFPARAMSTAIL4> -> EPSILON
 <REPTFPARAMS4> -> EPSILON
@@ -333,15 +333,15 @@
 <FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
 <TYPE> -> 'integer'
-<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
 <TYPE> -> 'integer'
-<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <STATEMENT>
@@ -430,16 +430,16 @@
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <FUNCDEF>
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
-<FUNCHEAD> -> 'function' 'id' !makeIdentifier <FUNCHEADTAIL>
-<FUNCHEADTAIL> -> 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
+<FUNCHEAD> -> 'function' 'id' <FUNCHEADTAIL>
+<FUNCHEADTAIL> -> !makeIdentifier 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
 <FPARAMS> -> EPSILON
 <RETURNTYPE> -> 'void'
 <FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeVariableDeclaration <ARRAYOROBJECT> !closeDims 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
 <TYPE> -> 'integer'
-<ARRAYOROBJECT> -> <REPTARRAYSIZE>
+<ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> <ARRAYSIZE> <REPTARRAYSIZE>
 <ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 <ARRAYSIZE2> -> 'intnum' !addIntToTop 'closesqbr'
