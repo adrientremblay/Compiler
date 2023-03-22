@@ -6,422 +6,422 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1->2
 3[label="FuncDefList"];
 4[label="FuncDef"];
-5[label="StatBlock"];
-6[label="AssigStat"];
-7[label="Id | size"];
-6->7
-8[label="Id | n"];
-6->8
-5->6
-9[label="AssigStat"];
-10[label="Int | 0"];
+5[label="Id | main"];
+4->5
+6[label="ParamList"];
+4->6
+7[label="StatBlock"];
+8[label="AssigStat"];
+9[label="Id | arr"];
+10[label="Indices"];
+11[label="Int | 0"];
+10->11
 9->10
-11[label="Id | j"];
-9->11
-5->9
-12[label="VarDecl"];
-13[label="Type | integer"];
-12->13
-14[label="Dims"];
-12->14
-15[label="Id | j"];
-12->15
-5->12
-16[label="WhileLoop"];
-17[label="StatBlock"];
-18[label="AssigStat"];
-19[label="AddOp"];
-20[label="Id | i"];
+8->9
+12[label="Int | 64"];
+8->12
+7->8
+13[label="FunctionCall"];
+14[label="ParamList"];
+15[label="Id | arr"];
+14->15
+16[label="Int | 7"];
+14->16
+13->14
+17[label="Id | printarray"];
+13->17
+7->13
+18[label="FunctionCall"];
+19[label="ParamList"];
+20[label="Id | arr"];
 19->20
-21[label="Int | 1"];
+21[label="Int | 7"];
 19->21
 18->19
-22[label="Id | i"];
+22[label="Id | printarray"];
 18->22
-17->18
-23[label="WhileLoop"];
-24[label="RelExpr"];
-25[label="SubOp"];
-26[label="SubOp"];
-27[label="Id | n"];
-26->27
-28[label="Id | i"];
-26->28
-25->26
-29[label="Int | 1"];
-25->29
+7->18
+23[label="FunctionCall"];
+24[label="ParamList"];
+25[label="Id | arr"];
 24->25
-30[label="Id | j"];
-24->30
-31[label="RelOp | lt"];
-24->31
+26[label="Int | 7"];
+24->26
 23->24
-32[label="StatBlock"];
+27[label="Id | bubbleSort"];
+23->27
+7->23
+28[label="AssigStat"];
+29[label="Id | arr"];
+30[label="Indices"];
+31[label="Int | 2"];
+30->31
+29->30
+28->29
+32[label="Int | 25"];
+28->32
+7->28
 33[label="AssigStat"];
-34[label="AddOp"];
-35[label="Id | j"];
-34->35
+34[label="Id | arr"];
+35[label="Indices"];
 36[label="Int | 1"];
-34->36
+35->36
+34->35
 33->34
-37[label="Id | j"];
+37[label="Int | 34"];
 33->37
-32->33
-38[label="IfStat"];
-39[label="StatBlock"];
-40[label="AssigStat"];
-41[label="Id | arr"];
-42[label="Indices"];
-43[label="AddOp"];
-44[label="Id | j"];
-43->44
-45[label="Int | 1"];
-43->45
-42->43
-41->42
+7->33
+38[label="AssigStat"];
+39[label="Id | arr"];
+40[label="Indices"];
+41[label="Int | 5"];
 40->41
-46[label="Id | temp"];
-40->46
 39->40
-47[label="AssigStat"];
-48[label="Id | arr"];
-49[label="Indices"];
-50[label="Id | j"];
-49->50
+38->39
+42[label="Int | 11"];
+38->42
+7->38
+43[label="AssigStat"];
+44[label="Int | 90"];
+43->44
+45[label="Id | arr"];
+46[label="Indices"];
+47[label="Int | 6"];
+46->47
+45->46
+43->45
+7->43
+48[label="AssigStat"];
+49[label="Int | 22"];
 48->49
-47->48
-51[label="Id | temp"];
-47->51
-39->47
-52[label="AssigStat"];
-53[label="Id | arr"];
-54[label="Indices"];
-55[label="Id | j"];
+50[label="Id | arr"];
+51[label="Indices"];
+52[label="Int | 4"];
+51->52
+50->51
+48->50
+7->48
+53[label="LocalVarDecl"];
+54[label="Dims"];
+55[label="Int | 7"];
 54->55
 53->54
-52->53
-56[label="Id | arr"];
-57[label="Indices"];
-58[label="AddOp"];
-59[label="Int | 1"];
+56[label="Type | integer"];
+53->56
+57[label="Id | arr"];
+53->57
+7->53
+58[label="AssigStat"];
+59[label="Id | arr"];
+60[label="Indices"];
+61[label="Int | 3"];
+60->61
+59->60
 58->59
-60[label="Id | j"];
-58->60
-57->58
-56->57
-52->56
-39->52
-38->39
-61[label="RelExpr"];
-62[label="Id | arr"];
-63[label="Indices"];
-64[label="Id | j"];
-63->64
-62->63
-61->62
-65[label="Id | arr"];
-66[label="Indices"];
-67[label="AddOp"];
-68[label="Int | 1"];
-67->68
-69[label="Id | j"];
-67->69
-66->67
-65->66
-61->65
-70[label="RelOp | gt"];
-61->70
-38->61
-71[label="StatBlock"];
-38->71
-32->38
-23->32
-17->23
-16->17
-72[label="RelExpr"];
-73[label="RelOp | lt"];
-72->73
-74[label="Id | i"];
-72->74
-75[label="SubOp"];
-76[label="Id | n"];
-75->76
-77[label="Int | 1"];
-75->77
-72->75
-16->72
-5->16
-78[label="VarDecl"];
-79[label="Type | integer"];
-78->79
-80[label="Dims"];
-78->80
-81[label="Id | i"];
-78->81
-5->78
-82[label="VarDecl"];
-83[label="Id | n"];
-82->83
-84[label="Type | integer"];
-82->84
-85[label="Dims"];
-82->85
-5->82
-86[label="AssigStat"];
-87[label="Id | i"];
-86->87
-88[label="Int | 0"];
-86->88
-5->86
-89[label="AssigStat"];
-90[label="Int | 0"];
-89->90
-91[label="Id | temp"];
-89->91
-5->89
-92[label="VarDecl"];
-93[label="Type | integer"];
-92->93
-94[label="Dims"];
-92->94
-95[label="Id | temp"];
-92->95
-5->92
-4->5
-96[label="ParamList"];
-97[label="VarDecl"];
-98[label="Dims"];
-none99[shape=point]98->none99
-97->98
-100[label="Id | arr"];
-97->100
-101[label="Type | integer"];
-97->101
-96->97
-102[label="VarDecl"];
-103[label="Id | size"];
-102->103
-104[label="Dims"];
-102->104
-105[label="Type | integer"];
-102->105
-96->102
-4->96
-106[label="Id | bubbleSort"];
-4->106
-107[label="ScopeSpec"];
-4->107
-108[label="Type | void"];
-4->108
+62[label="Int | 12"];
+58->62
+7->58
+4->7
+63[label="Type | void"];
+4->63
+64[label="ScopeSpec"];
+4->64
 3->4
-109[label="FuncDef"];
-110[label="Id | printArray"];
-109->110
-111[label="Type | void"];
-109->111
-112[label="ScopeSpec"];
-109->112
-113[label="ParamList"];
-114[label="VarDecl"];
-115[label="Id | arr"];
-114->115
-116[label="Type | integer"];
-114->116
-117[label="Dims"];
-none118[shape=point]117->none118
-114->117
+65[label="FuncDef"];
+66[label="ScopeSpec"];
+65->66
+67[label="Id | bubbleSort"];
+65->67
+68[label="Type | void"];
+65->68
+69[label="ParamList"];
+70[label="VarDecl"];
+71[label="Dims"];
+none72[shape=point]71->none72
+70->71
+73[label="Id | arr"];
+70->73
+74[label="Type | integer"];
+70->74
+69->70
+75[label="VarDecl"];
+76[label="Id | size"];
+75->76
+77[label="Dims"];
+75->77
+78[label="Type | integer"];
+75->78
+69->75
+65->69
+79[label="StatBlock"];
+80[label="AssigStat"];
+81[label="Id | j"];
+80->81
+82[label="Int | 0"];
+80->82
+79->80
+83[label="AssigStat"];
+84[label="Int | 0"];
+83->84
+85[label="Id | i"];
+83->85
+79->83
+86[label="LocalVarDecl"];
+87[label="Dims"];
+86->87
+88[label="Id | n"];
+86->88
+89[label="Type | integer"];
+86->89
+79->86
+90[label="LocalVarDecl"];
+91[label="Id | temp"];
+90->91
+92[label="Type | integer"];
+90->92
+93[label="Dims"];
+90->93
+79->90
+94[label="LocalVarDecl"];
+95[label="Dims"];
+94->95
+96[label="Id | j"];
+94->96
+97[label="Type | integer"];
+94->97
+79->94
+98[label="AssigStat"];
+99[label="Id | n"];
+98->99
+100[label="Id | size"];
+98->100
+79->98
+101[label="WhileLoop"];
+102[label="RelExpr"];
+103[label="SubOp"];
+104[label="Int | 1"];
+103->104
+105[label="Id | n"];
+103->105
+102->103
+106[label="RelOp | lt"];
+102->106
+107[label="Id | i"];
+102->107
+101->102
+108[label="StatBlock"];
+109[label="WhileLoop"];
+110[label="StatBlock"];
+111[label="AssigStat"];
+112[label="Id | j"];
+111->112
+113[label="AddOp"];
+114[label="Id | j"];
 113->114
-119[label="VarDecl"];
-120[label="Id | size"];
-119->120
-121[label="Dims"];
-119->121
-122[label="Type | integer"];
-119->122
-113->119
-109->113
-123[label="StatBlock"];
-124[label="VarDecl"];
-125[label="Id | n"];
-124->125
-126[label="Type | integer"];
-124->126
-127[label="Dims"];
-124->127
-123->124
-128[label="AssigStat"];
-129[label="Id | n"];
-128->129
-130[label="Id | size"];
-128->130
-123->128
-131[label="AssigStat"];
-132[label="Int | 0"];
+115[label="Int | 1"];
+113->115
+111->113
+110->111
+116[label="IfStat"];
+117[label="StatBlock"];
+116->117
+118[label="RelExpr"];
+119[label="RelOp | gt"];
+118->119
+120[label="Id | arr"];
+121[label="Indices"];
+122[label="AddOp"];
+123[label="Int | 1"];
+122->123
+124[label="Id | j"];
+122->124
+121->122
+120->121
+118->120
+125[label="Id | arr"];
+126[label="Indices"];
+127[label="Id | j"];
+126->127
+125->126
+118->125
+116->118
+128[label="StatBlock"];
+129[label="AssigStat"];
+130[label="Id | arr"];
+131[label="Indices"];
+132[label="AddOp"];
+133[label="Int | 1"];
+132->133
+134[label="Id | j"];
+132->134
 131->132
-133[label="Id | i"];
-131->133
-123->131
-134[label="VarDecl"];
-135[label="Type | integer"];
-134->135
-136[label="Dims"];
-134->136
-137[label="Id | i"];
-134->137
-123->134
-138[label="WhileLoop"];
-139[label="StatBlock"];
-140[label="WriteStat"];
-141[label="Id | arr"];
-142[label="Indices"];
-143[label="Id | i"];
-142->143
+130->131
+129->130
+135[label="Id | arr"];
+136[label="Indices"];
+137[label="Id | j"];
+136->137
+135->136
+129->135
+128->129
+138[label="AssigStat"];
+139[label="Id | temp"];
+138->139
+140[label="Id | arr"];
+141[label="Indices"];
+142[label="Id | j"];
 141->142
 140->141
-139->140
-144[label="AssigStat"];
-145[label="Id | i"];
-144->145
-146[label="AddOp"];
-147[label="Id | i"];
-146->147
+138->140
+128->138
+143[label="AssigStat"];
+144[label="Id | temp"];
+143->144
+145[label="Id | arr"];
+146[label="Indices"];
+147[label="AddOp"];
 148[label="Int | 1"];
-146->148
-144->146
-139->144
-138->139
-149[label="RelExpr"];
-150[label="RelOp | lt"];
-149->150
-151[label="Id | n"];
-149->151
-152[label="Id | i"];
-149->152
-138->149
-123->138
-109->123
-3->109
-153[label="FuncDef"];
-154[label="Type | void"];
-153->154
-155[label="StatBlock"];
-156[label="VarDecl"];
-157[label="Id | arr"];
-156->157
-158[label="Dims"];
-159[label="Int | 7"];
+147->148
+149[label="Id | j"];
+147->149
+146->147
+145->146
+143->145
+128->143
+116->128
+110->116
+109->110
+150[label="RelExpr"];
+151[label="RelOp | lt"];
+150->151
+152[label="SubOp"];
+153[label="Int | 1"];
+152->153
+154[label="SubOp"];
+155[label="Id | i"];
+154->155
+156[label="Id | n"];
+154->156
+152->154
+150->152
+157[label="Id | j"];
+150->157
+109->150
+108->109
+158[label="AssigStat"];
+159[label="Id | i"];
 158->159
-156->158
-160[label="Type | integer"];
-156->160
-155->156
-161[label="AssigStat"];
-162[label="Id | arr"];
-163[label="Indices"];
-164[label="Int | 1"];
+160[label="AddOp"];
+161[label="Int | 1"];
+160->161
+162[label="Id | i"];
+160->162
+158->160
+108->158
+101->108
+79->101
+163[label="AssigStat"];
+164[label="Int | 0"];
 163->164
-162->163
-161->162
-165[label="Int | 34"];
-161->165
-155->161
-166[label="AssigStat"];
-167[label="Int | 64"];
+165[label="Id | temp"];
+163->165
+79->163
+166[label="LocalVarDecl"];
+167[label="Id | i"];
 166->167
-168[label="Id | arr"];
-169[label="Indices"];
-170[label="Int | 0"];
-169->170
-168->169
+168[label="Type | integer"];
 166->168
-155->166
-171[label="FunctionCall"];
-172[label="Id | printarray"];
+169[label="Dims"];
+166->169
+79->166
+65->79
+3->65
+170[label="FuncDef"];
+171[label="ParamList"];
+172[label="VarDecl"];
+173[label="Type | integer"];
+172->173
+174[label="Id | size"];
+172->174
+175[label="Dims"];
+172->175
 171->172
-173[label="ParamList"];
-174[label="Int | 7"];
-173->174
-175[label="Id | arr"];
-173->175
-171->173
-155->171
-176[label="AssigStat"];
-177[label="Int | 12"];
+176[label="VarDecl"];
+177[label="Dims"];
+none178[shape=point]177->none178
 176->177
-178[label="Id | arr"];
-179[label="Indices"];
-180[label="Int | 3"];
-179->180
-178->179
-176->178
-155->176
-181[label="AssigStat"];
-182[label="Int | 11"];
-181->182
-183[label="Id | arr"];
-184[label="Indices"];
-185[label="Int | 5"];
-184->185
+179[label="Id | arr"];
+176->179
+180[label="Type | integer"];
+176->180
+171->176
+170->171
+181[label="ScopeSpec"];
+170->181
+182[label="StatBlock"];
+183[label="LocalVarDecl"];
+184[label="Id | i"];
 183->184
-181->183
-155->181
-186[label="AssigStat"];
-187[label="Id | arr"];
-188[label="Indices"];
-189[label="Int | 6"];
-188->189
+185[label="Type | integer"];
+183->185
+186[label="Dims"];
+183->186
+182->183
+187[label="AssigStat"];
+188[label="Id | i"];
 187->188
-186->187
-190[label="Int | 90"];
-186->190
-155->186
-191[label="FunctionCall"];
-192[label="Id | bubbleSort"];
+189[label="Int | 0"];
+187->189
+182->187
+190[label="WhileLoop"];
+191[label="RelExpr"];
+192[label="Id | n"];
 191->192
-193[label="ParamList"];
-194[label="Id | arr"];
-193->194
-195[label="Int | 7"];
-193->195
+193[label="Id | i"];
 191->193
-155->191
-196[label="AssigStat"];
-197[label="Int | 25"];
-196->197
-198[label="Id | arr"];
-199[label="Indices"];
-200[label="Int | 2"];
-199->200
+194[label="RelOp | lt"];
+191->194
+190->191
+195[label="StatBlock"];
+196[label="WriteStat"];
+197[label="Id | arr"];
+198[label="Indices"];
+199[label="Id | i"];
 198->199
-196->198
-155->196
-201[label="AssigStat"];
-202[label="Id | arr"];
-203[label="Indices"];
-204[label="Int | 4"];
-203->204
+197->198
+196->197
+195->196
+200[label="AssigStat"];
+201[label="Id | i"];
+200->201
+202[label="AddOp"];
+203[label="Id | i"];
 202->203
-201->202
-205[label="Int | 22"];
-201->205
-155->201
-206[label="FunctionCall"];
-207[label="ParamList"];
-208[label="Int | 7"];
-207->208
-209[label="Id | arr"];
-207->209
-206->207
-210[label="Id | printarray"];
-206->210
-155->206
-153->155
-211[label="Id | main"];
-153->211
-212[label="ScopeSpec"];
-153->212
-213[label="ParamList"];
-153->213
-3->153
+204[label="Int | 1"];
+202->204
+200->202
+195->200
+190->195
+182->190
+205[label="LocalVarDecl"];
+206[label="Dims"];
+205->206
+207[label="Id | n"];
+205->207
+208[label="Type | integer"];
+205->208
+182->205
+209[label="AssigStat"];
+210[label="Id | size"];
+209->210
+211[label="Id | n"];
+209->211
+182->209
+170->182
+212[label="Type | void"];
+170->212
+213[label="Id | printArray"];
+170->213
+3->170
 1->3
 }

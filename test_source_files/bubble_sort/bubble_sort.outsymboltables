@@ -3,5 +3,5 @@
 	- TABLE: bubbleSort
 - function | main | ():void
 	- TABLE: main
-- function | printArray | (integer,integer[]):void
+- function | printArray | (integer[],integer):void
 	- TABLE: printArray

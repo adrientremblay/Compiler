@@ -138,6 +138,10 @@ public class Parser {
                         VariableDeclaration variableDeclaration = new VariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(variableDeclaration);
                         break;
+                    case "makeLocalVariableDeclaration":
+                        LocalVariableDeclaration localVariableDeclaration = new LocalVariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
+                        semanticStack.peek().addChild(localVariableDeclaration);
+                        break;
                     case "addIntToTop":
                         semanticStack.peek().addChild(new Integer(lastToken));
                         break;
