@@ -4,284 +4,560 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 1[label="Prog"];
 2[label="ClassDeclList"];
 3[label="ClassDecl"];
-4[label="InherList"];
-3->4
-5[label="MembList"];
-6[label="FuncDecl"];
-7[label="Id | evaluate"];
-6->7
-8[label="ParamList"];
-9[label="ParamVarDecl"];
-10[label="Dims"];
-9->10
-11[label="Id | x"];
-9->11
-12[label="Type | float"];
-9->12
-8->9
-6->8
-13[label="Type | float"];
-6->13
-14[label="Visibility | public"];
-6->14
-15[label="ScopeSpec | POLYNOMIAL"];
-6->15
+4[label="MembList"];
+5[label="Constructor"];
+6[label="Visibility | public"];
 5->6
-3->5
-16[label="Id | POLYNOMIAL"];
-3->16
-2->3
-17[label="ClassDecl"];
-18[label="MembList"];
-19[label="MemberVarDecl"];
-20[label="ScopeSpec | QUADRATIC"];
+7[label="ParamList"];
+8[label="ParamVarDecl"];
+9[label="Dims"];
+8->9
+10[label="Id | A"];
+8->10
+11[label="Type | float"];
+8->11
+7->8
+12[label="ParamVarDecl"];
+13[label="Id | B"];
+12->13
+14[label="Type | float"];
+12->14
+15[label="Dims"];
+12->15
+7->12
+5->7
+16[label="ScopeSpec | LINEAR"];
+5->16
+4->5
+17[label="FuncDecl"];
+18[label="ParamList"];
+19[label="ParamVarDecl"];
+20[label="Type | float"];
 19->20
 21[label="Dims"];
 19->21
-22[label="Id | c"];
+22[label="Id | x"];
 19->22
-23[label="Visibility | private"];
-19->23
-24[label="Type | float"];
-19->24
 18->19
-25[label="Constructor"];
-26[label="Visibility | public"];
-25->26
-27[label="ParamList"];
-28[label="ParamVarDecl"];
-29[label="Dims"];
-28->29
-30[label="Id | B"];
-28->30
-31[label="Type | float"];
-28->31
-27->28
-32[label="ParamVarDecl"];
-33[label="Id | A"];
-32->33
-34[label="Dims"];
-32->34
-35[label="Type | float"];
-32->35
-27->32
-36[label="ParamVarDecl"];
-37[label="Id | C"];
-36->37
-38[label="Type | float"];
-36->38
-39[label="Dims"];
-36->39
-27->36
-25->27
-40[label="ScopeSpec | QUADRATIC"];
-25->40
-18->25
-41[label="MemberVarDecl"];
-42[label="Visibility | private"];
-41->42
-43[label="Type | float"];
-41->43
-44[label="Id | b"];
-41->44
-45[label="ScopeSpec | QUADRATIC"];
-41->45
-46[label="Dims"];
-41->46
-18->41
-47[label="MemberVarDecl"];
-48[label="Visibility | private"];
-47->48
-49[label="Type | float"];
-47->49
-50[label="ScopeSpec | QUADRATIC"];
-47->50
-51[label="Dims"];
-47->51
-52[label="Id | a"];
-47->52
-18->47
-53[label="FuncDecl"];
-54[label="Id | evaluate"];
-53->54
-55[label="ParamList"];
-56[label="ParamVarDecl"];
-57[label="Dims"];
-56->57
-58[label="Type | float"];
-56->58
-59[label="Id | x"];
-56->59
-55->56
-53->55
-60[label="Type | float"];
-53->60
-61[label="Visibility | public"];
-53->61
-62[label="ScopeSpec | QUADRATIC"];
-53->62
-18->53
 17->18
-63[label="Id | QUADRATIC"];
-17->63
-64[label="InherList"];
-65[label="Id | POLYNOMIAL"];
-64->65
-17->64
-2->17
-1->2
-66[label="FuncDefList"];
-67[label="FuncDef"];
-68[label="Type | float"];
-67->68
-69[label="StatBlock"];
-67->69
-70[label="ParamList"];
-71[label="ParamVarDecl"];
-72[label="Type | float"];
-71->72
-73[label="Dims"];
-71->73
-74[label="Id | x"];
-71->74
+23[label="Visibility | public"];
+17->23
+24[label="Id | evaluate"];
+17->24
+25[label="ScopeSpec | LINEAR"];
+17->25
+26[label="Type | float"];
+17->26
+4->17
+27[label="MemberVarDecl"];
+28[label="Visibility | private"];
+27->28
+29[label="Type | float"];
+27->29
+30[label="Id | b"];
+27->30
+31[label="ScopeSpec | LINEAR"];
+27->31
+32[label="Dims"];
+27->32
+4->27
+33[label="MemberVarDecl"];
+34[label="Visibility | private"];
+33->34
+35[label="Type | float"];
+33->35
+36[label="ScopeSpec | LINEAR"];
+33->36
+37[label="Dims"];
+33->37
+38[label="Id | a"];
+33->38
+4->33
+3->4
+39[label="InherList"];
+40[label="Id | POLYNOMIAL"];
+39->40
+3->39
+41[label="Id | LINEAR"];
+3->41
+2->3
+42[label="ClassDecl"];
+43[label="InherList"];
+42->43
+44[label="MembList"];
+45[label="FuncDecl"];
+46[label="Id | evaluate"];
+45->46
+47[label="ParamList"];
+48[label="ParamVarDecl"];
+49[label="Dims"];
+48->49
+50[label="Id | x"];
+48->50
+51[label="Type | float"];
+48->51
+47->48
+45->47
+52[label="Type | float"];
+45->52
+53[label="Visibility | public"];
+45->53
+54[label="ScopeSpec | POLYNOMIAL"];
+45->54
+44->45
+42->44
+55[label="Id | POLYNOMIAL"];
+42->55
+2->42
+56[label="ClassDecl"];
+57[label="InherList"];
+58[label="Id | POLYNOMIAL"];
+57->58
+56->57
+59[label="MembList"];
+60[label="FuncDecl"];
+61[label="Visibility | public"];
+60->61
+62[label="ParamList"];
+63[label="ParamVarDecl"];
+64[label="Dims"];
+63->64
+65[label="Id | x"];
+63->65
+66[label="Type | float"];
+63->66
+62->63
+60->62
+67[label="ScopeSpec | QUADRATIC"];
+60->67
+68[label="Id | evaluate"];
+60->68
+69[label="Type | float"];
+60->69
+59->60
+70[label="Constructor"];
+71[label="ScopeSpec | QUADRATIC"];
 70->71
-67->70
-75[label="Id | evaluate"];
-67->75
-76[label="ScopeSpec | POLYNOMIAL"];
-67->76
-66->67
-77[label="FuncDef"];
-78[label="Type"];
-77->78
-79[label="ParamList"];
-80[label="ParamVarDecl"];
+72[label="Visibility | public"];
+70->72
+73[label="ParamList"];
+74[label="ParamVarDecl"];
+75[label="Id | B"];
+74->75
+76[label="Dims"];
+74->76
+77[label="Type | float"];
+74->77
+73->74
+78[label="ParamVarDecl"];
+79[label="Dims"];
+78->79
+80[label="Id | A"];
+78->80
 81[label="Type | float"];
-80->81
-82[label="Dims"];
-80->82
+78->81
+73->78
+82[label="ParamVarDecl"];
 83[label="Id | C"];
-80->83
-79->80
-84[label="ParamVarDecl"];
+82->83
+84[label="Dims"];
+82->84
 85[label="Type | float"];
-84->85
-86[label="Dims"];
-84->86
-87[label="Id | A"];
-84->87
-79->84
-88[label="ParamVarDecl"];
+82->85
+73->82
+70->73
+59->70
+86[label="MemberVarDecl"];
+87[label="Type | float"];
+86->87
+88[label="ScopeSpec | QUADRATIC"];
+86->88
 89[label="Dims"];
-88->89
-90[label="Id | B"];
-88->90
-91[label="Type | float"];
-88->91
-79->88
-77->79
-92[label="Id | constructor"];
-77->92
-93[label="StatBlock"];
-94[label="AssigStat"];
-95[label="Id | C"];
-94->95
-96[label="Dot"];
-97[label="Id | c"];
-96->97
-98[label="Id | self"];
-96->98
-94->96
-93->94
-99[label="AssigStat"];
-100[label="Dot"];
-101[label="Id | self"];
-100->101
-102[label="Id | b"];
-100->102
-99->100
-103[label="Id | B"];
-99->103
-93->99
-104[label="AssigStat"];
-105[label="Id | A"];
-104->105
-106[label="Dot"];
-107[label="Id | self"];
-106->107
-108[label="Id | a"];
-106->108
-104->106
-93->104
-77->93
-109[label="ScopeSpec | QUADRATIC"];
-77->109
-66->77
-110[label="FuncDef"];
-111[label="ScopeSpec | QUADRATIC"];
+86->89
+90[label="Visibility | private"];
+86->90
+91[label="Id | b"];
+86->91
+59->86
+92[label="MemberVarDecl"];
+93[label="Type | float"];
+92->93
+94[label="Id | a"];
+92->94
+95[label="Dims"];
+92->95
+96[label="Visibility | private"];
+92->96
+97[label="ScopeSpec | QUADRATIC"];
+92->97
+59->92
+98[label="MemberVarDecl"];
+99[label="Visibility | private"];
+98->99
+100[label="Id | c"];
+98->100
+101[label="Dims"];
+98->101
+102[label="ScopeSpec | QUADRATIC"];
+98->102
+103[label="Type | float"];
+98->103
+59->98
+56->59
+104[label="Id | QUADRATIC"];
+56->104
+2->56
+1->2
+105[label="FuncDefList"];
+106[label="FuncDef"];
+107[label="StatBlock"];
+108[label="AssigStat"];
+109[label="Id | A"];
+108->109
+110[label="Dot"];
+111[label="Id | self"];
 110->111
-112[label="Type | float"];
+112[label="Id | a"];
 110->112
-113[label="Id | evaluate"];
-110->113
-114[label="StatBlock"];
-115[label="AssigStat"];
-116[label="Id | result"];
+108->110
+107->108
+113[label="AssigStat"];
+114[label="Id | B"];
+113->114
+115[label="Dot"];
+116[label="Id | b"];
 115->116
-117[label="Id | a"];
+117[label="Id | self"];
 115->117
-114->115
-118[label="LocalVarDecl"];
-119[label="Id | result"];
-118->119
-120[label="Dims"];
-118->120
-121[label="Type | float"];
-118->121
-114->118
-122[label="AssigStat"];
-123[label="Id | result"];
+113->115
+107->113
+106->107
+118[label="ScopeSpec | LINEAR"];
+106->118
+119[label="Type"];
+106->119
+120[label="Id | constructor"];
+106->120
+121[label="ParamList"];
+122[label="ParamVarDecl"];
+123[label="Type | float"];
 122->123
-124[label="AddOp"];
-125[label="Id | b"];
-124->125
-126[label="MultOp"];
-127[label="Id | x"];
-126->127
-128[label="Id | result"];
-126->128
-124->126
+124[label="Id | B"];
 122->124
-114->122
-129[label="AssigStat"];
-130[label="Id | result"];
-129->130
-131[label="AddOp"];
-132[label="MultOp"];
+125[label="Dims"];
+122->125
+121->122
+126[label="ParamVarDecl"];
+127[label="Type | float"];
+126->127
+128[label="Id | A"];
+126->128
+129[label="Dims"];
+126->129
+121->126
+106->121
+105->106
+130[label="FuncDef"];
+131[label="StatBlock"];
+132[label="LocalVarDecl"];
 133[label="Id | result"];
 132->133
-134[label="Id | x"];
+134[label="Type | float"];
 132->134
+135[label="Dims"];
+132->135
 131->132
-135[label="Id | c"];
-131->135
-129->131
-114->129
-136[label="ReturnStat"];
+136[label="AssigStat"];
 137[label="Id | result"];
 136->137
-114->136
-110->114
-138[label="ParamList"];
-139[label="ParamVarDecl"];
-140[label="Type | float"];
+138[label="AddOp"];
+139[label="MultOp"];
+140[label="Id | result"];
 139->140
 141[label="Id | x"];
 139->141
-142[label="Dims"];
-139->142
 138->139
-110->138
-66->110
-1->66
+142[label="Id | c"];
+138->142
+136->138
+131->136
+143[label="ReturnStat"];
+144[label="Id | result"];
+143->144
+131->143
+145[label="AssigStat"];
+146[label="Id | result"];
+145->146
+147[label="AddOp"];
+148[label="Id | b"];
+147->148
+149[label="MultOp"];
+150[label="Id | result"];
+149->150
+151[label="Id | x"];
+149->151
+147->149
+145->147
+131->145
+152[label="AssigStat"];
+153[label="Id | a"];
+152->153
+154[label="Id | result"];
+152->154
+131->152
+130->131
+155[label="Type | float"];
+130->155
+156[label="Id | evaluate"];
+130->156
+157[label="ScopeSpec | QUADRATIC"];
+130->157
+158[label="ParamList"];
+159[label="ParamVarDecl"];
+160[label="Id | x"];
+159->160
+161[label="Type | float"];
+159->161
+162[label="Dims"];
+159->162
+158->159
+130->158
+105->130
+163[label="FuncDef"];
+164[label="Id | main"];
+163->164
+165[label="StatBlock"];
+166[label="LocalVarDecl"];
+167[label="Type | LINEAR"];
+166->167
+168[label="Id | f1"];
+166->168
+169[label="ParamList"];
+170[label="Int | 2"];
+169->170
+171[label="Float | 3.5"];
+169->171
+166->169
+165->166
+172[label="AssigStat"];
+173[label="Id | counter"];
+172->173
+174[label="Int | 1"];
+172->174
+165->172
+175[label="WhileLoop"];
+176[label="RelExpr"];
+177[label="RelOp | leq"];
+176->177
+178[label="Id | counter"];
+176->178
+179[label="Int | 10"];
+176->179
+175->176
+180[label="StatBlock"];
+181[label="WriteStat"];
+182[label="Dot"];
+183[label="Id | f1"];
+182->183
+184[label="FunctionCall"];
+185[label="Id | evaluate"];
+184->185
+186[label="ParamList"];
+187[label="Id | counter"];
+186->187
+184->186
+182->184
+181->182
+180->181
+188[label="WriteStat"];
+189[label="Dot"];
+190[label="Id | f2"];
+189->190
+191[label="FunctionCall"];
+192[label="ParamList"];
+193[label="Id | counter"];
+192->193
+191->192
+194[label="Id | evaluate"];
+191->194
+189->191
+188->189
+180->188
+195[label="WriteStat"];
+196[label="Id | counter"];
+195->196
+180->195
+175->180
+165->175
+197[label="LocalVarDecl"];
+198[label="Type | QUADRATIC"];
+197->198
+199[label="Id | f2"];
+197->199
+200[label="ParamList"];
+201[label="Float | 1.0"];
+200->201
+202[label="Sign | -"];
+203[label="Float | 2.0"];
+202->203
+200->202
+204[label="Float | 0.0"];
+200->204
+197->200
+165->197
+205[label="LocalVarDecl"];
+206[label="Dims"];
+205->206
+207[label="Id | counter"];
+205->207
+208[label="Type | integer"];
+205->208
+165->205
+163->165
+209[label="ParamList"];
+163->209
+210[label="ScopeSpec"];
+163->210
+211[label="Type | void"];
+163->211
+105->163
+212[label="FuncDef"];
+213[label="StatBlock"];
+214[label="AssigStat"];
+215[label="Dot"];
+216[label="Id | a"];
+215->216
+217[label="Id | self"];
+215->217
+214->215
+218[label="Id | A"];
+214->218
+213->214
+219[label="AssigStat"];
+220[label="Id | C"];
+219->220
+221[label="Dot"];
+222[label="Id | self"];
+221->222
+223[label="Id | c"];
+221->223
+219->221
+213->219
+224[label="AssigStat"];
+225[label="Id | B"];
+224->225
+226[label="Dot"];
+227[label="Id | b"];
+226->227
+228[label="Id | self"];
+226->228
+224->226
+213->224
+212->213
+229[label="Type"];
+212->229
+230[label="ScopeSpec | QUADRATIC"];
+212->230
+231[label="Id | constructor"];
+212->231
+232[label="ParamList"];
+233[label="ParamVarDecl"];
+234[label="Id | B"];
+233->234
+235[label="Dims"];
+233->235
+236[label="Type | float"];
+233->236
+232->233
+237[label="ParamVarDecl"];
+238[label="Dims"];
+237->238
+239[label="Type | float"];
+237->239
+240[label="Id | A"];
+237->240
+232->237
+241[label="ParamVarDecl"];
+242[label="Dims"];
+241->242
+243[label="Id | C"];
+241->243
+244[label="Type | float"];
+241->244
+232->241
+212->232
+105->212
+245[label="FuncDef"];
+246[label="Type | float"];
+245->246
+247[label="ScopeSpec | LINEAR"];
+245->247
+248[label="ParamList"];
+249[label="ParamVarDecl"];
+250[label="Type | float"];
+249->250
+251[label="Id | x"];
+249->251
+252[label="Dims"];
+249->252
+248->249
+245->248
+253[label="Id | evaluate"];
+245->253
+254[label="StatBlock"];
+255[label="AssigStat"];
+256[label="Float | 0.0"];
+255->256
+257[label="Id | result"];
+255->257
+254->255
+258[label="LocalVarDecl"];
+259[label="Id | result"];
+258->259
+260[label="Type | float"];
+258->260
+261[label="Dims"];
+258->261
+254->258
+262[label="AssigStat"];
+263[label="AddOp"];
+264[label="Id | b"];
+263->264
+265[label="MultOp"];
+266[label="Id | x"];
+265->266
+267[label="Id | a"];
+265->267
+263->265
+262->263
+268[label="Id | result"];
+262->268
+254->262
+269[label="ReturnStat"];
+270[label="Id | result"];
+269->270
+254->269
+245->254
+105->245
+271[label="FuncDef"];
+272[label="ParamList"];
+273[label="ParamVarDecl"];
+274[label="Id | x"];
+273->274
+275[label="Type | float"];
+273->275
+276[label="Dims"];
+273->276
+272->273
+271->272
+277[label="StatBlock"];
+271->277
+278[label="ScopeSpec | POLYNOMIAL"];
+271->278
+279[label="Type | float"];
+271->279
+280[label="Id | evaluate"];
+271->280
+105->271
+1->105
 }

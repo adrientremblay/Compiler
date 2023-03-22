@@ -5,14 +5,14 @@
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
 <FUNCHEAD> -> 'function' 'id' <FUNCHEADTAIL>
 <FUNCHEADTAIL> -> !makeIdentifier 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeVariableDeclaration <REPTFPARAMS4>
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeParameterVariableDeclaration <REPTFPARAMS4>
 <TYPE> -> 'integer'
 <REPTFPARAMS3> -> <ARRAYSIZE> <REPTFPARAMS3>
 <ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 <ARRAYSIZE2> -> 'closesqbr' !addNothing
 <REPTFPARAMS3> -> EPSILON
 <REPTFPARAMS4> -> <FPARAMSTAIL> <REPTFPARAMS4>
-<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMSTAIL4> !makeVariableDeclaration
+<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMSTAIL4> !makeParameterVariableDeclaration
 <TYPE> -> 'integer'
 <REPTFPARAMSTAIL4> -> EPSILON
 <REPTFPARAMS4> -> EPSILON
@@ -318,14 +318,14 @@
 <FUNCDEF> -> <FUNCHEAD> <FUNCBODY> !makeFunctionDefinition
 <FUNCHEAD> -> 'function' 'id' <FUNCHEADTAIL>
 <FUNCHEADTAIL> -> !makeIdentifier 'openpar' !makeEmptyScopeSpecification !makeParameterList <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType
-<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeVariableDeclaration <REPTFPARAMS4>
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeParameterVariableDeclaration <REPTFPARAMS4>
 <TYPE> -> 'integer'
 <REPTFPARAMS3> -> <ARRAYSIZE> <REPTFPARAMS3>
 <ARRAYSIZE> -> 'opensqbr' <ARRAYSIZE2>
 <ARRAYSIZE2> -> 'closesqbr' !addNothing
 <REPTFPARAMS3> -> EPSILON
 <REPTFPARAMS4> -> <FPARAMSTAIL> <REPTFPARAMS4>
-<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMSTAIL4> !makeVariableDeclaration
+<FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMSTAIL4> !makeParameterVariableDeclaration
 <TYPE> -> 'integer'
 <REPTFPARAMSTAIL4> -> EPSILON
 <REPTFPARAMS4> -> EPSILON

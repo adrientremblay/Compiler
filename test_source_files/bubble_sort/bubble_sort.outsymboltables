@@ -1,14 +1,18 @@
 - TABLE: global
-- function | bubbleSort | (integer,integer[]):void
-	- TABLE: bubbleSort
-	- variable | i | integer
-	- variable | n | integer
-	- variable | temp | integer
-	- variable | j | integer
 - function | printArray | (integer[],integer):void
 	- TABLE: printArray
 	- variable | n | integer
+	- param | size | integer
+	- param | arr | integer
 	- variable | i | integer
 - function | main | ():void
 	- TABLE: main
 	- variable | arr | integer
+- function | bubbleSort | (integer,integer[]):void
+	- TABLE: bubbleSort
+	- variable | j | integer
+	- variable | i | integer
+	- param | size | integer
+	- variable | temp | integer
+	- variable | n | integer
+	- param | arr | integer

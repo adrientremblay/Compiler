@@ -135,7 +135,7 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 68[label="Type | void"];
 65->68
 69[label="ParamList"];
-70[label="VarDecl"];
+70[label="ParamVarDecl"];
 71[label="Dims"];
 none72[shape=point]71->none72
 70->71
@@ -144,7 +144,7 @@ none72[shape=point]71->none72
 74[label="Type | integer"];
 70->74
 69->70
-75[label="VarDecl"];
+75[label="ParamVarDecl"];
 76[label="Id | size"];
 75->76
 77[label="Dims"];
@@ -338,7 +338,7 @@ none72[shape=point]71->none72
 3->65
 170[label="FuncDef"];
 171[label="ParamList"];
-172[label="VarDecl"];
+172[label="ParamVarDecl"];
 173[label="Type | integer"];
 172->173
 174[label="Id | size"];
@@ -346,7 +346,7 @@ none72[shape=point]71->none72
 175[label="Dims"];
 172->175
 171->172
-176[label="VarDecl"];
+176[label="ParamVarDecl"];
 177[label="Dims"];
 none178[shape=point]177->none178
 176->177
