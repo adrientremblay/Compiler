@@ -1,4 +1,10 @@
 - TABLE: global
+- class | LINEAR | 
+	- TABLE: LINEAR
+- class | QUADRATIC | 
+	- TABLE: QUADRATIC
+- class | POLYNOMIAL | 
+	- TABLE: POLYNOMIAL
 - function | constructor | LINEAR
 	- TABLE: constructor
 - function | constructor | QUADRATIC

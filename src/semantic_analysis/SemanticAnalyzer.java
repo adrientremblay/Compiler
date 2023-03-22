@@ -4,6 +4,7 @@ import syntactical_analysis.ast_generation.tree.FunctionDefinition;
 import syntactical_analysis.ast_generation.tree.Program;
 import syntactical_analysis.ast_generation.tree.SemanticConcept;
 import syntactical_analysis.Parser;
+import syntactical_analysis.ast_generation.tree.classes.ClassDeclaration;
 import syntactical_analysis.ast_generation.tree.statements.LocalVariableDeclaration;
 
 import java.util.Stack;
@@ -97,5 +98,22 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
         String variableType = localVariableDeclaration.getType().getMember().getLexeme();
         String variableName = localVariableDeclaration.getIdentifier().getMember().getLexeme();
         scopeStack.peek().addRow(new SymbolTableRow(variableName, SymbolTableRowKind.VARIABLE, variableType));
+    }
+
+    /**
+     * Add a new class row with it's own scope
+     * @param classDeclaration
+     */
+    @Override
+    public void visitClassDeclaration(ClassDeclaration classDeclaration) {
+        String className = classDeclaration.getIdentifier().getMember().getLexeme();
+
+        SymbolTable classBodySymbolTable = new SymbolTable(className);
+
+        scopeStack.peek().addRow(new SymbolTableRow(className, SymbolTableRowKind.CLASS, "", classBodySymbolTable));
+
+        scopeStack.add(classBodySymbolTable);
+
+        astTraversalStack.add(new ScopeBack());
     }
 }

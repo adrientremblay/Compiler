@@ -28,6 +28,18 @@ public class ClassDeclaration extends SemanticConcept {
 
     @Override
     public void accept(SymbolTableVisitor visitor) {
-        // Do Nothing
+        visitor.visitClassDeclaration(this);
+    }
+
+    public MemberList getMemberList() {
+        return memberList;
+    }
+
+    public InheritanceList getInheritanceList() {
+        return inheritanceList;
+    }
+
+    public Identifier getIdentifier() {
+        return identifier;
     }
 }
