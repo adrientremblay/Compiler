@@ -2,7 +2,7 @@
 - class | POLYNOMIAL | 
 	- TABLE: POLYNOMIAL
 	- function | evaluate | (float[]):float
-		- TABLE: evaluate
+		- TABLE: POLYNOMIAL::evaluate
 	- inherit | none | 
 - function | main | ():void
 	- TABLE: main
@@ -12,16 +12,16 @@
 - class | LINEAR | 
 	- TABLE: LINEAR
 	- function | evaluate | (float[]):float
-		- TABLE: evaluate
+		- TABLE: LINEAR::evaluate
 		- variable | result | float
 	- function | constructor | (float[],float[]):LINEAR
-		- TABLE: constructor
+		- TABLE: LINEAR::constructor
 	- inherit | POLYNOMIAL | 
 - class | QUADRATIC | 
 	- TABLE: QUADRATIC
 	- inherit | POLYNOMIAL | 
 	- function | evaluate | (float[]):float
-		- TABLE: evaluate
+		- TABLE: QUADRATIC::evaluate
 		- variable | result | float
 	- function | constructor | (float[],float[],float[]):QUADRATIC
-		- TABLE: constructor
+		- TABLE: QUADRATIC::constructor
