@@ -14,9 +14,9 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 6->8
 5->6
 9[label="VarDecl"];
-10[label="Dims"];
+10[label="Id | i"];
 9->10
-11[label="Id | i"];
+11[label="Dims"];
 9->11
 12[label="Type | integer"];
 9->12
@@ -30,9 +30,9 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 16[label="VarDecl"];
 17[label="Type | integer"];
 16->17
-18[label="Id | n"];
+18[label="Dims"];
 16->18
-19[label="Dims"];
+19[label="Id | n"];
 16->19
 5->16
 20[label="WhileLoop"];
@@ -68,21 +68,21 @@ node [fontname=Sans];charset="UTF-8" splines=true splines=spline rankdir =LR
 4->5
 35[label="ParamList"];
 36[label="VarDecl"];
-37[label="Dims"];
+37[label="Id | size"];
 36->37
 38[label="Type | integer"];
 36->38
-39[label="Id | size"];
+39[label="Dims"];
 36->39
 35->36
 40[label="VarDecl"];
 41[label="Type | integer"];
 40->41
-42[label="Dims"];
-none43[shape=point]42->none43
+42[label="Id | arr"];
 40->42
-44[label="Id | arr"];
-40->44
+43[label="Dims"];
+none44[shape=point]43->none44
+40->43
 35->40
 4->35
 45[label="Id | printArray"];
@@ -173,12 +173,12 @@ none43[shape=point]42->none43
 88[label="VarDecl"];
 89[label="Type | integer"];
 88->89
-90[label="Dims"];
-91[label="Int | 7"];
-90->91
+90[label="Id | arr"];
 88->90
-92[label="Id | arr"];
-88->92
+91[label="Dims"];
+92[label="Int | 7"];
+91->92
+88->91
 52->88
 93[label="FunctionCall"];
 94[label="Id | printarray"];
@@ -223,11 +223,11 @@ none43[shape=point]42->none43
 109->112
 113[label="StatBlock"];
 114[label="VarDecl"];
-115[label="Id | i"];
+115[label="Dims"];
 114->115
 116[label="Type | integer"];
 114->116
-117[label="Dims"];
+117[label="Id | i"];
 114->117
 113->114
 118[label="AssigStat"];
@@ -237,9 +237,9 @@ none43[shape=point]42->none43
 118->120
 113->118
 121[label="VarDecl"];
-122[label="Id | temp"];
+122[label="Dims"];
 121->122
-123[label="Dims"];
+123[label="Id | temp"];
 121->123
 124[label="Type | integer"];
 121->124
@@ -257,9 +257,9 @@ none43[shape=point]42->none43
 128->130
 113->128
 131[label="VarDecl"];
-132[label="Id | j"];
+132[label="Dims"];
 131->132
-133[label="Dims"];
+133[label="Id | j"];
 131->133
 134[label="Type | integer"];
 131->134
@@ -395,11 +395,11 @@ none43[shape=point]42->none43
 197->199
 113->197
 200[label="VarDecl"];
-201[label="Dims"];
+201[label="Id | n"];
 200->201
 202[label="Type | integer"];
 200->202
-203[label="Id | n"];
+203[label="Dims"];
 200->203
 113->200
 109->113
@@ -407,18 +407,18 @@ none43[shape=point]42->none43
 205[label="VarDecl"];
 206[label="Type | integer"];
 205->206
-207[label="Id | arr"];
+207[label="Dims"];
+none208[shape=point]207->none208
 205->207
-208[label="Dims"];
-none209[shape=point]208->none209
-205->208
+209[label="Id | arr"];
+205->209
 204->205
 210[label="VarDecl"];
 211[label="Type | integer"];
 210->211
-212[label="Dims"];
+212[label="Id | size"];
 210->212
-213[label="Id | size"];
+213[label="Dims"];
 210->213
 204->210
 109->204

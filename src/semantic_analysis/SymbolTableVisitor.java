@@ -26,7 +26,10 @@ public class SymbolTableVisitor {
      * @param functionDefinition
      */
     public void visitFunctionDefinition(FunctionDefinition functionDefinition) {
-        currentScope.addRow(new SymbolTableRow(functionDefinition.getIdentifier().getMember().getLexeme(), SymbolTableRowKind.FUNCTION, "balls")); //todo: finish this
+        String functionName = functionDefinition.getIdentifier().getMember().getLexeme();
+        String functionType = functionDefinition.getParameterList().toString() + ":" + functionDefinition.getType().getMember().getLexeme();
+
+        currentScope.addRow(new SymbolTableRow(functionName, SymbolTableRowKind.FUNCTION, functionType));
     }
 
     public SymbolTable getGlobalSymbolTable() {

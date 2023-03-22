@@ -4,6 +4,9 @@ import semantic_analysis.SymbolTableVisitor;
 
 public class FunctionDefinition extends SemanticConcept {
     private Identifier identifier;
+    private Type type;
+    private ParameterList parameterList;
+    private ScopeSpecification scopeSpecification;
 
     public FunctionDefinition(SemanticConcept statementBlock, SemanticConcept type, SemanticConcept parameterList, SemanticConcept scopeSpecification, SemanticConcept id) {
         addChild(type);
@@ -13,6 +16,9 @@ public class FunctionDefinition extends SemanticConcept {
         addChild(scopeSpecification);
 
         this.identifier = (Identifier) id;
+        this.type = (Type) type;
+        this.parameterList = (ParameterList) parameterList;
+        this.scopeSpecification = (ScopeSpecification) scopeSpecification;
     }
 
     @Override
@@ -27,5 +33,17 @@ public class FunctionDefinition extends SemanticConcept {
 
     public Identifier getIdentifier() {
         return identifier;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public ParameterList getParameterList() {
+        return parameterList;
+    }
+
+    public ScopeSpecification getScopeSpecification() {
+        return scopeSpecification;
     }
 }

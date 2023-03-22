@@ -1,4 +1,4 @@
 - TABLE: global
-  - function | bubbleSort | balls
-  - function | printArray | balls
-  - function | main | balls
+  - function | bubbleSort | (integer,integer[]):void
+  - function | printArray | (integer[],integer):void
+  - function | main | ():void
