@@ -7,6 +7,10 @@ import syntactical_analysis.ast_generation.tree.factor.Integer;
 import syntactical_analysis.ast_generation.tree.classes.*;
 import syntactical_analysis.ast_generation.tree.factor.Not;
 import syntactical_analysis.ast_generation.tree.factor.Sign;
+import syntactical_analysis.ast_generation.tree.function.FunctionCall;
+import syntactical_analysis.ast_generation.tree.function.FunctionDefinition;
+import syntactical_analysis.ast_generation.tree.function.FunctionDefinitionList;
+import syntactical_analysis.ast_generation.tree.function.ParameterVariableDeclaration;
 import syntactical_analysis.ast_generation.tree.statements.*;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
@@ -149,6 +153,10 @@ public class Parser {
                     case "makeLocalVariableDeclaration":
                         LocalVariableDeclaration localVariableDeclaration = new LocalVariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
                         semanticStack.peek().addChild(localVariableDeclaration);
+                        break;
+                    case "makeParameterVariableDeclaration":
+                        ParameterVariableDeclaration parameterVariableDeclaration = new ParameterVariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
+                        semanticStack.peek().addChild(parameterVariableDeclaration);
                         break;
                     case "addIntToTop":
                         semanticStack.peek().addChild(new Integer(lastToken));

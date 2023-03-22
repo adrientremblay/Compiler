@@ -32,7 +32,7 @@
 <FACTOR2> -> !makeIndices <REPTIDNEST1> !consume
 <FACTOR2> -> EPSILON
 
-<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeVariableDeclaration <REPTFPARAMS4>
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeParameterVariableDeclaration <REPTFPARAMS4>
 <FPARAMS> -> EPSILON
 
 <FPARAMSTAIL> -> 'comma' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMSTAIL4> !makeVariableDeclaration

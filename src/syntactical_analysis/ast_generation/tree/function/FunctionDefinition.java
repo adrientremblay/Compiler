@@ -1,6 +1,7 @@
-package syntactical_analysis.ast_generation.tree;
+package syntactical_analysis.ast_generation.tree.function;
 
 import semantic_analysis.SymbolTableVisitor;
+import syntactical_analysis.ast_generation.tree.*;
 
 public class FunctionDefinition extends SemanticConcept {
     private Identifier identifier;

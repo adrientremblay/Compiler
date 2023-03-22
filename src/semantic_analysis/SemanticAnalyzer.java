@@ -6,6 +6,9 @@ import syntactical_analysis.ast_generation.tree.classes.ClassDeclaration;
 import syntactical_analysis.ast_generation.tree.classes.ClassDeclarationList;
 import syntactical_analysis.ast_generation.tree.classes.Constructor;
 import syntactical_analysis.ast_generation.tree.classes.FunctionDeclaration;
+import syntactical_analysis.ast_generation.tree.function.FunctionDefinition;
+import syntactical_analysis.ast_generation.tree.function.FunctionDefinitionList;
+import syntactical_analysis.ast_generation.tree.function.ParameterVariableDeclaration;
 import syntactical_analysis.ast_generation.tree.statements.LocalVariableDeclaration;
 
 import java.util.HashMap;
@@ -154,6 +157,13 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
         String variableType = localVariableDeclaration.getType().getMember().getLexeme();
         String variableName = localVariableDeclaration.getIdentifier().getMember().getLexeme();
         scopeStack.peek().addRow(new SymbolTableRow(variableName, SymbolTableRowKind.VARIABLE, variableType));
+    }
+
+    @Override
+    public void visitParameterVariableDeclaration(ParameterVariableDeclaration parameterVariableDeclaration) {
+        String variableType = parameterVariableDeclaration.getType().getMember().getLexeme();
+        String variableName = parameterVariableDeclaration.getIdentifier().getMember().getLexeme();
+        scopeStack.peek().addRow(new SymbolTableRow(variableName, SymbolTableRowKind.PARAMETER, variableType));
     }
 
     /**
