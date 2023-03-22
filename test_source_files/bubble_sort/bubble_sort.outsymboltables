@@ -1,1 +1,4 @@
 - TABLE: global
+  - function | bubbleSort | balls
+  - function | printArray | balls
+  - function | main | balls

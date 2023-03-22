@@ -25,6 +25,9 @@ public class SymbolTablePrinter {
 
     public void writeSymbolTable (SymbolTable symbolTable) {
         writeLine("- TABLE: " + symbolTable.getName());
+        for (SymbolTableRow row : symbolTable.getRows()) {
+            writeLine("  - " + row.getKind() + " | " + row.getName() + " | " + row.getType());
+        }
 
         cleanup();
     }
