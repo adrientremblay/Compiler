@@ -12,6 +12,11 @@ public class SymbolTableRow {
         this.type = type;
     }
 
+    public SymbolTableRow(String name, SymbolTableRowKind kind, String type, SymbolTable symbolTable) {
+        this(name, kind, type);
+        this.symbolTableLink = symbolTable;
+    }
+
     public String getName() {
         return name;
     }

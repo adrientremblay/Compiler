@@ -36,7 +36,7 @@ public class SemanticAnalyzer {
 
         SymbolTable globalSymbolTable = symbolTableVisitor.getGlobalSymbolTable();
 
-        symbolTablePrinter.writeSymbolTable(globalSymbolTable);
+        symbolTablePrinter.writeGlobalSymbolTable(globalSymbolTable);
 
         return globalSymbolTable;
     }

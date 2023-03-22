@@ -23,13 +23,27 @@ public class SymbolTablePrinter {
         }
     }
 
-    public void writeSymbolTable (SymbolTable symbolTable) {
-        writeLine("- TABLE: " + symbolTable.getName());
-        for (SymbolTableRow row : symbolTable.getRows()) {
-            writeLine("  - " + row.getKind() + " | " + row.getName() + " | " + row.getType());
-        }
+    public void writeGlobalSymbolTable(SymbolTable globalSymbolTable) {
+        writeSymbolTable(globalSymbolTable, 0);
 
         cleanup();
+    }
+
+    private void writeSymbolTable(SymbolTable symbolTable, int indent) {
+        StringBuilder sb = new StringBuilder();
+        while (indent > 0) {
+            sb.append('\t');
+            indent--;
+        }
+        String spacing = sb.toString();
+
+        writeLine(spacing + "- TABLE: " + symbolTable.getName());
+        for (SymbolTableRow row : symbolTable.getRows()) {
+            writeLine(spacing + "- " + row.getKind() + " | " + row.getName() + " | " + row.getType());
+            if (row.getSymbolTableLink() != null) {
+                writeSymbolTable(row.getSymbolTableLink(), indent+1);
+            }
+        }
     }
 
     private void writeLine(String line) {
