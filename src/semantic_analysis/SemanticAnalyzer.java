@@ -57,7 +57,21 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
 
         symbolTablePrinter.writeGlobalSymbolTable(globalSymbolTable);
 
+        semanticErrorChecks();
+
         return globalSymbolTable;
+    }
+
+    private void semanticErrorChecks() {
+        for (SymbolTable classSymbolTable : classMap.values()) {
+            for (SymbolTableRow row : classSymbolTable.getRows()) {
+                if (row.getRowKind() == SymbolTableRowKind.FUNCTION && row.getSymbolTableLink() == null) {
+                    // todo: causes runtime error
+                    System.err.println("ERROR 6.2: no definition for declared member function " + row.getName());
+                    symbolTablePrinter.writeError("ERROR 6.2: no definition for declared member function " + row.getName());
+                }
+            }
+        }
     }
 
     @Override

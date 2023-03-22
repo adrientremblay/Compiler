@@ -1,4 +1,9 @@
 - TABLE: global
+- function | main | ():void
+	- TABLE: main
+	- variable | counter | integer
+	- variable | f1 | LINEAR
+	- variable | f2 | QUADRATIC
 - class | POLYNOMIAL | 
 	- TABLE: POLYNOMIAL
 	- inherit | none | 
@@ -7,31 +12,26 @@
 		- param | x | float
 - class | LINEAR | 
 	- TABLE: LINEAR
-	- data | a | float
-	- inherit | POLYNOMIAL | 
-	- function | constructor | (float[],float[]):LINEAR | public
-		- TABLE: LINEAR::constructor
-		- param | B | float
-		- param | A | float
 	- data | b | float
 	- function | evaluate | (float[]):float | public
 		- TABLE: LINEAR::evaluate
 		- variable | result | float
 		- param | x | float
-- function | main | ():void
-	- TABLE: main
-	- variable | counter | integer
-	- variable | f2 | QUADRATIC
-	- variable | f1 | LINEAR
-- variable | result | float
+	- function | constructor | (float[],float[]):LINEAR | public
+		- TABLE: LINEAR::constructor
+		- param | B | float
+		- param | A | float
+	- data | a | float
+	- inherit | POLYNOMIAL | 
 - class | QUADRATIC | 
 	- TABLE: QUADRATIC
-	- inherit | POLYNOMIAL | 
-	- data | b | float
-	- data | a | float
+	- function | evaluate | (float[]):float | public
 	- function | constructor | (float[],float[],float[]):QUADRATIC | public
 		- TABLE: QUADRATIC::constructor
 		- param | A | float
 		- param | C | float
 		- param | B | float
+	- data | b | float
+	- inherit | POLYNOMIAL | 
 	- data | c | float
+	- data | a | float

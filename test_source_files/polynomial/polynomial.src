@@ -33,7 +33,6 @@ function QUADRATIC::evaluate(x: float) => float
   return (result);
 }
 
-
 function QUADRATIC::constructor(A: float, B: float, C: float)
 {
   self.a = A;
