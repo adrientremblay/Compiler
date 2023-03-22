@@ -1,10 +1,13 @@
 - TABLE: global
 - class | LINEAR | 
 	- TABLE: LINEAR
-- class | QUADRATIC | 
-	- TABLE: QUADRATIC
+	- inherit | POLYNOMIAL | 
 - class | POLYNOMIAL | 
 	- TABLE: POLYNOMIAL
+	- inherit | none | 
+- class | QUADRATIC | 
+	- TABLE: QUADRATIC
+	- inherit | POLYNOMIAL | 
 - function | constructor | LINEAR
 	- TABLE: constructor
 - function | constructor | QUADRATIC

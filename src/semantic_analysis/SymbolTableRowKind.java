@@ -3,7 +3,8 @@ package semantic_analysis;
 public enum SymbolTableRowKind {
     FUNCTION("function"),
     CLASS("class"),
-    VARIABLE("variable");
+    VARIABLE("variable"),
+    INHERIT("inherit");
 
     private String name;
 

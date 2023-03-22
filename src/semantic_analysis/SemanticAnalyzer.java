@@ -1,6 +1,7 @@
 package semantic_analysis;
 
 import syntactical_analysis.ast_generation.tree.FunctionDefinition;
+import syntactical_analysis.ast_generation.tree.Identifier;
 import syntactical_analysis.ast_generation.tree.Program;
 import syntactical_analysis.ast_generation.tree.SemanticConcept;
 import syntactical_analysis.Parser;
@@ -102,6 +103,7 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
 
     /**
      * Add a new class row with it's own scope
+     * Also add rows for inherits
      * @param classDeclaration
      */
     @Override
@@ -115,5 +117,14 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
         scopeStack.add(classBodySymbolTable);
 
         astTraversalStack.add(new ScopeBack());
+
+        if (classDeclaration.getInheritanceList().getChildren().isEmpty()) {
+            scopeStack.peek().addRow(new SymbolTableRow("none", SymbolTableRowKind.INHERIT, ""));
+        } else {
+            for (SemanticConcept child : classDeclaration.getInheritanceList().getChildren()) {
+                Identifier inherId = (Identifier) child;
+                scopeStack.peek().addRow(new SymbolTableRow(inherId.getMember().getLexeme(), SymbolTableRowKind.INHERIT, ""));
+            }
+        }
     }
 }
