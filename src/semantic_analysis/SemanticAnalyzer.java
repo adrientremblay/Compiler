@@ -163,7 +163,9 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
     public void visitParameterVariableDeclaration(ParameterVariableDeclaration parameterVariableDeclaration) {
         String variableType = parameterVariableDeclaration.getType().getMember().getLexeme();
         String variableName = parameterVariableDeclaration.getIdentifier().getMember().getLexeme();
-        scopeStack.peek().addRow(new SymbolTableRow(variableName, SymbolTableRowKind.PARAMETER, variableType));
+        //todo: kinda hacky
+        if (scopeStack.peek() != globalSymbolTable)
+            scopeStack.peek().addRow(new SymbolTableRow(variableName, SymbolTableRowKind.PARAMETER, variableType));
     }
 
     /**
