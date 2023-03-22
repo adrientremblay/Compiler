@@ -40,9 +40,8 @@ class E isa D {                                                         // 14.1
 
 // ====== member function implementations ====== //
 function POLYNOMIAL::evaluate(x: float) => float
-  {
-    return (0);
-  }
+{
+return (0);
 }
 
 function LINEAR::constructor(A: float, B: float)
@@ -98,12 +97,6 @@ function f(i: integer, j: integer) => integer {}                           // 9.
 function f3(p1: integer[2][3]) => integer {}
 
 // ====== main ====== //
-//function main() => void
-//{
-  /*
-  */
-//}
-
 function main() => void
 {
   localvar a: a;                                                           // 11.5
