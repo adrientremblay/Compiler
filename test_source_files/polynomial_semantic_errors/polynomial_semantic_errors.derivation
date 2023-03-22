@@ -15,6 +15,17 @@
 <REPTFPARAMS4> -> EPSILON
 <RETURNTYPE> -> <TYPE>
 <TYPE> -> 'float'
+<REPTMEMBERDECL> -> <VISIBILITY> !makeVisibility <MEMBERDECL> <REPTMEMBERDECL>
+<VISIBILITY> -> 'public'
+<MEMBERDECL> -> <MEMBERFUNCDECL>
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
+<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType !makeFunctionDeclaration
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeParameterVariableDeclaration <REPTFPARAMS4>
+<TYPE> -> 'float'
+<REPTFPARAMS3> -> EPSILON
+<REPTFPARAMS4> -> EPSILON
+<RETURNTYPE> -> <TYPE>
+<TYPE> -> 'float'
 <REPTMEMBERDECL> -> EPSILON
 <REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
 <CLASSDECLORFUNCDEF> -> <CLASSDECL>
@@ -26,6 +37,17 @@
 <MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
 <MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType !makeFunctionDeclaration
 <FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeParameterVariableDeclaration <REPTFPARAMS4>
+<TYPE> -> 'float'
+<REPTFPARAMS3> -> EPSILON
+<REPTFPARAMS4> -> EPSILON
+<RETURNTYPE> -> <TYPE>
+<TYPE> -> 'float'
+<REPTMEMBERDECL> -> <VISIBILITY> !makeVisibility <MEMBERDECL> <REPTMEMBERDECL>
+<VISIBILITY> -> 'public'
+<MEMBERDECL> -> <MEMBERFUNCDECL>
+<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
+<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType !makeFunctionDeclaration
+<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeParameterVariableDeclaration <REPTFPARAMS4>
 <TYPE> -> 'integer'
 <REPTFPARAMS3> -> EPSILON
 <REPTFPARAMS4> -> EPSILON
@@ -120,24 +142,4 @@
 <TYPE> -> 'float'
 <REPTFPARAMSTAIL4> -> EPSILON
 <REPTFPARAMS4> -> EPSILON
-<REPTMEMBERDECL> -> <VISIBILITY> !makeVisibility <MEMBERDECL> <REPTMEMBERDECL>
-<VISIBILITY> -> 'public'
-<MEMBERDECL> -> <MEMBERFUNCDECL>
-<MEMBERFUNCDECL> -> <MEMBERFUNCHEAD> 'semi'
-<MEMBERFUNCHEAD> -> 'function' 'id' !makeIdentifier !makeParameterList 'colon' 'openpar' <FPARAMS> 'closepar' 'arrow' <RETURNTYPE> !makeType !makeFunctionDeclaration
-<FPARAMS> -> 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTFPARAMS3> !makeParameterVariableDeclaration <REPTFPARAMS4>
-<TYPE> -> 'float'
-<REPTFPARAMS3> -> EPSILON
-<REPTFPARAMS4> -> EPSILON
-<RETURNTYPE> -> <TYPE>
-<TYPE> -> 'float'
-<REPTMEMBERDECL> -> EPSILON
-<REPTPROG0> -> <CLASSDECLORFUNCDEF> <REPTPROG0>
-<CLASSDECLORFUNCDEF> -> <CLASSDECL>
-<CLASSDECL> -> 'class' 'id' !makeIdentifier !markScope !makeInheritanceList <OPTINHERITS> 'opencurbr' !makeMemberList <REPTMEMBERDECL> 'closecurbr' !makeClassDeclaration 'semi'
-<OPTINHERITS> -> 'isa' 'id' !makeIdentifier !consume <REPTINHERITSLIST>
-<REPTINHERITSLIST> -> EPSILON
-<REPTMEMBERDECL> -> <VISIBILITY> !makeVisibility <MEMBERDECL> <REPTMEMBERDECL>
-<VISIBILITY> -> 'private'
-<MEMBERDECL> -> <MEMBERVARDECL>
-<MEMBERVARDECL> -> 'attribute' 'id' !makeIdentifier 'colon' <TYPE> !makeType !makeDimensions <REPTARRAYSIZE> !makeMemberVariableDeclaration 'semi'
+<REPTMEMBERDECL> -> <VISIBILITY> !makeVisibility <MEMBERDECL> <REPTMEMBERDECL
