@@ -13,6 +13,6 @@ public class Program extends SemanticConcept{
 
     @Override
     public void accept(SymbolTableVisitor visitor) {
-        visitor.visitProgram(this);
+        // Do Nothing
     }
 }

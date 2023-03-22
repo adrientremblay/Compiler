@@ -1,27 +1,27 @@
 - TABLE: global
-- class | LINEAR | 
-	- TABLE: LINEAR
-	- inherit | POLYNOMIAL | 
 - class | POLYNOMIAL | 
 	- TABLE: POLYNOMIAL
+	- function | evaluate | (float[]):float
+	- TABLE: evaluate
 	- inherit | none | 
+- function | main | ():void
+	- TABLE: main
+	- variable | f1 | LINEAR
+	- variable | f2 | QUADRATIC
+	- variable | counter | integer
+- class | LINEAR | 
+	- TABLE: LINEAR
+	- function | evaluate | (float[]):float
+	- TABLE: evaluate
+	- variable | result | float
+	- function | constructor | (float[],float[]):LINEAR
+	- TABLE: constructor
+	- inherit | POLYNOMIAL | 
 - class | QUADRATIC | 
 	- TABLE: QUADRATIC
 	- inherit | POLYNOMIAL | 
-- function | constructor | (float[],float[]):LINEAR
-	- TABLE: constructor
-- function | constructor | (float[],float[],float[]):QUADRATIC
-	- TABLE: constructor
-- function | main | ():void
-	- TABLE: main
-	- variable | counter | integer
-	- variable | f2 | QUADRATIC
-	- variable | f1 | LINEAR
-- function | evaluate | (float[]):float
+	- function | evaluate | (float[]):float
 	- TABLE: evaluate
 	- variable | result | float
-- function | evaluate | (float[]):float
-	- TABLE: evaluate
-	- variable | result | float
-- function | evaluate | (float[]):float
-	- TABLE: evaluate
+	- function | constructor | (float[],float[],float[]):QUADRATIC
+	- TABLE: constructor

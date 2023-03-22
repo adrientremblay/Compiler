@@ -1,11 +1,9 @@
 package semantic_analysis;
 
-import syntactical_analysis.ast_generation.tree.FunctionDefinition;
-import syntactical_analysis.ast_generation.tree.Identifier;
-import syntactical_analysis.ast_generation.tree.Program;
-import syntactical_analysis.ast_generation.tree.SemanticConcept;
+import syntactical_analysis.ast_generation.tree.*;
 import syntactical_analysis.Parser;
 import syntactical_analysis.ast_generation.tree.classes.ClassDeclaration;
+import syntactical_analysis.ast_generation.tree.classes.ClassDeclarationList;
 import syntactical_analysis.ast_generation.tree.statements.LocalVariableDeclaration;
 
 import java.util.HashMap;
@@ -33,11 +31,21 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
         Program ast = parser.parse();
 
         astTraversalStack = new Stack<>();
-        astTraversalStack.push(ast);
-
         scopeStack = new Stack<SymbolTable>();
-
+        globalSymbolTable = new SymbolTable("global");
+        scopeStack.add(globalSymbolTable);
         classMap = new HashMap<String, SymbolTable>();
+
+        // We want to forcefully visit the functions then the classes instead of pushing the ast node directly
+        FunctionDefinitionList functionDefinitionList = null;
+        ClassDeclarationList classDeclarationList = null;
+        for (SemanticConcept child : ast.getChildren())
+            if (child instanceof  FunctionDefinitionList)
+                functionDefinitionList = (FunctionDefinitionList) child;
+            else
+                classDeclarationList = (ClassDeclarationList) child;
+        astTraversalStack.push(functionDefinitionList);
+        astTraversalStack.push(classDeclarationList);
 
         while (!astTraversalStack.isEmpty()) {
             SemanticConcept curNode = astTraversalStack.pop();
@@ -49,18 +57,6 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
 
         return globalSymbolTable;
     }
-
-    /**
-     * Generates a new global table
-     *
-     * @param program
-     */
-    @Override
-    public void visitProgram(Program program) {
-        globalSymbolTable = new SymbolTable("global");
-        scopeStack.add(globalSymbolTable);
-    }
-
 
     /**
      * Adds a function row to the current scope symbol table
@@ -77,7 +73,16 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
 
         SymbolTable functionBodySymbolTable = new SymbolTable(functionName);
 
-        scopeStack.peek().addRow(new SymbolTableRow(functionName, SymbolTableRowKind.FUNCTION, functionType, functionBodySymbolTable));
+        SymbolTableRow functionRow = new SymbolTableRow(functionName, SymbolTableRowKind.FUNCTION, functionType, functionBodySymbolTable);
+
+        if (functionDefinition.getScopeSpecification().getMember() == null) {
+            scopeStack.peek().addRow(functionRow);
+        } else if (classMap.containsKey(functionDefinition.getScopeSpecification().getMember().getLexeme())) {
+            SymbolTable classSymbolTable = classMap.get(functionDefinition.getScopeSpecification().getMember().getLexeme());
+            classSymbolTable.addRow(functionRow);
+        } else {
+            System.err.println("ERROR! Can't find the class that this function should go in!");
+        }
 
         scopeStack.add(functionBodySymbolTable);
 
