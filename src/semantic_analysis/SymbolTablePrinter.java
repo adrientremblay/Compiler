@@ -43,7 +43,9 @@ public class SymbolTablePrinter {
         writeLine(spacing + "- TABLE: " + symbolTable.getName());
         //writeLine(spacing + "-----------------------------------------------------------");
         for (SymbolTableRow row : symbolTable.getRows()) {
-            writeLine(spacing + "- " + row.getKind() + " | " + row.getName() + " | " + row.getType());
+            String visibilityExtension = (row.getVisibilityKind() != null) ? " | " + row.getVisibilityKind().toString() : "";
+
+            writeLine(spacing + "- " + row.getRowKind() + " | " + row.getName() + " | " + row.getType() + visibilityExtension);
             if (row.getSymbolTableLink() != null) {
                 writeSymbolTable(row.getSymbolTableLink(), indent+1);
             }

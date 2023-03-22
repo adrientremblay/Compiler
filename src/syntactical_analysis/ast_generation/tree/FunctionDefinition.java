@@ -15,7 +15,6 @@ public class FunctionDefinition extends SemanticConcept {
         addChild(statementBlock);
         addChild(scopeSpecification);
 
-
         this.type = (Type) type;
         this.parameterList = (ParameterList) parameterList;
 

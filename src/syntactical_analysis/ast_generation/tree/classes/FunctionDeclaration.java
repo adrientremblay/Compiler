@@ -1,14 +1,27 @@
 package syntactical_analysis.ast_generation.tree.classes;
 
-import syntactical_analysis.ast_generation.tree.SemanticConcept;
+import syntactical_analysis.ast_generation.tree.*;
 import semantic_analysis.SymbolTableVisitor;
 
 public class FunctionDeclaration extends SemanticConcept {
-    public FunctionDeclaration(SemanticConcept id, SemanticConcept parameterList, SemanticConcept type, SemanticConcept visibility) {
+    private Type type;
+    private ParameterList parameterList;
+    private Identifier identifier;
+    private Visibility visibility;
+    private ScopeSpecification scopeSpecification;
+
+    public FunctionDeclaration(SemanticConcept type, SemanticConcept parameterList, SemanticConcept id, SemanticConcept visibility, ScopeSpecification scopeSpecification) {
         addChild(type);
         addChild(parameterList);
         addChild(id);
         addChild(visibility);
+        addChild(scopeSpecification);
+
+        this.type = (Type) type;
+        this.parameterList = (ParameterList) parameterList;
+        this.identifier = (Identifier) id;
+        this.visibility = (Visibility) visibility;
+        this.scopeSpecification = scopeSpecification;
     }
 
     @Override
@@ -18,6 +31,26 @@ public class FunctionDeclaration extends SemanticConcept {
 
     @Override
     public void accept(SymbolTableVisitor visitor) {
-        // Do Nothing
+        visitor.visitFunctionDeclaration(this);
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public ParameterList getParameterList() {
+        return parameterList;
+    }
+
+    public Identifier getIdentifier() {
+        return identifier;
+    }
+
+    public Visibility getVisibility() {
+        return visibility;
+    }
+
+    public ScopeSpecification getScopeSpecification() {
+        return scopeSpecification;
     }
 }

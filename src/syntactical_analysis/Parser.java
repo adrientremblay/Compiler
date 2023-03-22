@@ -37,6 +37,9 @@ public class Parser {
     private ClassDeclarationList classDeclarationList;
     private Stack<SemanticConcept> semanticStack;
 
+    // todo: this is cheap as hell, but I really don't care (for use for FuncDecl)
+    ScopeSpecification lastSeenScopeSpec;
+
     public Parser() {
         lexer = new Lexer();
 
@@ -154,7 +157,7 @@ public class Parser {
                         functionDefinitionList.addChild(new FunctionDefinition(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
                     case "makeFunctionDeclaration":
-                        FunctionDeclaration functionDeclaration = new FunctionDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
+                        FunctionDeclaration functionDeclaration = new FunctionDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), lastSeenScopeSpec);
                         semanticStack.peek().addChild(functionDeclaration);
                         break;
                     case "makeParameterList":
@@ -177,7 +180,8 @@ public class Parser {
                         classDeclarationList.addChild(new ClassDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop()));
                         break;
                     case "makeScopeSpecification":
-                        semanticStack.push(new ScopeSpecification(lastToken));
+                        lastSeenScopeSpec = new ScopeSpecification(lastToken);
+                        semanticStack.push(lastSeenScopeSpec);
                         break;
                     case "makeEmptyScopeSpecification":
                         semanticStack.push(new ScopeSpecification());

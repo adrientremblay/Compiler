@@ -4,6 +4,7 @@ import syntactical_analysis.ast_generation.tree.*;
 import syntactical_analysis.Parser;
 import syntactical_analysis.ast_generation.tree.classes.ClassDeclaration;
 import syntactical_analysis.ast_generation.tree.classes.ClassDeclarationList;
+import syntactical_analysis.ast_generation.tree.classes.FunctionDeclaration;
 import syntactical_analysis.ast_generation.tree.statements.LocalVariableDeclaration;
 
 import java.util.HashMap;
@@ -58,6 +59,32 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
         return globalSymbolTable;
     }
 
+    @Override
+    public void visitFunctionDeclaration(FunctionDeclaration functionDeclaration) {
+        String functionName = functionDeclaration.getIdentifier().getMember().getLexeme();
+
+        String functionType = functionDeclaration.getParameterList().toString() + ":";
+        functionType += (functionDeclaration.getType().getMember() != null) ? functionDeclaration.getType().getMember().getLexeme() :
+                functionDeclaration.getScopeSpecification().getMember().getLexeme(); // constructor
+
+        String functionTableName = functionDeclaration.getScopeSpecification().getMember().getLexeme() + "::" + functionName;
+
+        SymbolTableRow functionRow = new SymbolTableRow(functionName, SymbolTableRowKind.FUNCTION, functionType, VisibilityKind.kindOf(functionDeclaration.getVisibility()));
+        scopeStack.peek().addRow(functionRow);
+
+        /*
+        SymbolTable functionBodySymbolTable = new SymbolTable(functionTableName);
+        if (functionDefinition.getScopeSpecification().getMember() == null) {
+        scopeStack.peek().addRow(functionRow);
+        } else if (classMap.containsKey(functionDefinition.getScopeSpecification().getMember().getLexeme())) {
+        SymbolTable classSymbolTable = classMap.get(functionDefinition.getScopeSpecification().getMember().getLexeme());
+        classSymbolTable.addRow(functionRow);
+        } else {
+        System.err.println("ERROR! Can't find the class that this function should go in!");
+        }
+        */
+    }
+
     /**
      * Adds a function row to the current scope symbol table
      *
@@ -69,7 +96,7 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
 
         String functionType = functionDefinition.getParameterList().toString() + ":";
         functionType += (functionDefinition.getType().getMember() != null) ? functionDefinition.getType().getMember().getLexeme() :
-            functionDefinition.getScopeSpecification().getMember().getLexeme(); // constructor
+                functionDefinition.getScopeSpecification().getMember().getLexeme(); // constructor
 
         String functionTableName = functionDefinition.getScopeSpecification().getMember() == null ?
                 functionName :
@@ -77,19 +104,34 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
 
         SymbolTable functionBodySymbolTable = new SymbolTable(functionTableName);
 
-        SymbolTableRow functionRow = new SymbolTableRow(functionName, SymbolTableRowKind.FUNCTION, functionType, functionBodySymbolTable);
-
-        if (functionDefinition.getScopeSpecification().getMember() == null) {
+        if (functionDefinition.getScopeSpecification().getMember() == null) { // not a class function
+            SymbolTableRow functionRow = new SymbolTableRow(functionName, SymbolTableRowKind.FUNCTION, functionType, functionBodySymbolTable);
             scopeStack.peek().addRow(functionRow);
-        } else if (classMap.containsKey(functionDefinition.getScopeSpecification().getMember().getLexeme())) {
-            SymbolTable classSymbolTable = classMap.get(functionDefinition.getScopeSpecification().getMember().getLexeme());
-            classSymbolTable.addRow(functionRow);
-        } else {
-            System.err.println("ERROR! Can't find the class that this function should go in!");
+        } else { // class function
+            if (classMap.containsKey(functionDefinition.getScopeSpecification().getMember().getLexeme())) {
+                SymbolTable classSymbolTable = classMap.get(functionDefinition.getScopeSpecification().getMember().getLexeme());
+
+                // find the row
+                SymbolTableRow functionRow = null;
+                for (SymbolTableRow row : classSymbolTable.getRows()) {
+                    if (row.getName().equals(functionName) && row.getRowKind() == SymbolTableRowKind.FUNCTION && row.getType().equals(functionType)) {
+                        functionRow = row;
+                        break;
+                    }
+                }
+                if (functionRow == null) {
+                    System.err.println("ERROR! Failed to find the matching class func decl row for a func def!");
+                    return;
+                }
+
+                classSymbolTable.addRow(functionRow);
+            } else {
+                System.err.println("ERROR! Can't find the class that this function should go in!");
+                return;
+            }
         }
 
         scopeStack.add(functionBodySymbolTable);
-
         astTraversalStack.add(new ScopeBack());
     }
 
