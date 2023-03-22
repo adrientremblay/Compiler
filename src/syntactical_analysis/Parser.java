@@ -132,6 +132,7 @@ public class Parser {
                         semanticStack.push(new Type(lastToken));
                         break;
                     case "makeEmptyType":
+                        // todo: find a way to set the type to be the type of the constructor
                         semanticStack.push(new Type(null));
                         break;
                     case "makeVariableDeclaration":

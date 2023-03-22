@@ -15,10 +15,17 @@ public class FunctionDefinition extends SemanticConcept {
         addChild(statementBlock);
         addChild(scopeSpecification);
 
-        this.identifier = (Identifier) id;
+
         this.type = (Type) type;
         this.parameterList = (ParameterList) parameterList;
-        this.scopeSpecification = (ScopeSpecification) scopeSpecification;
+
+        if (id instanceof Identifier) {
+            this.identifier = (Identifier) id;
+            this.scopeSpecification = (ScopeSpecification) scopeSpecification;
+        } else {
+            this.identifier = (Identifier) scopeSpecification;
+            this.scopeSpecification = (ScopeSpecification) id;
+        }
     }
 
     @Override

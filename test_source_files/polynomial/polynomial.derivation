@@ -139,7 +139,7 @@
 <FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeLocalVariableDeclaration 'semi'
 <TYPE> -> 'float'
 <ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
@@ -340,7 +340,7 @@
 <FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeLocalVariableDeclaration 'semi'
 <TYPE> -> 'float'
 <ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON
@@ -403,7 +403,7 @@
 <FUNCBODY> -> !makeStatementBlock 'opencurbr' <REPTLOCALVARORSTAT> 'closecurbr'
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeLocalVariableDeclaration 'semi'
 <TYPE> -> 'id'
 <ARRAYOROBJECT> -> 'openpar' <APARAMS> 'closepar'
 <APARAMS> -> !makeParameterList <EXPR> !consume <REPTAPARAMS1>
@@ -426,7 +426,7 @@
 <REPTAPARAMS1> -> EPSILON
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeLocalVariableDeclaration 'semi'
 <TYPE> -> 'id'
 <ARRAYOROBJECT> -> 'openpar' <APARAMS> 'closepar'
 <APARAMS> -> !makeParameterList <EXPR> !consume <REPTAPARAMS1>
@@ -460,7 +460,7 @@
 <REPTAPARAMS1> -> EPSILON
 <REPTLOCALVARORSTAT> -> <LOCALVARORSTAT> <REPTLOCALVARORSTAT>
 <LOCALVARORSTAT> -> <LOCALVARDECL>
-<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeVariableDeclaration 'semi'
+<LOCALVARDECL> -> 'localvar' 'id' !makeIdentifier 'colon' <TYPE> !makeType <ARRAYOROBJECT> !makeLocalVariableDeclaration 'semi'
 <TYPE> -> 'integer'
 <ARRAYOROBJECT> -> !makeDimensions <REPTARRAYSIZE>
 <REPTARRAYSIZE> -> EPSILON

@@ -1,0 +1,18 @@
+- TABLE: global
+- function | constructor | LINEAR
+	- TABLE: constructor
+- function | constructor | QUADRATIC
+	- TABLE: constructor
+- function | main | ():void
+	- TABLE: main
+	- variable | counter | integer
+	- variable | f2 | QUADRATIC
+	- variable | f1 | LINEAR
+- function | evaluate | (float[]):float
+	- TABLE: evaluate
+	- variable | result | float
+- function | evaluate | (float[]):float
+	- TABLE: evaluate
+	- variable | result | float
+- function | evaluate | (float[]):float
+	- TABLE: evaluate

@@ -64,7 +64,11 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
     @Override
     public void visitFunctionDefinition(FunctionDefinition functionDefinition) {
         String functionName = functionDefinition.getIdentifier().getMember().getLexeme();
-        String functionType = functionDefinition.getParameterList().toString() + ":" + functionDefinition.getType().getMember().getLexeme();
+
+        String functionType = (functionDefinition.getType().getMember() != null) ?
+            functionDefinition.getParameterList().toString() + ":" + functionDefinition.getType().getMember().getLexeme()
+            : // constructor
+            functionDefinition.getScopeSpecification().getMember().getLexeme();
 
         SymbolTable functionBodySymbolTable = new SymbolTable(functionName);
 
