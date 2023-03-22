@@ -1,6 +1,6 @@
 package semantic_analysis;
 
-import ast_generation.tree.Program;
+import syntactical_analysis.ast_generation.tree.Program;
 
 public class SymbolTableVisitor {
     private SymbolTable globalSymbolTable;

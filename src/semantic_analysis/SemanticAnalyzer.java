@@ -1,7 +1,7 @@
 package semantic_analysis;
 
-import ast_generation.tree.Program;
-import ast_generation.tree.SemanticConcept;
+import syntactical_analysis.ast_generation.tree.Program;
+import syntactical_analysis.ast_generation.tree.SemanticConcept;
 import syntactical_analysis.Parser;
 
 import java.util.Stack;

@@ -1,6 +1,6 @@
 package lexical_analysis;
 
-import dfa_generation.*;
+import lexical_analysis.dfa_generation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;

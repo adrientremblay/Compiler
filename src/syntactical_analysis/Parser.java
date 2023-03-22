@@ -1,13 +1,13 @@
 package syntactical_analysis;
 
-import ast_generation.AstPrinter;
-import ast_generation.tree.*;
-import ast_generation.tree.factor.Float;
-import ast_generation.tree.factor.Integer;
-import ast_generation.tree.classes.*;
-import ast_generation.tree.factor.Not;
-import ast_generation.tree.factor.Sign;
-import ast_generation.tree.statements.*;
+import syntactical_analysis.ast_generation.AstPrinter;
+import syntactical_analysis.ast_generation.tree.*;
+import syntactical_analysis.ast_generation.tree.factor.Float;
+import syntactical_analysis.ast_generation.tree.factor.Integer;
+import syntactical_analysis.ast_generation.tree.classes.*;
+import syntactical_analysis.ast_generation.tree.factor.Not;
+import syntactical_analysis.ast_generation.tree.factor.Sign;
+import syntactical_analysis.ast_generation.tree.statements.*;
 import lexical_analysis.FoundToken;
 import lexical_analysis.Lexer;
 import lexical_analysis.Token;
