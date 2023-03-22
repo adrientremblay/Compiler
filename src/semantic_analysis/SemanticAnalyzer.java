@@ -4,6 +4,7 @@ import syntactical_analysis.ast_generation.tree.FunctionDefinition;
 import syntactical_analysis.ast_generation.tree.Program;
 import syntactical_analysis.ast_generation.tree.SemanticConcept;
 import syntactical_analysis.Parser;
+import syntactical_analysis.ast_generation.tree.statements.LocalVariableDeclaration;
 
 import java.util.Stack;
 
@@ -81,5 +82,16 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
     @Override
     public void visitScopeBack(ScopeBack scopeBack) {
         scopeStack.pop();
+    }
+
+    /**
+     * Add a variable row to the current scope
+     * @param localVariableDeclaration
+     */
+    @Override
+    public void visitLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
+        String variableType = localVariableDeclaration.getType().getMember().getLexeme();
+        String variableName = localVariableDeclaration.getIdentifier().getMember().getLexeme();
+        scopeStack.peek().addRow(new SymbolTableRow(variableName, SymbolTableRowKind.VARIABLE, variableType));
     }
 }

@@ -28,7 +28,7 @@ public class LocalVariableDeclaration extends SemanticConcept {
 
     @Override
     public void accept(SymbolTableVisitor visitor) {
-        // Do Nothing
+        visitor.visitLocalVariableDeclaration(this);
     }
 
     @Override
@@ -40,5 +40,17 @@ public class LocalVariableDeclaration extends SemanticConcept {
             sb.append(dimensions);
 
         return sb.toString();
+    }
+
+    public Identifier getIdentifier() {
+        return identifier;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public Dimensions getDimensions() {
+        return dimensions;
     }
 }
