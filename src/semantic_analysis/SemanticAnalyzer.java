@@ -2,10 +2,7 @@ package semantic_analysis;
 
 import syntactical_analysis.ast_generation.tree.*;
 import syntactical_analysis.Parser;
-import syntactical_analysis.ast_generation.tree.classes.ClassDeclaration;
-import syntactical_analysis.ast_generation.tree.classes.ClassDeclarationList;
-import syntactical_analysis.ast_generation.tree.classes.Constructor;
-import syntactical_analysis.ast_generation.tree.classes.FunctionDeclaration;
+import syntactical_analysis.ast_generation.tree.classes.*;
 import syntactical_analysis.ast_generation.tree.function.FunctionDefinition;
 import syntactical_analysis.ast_generation.tree.function.FunctionDefinitionList;
 import syntactical_analysis.ast_generation.tree.function.ParameterVariableDeclaration;
@@ -191,5 +188,14 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
                 classBodySymbolTable.addRow(new SymbolTableRow(inherId.getMember().getLexeme(), SymbolTableRowKind.INHERIT, ""));
             }
         }
+    }
+
+    @Override
+    public void visitMemberVariableDeclaration(MemberVariableDeclaration memberVariableDeclaration) {
+        SymbolTable classSymbolTable = classMap.get(memberVariableDeclaration.getScopeSpecification().getMember().getLexeme());
+
+        String variableType = memberVariableDeclaration.getType().getMember().getLexeme();
+        String variableName = memberVariableDeclaration.getIdentifier().getMember().getLexeme();
+        classSymbolTable.addRow(new SymbolTableRow(variableName, SymbolTableRowKind.ATTRIBUTE, variableType));
     }
 }

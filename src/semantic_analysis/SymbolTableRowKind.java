@@ -5,6 +5,7 @@ public enum SymbolTableRowKind {
     CLASS("class"),
     VARIABLE("variable"),
     PARAMETER("param"),
+    ATTRIBUTE("data"),
     INHERIT("inherit");
 
     private String name;

@@ -147,7 +147,7 @@ public class Parser {
                         semanticStack.peek().addChild(variableDeclaration);
                         break;
                     case "makeMemberVariableDeclaration":
-                        MemberVariableDeclaration memberVariableDeclaration = new MemberVariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop());
+                        MemberVariableDeclaration memberVariableDeclaration = new MemberVariableDeclaration(semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), semanticStack.pop(), new ScopeSpecification(lastSeenScopeSpec));
                         semanticStack.peek().addChild(memberVariableDeclaration);
                         break;
                     case "makeLocalVariableDeclaration":
