@@ -8,6 +8,7 @@ import syntactical_analysis.Parser;
 import syntactical_analysis.ast_generation.tree.classes.ClassDeclaration;
 import syntactical_analysis.ast_generation.tree.statements.LocalVariableDeclaration;
 
+import java.util.HashMap;
 import java.util.Stack;
 
 public class SemanticAnalyzer implements SymbolTableVisitor {
@@ -17,6 +18,7 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
     private SymbolTable globalSymbolTable;
     private Stack<SymbolTable> scopeStack;
     private Stack<SemanticConcept> astTraversalStack;
+    private HashMap<String, SymbolTable> classMap;
 
     public SemanticAnalyzer() {
         parser = new Parser();
@@ -34,6 +36,8 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
         astTraversalStack.push(ast);
 
         scopeStack = new Stack<SymbolTable>();
+
+        classMap = new HashMap<String, SymbolTable>();
 
         while (!astTraversalStack.isEmpty()) {
             SemanticConcept curNode = astTraversalStack.pop();
@@ -113,16 +117,14 @@ public class SemanticAnalyzer implements SymbolTableVisitor {
 
         scopeStack.peek().addRow(new SymbolTableRow(className, SymbolTableRowKind.CLASS, "", classBodySymbolTable));
 
-        scopeStack.add(classBodySymbolTable);
-
-        astTraversalStack.add(new ScopeBack());
+        classMap.put(className, classBodySymbolTable);
 
         if (classDeclaration.getInheritanceList().getChildren().isEmpty()) {
-            scopeStack.peek().addRow(new SymbolTableRow("none", SymbolTableRowKind.INHERIT, ""));
+            classBodySymbolTable.addRow(new SymbolTableRow("none", SymbolTableRowKind.INHERIT, ""));
         } else {
             for (SemanticConcept child : classDeclaration.getInheritanceList().getChildren()) {
                 Identifier inherId = (Identifier) child;
-                scopeStack.peek().addRow(new SymbolTableRow(inherId.getMember().getLexeme(), SymbolTableRowKind.INHERIT, ""));
+                classBodySymbolTable.addRow(new SymbolTableRow(inherId.getMember().getLexeme(), SymbolTableRowKind.INHERIT, ""));
             }
         }
     }
